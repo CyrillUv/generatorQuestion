@@ -1,0 +1,11 @@
+.category{
+  background: mediumslateblue;
+}
+.category :active{
+  background: darkblue;
+  color:#93c5fd
+}
+.questions{
+  background: #35006e;
+  color: #40fd01
+}

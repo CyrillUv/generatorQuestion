@@ -49,24 +49,4 @@ class DesantAdapter {
 })
 export class AppComponent {
 
-  test(): void {
-    const frontendData: Frontend = {
-      ready: false,
-      planning: true,
-      name: '234',
-      parachutes: [],
-      id: '234'
-    }
-    const dataBackend = DesantAdapter.toBackend(frontendData);
-    this.requestBackend(dataBackend)
-  }
-
-
-  public requestBackend(val: Backend) {
-
-  }
-
-
-  title = 'generatorQuestion';
-
 }

@@ -1,0 +1,23 @@
+<button routerLink="/menu"><~ назад</button>
+<div style="display: flex">
+  <div class="category" style="border:5px blue solid;width: 30%; color:#3f1212">
+    @for(category of categories;track category){
+      <div  style="border:1px yellow solid;font-weight: bold"  (click)="getQuestions(category)">
+        {{category}}
+      </div>
+    }
+  </div>
+  <div class="questions" style="border:1px black solid;width: 70%">
+  @for(question of questions;track question.question; let i = $index){
+    <div  style="border:1px greenyellow solid;font-weight: bold" (click)="question.active=!question.active">
+      {{i+1 + ". " + question.question}}
+      <div style="margin:30px; padding:30px; color:#93c5fd;; border-radius: 30px;background: rgb(30, 41, 59)" *ngIf="question.active">
+        {{question.response}}
+      </div>
+    </div>
+
+  } @empty {
+    Выбери категорию
+  }
+  </div>
+</div>
