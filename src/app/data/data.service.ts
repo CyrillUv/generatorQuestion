@@ -15,5 +15,7 @@ export class DataService {
   public getQuestions(category:NameDataType): Array<IQuestion>{
   return (this.data.find(obj=> obj.name===category) as IData).questions
   }
-
+  public getData():Array<IData>{
+    return this.data
+  }
 }

@@ -1,5 +1,9 @@
 <div>
   Questions
-  <button>Ответ</button>
+  <button (click)="this.question1.active=true">Ответ</button>
+  <div>00:00</div>
+  <div>{{this.question1.question}}</div>
+  <div *ngIf="this.question1.active">{{this.question1.response}}</div>
+  <button (click)="randomizeQuestion()">Начать</button>
   <button routerLink="/statistics">Готово</button>
 </div>
