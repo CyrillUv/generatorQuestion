@@ -9,3 +9,9 @@
   background: #35006e;
   color: #40fd01
 }
+.question{
+  cursor: pointer;
+  &:hover {
+    color:red;
+  }
+}
