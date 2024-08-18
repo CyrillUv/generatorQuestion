@@ -2,10 +2,15 @@
 <div style="display: flex">
   <div class="category" style="border:5px blue solid;width: 30%; color:#3f1212">
     @for(category of categories;track category){
-      <div  style="border:1px yellow solid;font-weight: bold"  (click)="getQuestions(category)">
+      <div  style="border:1px yellow solid;font-weight: bold"
+            (click)="getQuestions(category)"
+      >
         {{category}}
       </div>
+
     }
+    <div style="border:1px yellow solid;font-weight: bold" [routerLink]="'/screen'">Скрины</div>
+
   </div>
   <div class="questions" style="border:1px black solid;width: 70%">
   @for(question of questions;track question.question; let i = $index){
@@ -18,6 +23,10 @@
 
   } @empty {
     Выбери категорию
+
   }
   </div>
 </div>
+
+
+<!--<router-outlet></router-outlet>-->

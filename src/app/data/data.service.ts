@@ -6,6 +6,7 @@ import {IData, IQuestion, NameDataType} from "./type";
   providedIn: 'root',
 })
 export class DataService {
+  public id = false;
   private data = data;
 
   constructor() { }

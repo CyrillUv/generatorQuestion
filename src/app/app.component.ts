@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {Subject} from "rxjs";
+import {Subscribers} from "./shared/subscribers";
 
 
 
@@ -47,6 +49,7 @@ class DesantAdapter {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent{
+
 
 }

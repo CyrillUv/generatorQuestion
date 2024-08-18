@@ -1,10 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {IQuestion, NameDataType} from "../../data/type";
 import {DataService} from "../../data/data.service";
 import {NgIf} from "@angular/common";
-import {interval, Subscription} from "rxjs";
+import {interval, tap} from "rxjs";
 import {QuestionsTimerPipe} from "./questions-timer.pipe";
+import {TakeUntilDestroy} from "../../shared/take-until-destroy";
 
 @Component({
   selector: 'app-questions',
@@ -17,25 +18,55 @@ import {QuestionsTimerPipe} from "./questions-timer.pipe";
   templateUrl: './questions.component.html',
   styleUrl: './questions.component.css'
 })
-export class QuestionsComponent implements OnInit,OnDestroy{
+export class QuestionsComponent
+  // extends Subscribers
+  // extends TakeUntilDirective
+  extends TakeUntilDestroy
+  implements OnInit
+  // OnDestroy
+{
 
   public categories!: Array<NameDataType>;
   public questions!: Array<IQuestion>;
   public question1!: IQuestion;
   public count = 0;
-  public subscribers:Subscription[] = [];
-  constructor(private dataService: DataService) {
+
+
+  constructor(private dataService: DataService
+  ) {
+    super();
+
   }
 
   ngOnInit(): void {
-    this.subscribers.push(interval(1000).subscribe(()=>{
-    this.count+=1;
-  }))
+    //subscription
+    //   this.subscriber = interval(1000).subscribe(
+    //     ()=>{
+    //       this.count+=1;
+    //       console.log(this.count)
+    //     })
+
+    //     this.subscribers.push(interval(1000).subscribe(()=>{
+    //   this.count+=1;
+    //     console.log(this.count)
+    // }))
+
+
+    this.takeUntilDestroy(interval(10)
+    )
+      .subscribe(
+      () => {
+        this.count += 1;
+        console.log(this.count)
+      })
+
+    // this.takeUntil(interval(1000)).subscribe(
+    //   ()=>{
+    //   this.count+=1;
+    //   console.log(this.count)
+    // })
   }
 
-  ngOnDestroy(): void {
-  this.subscribers.forEach(el=>el.unsubscribe());
-  }
 
   public getCategories(): void {
     this.categories = this.dataService.getCategories()

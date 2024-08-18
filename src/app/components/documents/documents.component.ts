@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 import {DataService} from "../../data/data.service";
 import {IQuestion, NameDataType} from "../../data/type";
 import {NgIf} from "@angular/common";
@@ -9,7 +9,8 @@ import {NgIf} from "@angular/common";
   standalone: true,
   imports: [
     RouterLink,
-    NgIf
+    NgIf,
+    RouterOutlet
   ],
   templateUrl: './documents.component.html',
   styleUrl: './documents.component.css'
@@ -24,6 +25,7 @@ public questions!:Array<IQuestion>;
   ngOnInit(): void {
         this.categories = this.dataService.getCategories()
     }
+
     public getQuestions(category:NameDataType):void{
       this.questions = this.dataService.getQuestions(category)
     }
