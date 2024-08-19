@@ -1,0 +1,16 @@
+<div class="screen-wrapper">
+  <div>
+    <button *ngIf="existPrevScreen" (click)="prevScreen()"><=</button>
+    <button [routerLink]="'/documents'">documents</button>
+  </div>
+  <div>
+    <h1 class="align-center">{{ screen?.title }}</h1>
+    <h3>{{ screen?.description }}</h3>
+    <div class="screen__container"><img src="{{screen?.url}}" alt=""></div>
+    <h3>{{ screen?.description2 }}</h3>
+    <div class="screen__container"><img src="{{screen?.url2}}" alt=""></div>
+  </div>
+  <div>
+    <button *ngIf="existNextScreen" (click)="nextScreen()">=></button>
+  </div>
+</div>

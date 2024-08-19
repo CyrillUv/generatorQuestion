@@ -3,9 +3,9 @@ import {RouterLink} from "@angular/router";
 import {IQuestion, NameDataType} from "../../data/type";
 import {DataService} from "../../data/data.service";
 import {NgIf} from "@angular/common";
-import {interval, tap} from "rxjs";
 import {QuestionsTimerPipe} from "./questions-timer.pipe";
 import {TakeUntilDestroy} from "../../shared/take-until-destroy";
+import {interval} from "rxjs";
 
 @Component({
   selector: 'app-questions',
@@ -19,11 +19,9 @@ import {TakeUntilDestroy} from "../../shared/take-until-destroy";
   styleUrl: './questions.component.css'
 })
 export class QuestionsComponent
-  // extends Subscribers
-  // extends TakeUntilDirective
+
   extends TakeUntilDestroy
   implements OnInit
-  // OnDestroy
 {
 
   public categories!: Array<NameDataType>;
@@ -35,36 +33,17 @@ export class QuestionsComponent
   constructor(private dataService: DataService
   ) {
     super();
-
   }
 
   ngOnInit(): void {
-    //subscription
-    //   this.subscriber = interval(1000).subscribe(
-    //     ()=>{
-    //       this.count+=1;
-    //       console.log(this.count)
-    //     })
 
-    //     this.subscribers.push(interval(1000).subscribe(()=>{
-    //   this.count+=1;
-    //     console.log(this.count)
-    // }))
-
-
-    this.takeUntilDestroy(interval(10)
+    this.takeUntilDestroy(interval(1000)
     )
       .subscribe(
       () => {
         this.count += 1;
-        console.log(this.count)
       })
 
-    // this.takeUntil(interval(1000)).subscribe(
-    //   ()=>{
-    //   this.count+=1;
-    //   console.log(this.count)
-    // })
   }
 
 

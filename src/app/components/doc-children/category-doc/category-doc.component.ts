@@ -13,10 +13,7 @@ type CategoryRoute = Params & { title: string}
 export class CategoryComponent implements OnInit{
   public name = '';
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
-
   constructor() {
-
   }
 
   ngOnInit() {
@@ -28,7 +25,6 @@ export class CategoryComponent implements OnInit{
       console.log('params', res)
       this.name=res.title;
     });
-    // console.log(this.name)
   }
 
 }

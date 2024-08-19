@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import {provideRouter, RouterLink} from "@angular/router";
-import {routes} from "../../app.routes";
+import {Component} from '@angular/core';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-menu',

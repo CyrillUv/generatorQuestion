@@ -1,0 +1,9 @@
+.screen-wrapper{
+  display: grid;
+  grid-template-columns: 100px calc(100% - 200px) 100px;
+
+}
+
+.screen__container {
+    background-color: #2b2b2b;
+}

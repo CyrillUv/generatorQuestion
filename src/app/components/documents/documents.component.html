@@ -1,30 +1,30 @@
-<button routerLink="/menu"><~ назад</button>
-<div style="display: flex">
-  <div class="category" style="border:5px blue solid;width: 30%; color:#3f1212">
-    @for(category of categories;track category){
-      <div  style="border:1px yellow solid;font-weight: bold"
-            (click)="getQuestions(category)"
+<div class="documents">
+  <div class="categories">
+    <button routerLink="/menu">menu</button>
+    @for (category of categories; track category) {
+      <div class="category"
+           (click)="getQuestions(category)"
       >
-        {{category}}
+        {{ category }}
       </div>
 
     }
-    <div style="border:1px yellow solid;font-weight: bold" [routerLink]="'/screen'">Скрины</div>
-
+    <div [routerLink]="'/screen'">Скрины</div>
   </div>
-  <div class="questions" style="border:1px black solid;width: 70%">
-  @for(question of questions;track question.question; let i = $index){
-    <div   style="border:1px greenyellow solid;font-weight: bold" (click)="question.active=!question.active">
-      <span class="question">{{i+1 + ". " + question.question}}</span>
-      <div style="margin:30px; padding:30px; color:#93c5fd;; border-radius: 30px;background: rgb(30, 41, 59)" *ngIf="question.active">
-        {{question.response}}
+  <hr>
+  <div class="questions">
+    @for (question of questions; track question.question; let i = $index) {
+      <div  (click)="question.active=!question.active">
+        <span class="question">{{ i + 1 + ". " + question.question }}</span>
+        <div class="response" *ngIf="question.active">
+          {{ question.response }}
+        </div>
       </div>
-    </div>
 
-  } @empty {
-    Выбери категорию
+    } @empty {
+      Выбери категорию
 
-  }
+    }
   </div>
 </div>
 
