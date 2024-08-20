@@ -11,7 +11,15 @@ export class ScreenService {
   public getScreen(): IScreen {
     return this.screens[this.screenOrder];
   }
+  public getTitleScreens():Array<string>{
+    return this.screens.map(screen => screen.title);
+  }
+  public getScreenFromTitle(title:string):IScreen{
 
+    console.log(this.screenOrder)
+
+    return (this.screens.find(screen=> screen.title===title) as IScreen)
+  }
   public nextScreen(): IScreen {
    this.existPrevScreen = true;
     this.screenOrder += 1;

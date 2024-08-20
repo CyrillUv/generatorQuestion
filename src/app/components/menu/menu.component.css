@@ -1,16 +1,19 @@
 .menu{
   width: 100%;
+  padding: 10px;
   height: 100vh;
+}
+.menu,.menu button{
   background: rgb(34,193,195);
+  color:darkcyan;
+  font-size: large;
+  font-weight: bold;
   background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
 }
-
 .menu button {
   width: 200px;
   margin: 10px;
   height: 100px;
   border: solid 1px darkcyan;
   border-radius: 30px;
-  background: rgb(34, 193, 195);
-  background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
 }

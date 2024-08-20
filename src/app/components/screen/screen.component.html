@@ -1,7 +1,14 @@
-<div class="screen-wrapper">
+<div class="screen-page">
+  <div class="screen-nav">
+    <div [routerLink]="'/documents'">documents</div>
+    <div class="screen-title" (click)="getScreenFromTitle(title)" *ngFor="let title of titles ">
+      {{title}}
+    </div>
+  </div>
+  <hr class="horizont">
+  <div class="screen-wrapper">
   <div>
-    <button *ngIf="existPrevScreen" (click)="prevScreen()"><=</button>
-    <button [routerLink]="'/documents'">documents</button>
+    <div class="arrow" *ngIf="existPrevScreen" (click)="prevScreen()">←</div>
   </div>
   <div>
     <h1 class="align-center">{{ screen?.title }}</h1>
@@ -11,6 +18,7 @@
     <div class="screen__container"><img src="{{screen?.url2}}" alt=""></div>
   </div>
   <div>
-    <button *ngIf="existNextScreen" (click)="nextScreen()">=></button>
+    <div class="arrow"  *ngIf="existNextScreen" (click)="nextScreen()">→</div>
+  </div>
   </div>
 </div>
