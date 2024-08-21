@@ -1,11 +1,13 @@
 <div class="screen-page">
   <div class="screen-nav">
     <div [routerLink]="'/documents'">documents</div>
-    <div class="screen-title" (click)="getScreenFromTitle(title)" *ngFor="let title of titles ">
+    @for(title of titles;track title){
+    <div class="screen-title" (click)="getScreenFromTitle(title)">
       {{title}}
     </div>
+    }
   </div>
-  <hr class="horizont">
+  <hr>
   <div class="screen-wrapper">
   <div>
     <div class="arrow" *ngIf="existPrevScreen" (click)="prevScreen()">←</div>

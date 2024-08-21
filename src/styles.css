@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-
+body,button{
+  background: #2b2b2b;
+  color: #868c06;
+}
+hr{
+  border:1px solid gray
+}
 
 .align-center{
   text-align: center;
