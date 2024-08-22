@@ -6,9 +6,8 @@
   width: 100%;
 }
 
-.question {
+.question ,.category  {
   cursor: pointer;
-  padding: 10px;
 
   &:hover {
     color: lightyellow;
@@ -16,8 +15,10 @@
 }
 .response{
   margin:30px;
+  padding: 10px;
+  background-color: rgba(98, 114, 114, 0.7);
 
-  border-radius: 30px;
+
 }
 .categories {
   width: 30%;

@@ -8,6 +8,7 @@ import {IData, IQuestion, NameDataType} from "./type";
 export class DataService {
   public id = false;
   private data = data;
+  private statistic = '0'
 
   constructor() { }
   public getCategories():Array<NameDataType>{
@@ -19,4 +20,14 @@ export class DataService {
   public getData():Array<IData>{
     return this.data
   }
+  public getStatistic():string{
+    return this.statistic
+  }
+  public setStatistic(statistic:string):void{
+     this.statistic = statistic;
+  }
+  public setTimeForQuestion(time:Array<number>):void{
+
+  }
+
 }

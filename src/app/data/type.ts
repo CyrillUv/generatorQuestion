@@ -5,6 +5,7 @@ export interface IQuestion{
   question: string;
   response:string;
   active:boolean;
+
 }
 
 export interface IData{

@@ -1,6 +1,6 @@
 <div class="documents">
   <div class="categories">
-    <div  routerLink="/menu">Обратно в меню</div>
+    <div  routerLink="/menu">← Меню</div>
     @for (category of categories; track category) {
       <div class="category"
            (click)="getQuestions(category)"
@@ -14,7 +14,7 @@
   <hr>
   <div class="questions">
     @for (question of questions; track question.question; let i = $index) {
-      <div  (click)="question.active=!question.active">
+      <div   (click)="question.active=!question.active">
         <span class="question">{{ i + 1 + ". " + question.question }}</span>
         <div class="response" *ngIf="question.active">
           {{ question.response }}
@@ -22,7 +22,7 @@
       </div>
 
     } @empty {
-      Выбери категорию
+      <div class="response">Выберите категорию</div>
 
     }
   </div>

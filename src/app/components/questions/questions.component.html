@@ -1,14 +1,26 @@
-<div class="questions" >
+<div class="questions">
   <div>
-    Questions
-    @if (question1){
+    {{ numQuestion }} Вопрос из {{ lastQuestion }}
+    @if (question1) {
       <button (click)="question1.active=true">Ответ</button>
-      <div>{{question1.question}}</div>
-      <div *ngIf="question1?.active">{{question1.response}}</div>
+
+      <div>{{ question1.question }}</div>
+      @if (question1?.active) {
+        <div>{{ question1.response }}</div>
+      }
     }
-    <button (click)="randomizeQuestion()">Начать</button>
-    <button routerLink="/statistics">Готово</button>
+    @if (numQuestion !== lastQuestion) {
+      <span>
+        @if (numQuestion === 0) {
+          <button (click)="randomizeQuestion()">Начать</button>
+        }
+        @if (numQuestion !== 0) {
+          <button (click)="randomizeQuestion()">Следующий вопрос</button>
+        }
+         </span>
+    }
+    <button (click)="setStatistic(count+'')" routerLink="/statistics">Готово</button>
 
   </div>
-  <h2>{{count|questionsTimer}}</h2>
+  <h2>{{ count|questionsTimer }}</h2>
 </div>
