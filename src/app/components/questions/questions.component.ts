@@ -29,23 +29,23 @@ export class QuestionsComponent
   public timerFlag = false
   public numQuestion = 0
   public lastQuestion = 10
-  public arrayTime: Array<number> = []
 
-  constructor(private dataService: DataService
+
+  constructor(private ds: DataService
   ) {
     super();
   }
 
 
   public getCategories(): void {
-    this.categories = this.dataService.getCategories()
+    this.categories = this.ds.getCategories()
   }
 
   public setStatistic(timerValue: string): void {
-    this.dataService.setStatistic(timerValue)
-    this.arrayTime.shift()
-    this.arrayTime.push(this.count)
-    console.log(this.arrayTime)
+    this.ds.setStatistic(timerValue)
+    this.ds.arrayTime.shift()
+    this.ds.arrayTime.push(this.count)
+    console.log(this.ds.arrayTime)
 
   }
 
@@ -61,21 +61,21 @@ export class QuestionsComponent
   }
 
   public getQuestions(category: NameDataType): void {
-    this.questions = this.dataService.getQuestions(category)
+    this.questions = this.ds.getQuestions(category)
   }
 
   public randomizeQuestion(): void {
     if (!this.timerFlag)
       this.startTimer()
     if (this.timerFlag) {
-      this.arrayTime.push(this.count)
-      console.log(this.arrayTime)
+      this.ds.arrayTime.push(this.count)
+      console.log(this.ds.arrayTime)
       this.numQuestion += 1
     }
     this.getCategories()
     this.getQuestions('Структуры данных')
     console.log((Math.floor(Math.random() * this.categories.length) + 1), 'категория', (Math.floor(Math.random() * this.questions.length) + 1), 'вопрос')
-    this.question1 = this.dataService.getData()[(Math.floor(Math.random() * this.categories.length))]
+    this.question1 = this.ds.getData()[(Math.floor(Math.random() * this.categories.length))]
       .questions[Math.floor(Math.random() * this.questions.length)]
   }
 }

@@ -20,7 +20,7 @@ export class StatisticsComponent implements OnInit{
   public arrayTimeQuestions:Array<number> = [1, 3, 4, 6, 7, 8, 9, 10, 11, 13]
   public arithmeticMean=0
   public hardQuestion = 0
-  constructor(public data:DataService) {
+  constructor(public ds:DataService) {
 
   }
   ngOnInit(): void {
@@ -30,16 +30,18 @@ export class StatisticsComponent implements OnInit{
     console.log(this.arithmeticMean)
   }
 public getStatistics(): void{
-  this.statistic = this.data.getStatistic()
+  this.statistic = this.ds.getStatistic()
 }
 public statisticTimeQuestion():void{
-      let array = []
-     array.push(this.arrayTimeQuestions[0])
-     for(let i = 0;i < this.arrayTimeQuestions.length-1;i++){
-       array.push(this.arrayTimeQuestions[i+1]-this.arrayTimeQuestions[i])
+      let array:number[] = []
+      let arrayTimeQuestions:Array<number> = this.ds.getArrayTime()
+
+     for(let i = 0;i < arrayTimeQuestions.length-1;i++){
+       array.push(arrayTimeQuestions[i+1]-arrayTimeQuestions[i])
+       console.log('for',arrayTimeQuestions)
      }
     this.hardQuestion = Math.max(...array)
-    this.arithmeticMean = array.reduce((acc,el)=>acc+el,0)/this.arrayTimeQuestions.length
-  console.log(array)
+    this.arithmeticMean = array.reduce((acc,el)=>acc+el,0)/arrayTimeQuestions.length
+  console.log('hard',array)
   }
 }
