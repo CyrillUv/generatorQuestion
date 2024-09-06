@@ -2,7 +2,7 @@
   <div>
     {{ numQuestion }} Вопрос из {{ lastQuestion }}
     @if (question1) {
-      <button (click)="question1.active=true">Ответ</button>
+      <button (click)="unansweredQuestion()" [disabled]="this.question1.active">Ответ</button>
 
       <div>{{ question1.question }}</div>
       @if (question1?.active) {

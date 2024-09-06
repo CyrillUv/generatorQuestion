@@ -2,7 +2,12 @@
   <h1>Статистика</h1>
   <div>Затрачено на все вопросы {{+statistic | questionsTimer}}</div>
   <div>Затрачено времени в среднем за вопрос   {{arithmeticMean| questionsTimer}}</div>
-  <div>Самый долгий вопрос по времени {{hardQuestion| questionsTimer}}</div>
-  <div>Неотвеченные вопросы {{+statistic | questionsTimer}}</div>
+  <div>Самый долгий вопрос по времени {{hardQuestion| questionsTimer }}</div>
+  <div>Неотвеченные вопросы:
+    @for(unanswered of ds.getArrayOfUnanswered();track unanswered){
+      <li>{{unanswered}}</li>
+    }
+
+  </div>
   <button routerLink="/menu">Вернуться в меню</button>
 </div>

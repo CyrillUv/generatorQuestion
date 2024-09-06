@@ -10,12 +10,16 @@ export class DataService {
   private data = data;
   private statistic = '0'
   public arrayTime: Array<number> = []
+  public arrayOfUnanswered: Array<string> = []
 
   constructor() {
 
   }
   public getArrayTime(): Array<number> {
     return this.arrayTime
+  }
+  public getArrayOfUnanswered(): Array<string>{
+    return this.arrayOfUnanswered
   }
   public getCategories():Array<NameDataType>{
     return this.data.map(obj => obj.name);
@@ -32,8 +36,6 @@ export class DataService {
   public setStatistic(statistic:string):void{
      this.statistic = statistic;
   }
-  public setTimeForQuestion(time:Array<number>):void{
 
-  }
 
 }

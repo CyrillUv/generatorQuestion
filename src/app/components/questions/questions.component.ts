@@ -78,4 +78,8 @@ export class QuestionsComponent
     this.question1 = this.ds.getData()[(Math.floor(Math.random() * this.categories.length))]
       .questions[Math.floor(Math.random() * this.questions.length)]
   }
+  public unansweredQuestion(){
+    this.question1.active=true
+    this.ds.getArrayOfUnanswered().push(this.question1.question)
+  }
 }
