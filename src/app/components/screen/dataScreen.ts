@@ -28,5 +28,10 @@ export const dataScreen:Array<IScreen> = [
   {title:'Демонстрация метода combineLatest',url:'combineLatest.png',
     description:'Происходит подписка сразу на несколько контролов,при подписке вытягивает значение всех поочередно'},
   {title:'Популярные типы утилит в TS',url:'utilitsTypeTS.png',
-    description:'Omit,Pick,Required,Particle'}
+    description:'Omit,Pick,Required,Particle'},{title:'Манипуляции с путем в роутинге',url:'routeManipulation.png',
+    description:'Любой маршрут может лениво загружать свой маршрутизированный автономный компонент, используя loadComponent:',
+    description2:'С помощью обьекта data,можно вытаскивать какие-то данные.Метод resolve,извлекает данные, необходимые для активации запрошенного маршрута.'},{title:`Работа с Guard'ами`,url:'canActivate.png',
+    description:'Если все охранники возвращаются true, навигация продолжается. ' +
+      'Если любой охранник возвращается false, навигация отменяется. Если любой охранник возвращается UrlTree,' +
+      ' текущая навигация отменяется и начинается новая навигация к UrlTree возвращенному от охранника.'}
 ]

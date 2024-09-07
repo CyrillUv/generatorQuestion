@@ -4,6 +4,7 @@ import {data} from "../../data/data";
 import {DataService} from "../../data/data.service";
 import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 import {QuestionsTimerPipe} from "../questions/questions-timer.pipe";
+import {IQuestion} from "../../data/type";
 
 @Component({
   selector: 'app-statistics',
@@ -16,22 +17,19 @@ import {QuestionsTimerPipe} from "../questions/questions-timer.pipe";
   styleUrl: './statistics.component.css'
 })
 export class StatisticsComponent implements OnInit{
-  public statistic = ''
   public arithmeticMean=0
   public hardQuestion = 0
-  public arrayUnanswered = []
   constructor(public ds:DataService) {
 
   }
   ngOnInit(): void {
-    this.getStatistics()
-    console.log(this.statistic)
+    this.ds.getStatistic()
+
     this.statisticTimeQuestion()
     console.log(this.arithmeticMean)
+
   }
-public getStatistics(): void{
-  this.statistic = this.ds.getStatistic()
-}
+
 public statisticTimeQuestion():void{
       let array:number[] = []
       let arrayTimeQuestions:Array<number> = this.ds.getArrayTime()
@@ -40,6 +38,9 @@ public statisticTimeQuestion():void{
      }
     this.hardQuestion = Math.max(...array)
     this.arithmeticMean = array.reduce((acc,el)=>acc+el,0)/arrayTimeQuestions.length
-
   }
+public openRequest(unanswered:IQuestion):void{
+    unanswered.active=!unanswered.active
+}
+
 }

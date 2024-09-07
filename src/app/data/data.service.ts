@@ -7,10 +7,10 @@ import {IData, IQuestion, NameDataType} from "./type";
 })
 export class DataService {
   public id = false;
-  private data = data;
-  private statistic = '0'
+  private _data = data;
+  private _statistic = '0'
   public arrayTime: Array<number> = []
-  public arrayOfUnanswered: Array<string> = []
+  public arrayOfUnanswered: Array<IQuestion> = []
 
   constructor() {
 
@@ -18,24 +18,29 @@ export class DataService {
   public getArrayTime(): Array<number> {
     return this.arrayTime
   }
-  public getArrayOfUnanswered(): Array<string>{
+  public getArrayOfUnanswered(): Array<IQuestion>{
     return this.arrayOfUnanswered
   }
+  public nullingArrayOfUnanswered():void{
+     this.arrayOfUnanswered=[]
+  }
   public getCategories():Array<NameDataType>{
-    return this.data.map(obj => obj.name);
+    return this._data.map(obj => obj.name);
   }
   public getQuestions(category:NameDataType): Array<IQuestion>{
-  return (this.data.find(obj=> obj.name===category) as IData).questions
+  return (this._data.find(obj=> obj.name===category) as IData).questions
   }
   public getData():Array<IData>{
-    return this.data
+    return this._data
   }
   public getStatistic():string{
-    return this.statistic
+    return this._statistic
   }
   public setStatistic(statistic:string):void{
-     this.statistic = statistic;
+     this._statistic = statistic;
   }
-
+  public nullingRequestsForQuest(questions:Array<IQuestion>):void{
+    questions.forEach(question=>{question.active=false})
+  }
 
 }

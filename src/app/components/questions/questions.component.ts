@@ -31,7 +31,7 @@ export class QuestionsComponent
   public lastQuestion = 10
 
 
-  constructor(private ds: DataService
+  constructor(public ds: DataService
   ) {
     super();
   }
@@ -46,7 +46,7 @@ export class QuestionsComponent
     this.ds.arrayTime.shift()
     this.ds.arrayTime.push(this.count)
     console.log(this.ds.arrayTime)
-
+    this.ds.nullingRequestsForQuest(this.ds.getArrayOfUnanswered())
   }
 
   public startTimer(): void {
@@ -80,6 +80,6 @@ export class QuestionsComponent
   }
   public unansweredQuestion(){
     this.question1.active=true
-    this.ds.getArrayOfUnanswered().push(this.question1.question)
+    this.ds.getArrayOfUnanswered().push(this.question1)
   }
 }
