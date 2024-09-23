@@ -10,7 +10,7 @@ import {Injectable} from "@angular/core";
 export class ActivateStatistics implements CanActivate {
   constructor(private _ds:DataService,private _router:Router) {}
   public canActivate():boolean {
-    if(this._ds.getArrayOfUnanswered().length&&this._ds.getStatistic()!=='0'&&this._ds.getArrayTime().length){
+    if(this._ds.getStatistic()!=='0'&&this._ds.getArrayTime().length){
     return true
     }
     this._router.navigate([''])

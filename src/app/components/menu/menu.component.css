@@ -3,15 +3,9 @@
   padding: 10px;
   height: 100vh;
 }
-.menu,.menu button{
+.menu{
 
   font-size: large;
   font-weight: bold;
 
-}
-.menu button {
-  width: 200px;
-  margin: 10px;
-  height: 100px;
-  border-radius: 30px;
 }

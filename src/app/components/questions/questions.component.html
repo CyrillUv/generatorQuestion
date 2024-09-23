@@ -5,7 +5,7 @@
       <button (click)="unansweredQuestion()" [disabled]="this.question1.active">Ответ</button>
 
       <div>{{ question1.question }}</div>
-      @if (question1?.active) {
+      @if (question1.active) {
         <div>{{ question1.response }}</div>
       }
     }
@@ -19,7 +19,9 @@
         }
          </span>
     }
-    <button (click)="setStatistic(count+'');" routerLink="/statistics">Готово</button>
+    @if (ds.getArrayTime().length===10){
+      <button (click)="setStatistic(count+'');" routerLink="/statistics">Готово</button>
+    }
 
   </div>
   <h2>{{ count|questionsTimer }}</h2>
