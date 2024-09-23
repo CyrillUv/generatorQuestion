@@ -1,11 +1,11 @@
 .panelTesting {
-  display: flex;
   padding: 10px;
-
-  div {
-    padding: 12px;
+  .panelCeils{
+    display: flex;
   }
-
+  .image{
+    height: 300px;
+    width: 500px  }
   .panelTrueCell {
     background-color: green;
   }
