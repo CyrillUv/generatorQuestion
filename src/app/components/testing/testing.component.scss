@@ -1,0 +1,17 @@
+.panelTesting {
+  display: flex;
+  padding: 10px;
+
+  div {
+    padding: 12px;
+  }
+
+  .panelTrueCell {
+    background-color: green;
+  }
+
+  .panelFalseCell {
+    background-color: #bd1111;
+  }
+}
+
