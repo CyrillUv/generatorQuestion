@@ -6,10 +6,18 @@
   .image{
     height: 300px;
     width: 500px  }
-  .panelTrueCell {
-    background-color: green;
+  .panelCeil{
+    cursor: pointer;
+
   }
-  .panelFalseCell {
+  .panelTrueCeil {
+    background-color: green;
+    cursor: pointer;
+
+  }
+  .panelFalseCeil {
+
+    cursor: pointer;
     background-color: #bd1111;
   }
 }
