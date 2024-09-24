@@ -1,10 +1,9 @@
 import { Component, OnInit} from "@angular/core";
 import {RouterLink} from "@angular/router";
 import {NgForOf} from "@angular/common";
-interface ICell {
-  item:number,
-  state:boolean|null
-}
+import {DataTestService} from "../../../data/testing/dataTest.service";
+import {IDataTest} from "../../../data/testing/type";
+
 
 @Component({
   selector: 'app-panel-testing',
@@ -17,25 +16,17 @@ interface ICell {
   styleUrl: 'panelTesting.component.scss'
 })
 export class PanelTestingComponent implements OnInit{
-
 public page = 'Тестирование'
-public arrCeil:Array<ICell> = []
+public activeTest!:IDataTest
+public arrTest:Array<IDataTest> = []
+  constructor(public dt:DataTestService) {
+  }
   ngOnInit(): void {
-    this.formationArray()
+    this.arrTest=this.dt.getData()
+    this.activeTest=this.arrTest[0]
   }
-public formationArray():Array<ICell>{
-  for(let i=1; i<=10;i++) {
-    this.arrCeil.push({item:i,state:null})
-
-  }
-  return this.arrCeil
-}
-public falsing(element:ICell):void{
-  // @ts-ignore
- this.arrCeil.find(el=>el===element).state=false
-}
-  public truing(element:ICell):void{
-     // @ts-ignore
-    this.arrCeil.find(el=>el===element).state=true
+  public findTest(id:number):void {
+    console.log(this.activeTest);
+   this.activeTest = <IDataTest>this.arrTest.find(test => test.id === id)
   }
 }

@@ -3,12 +3,12 @@ import {MenuComponent} from "./components/menu/menu.component";
 import {StatisticsComponent} from "./components/statistics/statistics.component";
 import {CategoryComponent} from "./components/doc-children/category-doc/category-doc.component";
 import {inject} from "@angular/core";
-import {DataService} from "./data/data.service";
 import {ActivateStatistics} from "./guards/activate-statistics.guard";
+import {DataQuestService} from "./data/question/dataQuest.service";
 
 
 const resolver: ResolveFn<boolean> = () => {
-  const test = inject(DataService);
+  const test = inject(DataQuestService);
   return test?.id || true
 }
 

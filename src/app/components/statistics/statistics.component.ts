@@ -1,10 +1,9 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {data} from "../../data/data";
-import {DataService} from "../../data/data.service";
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
+
 import {QuestionsTimerPipe} from "../questions/questions-timer.pipe";
-import {IQuestion} from "../../data/type";
+import {DataQuestService} from "../../data/question/dataQuest.service";
+import {IQuestion} from "../../data/question/type";
 
 @Component({
   selector: 'app-statistics',
@@ -16,12 +15,14 @@ import {IQuestion} from "../../data/type";
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.css'
 })
-export class StatisticsComponent implements OnInit{
-  public arithmeticMean=0
+export class StatisticsComponent implements OnInit {
+  public arithmeticMean = 0
   public hardQuestion = 0
-  constructor(public ds:DataService) {
+
+  constructor(public ds: DataQuestService) {
 
   }
+
   ngOnInit(): void {
     this.ds.getStatistic()
 
@@ -30,17 +31,18 @@ export class StatisticsComponent implements OnInit{
 
   }
 
-public statisticTimeQuestion():void{
-      let array:number[] = []
-      let arrayTimeQuestions:Array<number> = this.ds.getArrayTime()
-     for(let i = 0;i < arrayTimeQuestions.length-1;i++){
-       array.push(arrayTimeQuestions[i+1]-arrayTimeQuestions[i])
-     }
+  public statisticTimeQuestion(): void {
+    let array: number[] = []
+    let arrayTimeQuestions: Array<number> = this.ds.getArrayTime()
+    for (let i = 0; i < arrayTimeQuestions.length - 1; i++) {
+      array.push(arrayTimeQuestions[i + 1] - arrayTimeQuestions[i])
+    }
     this.hardQuestion = Math.max(...array)
-    this.arithmeticMean = array.reduce((acc,el)=>acc+el,0)/arrayTimeQuestions.length
+    this.arithmeticMean = array.reduce((acc, el) => acc + el, 0) / arrayTimeQuestions.length
   }
-public openRequest(unanswered:IQuestion):void{
-    unanswered.active=!unanswered.active
-}
+
+  public openRequest(unanswered: IQuestion): void {
+    unanswered.active = !unanswered.active
+  }
 
 }

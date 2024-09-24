@@ -9,4 +9,6 @@ import {PanelTestingComponent} from "./panelTesting/panelTesting.component";
     PanelTestingComponent
   ],
 })
-export class TestingComponent {}
+export class TestingComponent {
+
+}

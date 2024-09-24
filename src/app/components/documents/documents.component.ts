@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLink, RouterOutlet} from "@angular/router";
-import {DataService} from "../../data/data.service";
-import {IQuestion, NameDataType} from "../../data/type";
+
 import {NgIf} from "@angular/common";
+import {IQuestion, NameDataType} from "../../data/question/type";
+import { DataQuestService } from '../../data/question/dataQuest.service';
 
 @Component({
   selector: 'app-documents',
@@ -19,7 +20,7 @@ export class DocumentsComponent implements OnInit{
 public categories!: Array<NameDataType>;
 public questions!:Array<IQuestion>;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataQuestService) {
 }
 
   ngOnInit(): void {

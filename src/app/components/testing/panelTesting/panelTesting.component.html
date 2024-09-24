@@ -1,23 +1,25 @@
 <div class="panelTesting">
     <div> {{ page }}</div>
    <div class="panelCeils" >
-     <div  *ngFor="let el of arrCeil">
-       @if (el.state===null){
-         <div (click)="falsing(el)"  (dblclick)="truing(el)"  class="">{{el.item}}</div>
+     <div *ngFor="let el of arrTest">
+       @if (el.active===null){
+         <div (click)="findTest(el.id)"  class="">{{el.id}}</div>
        }
-       @if(el.state===true) {
-         <div (click)="falsing(el)" (dblclick)="truing(el)"  class="panelTrueCell">{{el.item}}</div>
+       @if(el.active===true) {
+         <div  (click)="findTest(el.id)"   class="panelTrueCell">{{el.id}}</div>
        }
-       @if (el.state===false){
-         <div (click)="falsing(el)" (dblclick)="truing(el)"  class="panelFalseCell">{{el.item}}</div>
+       @if (el.active===false){
+         <div (click)="findTest(el.id)"  class="panelFalseCell">{{el.id}}</div>
        }
      </div>
    </div>
-    <div>
+      <div  >
       <div class="image"></div>
-      <div>Вопрос</div>
-      <div  *ngFor="let el of [1,2,3,4]">
-        <div >Ответ {{el}}</div>
+      <div>{{activeTest.question}}</div>
+          <div >{{activeTest.answers[0]}}</div>
+          <div >{{activeTest.answers[1]}}</div>
+          <div >{{activeTest.answers[2]}}</div>
+          <div >{{activeTest.answers[3]}}</div>
       </div>
-    </div>
+
 </div>

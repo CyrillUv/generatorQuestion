@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {IScreen} from "./dataScreen";
 import {ScreenService} from "./screen.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
-import {IData, IQuestion, NameDataType} from "../../data/type";
 
 @Component({
   selector: 'app-screen',

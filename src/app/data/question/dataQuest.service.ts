@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
-import {data} from "./data";
-import {IData, IQuestion, NameDataType} from "./type";
+import {dataQuest} from "./dataQuest";
+import {IDataQuest, IQuestion, NameDataType} from "./type";
 
 @Injectable({
   providedIn: 'root',
 })
-export class DataService {
+export class DataQuestService {
   public id = false;
-  private _data = data;
+  private _data = dataQuest;
   private _statistic = '0'
   public arrayTime: Array<number> = []
   public arrayOfUnanswered: Array<IQuestion> = []
 
-  constructor() {
-
-  }
   public getArrayTime(): Array<number> {
     return this.arrayTime
   }
@@ -28,9 +25,9 @@ export class DataService {
     return this._data.map(obj => obj.name);
   }
   public getQuestions(category:NameDataType): Array<IQuestion>{
-  return (this._data.find(obj=> obj.name===category) as IData).questions
+  return (this._data.find(obj=> obj.name===category) as IDataQuest).questions
   }
-  public getData():Array<IData>{
+  public getData():Array<IDataQuest>{
     return this._data
   }
   public getStatistic():string{

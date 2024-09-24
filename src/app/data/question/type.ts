@@ -8,7 +8,7 @@ export interface IQuestion{
 
 }
 
-export interface IData{
+export interface IDataQuest{
   name: NameDataType;
   questions:Array<IQuestion>
   active:boolean;

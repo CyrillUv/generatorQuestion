@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {IQuestion, NameDataType} from "../../data/type";
-import {DataService} from "../../data/data.service";
+
 import {NgIf} from "@angular/common";
 import {QuestionsTimerPipe} from "./questions-timer.pipe";
 import {TakeUntilDestroy} from "../../shared/take-until-destroy";
 import {interval} from "rxjs";
+import {IQuestion, NameDataType} from "../../data/question/type";
+import {DataQuestService} from "../../data/question/dataQuest.service";
 
 
 @Component({
@@ -31,7 +32,7 @@ export class QuestionsComponent
   public lastQuestion = 10
 
 
-  constructor(public ds: DataService
+  constructor(public ds: DataQuestService
   ) {
     super();
   }

@@ -1,6 +1,6 @@
-import {IData} from "./type";
+import {IDataQuest} from "./type";
 
-export const data: Array<IData> = [{
+export const dataQuest: Array<IDataQuest> = [{
   name: 'Структуры данных', questions: [
     {
       question:
