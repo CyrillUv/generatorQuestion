@@ -2,191 +2,191 @@ import {IDataTest} from "./type";
 
 export const dataTests: Array<IDataTest> = [{
   id: 1,
-  question: 'Вопросик1',
-  answers: [{answer: '1ответ', correct: false},
-    {answer: '2ответ', correct: true}, {
-      answer: '3ответ',
+  name: 'Вопросик1',
+  answers: [{title: '1ответ', correct: false},
+    {title: '2ответ', correct: true}, {
+      title: '3ответ',
       correct: false
-    }, {answer: '4ответ12132', correct: false}],
-  active: null
+    }, {title: '4ответ12132', correct: false}],
+
 },
   {
     id: 2,
-    question: 'Вопрос2',
-    answers: [{answer: '1ответ', correct: true},
-      {answer: '2ответ', correct: false}, {
-        answer: '3ответ',
+    name: 'Вопрос2',
+    answers: [{title: '1ответ', correct: true},
+      {title: '2ответ', correct: false}, {
+        title: '3ответ',
         correct: false
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
     id: 3,
-    question: 'Вопросик3',
-    answers: [{answer: '1ответ', correct: false},
-      {answer: '2ответ', correct: false}, {
-        answer: '3ответ',
+    name: 'Вопросик3',
+    answers: [{title: '1ответ', correct: false},
+      {title: '2ответ', correct: false}, {
+        title: '3ответ',
         correct: false
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
     id: 4,
-    question: 'Вопросик4',
-    answers: [{answer: '1ответ', correct: false},
-      {answer: '2ответ', correct: false}, {
-        answer: '3ответ',
+    name: 'Вопросик4',
+    answers: [{title: '1ответ', correct: false},
+      {title: '2ответ', correct: false}, {
+        title: '3ответ',
         correct: false
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
     id: 5,
-    question: 'Вопросик5',
-    answers: [{answer: '1ответ', correct: false},
-      {answer: '2ответ', correct: true,}, {
-        answer: '3ответ',
+    name: 'Вопросик5',
+    answers: [{title: '1ответ', correct: false},
+      {title: '2ответ', correct: true,}, {
+        title: '3ответ',
         correct: false,
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
     id: 6,
-    question: 'Вопросик6',
-    answers: [{answer: '1ответ', correct: false},
-      {answer: '2ответ', correct: false}, {
-        answer: '3ответ',
+    name: 'Вопросик6',
+    answers: [{title: '1ответ', correct: false},
+      {title: '2ответ', correct: false}, {
+        title: '3ответ',
         correct: false,
-      }, {answer: '4ответ12132', correct: true}],
-    active: null
+      }, {title: '4ответ12132', correct: true}],
+
   },
   {
     id: 7,
-    question: 'Вопросик7',
-    answers: [{answer: '1ответ', correct: false},
-      {answer: '2ответ', correct: false}, {
-        answer: '3ответ',
+    name: 'Вопросик7',
+    answers: [{title: '1ответ', correct: false},
+      {title: '2ответ', correct: false}, {
+        title: '3ответ',
         correct: false,
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
     id: 8,
-    question: 'Вопросик8',
-    answers: [{answer: '1ответ', correct: false},
-      {answer: '2ответ', correct: true}, {
-        answer: '3ответ',
+    name: 'Вопросик8',
+    answers: [{title: '1ответ', correct: false},
+      {title: '2ответ', correct: true}, {
+        title: '3ответ',
         correct: false,
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
     id: 9,
-    question: 'Вопросик9',
-    answers: [{answer: '1ответ', correct: true},
-      {answer: '2ответ', correct: false}, {
-        answer: '3ответ',
+    name: 'Вопросик9',
+    answers: [{title: '1ответ', correct: true},
+      {title: '2ответ', correct: false}, {
+        title: '3ответ',
         correct: false,
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
     id: 10,
-    question: 'Вопросик10',
-    answers: [{answer: '1ответ', correct: false},
-      {answer: '2ответ', correct: false}, {
-        answer: '3ответ',
+    name: 'Вопросик10',
+    answers: [{title: '1ответ', correct: false},
+      {title: '2ответ', correct: false}, {
+        title: '3ответ',
         correct: false,
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
     id: 11,
-    question: 'Вопросик11',
-    answers: [{answer: '1ответ', correct: true},
-      {answer: '2ответ', correct: false}, {
-        answer: '3ответ',
+    name: 'Вопросик11',
+    answers: [{title: '1ответ', correct: true},
+      {title: '2ответ', correct: false}, {
+        title: '3ответ',
         correct: false,
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
-    id: 12, question: 'Вопросик12', answers: [{answer: '1ответ', correct: false},
-      {answer: '2ответ', correct: false}, {answer: '3ответ', correct: true}, {
-        answer: '4отве14235т12132',
+    id: 12, name: 'Вопросик12', answers: [{title: '1ответ', correct: false},
+      {title: '2ответ', correct: false}, {title: '3ответ', correct: true}, {
+        title: '4отве14235т12132',
         correct: false
-      }], active: null
+      }],
   },
   {
     id: 13,
-    question: 'Вопросик13',
-    answers: [{answer: '1ответ', correct: false},
-      {answer: '2ответ', correct: true}, {
-        answer: '3ответ',
+    name: 'Вопросик13',
+    answers: [{title: '1ответ', correct: false},
+      {title: '2ответ', correct: true}, {
+        title: '3ответ',
         correct: false,
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
-    id: 14, question: 'Вопросикa14', answers: [{answer: '1оcxvcxvтвет', correct: false},
-      {answer: '2ответ', correct: true}, {answer: '3ответ', correct: false}, {
-        answer: '4оdsfsadfтвет12132',
+    id: 14, name: 'Вопросикa14', answers: [{title: '1оcxvcxvтвет', correct: false},
+      {title: '2ответ', correct: true}, {title: '3ответ', correct: false}, {
+        title: '4оdsfsadfтвет12132',
         correct: false
-      }], active: null
+      }],
   },
   {
     id: 15,
-    question: 'Вопросsss15',
-    answers: [{answer: '1ответ', correct: false},
-      {answer: '2ответ', correct: true}, {
-        answer: '3ответ',
+    name: 'Вопросsss15',
+    answers: [{title: '1ответ', correct: false},
+      {title: '2ответ', correct: true}, {
+        title: '3ответ',
         correct: false,
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
     id: 16,
-    question: 'Вопросdas16',
-    answers: [{answer: '1ответ', correct: true},
-      {answer: '2ответ', correct: false}, {
-        answer: '3ответ',
+    name: 'Вопросdas16',
+    answers: [{title: '1ответ', correct: true},
+      {title: '2ответ', correct: false}, {
+        title: '3ответ',
         correct: false,
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
-    id: 17, question: 'Вопросик17', answers: [{answer: '1ответ', correct: false},
-      {answer: '2ответ', correct: true}, {answer: '3отвasdет', correct: false}, {
-        answer: '4ответ12132',
+    id: 17, name: 'Вопросик17', answers: [{title: '1ответ', correct: false},
+      {title: '2ответ', correct: true}, {title: '3отвasdет', correct: false}, {
+        title: '4ответ12132',
         correct: false
-      }], active: null
+      }],
   },
   {
     id: 18,
-    question: 'Вопросик18',
-    answers: [{answer: '1ответ', correct: false},
-      {answer: '2ответ', correct: true}, {
-        answer: '3ответ',
+    name: 'Вопросик18',
+    answers: [{title: '1ответ', correct: false},
+      {title: '2ответ', correct: true}, {
+        title: '3ответ',
         correct: false,
-      }, {answer: '4ответ12132', correct: false}],
-    active: null
+      }, {title: '4ответ12132', correct: false}],
+
   },
   {
     id: 19,
-    question: 'Вопросик19',
-    answers: [{answer: '1от123123вет', correct: false},
-      {answer: '2ответ', correct: false}, {
-        answer: '3ответ',
+    name: 'Вопросик19',
+    answers: [{title: '1от123123вет', correct: false},
+      {title: '2ответ', correct: false}, {
+        title: '3ответ',
         correct: false,
-      }, {answer: '4ответ12132', correct: true}],
-    active: null
+      }, {title: '4ответ12132', correct: true}],
+
   },
   {
-    id: 20, question: 'Вопросик20', answers: [{answer: '1от123sadвет', correct: false},
-      {answer: '2ответ', correct: false}, {answer: '3ответ', correct: false}, {
-        answer: '4ответ1231231212132',
+    id: 20, name: 'Вопросик20', answers: [{title: '1от123sadвет', correct: false},
+      {title: '2ответ', correct: false}, {title: '3ответ', correct: false}, {
+        title: '4ответ1231231212132',
         correct: true
-      }], active: null
+      }],
   },
 
 ]

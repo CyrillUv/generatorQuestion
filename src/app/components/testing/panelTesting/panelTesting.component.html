@@ -2,58 +2,18 @@
   <div> {{ page }}</div>
   <div class="panelCeils">
     <div *ngFor="let el of arrTest">
-      @if (el.active === null) {
-        <div (click)="findTest(el.id)" class="panelCeil">{{ el.id }}</div>
-      }
-      @if (el.active === true) {
-        <div (click)="findTest(el.id)" class="panelTrueCeil">{{ el.id }}</div>
-      }
-      @if (el.active === false) {
-        <div (click)="findTest(el.id)" class="panelFalseCeil">{{ el.id }}</div>
-      }
+        <div (click)="findTest(el.id)"  [class]="activeTest.id===el.id?'activeCeil':'panelCeil'">{{ el.id }}</div>
     </div>
   </div>
   <div>
     <div class="image"></div>
-    <h3>{{ activeTest.question }}</h3>
+    <h3>{{activeTest['name']}}</h3>
     <div [appCorrectAnswer]="at.correct"  *ngFor="let at of activeTest.answers">
-      <div [appCorrectAnswer]="at.correct">{{at.answer}}</div>
+      <div class="panelCeil" (click)="testSolution(at.correct)"  [appCorrectAnswer]="at.correct" [newList]="changePage" >{{at.title}}</div>
     </div>
-<!--    @if (activeTest.answers[0].clicking) {-->
-<!--      <div [class]="activeTest.answers[0].correct?'panelTrueCeil':'panelFalseCeil'"-->
-<!--      >{{ activeTest.answers[0].answer }}-->
-<!--      </div>-->
-<!--    } @else {-->
-<!--      <div-->
-<!--        (click)="activeTest.answers[0].clicking=true">{{ activeTest.answers[0].answer }}-->
-<!--      </div>-->
-<!--    }-->
-<!--    @if (activeTest.answers[1].clicking) {-->
-<!--      <div [class]="activeTest.answers[1].correct?'panelTrueCeil':'panelFalseCeil'">{{ activeTest.answers[1].answer }}-->
-<!--      </div>-->
-<!--    } @else {-->
-<!--      <div-->
-<!--        (click)="activeTest.answers[1].clicking=true">{{ activeTest.answers[1].answer }}-->
-<!--      </div>-->
-<!--    }-->
-<!--    @if (activeTest.answers[2].clicking) {-->
-<!--      <div [class]="activeTest.answers[2].correct?'panelTrueCeil':'panelFalseCeil'"-->
-<!--      >{{ activeTest.answers[2].answer }}-->
-<!--      </div>-->
-<!--    } @else {-->
-<!--      <div-->
-<!--        (click)="activeTest.answers[2].clicking=true">{{ activeTest.answers[2].answer }}-->
-<!--      </div>-->
-<!--    }-->
-<!--    @if (activeTest.answers[3].clicking) {-->
-<!--      <div-->
-<!--        [class]="activeTest.answers[3].correct?'panelTrueCeil':'panelFalseCeil'">{{ activeTest.answers[3].answer }}-->
-<!--      </div>-->
-<!--    } @else {-->
-<!--      <div-->
-<!--        (click)="activeTest.answers[3].clicking=true">{{ activeTest.answers[3].answer }}-->
-<!--      </div>-->
-<!--    }-->
+    @if(solution===false&&!changePage) {
+      <span>Неправильно </span>
+    }
   </div>
 
 </div>

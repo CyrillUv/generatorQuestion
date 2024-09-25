@@ -1,10 +1,9 @@
 interface IAnswer{
-  answer: string;
+  title: string;
   correct: boolean;
 }
 export interface IDataTest {
   id:number
-  question: string;
+  name: string;
   answers: Array<IAnswer>;
-  active:boolean|null
 }

@@ -19,21 +19,30 @@ import {CorrectDirectiveDirective} from "../../../directive/correct.directive.ts
 })
 export class PanelTestingComponent implements OnInit {
   public page = 'Тестирование'
-
   public activeTest!: IDataTest
   public arrTest: Array<IDataTest> = []
-
+  public solution: boolean | null = null
+  public changePage!:boolean
   constructor(public dt: DataTestService) {
   }
 
   ngOnInit(): void {
     this.arrTest = this.dt.getData()
     this.activeTest = this.arrTest[0]
+    this.changePage=true
+    this.solution = null
   }
 
   public findTest(id: number): void {
-    console.log(this.activeTest);
     this.activeTest = <IDataTest>this.arrTest.find(test => test.id === id)
+    this.changePage=true
+    console.log(this.changePage)
+    this.testSolution(null)
   }
 
+  public testSolution(result: boolean | null) {
+
+    this.solution = result
+
+  }
 }

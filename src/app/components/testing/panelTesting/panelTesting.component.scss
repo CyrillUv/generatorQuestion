@@ -1,19 +1,24 @@
 .panelTesting {
   padding: 10px;
-  .panelCeils{
+
+  .panelCeils {
     display: flex;
   }
-  .image{
-    height: 300px;
-    width: 500px  }
-  .panelCeil{
-    cursor: pointer;
 
+  .image {
+    height: 300px;
+    width: 500px
   }
+  .panelCeil {
+    cursor: pointer;
+  }
+  .activeCeil{
+    box-shadow: 1px 1px #4e99c9;
+    cursor: pointer;
+}
   .panelTrueCeil {
     background-color: green;
     cursor: pointer;
-
   }
   .panelFalseCeil {
 
