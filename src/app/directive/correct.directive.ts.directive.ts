@@ -4,27 +4,25 @@ import {Directive, HostBinding, HostListener, Input} from '@angular/core';
   selector: '[appCorrectAnswer]',
   standalone: true
 })
-export class CorrectDirectiveDirective {
+export class CorrectDirective {
   @Input()
-  public appCorrectAnswer!: boolean;
+  public appCorrectAnswer!:boolean;
   @Input()
-  public newList!: boolean;
+  public newList:boolean=true;
 
-  @HostListener("click") onClicking(): void {
-    if (!this.newList) {
-      return
-    } else {
-
-      this.newList = false
-      this.setCorrectColor();
-
+  @HostListener("click") onClicking():void{
+    if(!this.newList) return
+    else{
+    this.setCorrectColor();
       console.log(this.newList)
-    }
+    this.newList=false
+      console.log(this.newList)
+      }
   }
+  @HostBinding('style.color')
+  public color!:string;
 
-  @HostBinding('style.color') public color!: string;
-
-  private setCorrectColor(): void {
-    this.color = this.appCorrectAnswer ? "green" : "red";
+  private setCorrectColor():void {
+      this.color = this.appCorrectAnswer?"green":"red";
   }
 }

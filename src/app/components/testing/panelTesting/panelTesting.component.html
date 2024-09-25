@@ -9,7 +9,7 @@
     <div class="image"></div>
     <h3>{{activeTest['name']}}</h3>
     <div [appCorrectAnswer]="at.correct"  *ngFor="let at of activeTest.answers">
-      <div class="panelCeil" (click)="testSolution(at.correct)"  [appCorrectAnswer]="at.correct" [newList]="changePage" >{{at.title}}</div>
+      <div class="panelCeil" (click)="testSolution(at.correct)"  [appCorrectAnswer]="at.correct" [newList]="changePage"  >{{at.title}}</div>
     </div>
     @if(solution===false&&!changePage) {
       <span>Неправильно </span>
