@@ -12,12 +12,10 @@ export class CorrectDirective {
 
   @HostListener("click") onClicking():void{
     if(!this.newList) return
-    else{
-    this.setCorrectColor();
-      console.log(this.newList)
-    this.newList=false
-      console.log(this.newList)
-      }
+    else {
+      this.setCorrectColor();
+      this.newList = false
+    }
   }
   @HostBinding('style.color')
   public color!:string;

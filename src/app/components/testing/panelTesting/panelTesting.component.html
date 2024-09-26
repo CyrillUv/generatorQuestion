@@ -11,7 +11,7 @@
     <div [appCorrectAnswer]="at.correct"  *ngFor="let at of activeTest.answers">
       <div class="panelCeil" (click)="testSolution(at.correct)"  [appCorrectAnswer]="at.correct" [newList]="changePage"  >{{at.title}}</div>
     </div>
-    @if(solution===false&&!changePage) {
+    @if(solution===false) {
       <span>Неправильно </span>
     }
   </div>

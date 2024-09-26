@@ -22,7 +22,7 @@ export class PanelTestingComponent implements OnInit {
   public activeTest!: IDataTest
   public arrTest: Array<IDataTest> = []
   public solution: boolean | null = null
-  public SuccessTests:Map<number,string> = new Map()
+  public SuccessTests:Map<number,boolean> = new Map()
   public changePage!: boolean
 
   constructor(public dt: DataTestService) {
@@ -30,24 +30,28 @@ export class PanelTestingComponent implements OnInit {
 
   ngOnInit(): void {
     this.arrTest = this.dt.getData()
-    this.createSuccessTests(this.arrTest[0].id,this.arrTest[0].name)
     this.activeTest = this.arrTest[0]
     this.changePage = true
     this.solution = null
   }
-  public createSuccessTests(id:number,name:string):void{
-    this.SuccessTests.set(id,name)
+  public createSuccessTests(id:number,state:boolean):void{
+    this.SuccessTests.set(id,state)
   }
   public findTest(id: number): void {
+    if(!this.SuccessTests.has(id)&&this.solution!==null){
+      this.createSuccessTests(this.activeTest.id,this.solution)
+    }
     this.activeTest = <IDataTest>this.arrTest.find(test => test.id === id)
-    this.createSuccessTests(this.activeTest.id,this.activeTest.name)
     this.changePage = true
+
     this.testSolution(null)
+
     console.log(this.SuccessTests)
   }
 
 
   public testSolution(result: boolean | null) {
     this.solution = result
+
   }
 }
