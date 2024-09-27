@@ -24,7 +24,6 @@ export class PanelTestingComponent implements OnInit {
   public page = 'Тестирование'
   public activeTest!: IDataTest
   public arrTest: Array<IDataTest> = []
-  public successTestsMap:Map<number,IAnswer> = new Map()
   public selectAnswer = false;
 
   constructor(public dt: DataTestService) {
@@ -37,22 +36,22 @@ export class PanelTestingComponent implements OnInit {
 
   public findTest(id: number): void {
     this.activeTest = <IDataTest>this.arrTest.find(test => test.id === id)
-    this.selectAnswer = this.successTestsMap.has(this.activeTest.id);
+    this.selectAnswer = this.dt.getSuccessTestsMap().has(this.activeTest.id);
   }
 
   public clickAnswer(answer: IAnswer) {
-    this.successTestsMap.set(this.activeTest.id,answer)
+    this.dt.setSuccessTestsMap(this.activeTest.id,answer);
     this.selectAnswer = true;
   }
   public correctKeyInMap(id:number):boolean|undefined{
-    if(!this.successTestsMap.has(id)) return;
+    if(!this.dt.getSuccessTestsMap().has(id)) return;
 
-      return (this.successTestsMap.get(id)?.correct as boolean)
+      return (this.dt.getSuccessTestsMap().get(id)?.correct as boolean)
   }
-  public correctAnswerInMap(titlre: string):boolean|undefined{
-   if(this.successTestsMap.has(this.activeTest.id)
-    && this.successTestsMap.get(this.activeTest.id)?.title === titlre) {
-       return this.successTestsMap.get(this.activeTest.id)?.correct
+  public correctAnswerInMap(title: string):boolean|undefined{
+   if(this.dt.getSuccessTestsMap().has(this.activeTest.id)
+    && this.dt.getSuccessTestsMap().get(this.activeTest.id)?.title === title) {
+       return this.dt.getSuccessTestsMap().get(this.activeTest.id)?.correct
    } else return undefined
   }
 }
