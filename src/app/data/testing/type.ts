@@ -1,4 +1,4 @@
-interface IAnswer{
+export interface IAnswer{
   title: string;
   correct: boolean;
 }

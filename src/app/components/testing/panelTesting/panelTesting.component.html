@@ -2,18 +2,31 @@
   <div> {{ page }}</div>
   <div class="panelCeils">
     <div *ngFor="let el of arrTest">
-        <div (click)="findTest(el.id)"  [class]="activeTest.id===el.id?'activeCeil':'panelCeil'">{{ el.id }}</div>
+      <div (click)="findTest(el.id)" [class]="activeTest.id===el.id?'activeCeil':'panelCeil'">
+        <span
+          [class.panelTrueCeil]="correctKeyInMap(el.id)"
+          [class.panelFalseCeil]="correctKeyInMap(el.id)===false"
+        >{{ el.id }}</span>
+      </div>
     </div>
   </div>
   <div>
     <div class="image"></div>
-    <h3>{{activeTest['name']}}</h3>
-    <div [appCorrectAnswer]="at.correct"  *ngFor="let at of activeTest.answers">
-      <div class="panelCeil" (click)="testSolution(at.correct)"  [appCorrectAnswer]="at.correct" [newList]="changePage"  >{{at.title}}</div>
+    <h3>{{ activeTest['name'] }}</h3>
+    <div [appCorrectAnswer]="answer.correct"
+         *ngFor="let answer of activeTest.answers">
+      <div class="panelCeil"
+           [class.panelTrueCeil]="correctAnswerInMap(answer.title)"
+           [class.panelFalseCeil]="correctAnswerInMap(answer.title)===false"
+
+           (onClick)="clickAnswer(answer)"
+           [appCorrectAnswer]="answer.correct"
+           [selectAnswer]="selectAnswer">
+
+          {{ answer.title }}
+
+      </div>
     </div>
-    @if(solution===false) {
-      <span>Неправильно </span>
-    }
   </div>
 
 </div>

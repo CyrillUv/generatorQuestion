@@ -13,17 +13,17 @@
     cursor: pointer;
   }
   .activeCeil{
-    box-shadow: 1px 1px #4e99c9;
+    border-radius: 7px;
+    outline: 3px solid #4e99c9;
     cursor: pointer;
 }
   .panelTrueCeil {
-    background-color: green;
+    color: green;
     cursor: pointer;
   }
   .panelFalseCeil {
-
     cursor: pointer;
-    background-color: #bd1111;
+    color: #bd1111;
   }
 }
 

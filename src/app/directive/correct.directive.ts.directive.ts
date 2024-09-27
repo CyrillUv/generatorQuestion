@@ -1,4 +1,4 @@
-import {Directive, HostBinding, HostListener, Input} from '@angular/core';
+import {Directive, EventEmitter, HostBinding, HostListener, Input, Output} from '@angular/core';
 
 @Directive({
   selector: '[appCorrectAnswer]',
@@ -6,15 +6,15 @@ import {Directive, HostBinding, HostListener, Input} from '@angular/core';
 })
 export class CorrectDirective {
   @Input()
-  public appCorrectAnswer!:boolean;
-  @Input()
-  public newList:boolean=true;
-
+  public appCorrectAnswer!:boolean;@Input()
+  public selectAnswer!:boolean ;
+  @Output()
+  public onClick:EventEmitter<any> = new EventEmitter();
   @HostListener("click") onClicking():void{
-    if(!this.newList) return
-    else {
+    if(!this.selectAnswer && this.selectAnswer !== undefined) {
+      console.log('select', this.selectAnswer)
       this.setCorrectColor();
-      this.newList = false
+      this.onClick.emit();
     }
   }
   @HostBinding('style.color')
