@@ -3,15 +3,15 @@ import {dataScreen, IScreen} from "./dataScreen";
 
 @Injectable()
 export class ScreenService {
-  public screens: Array<IScreen> = dataScreen;
-  public screenOrder: number = 0;
-  public existPrevScreen: boolean = false;
-  public existNextScreen: boolean = true;
+  public screens: IScreen[] = dataScreen;
+  public screenOrder = 0;
+  public existPrevScreen = false;
+  public existNextScreen = true;
 
   public getScreen(): IScreen {
     return this.screens[this.screenOrder];
   }
-  public getTitleScreens():Array<string>{
+  public getTitleScreens():string[]{
     return this.screens.map(screen => screen.title);
   }
   public getScreenFromTitle(title:string):IScreen{

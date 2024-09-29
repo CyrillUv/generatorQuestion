@@ -9,25 +9,25 @@ export class DataQuestService {
   public id = false;
   private _data = dataQuest;
   private _statistic = '0'
-  public arrayTime: Array<number> = []
-  public arrayOfUnanswered: Array<IQuestion> = []
+  public arrayTime: number[] = []
+  public arrayOfUnanswered: IQuestion[] = []
 
-  public getArrayTime(): Array<number> {
+  public getArrayTime(): number[] {
     return this.arrayTime
   }
-  public getArrayOfUnanswered(): Array<IQuestion>{
+  public getArrayOfUnanswered(): IQuestion[]{
     return this.arrayOfUnanswered
   }
   public nullingArrayOfUnanswered():void{
      this.arrayOfUnanswered=[]
   }
-  public getCategories():Array<NameDataType>{
+  public getCategories():NameDataType[]{
     return this._data.map(obj => obj.name);
   }
-  public getQuestions(category:NameDataType): Array<IQuestion>{
+  public getQuestions(category:NameDataType): IQuestion[]{
   return (this._data.find(obj=> obj.name===category) as IDataQuest).questions
   }
-  public getData():Array<IDataQuest>{
+  public getData():IDataQuest[]{
     return this._data
   }
   public getStatistic():string{
@@ -36,7 +36,7 @@ export class DataQuestService {
   public setStatistic(statistic:string):void{
      this._statistic = statistic;
   }
-  public nullingRequestsForQuest(questions:Array<IQuestion>):void{
+  public nullingRequestsForQuest(questions:IQuestion[]):void{
     questions.forEach(question=>{question.active=false})
   }
 

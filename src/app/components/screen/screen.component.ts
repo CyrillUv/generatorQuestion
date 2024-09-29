@@ -18,7 +18,7 @@ import {RouterLink} from "@angular/router";
 })
 export class ScreenComponent {
   public screen:IScreen|null = null;
-  public titles:Array<string>=[]
+  public titles:string[]=[]
   get existPrevScreen():boolean{
     return this.screenService.existPrevScreen;
   }

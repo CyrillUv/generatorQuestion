@@ -6,9 +6,9 @@ import {dataTests} from "./dataTest";
   providedIn: "root"
 })
 export class DataTestService {
- private _data:Array<IDataTest>=dataTests
- private _successTestsMap:Map<number,IAnswer> = new Map()
- public getData():Array<IDataTest>{
+ private _data:IDataTest[]=dataTests
+ private _successTestsMap = new Map<number,IAnswer>()
+ public getData():IDataTest[]{
    return this._data;
  }
  public getSuccessTestsMap():Map<number,IAnswer>{

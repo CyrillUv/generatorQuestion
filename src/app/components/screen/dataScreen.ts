@@ -8,7 +8,7 @@ export interface IScreen {
 }
 
 
-export const dataScreen:Array<IScreen> = [
+export const dataScreen:IScreen[] = [
   {title:'Новая отписка через takeUntilDestroy',url:'takeUntilDestroy.png',url2:'takeUntilDestroy2.png',
     description:'Базовый класс от которого нужно наследоваться,внутри есть отписка на destroy',
     description2:'Так мы наследуемся и весь Observable прокидываем в метод до subscribe'},

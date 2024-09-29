@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {RouterLink} from "@angular/router";
-import {NgForOf, NgIf, NgStyle} from "@angular/common";
+import {JsonPipe, NgForOf, NgIf, NgStyle} from "@angular/common";
 import {DataTestService} from "../../../data/testing/dataTest.service";
 import {IAnswer, IDataTest} from "../../../data/testing/type";
 import {CorrectDirective} from "../../../directive/correct.directive.ts.directive";
@@ -23,7 +23,7 @@ import {CorrectDirective} from "../../../directive/correct.directive.ts.directiv
 export class PanelTestingComponent implements OnInit {
   public page = 'Тестирование'
   public activeTest!: IDataTest
-  public arrTest: Array<IDataTest> = []
+  public arrTest: IDataTest[] = []
   public selectAnswer = false;
 
   constructor(public dt: DataTestService) {
@@ -35,7 +35,7 @@ export class PanelTestingComponent implements OnInit {
   }
 
   public findTest(id: number): void {
-    this.activeTest = <IDataTest>this.arrTest.find(test => test.id === id)
+    this.activeTest = this.arrTest.find(test => test.id === id) as IDataTest
     this.selectAnswer = this.dt.getSuccessTestsMap().has(this.activeTest.id);
   }
 

@@ -10,6 +10,6 @@ export interface IQuestion{
 
 export interface IDataQuest{
   name: NameDataType;
-  questions:Array<IQuestion>
+  questions:IQuestion[]
   active:boolean;
 }

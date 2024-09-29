@@ -1,6 +1,6 @@
 import {IDataTest} from "./type";
 
-export const dataTests: Array<IDataTest> = [{
+export const dataTests: IDataTest[] = [{
   id: 1,
   name: 'Вопросик1',
   answers: [{title: '1ответ', correct: false},

@@ -9,7 +9,7 @@ export class CorrectDirective {
   public appCorrectAnswer!:boolean;@Input()
   public selectAnswer!:boolean ;
   @Output()
-  public onClick:EventEmitter<any> = new EventEmitter();
+  public onClick = new EventEmitter<any>();
   @HostListener("click") onClicking():void{
     if(!this.selectAnswer && this.selectAnswer !== undefined) {
       console.log('select', this.selectAnswer)

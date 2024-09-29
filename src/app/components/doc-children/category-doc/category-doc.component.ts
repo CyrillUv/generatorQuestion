@@ -21,7 +21,7 @@ export class CategoryComponent implements OnInit{
       console.log('data', r)
     });
 
-    (<Observable<CategoryRoute>>this.route.params).subscribe(res => {
+    (this.route.params as Observable<CategoryRoute>).subscribe(res => {
       console.log('params', res)
       this.name=res.title;
     });

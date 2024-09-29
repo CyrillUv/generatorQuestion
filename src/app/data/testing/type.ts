@@ -5,5 +5,5 @@ export interface IAnswer{
 export interface IDataTest {
   id:number
   name: string;
-  answers: Array<IAnswer>;
+  answers: IAnswer[];
 }

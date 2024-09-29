@@ -8,7 +8,7 @@ import {Subscribers} from "./shared/subscribers";
 interface Backend {
   title: string;
   planned: boolean;
-  parachutes: Array<string>;
+  parachutes: string[];
   id: string;
   readiness: boolean;
 }
@@ -16,7 +16,7 @@ interface Backend {
 interface Frontend {
   name: string;
   planning: boolean;
-  parachutes: Array<string>;
+  parachutes: string[];
   id: string;
   ready: boolean;
 }

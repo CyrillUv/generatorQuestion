@@ -2,7 +2,9 @@
   <div>
     {{ numQuestion }} Вопрос из {{ lastQuestion }}
     @if (question1) {
-      <button (click)="unansweredQuestion()" [disabled]="this.question1.active">Ответ</button>
+      <button (click)="unansweredQuestion()" [disabled]="this.question1.active">
+        Ответ
+      </button>
 
       <div>{{ question1.question }}</div>
       @if (question1.active) {
@@ -17,12 +19,13 @@
         @if (numQuestion !== 0) {
           <button (click)="randomizeQuestion()">Следующий вопрос</button>
         }
-         </span>
+      </span>
     }
-    @if (ds.getArrayTime().length===10){
-      <button (click)="setStatistic(count+'');" routerLink="/statistics">Готово</button>
+    @if (ds.getArrayTime().length === 10) {
+      <button (click)="setStatistic(count + '')" routerLink="/statistics">
+        Готово
+      </button>
     }
-
   </div>
-  <h2>{{ count|questionsTimer }}</h2>
+  <h2>{{ count | questionsTimer }}</h2>
 </div>

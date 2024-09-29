@@ -1,21 +1,28 @@
 <div class="statistics">
   <h1>Статистика</h1>
-  <div>Затрачено на все вопросы {{+this.ds.getStatistic() | questionsTimer}}</div>
-  <div>Затрачено времени в среднем за вопрос   {{arithmeticMean| questionsTimer}}</div>
-  <div>Самый долгий вопрос по времени {{hardQuestion| questionsTimer }}</div>
-  @if(ds.getArrayOfUnanswered().length){
-  <div class="unansweredQuestions">Неотвеченные вопросы:
-    @for(unanswered of ds.getArrayOfUnanswered();track unanswered){
-      <li (click)="openRequest(unanswered)">{{unanswered.question}}</li>
-      @if(unanswered.active){
-        <span class="response">
-          {{unanswered.response}}
-        </span>
-      }
-    }
+  <div>
+    Затрачено на все вопросы {{ +this.ds.getStatistic() | questionsTimer }}
   </div>
+  <div>
+    Затрачено времени в среднем за вопрос {{ arithmeticMean | questionsTimer }}
+  </div>
+  <div>Самый долгий вопрос по времени {{ hardQuestion | questionsTimer }}</div>
+  @if (ds.getArrayOfUnanswered().length) {
+    <div class="unansweredQuestions">
+      Неотвеченные вопросы:
+      @for (unanswered of ds.getArrayOfUnanswered(); track unanswered) {
+        <li (click)="openRequest(unanswered)">{{ unanswered.question }}</li>
+        @if (unanswered.active) {
+          <span class="response">
+            {{ unanswered.response }}
+          </span>
+        }
+      }
+    </div>
   } @else {
     <h1>Вы ответили на все вопросы,поздравляю!!! ฅ^•ﻌ•^ฅ</h1>
   }
-  <button routerLink="/menu" (click)="ds.nullingArrayOfUnanswered()">Вернуться в меню</button>
+  <button routerLink="/menu" (click)="ds.nullingArrayOfUnanswered()">
+    Вернуться в меню
+  </button>
 </div>
