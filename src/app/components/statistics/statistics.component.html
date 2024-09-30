@@ -8,12 +8,12 @@
   </div>
   <div>Самый долгий вопрос по времени {{ hardQuestion | questionsTimer }}</div>
   @if (ds.getArrayOfUnanswered().length) {
-    <div class="unansweredQuestions">
+    <div class="statistics__unansweredQuestions">
       Неотвеченные вопросы:
       @for (unanswered of ds.getArrayOfUnanswered(); track unanswered) {
         <li (click)="openRequest(unanswered)">{{ unanswered.question }}</li>
         @if (unanswered.active) {
-          <span class="response">
+          <span class="statistics__response">
             {{ unanswered.response }}
           </span>
         }

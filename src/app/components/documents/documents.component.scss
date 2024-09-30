@@ -1,0 +1,31 @@
+.documents {
+  display: flex;
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+
+  &__categories {
+    width: 30%;
+  }
+
+  &__questions {
+    width: 70%;
+  }
+
+  &__question, &__category {
+    cursor: pointer;
+    &:hover {
+      color: lightyellow;
+    }
+  }
+
+  &__response {
+    margin: 30px;
+    padding: 10px;
+    background-color: rgba(98, 114, 114, 0.7);
+  }
+}
+
+
+
+

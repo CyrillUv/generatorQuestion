@@ -1,27 +1,31 @@
-.panelTesting {
+.panel-testing {
   padding: 10px;
 
-  .panelCeils {
+  &__ceils {
     display: flex;
   }
 
-  .image {
+  &__image {
     height: 300px;
-    width: 500px
+    width: 500px;
   }
-  .panelCeil {
+
+  &__ceil {
     cursor: pointer;
   }
-  .activeCeil{
+
+  &__ceil--active {
     border-radius: 7px;
     outline: 3px solid #4e99c9;
     cursor: pointer;
-}
-  .panelTrueCeil {
+  }
+
+  &__correct-ceil {
     color: green;
     cursor: pointer;
   }
-  .panelFalseCeil {
+
+  &__incorrect-ceil {
     cursor: pointer;
     color: #bd1111;
   }

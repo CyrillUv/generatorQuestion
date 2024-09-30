@@ -6,7 +6,7 @@ import { QuestionsTimerPipe } from './questions-timer.pipe';
 import { TakeUntilDestroy } from '../../shared/take-until-destroy';
 import { interval } from 'rxjs';
 import { IQuestion, NameDataType } from '../../data/question/type';
-import { DataQuestService } from '../../data/question/dataQuest.service';
+import { DataQuestService } from '../../data/question/data-quest.service';
 
 @Component({
   selector: 'app-questions',
@@ -72,7 +72,8 @@ export class QuestionsComponent extends TakeUntilDestroy {
         Math.floor(Math.random() * this.categories.length)
       ].questions[Math.floor(Math.random() * this.questions.length)];
   }
-  public unansweredQuestion() {
+
+  public unansweredQuestion(): void {
     this.questions.map((el) => (el.active = false));
     this.question1.active = true;
     this.ds.getArrayOfUnanswered().push(this.question1);

@@ -1,9 +1,10 @@
-export interface IAnswer{
+export interface IAnswer {
   title: string;
   correct: boolean;
 }
+
 export interface IDataTest {
-  id:number
+  id: number;
   name: string;
   answers: IAnswer[];
 }

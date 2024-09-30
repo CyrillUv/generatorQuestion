@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { QuestionsTimerPipe } from '../questions/questions-timer.pipe';
-import { DataQuestService } from '../../data/question/dataQuest.service';
+import { DataQuestService } from '../../data/question/data-quest.service';
 import { IQuestion } from '../../data/question/type';
 
 @Component({
@@ -10,7 +10,7 @@ import { IQuestion } from '../../data/question/type';
   standalone: true,
   imports: [RouterLink, QuestionsTimerPipe],
   templateUrl: './statistics.component.html',
-  styleUrl: './statistics.component.css',
+  styleUrl: './statistics.component.scss',
 })
 export class StatisticsComponent implements OnInit {
   public arithmeticMean = 0;
@@ -23,12 +23,6 @@ export class StatisticsComponent implements OnInit {
 
     this.statisticTimeQuestion();
     console.log(this.arithmeticMean);
-
-    if (true) {
-      const cat = 'dog';
-    } else if (false) {
-      let fog = 'cat';
-    }
   }
 
   public statisticTimeQuestion(): void {

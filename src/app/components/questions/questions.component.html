@@ -5,7 +5,6 @@
       <button (click)="unansweredQuestion()" [disabled]="this.question1.active">
         Ответ
       </button>
-
       <div>{{ question1.question }}</div>
       @if (question1.active) {
         <div>{{ question1.response }}</div>

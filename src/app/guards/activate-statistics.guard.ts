@@ -1,6 +1,6 @@
 import { CanActivate, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { DataQuestService } from '../data/question/dataQuest.service';
+import { DataQuestService } from '../data/question/data-quest.service';
 
 @Injectable({
   providedIn: 'root',

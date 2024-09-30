@@ -1,0 +1,44 @@
+<div class="panel-testing">
+  <div>{{ page }}</div>
+  <div class="panel-testing__ceils">
+    <div *ngFor="let el of arrTest">
+      <div
+        (click)="findTest(el.id)"
+        [class]="
+          activeTest.id === el.id
+            ? 'panel-testing__ceil--active'
+            : 'panel-testing__ceil'
+        "
+      >
+        <span
+          [class.panel-testing__correct-ceil]="correctKeyInMap(el.id)"
+          [class.panel-testing__incorrect-ceil]="
+            correctKeyInMap(el.id) === false
+          "
+          >{{ el.id }}</span
+        >
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="panel-testing__image"></div>
+    <h3>{{ activeTest["name"] }}</h3>
+    <div
+      [appCorrectAnswer]="answer.correct"
+      *ngFor="let answer of activeTest.answers"
+    >
+      <div
+        class="panel-testing__ceil"
+        [class.panel-testing__correct-ceil]="correctAnswerInMap(answer.title)"
+        [class.panel-testing__incorrect-ceil]="
+          correctAnswerInMap(answer.title) === false
+        "
+        (onClick)="clickAnswer(answer)"
+        [appCorrectAnswer]="answer.correct"
+        [selectAnswer]="selectAnswer"
+      >
+        {{ answer.title }}
+      </div>
+    </div>
+  </div>
+</div>

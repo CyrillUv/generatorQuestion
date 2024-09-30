@@ -1,15 +1,13 @@
-export type NameDataType =
-  'Структуры данных'|'JavaScript'
+export type NameDataType = 'Структуры данных' | 'JavaScript';
 
-export interface IQuestion{
+export interface IQuestion {
   question: string;
-  response:string;
-  active:boolean;
-
+  response: string;
+  active: boolean;
 }
 
-export interface IDataQuest{
+export interface IDataQuest {
   name: NameDataType;
-  questions:IQuestion[]
-  active:boolean;
+  questions: IQuestion[];
+  active: boolean;
 }

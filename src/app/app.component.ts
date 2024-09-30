@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {Subject} from "rxjs";
-import {Subscribers} from "./shared/subscribers";
-
-
 
 interface Backend {
   title: string;
@@ -21,24 +17,23 @@ interface Frontend {
   ready: boolean;
 }
 
-
 class DesantAdapter {
   public static toFrontend(value: Backend): Frontend {
     return {
       name: value.title,
       planning: value.planned,
       ready: value.readiness,
-      ...value
-    }
+      ...value,
+    };
   }
 
- public static toBackend(value: Frontend): Backend {
+  public static toBackend(value: Frontend): Backend {
     return {
-      title:value.name,
-      planned:value.planning,
-      readiness:value.ready,
-      ...value
-    }
+      title: value.name,
+      planned: value.planning,
+      readiness: value.ready,
+      ...value,
+    };
   }
 }
 
@@ -47,9 +42,6 @@ class DesantAdapter {
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
-export class AppComponent{
-
-
-}
+export class AppComponent {}
