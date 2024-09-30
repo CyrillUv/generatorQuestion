@@ -6,7 +6,7 @@
         (click)="findTest(el.id)"
         [class]="
           activeTest.id === el.id
-            ? 'panel-testing__ceil--active'
+            ? 'panel-testing__ceil--active panel-testing__ceil'
             : 'panel-testing__ceil'
         "
       >
@@ -20,15 +20,17 @@
       </div>
     </div>
   </div>
-  <div>
-    <div class="panel-testing__image"></div>
+  <div class="panel-testing__image">
+    <img src="takeUntil.png" alt="" />
     <h3>{{ activeTest["name"] }}</h3>
+  </div>
+  <div>
     <div
       [appCorrectAnswer]="answer.correct"
       *ngFor="let answer of activeTest.answers"
     >
       <div
-        class="panel-testing__ceil"
+        [class]="!selectAnswer ? 'panel-testing__answer' : ''"
         [class.panel-testing__correct-ceil]="correctAnswerInMap(answer.title)"
         [class.panel-testing__incorrect-ceil]="
           correctAnswerInMap(answer.title) === false
@@ -39,6 +41,22 @@
       >
         {{ answer.title }}
       </div>
+    </div>
+  </div>
+  <div class="panel-testing__buttons">
+    <div
+      *ngIf="activeTest.id !== 1"
+      (click)="findTest(activeTest.id - 1)"
+      class="panel-testing__next-button"
+    >
+      Предыдущий тест
+    </div>
+    <div
+      *ngIf="activeTest.id !== arrTest.length && selectAnswer"
+      (click)="findTest(activeTest.id + 1)"
+      class="panel-testing__prev-button"
+    >
+      Следующий тест
     </div>
   </div>
 </div>

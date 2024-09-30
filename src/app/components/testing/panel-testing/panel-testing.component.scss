@@ -1,32 +1,80 @@
 .panel-testing {
   padding: 10px;
+  text-wrap: wrap;
 
   &__ceils {
     display: flex;
+    justify-content: space-between;
   }
 
   &__image {
-    height: 300px;
-    width: 500px;
+    margin: 20px;
+    overflow: hidden;
+    & h3{
+      text-wrap: wrap;
+
+    }
+    & img {
+
+      max-height: 500px;
+      width: 100%;
+      transition:transform ease 1s;
+
+      &:hover {
+        transform: scale(1.1);
+        transition:transform ease 1s;
+      }
+    }
   }
 
   &__ceil {
+    text-align: center;
+    height: 20px;
+    width: 17px;
     cursor: pointer;
+    margin: -5px;
+    padding: 15px;
+    transition:transform ease 0.1s;
+    &:hover {
+      transform: scale(1.1);
+      transition:transform ease 0.1s;
+      background-color: #727708;
+
+    }
+
+  }
+  &__buttons{
+  display: flex;
+    & div{
+      cursor: pointer;
+
+    }
+  }
+  &__answer {
+    cursor: pointer;
+    margin: -5px;
+    padding: 15px;
+    &:hover {
+      background-color: #727708;
+    }
   }
 
   &__ceil--active {
-    border-radius: 7px;
     outline: 3px solid #4e99c9;
     cursor: pointer;
+
+    &:hover {
+      background-color: #4B4747FF;
+    }
   }
 
   &__correct-ceil {
     color: green;
-    cursor: pointer;
+    cursor: default;
   }
 
   &__incorrect-ceil {
-    cursor: pointer;
+    cursor: default;
     color: #bd1111;
   }
 }
