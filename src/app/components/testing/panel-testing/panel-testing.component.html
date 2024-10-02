@@ -1,7 +1,9 @@
 <div class="panel-testing">
   <div>{{ page }}</div>
+
   <div class="panel-testing__ceils">
-    <div *ngFor="let el of arrTest">
+    <div *ngIf="pack !== 20" (click)="prevPackTests()">Предыдущий блок</div>
+    <div *ngFor="let el of testsSeparator()">
       <div
         (click)="findTest(el.id)"
         [class]="
@@ -18,6 +20,9 @@
           >{{ el.id }}</span
         >
       </div>
+    </div>
+    <div *ngIf="pack !== arrTest.length" (click)="nextPackTests()">
+      Следующий блок
     </div>
   </div>
   <div class="panel-testing__block">

@@ -17,6 +17,7 @@ export class PanelTestingComponent implements OnInit {
   public activeTest!: IDataTest;
   public arrTest: IDataTest[] = [];
   public selectAnswer = false;
+  public pack = 20;
 
   constructor(public dt: DataTestService) {}
 
@@ -34,11 +35,13 @@ export class PanelTestingComponent implements OnInit {
     this.dt.setSuccessTestsMap(this.activeTest.id, answer);
     this.selectAnswer = true;
   }
+
   public correctKeyInMap(id: number): boolean | undefined {
     if (!this.dt.getSuccessTestsMap().has(id)) return;
 
     return this.dt.getSuccessTestsMap().get(id)?.correct as boolean;
   }
+
   public correctAnswerInMap(title: string): boolean | undefined {
     if (
       this.dt.getSuccessTestsMap().has(this.activeTest.id) &&
@@ -46,5 +49,19 @@ export class PanelTestingComponent implements OnInit {
     ) {
       return this.dt.getSuccessTestsMap().get(this.activeTest.id)?.correct;
     } else return undefined;
+  }
+
+  public testsSeparator(): IDataTest[] {
+    return this.arrTest.filter(
+      (test) => test.id > this.pack - 20 && test.id <= this.pack,
+    );
+  }
+
+  public nextPackTests(): void {
+    this.pack += 20;
+  }
+
+  public prevPackTests(): void {
+    this.pack -= 20;
   }
 }
