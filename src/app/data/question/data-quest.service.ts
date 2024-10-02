@@ -22,6 +22,7 @@ export class DataQuestService {
 
   public nullingArrayOfUnanswered(): void {
     this.arrayOfUnanswered = [];
+    this.removeArrayTime();
   }
 
   public getCategories(): NameDataType[] {
@@ -49,5 +50,8 @@ export class DataQuestService {
     questions.forEach((question) => {
       question.active = false;
     });
+  }
+  public removeArrayTime() {
+    this.arrayTime = [];
   }
 }
