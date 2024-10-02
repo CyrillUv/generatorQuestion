@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { IScreen } from './data-screen';
 import { ScreenService } from './screen.service';
 import { NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
@@ -13,28 +13,29 @@ import { RouterLink } from '@angular/router';
   providers: [ScreenService],
 })
 export class ScreenComponent {
+  public screens!: IScreen[];
   public screen: IScreen | null = null;
   public titles: string[] = [];
-  get existPrevScreen(): boolean {
-    return this.screenService.existPrevScreen;
-  }
-  get existNextScreen(): boolean {
-    return this.screenService.existNextScreen;
-  }
 
-  constructor(private screenService: ScreenService) {
+  constructor(
+    private screenService: ScreenService,
+    private cdRef: ChangeDetectorRef,
+  ) {
     this.screen = this.screenService.getScreen();
     this.titles = this.screenService.getTitleScreens();
+    this.screens = this.screenService.screens;
   }
 
   public prevScreen() {
+    this.cdRef.detectChanges();
     this.screen = this.screenService.prevScreen();
   }
-  public getScreenFromTitle(title: string): void {
-    this.screen = this.screenService.getScreenFromTitle(title);
+  public getScreenFromTitle(title: string, id: number): void {
+    this.screen = this.screenService.getScreenFromTitle(title, id);
   }
 
   public nextScreen() {
+    this.cdRef.detectChanges();
     this.screen = this.screenService.nextScreen();
   }
 }
