@@ -1,13 +1,18 @@
 <div class="questions">
   <div>
-    {{ numQuestion }} Вопрос из {{ lastQuestion }}
-    @if (question1) {
-      <button (click)="unansweredQuestion()" [disabled]="this.question1.active">
+    <div *ngIf="numQuestion !== 0">
+      {{ numQuestion }} Вопрос из {{ lastQuestion }}
+    </div>
+    @if (activeQuestion) {
+      <button
+        (click)="unansweredQuestion()"
+        [disabled]="this.activeQuestion.active"
+      >
         Ответ
       </button>
-      <div>{{ question1.question }}</div>
-      @if (question1.active) {
-        <div>{{ question1.response }}</div>
+      <div>{{ activeQuestion.question }}</div>
+      @if (activeQuestion.active) {
+        <div>{{ activeQuestion.response }}</div>
       }
     }
     @if (numQuestion !== lastQuestion) {

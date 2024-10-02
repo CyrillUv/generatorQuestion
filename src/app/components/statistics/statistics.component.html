@@ -1,17 +1,24 @@
 <div class="statistics">
   <h1>Статистика</h1>
-  <div>
+  <div class="statistics__result">
     Затрачено на все вопросы {{ +this.ds.getStatistic() | questionsTimer }}
   </div>
-  <div>
+  <div class="statistics__result">
     Затрачено времени в среднем за вопрос {{ arithmeticMean | questionsTimer }}
   </div>
-  <div>Самый долгий вопрос по времени {{ hardQuestion | questionsTimer }}</div>
+  <div class="statistics__result">
+    Самый долгий вопрос по времени {{ hardQuestion | questionsTimer }}
+  </div>
   @if (ds.getArrayOfUnanswered().length) {
     <div class="statistics__unansweredQuestions">
       Неотвеченные вопросы:
       @for (unanswered of ds.getArrayOfUnanswered(); track unanswered) {
-        <li (click)="openRequest(unanswered)">{{ unanswered.question }}</li>
+        <li
+          class="statistics__unansweredQuestions__mistake"
+          (click)="openRequest(unanswered)"
+        >
+          {{ unanswered.question }}
+        </li>
         @if (unanswered.active) {
           <span class="statistics__response">
             {{ unanswered.response }}
@@ -20,7 +27,9 @@
       }
     </div>
   } @else {
-    <h1>Вы ответили на все вопросы,поздравляю!!! ฅ^•ﻌ•^ฅ</h1>
+    <h1 class="statistics__congratulation">
+      Вы ответили на все вопросы,поздравляю!!! ฅ^•ﻌ•^ฅ
+    </h1>
   }
   <button routerLink="/menu" (click)="ds.nullingArrayOfUnanswered()">
     Вернуться в меню

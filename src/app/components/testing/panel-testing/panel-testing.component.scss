@@ -7,23 +7,26 @@
     justify-content: space-between;
   }
 
-  &__image {
+  &__block {
     margin: 20px;
     overflow: hidden;
-    & h3{
+    word-break: break-all;
+
+    &__question {
       text-wrap: wrap;
-
     }
-    & img {
 
+    &__image {
+      border: 1px solid #410877FF;
       max-height: 500px;
       width: 100%;
-      transition:transform ease 1s;
+      transition: transform ease 1s;
 
       &:hover {
         transform: scale(1.1);
-        transition:transform ease 1s;
+        transition: transform ease 1s;
       }
+
     }
   }
 
@@ -34,28 +37,48 @@
     cursor: pointer;
     margin: -5px;
     padding: 15px;
-    transition:transform ease 0.1s;
+    transition: transform ease 0.1s;
+
+    &--correct{
+      color: green;
+      cursor: default;
+    }
+
+    &--incorrect{
+      cursor: default;
+      color: #bd1111;
+    }
+
     &:hover {
       transform: scale(1.1);
-      transition:transform ease 0.1s;
-      background-color: #727708;
+      transition: transform ease 0.1s;
+      background-color: #410877FF;
 
     }
 
   }
-  &__buttons{
-  display: flex;
-    & div{
+
+  &__buttons {
+    display: flex;
+
+    &__prev-button, &__next-button {
       cursor: pointer;
+      padding: 10px;
 
+      &:hover {
+        background-color: #410877FF;
+      }
     }
   }
+
   &__answer {
     cursor: pointer;
     margin: -5px;
     padding: 15px;
+    word-break: break-all;
+
     &:hover {
-      background-color: #727708;
+      background-color: #410877;
     }
   }
 
@@ -68,14 +91,7 @@
     }
   }
 
-  &__correct-ceil {
-    color: green;
-    cursor: default;
-  }
 
-  &__incorrect-ceil {
-    cursor: default;
-    color: #bd1111;
-  }
+
 }
 

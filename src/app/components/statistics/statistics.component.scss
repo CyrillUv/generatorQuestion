@@ -4,16 +4,18 @@
   padding: 10px;
   font-size: large;
   font-weight: bold;
-  & h1{
+  &__congratulation{
     text-align: center;
   }
-  & div{
+  &__result{
     margin: 10px;
   }
 
-  &__unansweredQuestions li{
-    margin: 10px;
-    cursor: pointer;
+  &__unansweredQuestions{
+    &__mistake{
+      margin: 10px;
+      cursor: pointer;
+    }
   }
   &__response{
     margin-left: 4%;

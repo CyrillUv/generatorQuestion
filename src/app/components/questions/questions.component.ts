@@ -18,7 +18,7 @@ import { DataQuestService } from '../../data/question/data-quest.service';
 export class QuestionsComponent extends TakeUntilDestroy {
   public categories!: NameDataType[];
   public questions!: IQuestion[];
-  public question1!: IQuestion;
+  public activeQuestion!: IQuestion;
   public count = 0;
   public timerFlag = false;
   public numQuestion = 0;
@@ -36,7 +36,6 @@ export class QuestionsComponent extends TakeUntilDestroy {
     this.ds.setStatistic(timerValue);
     this.ds.arrayTime.shift();
     this.ds.arrayTime.push(this.count);
-    console.log(this.ds.arrayTime);
     this.ds.nullingRequestsForQuest(this.ds.getArrayOfUnanswered());
   }
 
@@ -61,13 +60,7 @@ export class QuestionsComponent extends TakeUntilDestroy {
     }
     this.getCategories();
     this.getQuestions('Структуры данных');
-    console.log(
-      Math.floor(Math.random() * this.categories.length) + 1,
-      'категория',
-      Math.floor(Math.random() * this.questions.length) + 1,
-      'вопрос',
-    );
-    this.question1 =
+    this.activeQuestion =
       this.ds.getData()[
         Math.floor(Math.random() * this.categories.length)
       ].questions[Math.floor(Math.random() * this.questions.length)];
@@ -75,7 +68,7 @@ export class QuestionsComponent extends TakeUntilDestroy {
 
   public unansweredQuestion(): void {
     this.questions.map((el) => (el.active = false));
-    this.question1.active = true;
-    this.ds.getArrayOfUnanswered().push(this.question1);
+    this.activeQuestion.active = true;
+    this.ds.getArrayOfUnanswered().push(this.activeQuestion);
   }
 }

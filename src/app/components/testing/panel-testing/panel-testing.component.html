@@ -11,8 +11,8 @@
         "
       >
         <span
-          [class.panel-testing__correct-ceil]="correctKeyInMap(el.id)"
-          [class.panel-testing__incorrect-ceil]="
+          [class.panel-testing__ceil--correct]="correctKeyInMap(el.id)"
+          [class.panel-testing__ceil--incorrect]="
             correctKeyInMap(el.id) === false
           "
           >{{ el.id }}</span
@@ -20,9 +20,9 @@
       </div>
     </div>
   </div>
-  <div class="panel-testing__image">
-    <img src="takeUntil.png" alt="" />
-    <h3>{{ activeTest["name"] }}</h3>
+  <div class="panel-testing__block">
+    <img class="panel-testing__block__image" src="takeUntil.png" alt="" />
+    <h3 class="panel-testing__block__question">{{ activeTest["name"] }}</h3>
   </div>
   <div>
     <div
@@ -31,11 +31,11 @@
     >
       <div
         [class]="!selectAnswer ? 'panel-testing__answer' : ''"
-        [class.panel-testing__correct-ceil]="correctAnswerInMap(answer.title)"
-        [class.panel-testing__incorrect-ceil]="
+        [class.panel-testing__ceil--correct]="correctAnswerInMap(answer.title)"
+        [class.panel-testing__ceil--incorrect]="
           correctAnswerInMap(answer.title) === false
         "
-        (onClick)="clickAnswer(answer)"
+        (clickEmitter)="clickAnswer(answer)"
         [appCorrectAnswer]="answer.correct"
         [selectAnswer]="selectAnswer"
       >
@@ -47,14 +47,14 @@
     <div
       *ngIf="activeTest.id !== 1"
       (click)="findTest(activeTest.id - 1)"
-      class="panel-testing__next-button"
+      class="panel-testing__buttons__prev-button"
     >
       Предыдущий тест
     </div>
     <div
       *ngIf="activeTest.id !== arrTest.length && selectAnswer"
       (click)="findTest(activeTest.id + 1)"
-      class="panel-testing__prev-button"
+      class="panel-testing__buttons__prev-button"
     >
       Следующий тест
     </div>

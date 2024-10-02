@@ -18,12 +18,12 @@ export class CorrectDirective {
   @Input()
   public selectAnswer!: boolean;
   @Output()
-  public onClick = new EventEmitter<IAnswer>();
+  public clickEmitter = new EventEmitter<IAnswer>();
 
   @HostListener('click') onClicking(): void {
     if (!this.selectAnswer && this.selectAnswer !== undefined) {
       this.setCorrectColor();
-      this.onClick.emit();
+      this.clickEmitter.emit();
     }
   }
 

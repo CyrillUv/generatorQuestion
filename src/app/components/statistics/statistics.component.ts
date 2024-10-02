@@ -4,11 +4,18 @@ import { RouterLink } from '@angular/router';
 import { QuestionsTimerPipe } from '../questions/questions-timer.pipe';
 import { DataQuestService } from '../../data/question/data-quest.service';
 import { IQuestion } from '../../data/question/type';
+import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 
 @Component({
   selector: 'app-statistics',
   standalone: true,
-  imports: [RouterLink, QuestionsTimerPipe],
+  imports: [
+    RouterLink,
+    QuestionsTimerPipe,
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
+  ],
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.scss',
 })
@@ -22,7 +29,6 @@ export class StatisticsComponent implements OnInit {
     this.ds.getStatistic();
 
     this.statisticTimeQuestion();
-    console.log(this.arithmeticMean);
   }
 
   public statisticTimeQuestion(): void {
