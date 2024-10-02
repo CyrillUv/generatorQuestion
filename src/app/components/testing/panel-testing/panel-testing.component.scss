@@ -57,18 +57,19 @@
     }
 
   }
+  &__prev-button, &__next-button {
+    cursor: pointer;
+    padding: 15px;
+
+    &:hover {
+      background-color: #410877FF;
+    }
+  }
 
   &__buttons {
     display: flex;
 
-    &__prev-button, &__next-button {
-      cursor: pointer;
-      padding: 10px;
 
-      &:hover {
-        background-color: #410877FF;
-      }
-    }
   }
 
   &__answer {

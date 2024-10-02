@@ -1,8 +1,13 @@
 <div class="panel-testing">
   <div>{{ page }}</div>
-
   <div class="panel-testing__ceils">
-    <div *ngIf="pack !== 20" (click)="prevPackTests()">Предыдущий блок</div>
+    <div
+      *ngIf="pack !== 20"
+      class="panel-testing__prev-button"
+      (click)="prevPackTests()"
+    >
+      Предыдущий
+    </div>
     <div *ngFor="let el of testsSeparator()">
       <div
         (click)="findTest(el.id)"
@@ -21,8 +26,12 @@
         >
       </div>
     </div>
-    <div *ngIf="pack !== arrTest.length" (click)="nextPackTests()">
-      Следующий блок
+    <div
+      *ngIf="pack < arrTest.length"
+      class="panel-testing__next-button"
+      (click)="nextPackTests()"
+    >
+      Следующий
     </div>
   </div>
   <div class="panel-testing__block">
@@ -52,14 +61,14 @@
     <div
       *ngIf="activeTest.id !== 1"
       (click)="findTest(activeTest.id - 1)"
-      class="panel-testing__buttons__prev-button"
+      class="panel-testing__prev-button"
     >
       Предыдущий тест
     </div>
     <div
       *ngIf="activeTest.id !== arrTest.length && selectAnswer"
       (click)="findTest(activeTest.id + 1)"
-      class="panel-testing__buttons__prev-button"
+      class="panel-testing__next-button"
     >
       Следующий тест
     </div>

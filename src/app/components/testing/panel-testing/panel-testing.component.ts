@@ -59,6 +59,8 @@ export class PanelTestingComponent implements OnInit {
 
   public nextPackTests(): void {
     this.pack += 20;
+    console.log(this.pack);
+    console.log(this.arrTest.length);
   }
 
   public prevPackTests(): void {
