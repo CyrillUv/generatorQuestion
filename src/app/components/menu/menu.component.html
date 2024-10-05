@@ -1,10 +1,11 @@
 <div class="menu">
+  <app-settings *ngIf="ms.getSettingMode()" />
   Меню
   <div
     (mouseleave)="dataMenu[0].dropdownActive = false"
     class="menu__questions"
   >
-    <button routerLink="/questions">Вопросы</button>
+    <button (click)="changeRoute('/questions')">Вопросы</button>
     <span (mousemove)="dataMenu[0].dropdownActive = true">Настройки</span>
     <main *ngFor="let option of dataMenu[0].options">
       <div *ngIf="dataMenu[0].dropdownActive" class="menu__dropdown">
@@ -22,7 +23,7 @@
     </main>
   </div>
   <div class="menu__testing" (mouseleave)="dataMenu[1].dropdownActive = false">
-    <button routerLink="/testing">Тестирование</button>
+    <button (click)="changeRoute('/testing')">Тестирование</button>
     <span (mousemove)="dataMenu[1].dropdownActive = true">Настройки</span>
     <main *ngFor="let option of dataMenu[1].options">
       <div *ngIf="dataMenu[1].dropdownActive" class="menu__dropdown">
