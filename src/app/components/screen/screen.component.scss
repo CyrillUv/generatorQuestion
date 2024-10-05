@@ -8,6 +8,11 @@
   &__title {
     margin: 5px;
     cursor: pointer;
+    &--active{
+      border: 3px solid green;
+      cursor: default;
+
+    }
   }
 
   &__arrowCard {

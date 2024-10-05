@@ -1,6 +1,47 @@
 <div class="menu">
   Меню
-  <button routerLink="/questions">Вопросы</button>
-  <button routerLink="/testing">Тестирование</button>
-  <button routerLink="/documents">Документация</button>
+  <div
+    (mouseleave)="dataMenu[0].dropdownActive = false"
+    class="menu__questions"
+  >
+    <button routerLink="/questions">Вопросы</button>
+    <span (mousemove)="dataMenu[0].dropdownActive = true">Настройки</span>
+    <main *ngFor="let option of dataMenu[0].options">
+      <div *ngIf="dataMenu[0].dropdownActive" class="menu__dropdown">
+        <div
+          [class]="
+            activeNumOfQuestions === option.number
+              ? 'menu__dropdown__option--active'
+              : 'menu__dropdown__option'
+          "
+          (click)="changeNumOfQuestions(option.number)"
+        >
+          {{ option.number }} вопросов
+        </div>
+      </div>
+    </main>
+  </div>
+  <div class="menu__testing" (mouseleave)="dataMenu[1].dropdownActive = false">
+    <button routerLink="/testing">Тестирование</button>
+    <span (mousemove)="dataMenu[1].dropdownActive = true">Настройки</span>
+    <main *ngFor="let option of dataMenu[1].options">
+      <div *ngIf="dataMenu[1].dropdownActive" class="menu__dropdown">
+        <div
+          [class]="
+            activeBlockTests === option.number
+              ? 'menu__dropdown__option--active'
+              : 'menu__dropdown__option'
+          "
+          (click)="changeActiveBlockTests(option.number)"
+        >
+          {{ option.number }} блок
+        </div>
+      </div>
+    </main>
+  </div>
+  <div>
+    <button class="menu__documents" routerLink="/documents">
+      Документация
+    </button>
+  </div>
 </div>

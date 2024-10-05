@@ -1,8 +1,16 @@
 <div class="panel-testing">
-  <div>{{ page }}</div>
+  <div class="panel-testing__header">
+    <h1 *ngIf="fullMode" (click)="fullMode = false" class="panel-testing__page">
+      Пройти частичное тестирование
+    </h1>
+    <h1 *ngIf="!fullMode" (click)="fullMode = true" class="panel-testing__page">
+      Пройти полное тестирование
+    </h1>
+    <h1 class="panel-testing__time">{{ time | Timer }}</h1>
+  </div>
   <div class="panel-testing__ceils">
     <div
-      *ngIf="pack !== 20"
+      *ngIf="separatorResult - 20 !== 0 && fullMode"
       class="panel-testing__prev-button"
       (click)="prevPackTests()"
     >
@@ -27,7 +35,7 @@
       </div>
     </div>
     <div
-      *ngIf="pack < arrTest.length"
+      *ngIf="separatorResult < arrTest.length - 1 && fullMode"
       class="panel-testing__next-button"
       (click)="nextPackTests()"
     >
@@ -52,6 +60,7 @@
         (clickEmitter)="clickAnswer(answer)"
         [appCorrectAnswer]="answer.correct"
         [selectAnswer]="selectAnswer"
+        (click)="choiceOfAnswer(this.activeTest.id)"
       >
         {{ answer.title }}
       </div>
@@ -59,18 +68,30 @@
   </div>
   <div class="panel-testing__buttons">
     <div
-      *ngIf="activeTest.id !== 1"
+      *ngIf="activeTest.id !== this.separatorResult - 19"
       (click)="findTest(activeTest.id - 1)"
       class="panel-testing__prev-button"
     >
       Предыдущий тест
     </div>
     <div
-      *ngIf="activeTest.id !== arrTest.length && selectAnswer"
+      *ngIf="activeTest.id !== this.separatorResult && selectAnswer"
       (click)="findTest(activeTest.id + 1)"
       class="panel-testing__next-button"
     >
       Следующий тест
+    </div>
+    <div
+      *ngIf="
+        fullMode
+          ? this.ts.getSuccessTestsMap().size === arrTest.length - 1
+          : this.ts.getSuccessTestsMap().size >= separatorResult
+      "
+      (click)="setStatistic(time + '')"
+      class="panel-testing__next-button"
+      routerLink="/statistics"
+    >
+      Готово
     </div>
   </div>
 </div>

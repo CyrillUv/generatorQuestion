@@ -4,10 +4,10 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { CategoryComponent } from './components/doc-children/category-doc/category-doc.component';
 import { inject } from '@angular/core';
 import { ActivateStatistics } from './guards/activate-statistics.guard';
-import { DataQuestService } from './data/question/data-quest.service';
+import { QuestionService } from './data/question/question.service';
 
 const resolver: ResolveFn<boolean> = () => {
-  const test = inject(DataQuestService);
+  const test = inject(QuestionService);
   return test?.id || true;
 };
 

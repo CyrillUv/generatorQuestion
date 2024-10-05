@@ -2,6 +2,15 @@
   padding: 10px;
   text-wrap: wrap;
 
+  &__page{
+    cursor: pointer;
+  }
+  &__header {
+    margin: 0 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__ceils {
     display: flex;
     justify-content: center;
@@ -39,12 +48,12 @@
     padding: 15px;
     transition: transform ease 0.1s;
 
-    &--correct{
+    &--correct {
       color: green;
       cursor: default;
     }
 
-    &--incorrect{
+    &--incorrect {
       cursor: default;
       color: #bd1111;
     }
@@ -57,6 +66,7 @@
     }
 
   }
+
   &__prev-button, &__next-button {
     cursor: pointer;
     padding: 15px;
@@ -91,7 +101,6 @@
       background-color: #4B4747FF;
     }
   }
-
 
 
 }

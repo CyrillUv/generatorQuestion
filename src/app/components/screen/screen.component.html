@@ -4,6 +4,9 @@
     @for (screen of screens; track screen.title) {
       <div
         class="screen-page__title"
+        [class.screen-page__title--active]="
+          screen.title === activeScreen?.title
+        "
         (click)="getScreenFromTitle(screen.title, screen.id)"
       >
         {{ screen.title }}
@@ -14,7 +17,8 @@
   <div class="screen-page__wrapper">
     <div class="screen-page__arrowCard">
       <div
-        *ngIf="screen !== screens[0]"
+        [tabIndex]="1"
+        *ngIf="activeScreen !== screens[0]"
         (click)="prevScreen()"
         class="screen-page__arrow"
       >
@@ -22,20 +26,22 @@
       </div>
     </div>
     <div>
-      <h1 class="align-center">{{ screen?.title }}</h1>
-      <h3>{{ screen?.description }}</h3>
+      <h1 class="align-center">{{ activeScreen?.title }}</h1>
+      <h3>{{ activeScreen?.description }}</h3>
       <div class="screen-page__container">
-        <img src="{{ screen?.url }}" alt="" />
+        <img src="{{ activeScreen?.url }}" alt="" />
       </div>
-      <h3>{{ screen?.description2 }}</h3>
+      <h3>{{ activeScreen?.description2 }}</h3>
       <div class="screen-page__container">
-        <img src="{{ screen?.url2 }}" alt="" />
+        <img src="{{ activeScreen?.url2 }}" alt="" />
       </div>
     </div>
     <div class="screen-page__arrowCard">
       <div
-        *ngIf="screen !== screens[screens.length - 1]"
+        [tabindex]="1"
+        *ngIf="activeScreen !== screens[screens.length - 1]"
         (click)="nextScreen()"
+        (keydown.enter)="nextScreen()"
         class="screen-page__arrow"
       >
         →

@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { IScreen } from './data-screen';
-import { ScreenService } from './screen.service';
+import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
+
 import { NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ScreenService } from '../../data/screen/screen.service';
+import { IScreen } from '../../data/screen/data-screen';
 
 @Component({
   selector: 'app-screen',
@@ -14,28 +15,45 @@ import { RouterLink } from '@angular/router';
 })
 export class ScreenComponent {
   public screens!: IScreen[];
-  public screen: IScreen | null = null;
+  public activeScreen: IScreen | null = null;
   public titles: string[] = [];
 
   constructor(
     private screenService: ScreenService,
     private cdRef: ChangeDetectorRef,
   ) {
-    this.screen = this.screenService.getScreen();
+    this.activeScreen = this.screenService.getScreen();
     this.titles = this.screenService.getTitleScreens();
     this.screens = this.screenService.screens;
   }
-
+  @HostListener('window:keydown', ['$event']) handleKeyDown(
+    event: KeyboardEvent,
+  ) {
+    const nextKeys = ['ArrowRight', 'ArrowDown'];
+    const prevKeys = ['ArrowLeft', 'ArrowUp'];
+    if (
+      this.activeScreen !== this.screens[this.screens.length - 1] &&
+      nextKeys.includes(event.key)
+    ) {
+      this.nextScreen();
+    }
+    if (this.activeScreen !== this.screens[0] && prevKeys.includes(event.key)) {
+      this.prevScreen();
+    }
+  }
   public prevScreen() {
     this.cdRef.detectChanges();
-    this.screen = this.screenService.prevScreen();
+    this.activeScreen = this.screenService.prevScreen();
   }
   public getScreenFromTitle(title: string, id: number): void {
-    this.screen = this.screenService.getScreenFromTitle(title, id);
+    this.activeScreen = this.screenService.getScreenFromTitle(title, id);
   }
 
   public nextScreen() {
     this.cdRef.detectChanges();
-    this.screen = this.screenService.nextScreen();
+    this.activeScreen = this.screenService.nextScreen();
+  }
+  public keyPressDown(event: any): void {
+    console.log(event);
   }
 }

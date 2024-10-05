@@ -7,4 +7,5 @@ export interface IDataTest {
   id: number;
   name: string;
   answers: IAnswer[];
+  description: string;
 }

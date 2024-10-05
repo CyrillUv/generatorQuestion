@@ -25,11 +25,11 @@
         }
       </span>
     }
-    @if (ds.getArrayTime().length === 10) {
-      <button (click)="setStatistic(count + '')" routerLink="/statistics">
+    @if (qs.getArrayTime().length === lastQuestion) {
+      <button (click)="setStatistic(time + '')" routerLink="/statistics">
         Готово
       </button>
     }
   </div>
-  <h2>{{ count | questionsTimer }}</h2>
+  <h2>{{ time | Timer }}</h2>
 </div>

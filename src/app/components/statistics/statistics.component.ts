@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { QuestionsTimerPipe } from '../questions/questions-timer.pipe';
-import { DataQuestService } from '../../data/question/data-quest.service';
+import { QuestionService } from '../../data/question/question.service';
 import { IQuestion } from '../../data/question/type';
-import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { IWrongTest, TestingService } from '../../data/testing/testing.service';
 
 @Component({
   selector: 'app-statistics',
@@ -15,6 +16,7 @@ import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
     NgSwitch,
     NgSwitchCase,
     NgSwitchDefault,
+    NgIf,
   ],
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.scss',
@@ -22,27 +24,30 @@ import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 export class StatisticsComponent implements OnInit {
   public arithmeticMean = 0;
   public hardQuestion = 0;
-
-  constructor(public ds: DataQuestService) {}
+  constructor(
+    public ds: QuestionService,
+    public ts: TestingService,
+  ) {}
 
   ngOnInit(): void {
-    this.ds.getStatistic();
-
-    this.statisticTimeQuestion();
+    if (this.ds.arrayTime.length) this.statisticTime(this.ds.arrayTime);
+    if (this.ts.arrayTime.length) this.statisticTime(this.ts.arrayTime);
   }
 
-  public statisticTimeQuestion(): void {
+  public statisticTime(arrayTime: number[]): void {
     const array: number[] = [];
-    const arrayTimeQuestions: number[] = this.ds.getArrayTime();
-    for (let i = 0; i < arrayTimeQuestions.length - 1; i++) {
-      array.push(arrayTimeQuestions[i + 1] - arrayTimeQuestions[i]);
+    for (let i = 0; i < arrayTime.length - 1; i++) {
+      array.push(arrayTime[i + 1] - arrayTime[i]);
     }
     this.hardQuestion = Math.max(...array);
     this.arithmeticMean =
-      array.reduce((acc, el) => acc + el, 0) / arrayTimeQuestions.length;
+      array.reduce((acc, el) => acc + el, 0) / arrayTime.length;
   }
 
-  public openRequest(unanswered: IQuestion): void {
+  public openRequestQuestion(unanswered: IQuestion): void {
     unanswered.active = !unanswered.active;
+  }
+  public openRequestTest(unanswered: IWrongTest): void {
+    unanswered.correct = !unanswered.correct;
   }
 }

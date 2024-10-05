@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { dataQuest } from './data-quest';
+import { dataQuestion } from './data-question';
 import { IDataQuest, IQuestion, NameDataType } from './type';
 
 @Injectable({
   providedIn: 'root',
 })
-export class DataQuestService {
+export class QuestionService {
   public id = false;
-  private _data = dataQuest;
+  private _data = dataQuestion;
   private _statistic = '0';
   public arrayTime: number[] = [];
   public arrayOfUnanswered: IQuestion[] = [];
@@ -46,11 +46,6 @@ export class DataQuestService {
     this._statistic = statistic;
   }
 
-  public nullingRequestsForQuest(questions: IQuestion[]): void {
-    questions.forEach((question) => {
-      question.active = false;
-    });
-  }
   public removeArrayTime() {
     this.arrayTime = [];
   }

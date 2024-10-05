@@ -1,21 +1,47 @@
 <div class="statistics">
-  <h1>Статистика</h1>
-  <div class="statistics__result">
-    Затрачено на все вопросы {{ +this.ds.getStatistic() | questionsTimer }}
+  <h1 *ngIf="ts.arrayTime.length">Статистика тестирования</h1>
+  <h1 *ngIf="ds.arrayTime.length">Статистика ответов на вопросы</h1>
+  <div *ngIf="ts.arrayTime.length" class="statistics__result">
+    Затрачено на все тесты {{ +ts.getStatistic() | Timer }}
+  </div>
+  <div *ngIf="ds.arrayTime.length" class="statistics__result">
+    Затрачено на все вопросы {{ +ds.getStatistic() | Timer }}
   </div>
   <div class="statistics__result">
-    Затрачено времени в среднем за вопрос {{ arithmeticMean | questionsTimer }}
+    Затрачено времени в среднем за вопрос {{ arithmeticMean | Timer }}
   </div>
   <div class="statistics__result">
-    Самый долгий вопрос по времени {{ hardQuestion | questionsTimer }}
+    Самый долгий вопрос по времени {{ hardQuestion | Timer }}
   </div>
+  @if (ts.getArrayOfUnanswered().length) {
+    <div class="statistics__unansweredQuestions">
+      Неотвеченные тесты:
+      @for (unanswered of ts.getArrayOfUnanswered(); track unanswered) {
+        <li
+          class="statistics__unansweredQuestions__mistake"
+          (click)="openRequestTest(this.unanswered)"
+        >
+          {{ unanswered.title }}
+        </li>
+        @if (unanswered.correct) {
+          <span class="statistics__response">
+            {{ unanswered.description }}
+          </span>
+        }
+      }
+    </div>
+  } @else {
+    <h1 *ngIf="ts.arrayTime.length" class="statistics__congratulation">
+      Вы прошли тесты без ошибок,поздравляю!!! ฅ^•ﻌ•^ฅ
+    </h1>
+  }
   @if (ds.getArrayOfUnanswered().length) {
     <div class="statistics__unansweredQuestions">
       Неотвеченные вопросы:
       @for (unanswered of ds.getArrayOfUnanswered(); track unanswered) {
         <li
           class="statistics__unansweredQuestions__mistake"
-          (click)="openRequest(unanswered)"
+          (click)="openRequestQuestion(unanswered)"
         >
           {{ unanswered.question }}
         </li>
@@ -27,11 +53,20 @@
       }
     </div>
   } @else {
-    <h1 class="statistics__congratulation">
+    <h1 *ngIf="ds.arrayTime.length" class="statistics__congratulation">
       Вы ответили на все вопросы,поздравляю!!! ฅ^•ﻌ•^ฅ
     </h1>
   }
-  <button routerLink="/menu" (click)="ds.nullingArrayOfUnanswered()">
+  <button
+    routerLink="/menu"
+    (click)="
+      ts.arrayTime.length
+        ? ts.nullingArrayOfUnanswered()
+        : ds.arrayTime.length
+          ? ds.nullingArrayOfUnanswered()
+          : ''
+    "
+  >
     Вернуться в меню
   </button>
 </div>
