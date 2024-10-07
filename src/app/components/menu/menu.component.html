@@ -1,14 +1,15 @@
 <div class="menu">
-  <app-settings *ngIf="ms.getSettingMode()" />
+  <app-settings />
   Меню
-  <div
-    (mouseleave)="dataMenu[0].dropdownActive = false"
-    class="menu__questions"
-  >
-    <button (click)="changeRoute('/questions')">Вопросы</button>
+  <div (mouseleave)="dataMenu[0].dropdownActive = false">
+    <button class="menu__questions" (click)="changeRoute('/questions')">
+      Вопросы
+    </button>
   </div>
-  <div class="menu__testing" (mouseleave)="dataMenu[1].dropdownActive = false">
-    <button (click)="changeRoute('/testing')">Тестирование</button>
+  <div (mouseleave)="dataMenu[1].dropdownActive = false">
+    <button class="menu__testing" (click)="changeRoute('/testing')">
+      Тестирование
+    </button>
   </div>
   <div>
     <button class="menu__documents" routerLink="/documents">

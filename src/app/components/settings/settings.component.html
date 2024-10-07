@@ -1,5 +1,9 @@
-<div class="settings-page">
-  <div *ngIf="ms.getRoute() === '/questions'" class="settings-page__options">
+<div class="settings-page" [class.settings-page--active]="!ms.getSettingMode()">
+  <div
+    *ngIf="ms.getRoute() === '/questions'"
+    class="settings-page__options"
+    [class.settings-page__options--active]="ms.getSettingMode()"
+  >
     <h3>Настройки вопросов</h3>
     <main *ngFor="let option of dataMenu[0].options">
       <div class="settings-page__options__dropdown">
@@ -20,6 +24,7 @@
       <div
         class="settings-page__options__buttons__begin"
         routerLink="{{ ms.getRoute() }}"
+        (click)="ms.setSettingMode(false)"
       >
         Начать
       </div>
@@ -31,7 +36,11 @@
       </div>
     </main>
   </div>
-  <div *ngIf="ms.getRoute() === '/testing'" class="settings-page__options">
+  <div
+    *ngIf="ms.getRoute() === '/testing'"
+    class="settings-page__options"
+    [class]="ms.getSettingMode() ? 'settings-page__options--active' : ''"
+  >
     <h3>Настройки тестирования</h3>
     <main *ngFor="let option of dataMenu[1].options">
       <div class="settings-page__options__dropdown">
@@ -52,7 +61,7 @@
         class="settings-page__options__buttons__begin"
         routerLink="{{ ms.getRoute() }}"
       >
-        Начать
+        Начать ▶
       </div>
       <div
         class="settings-page__options__buttons__close"

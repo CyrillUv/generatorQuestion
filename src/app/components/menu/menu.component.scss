@@ -4,7 +4,9 @@
   padding: 10px;
   height: 100vh;
   font-weight: bold;
-
+&__testing,&__questions,&__documents{
+  cursor: pointer;
+}
 
 }
 

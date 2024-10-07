@@ -8,7 +8,7 @@ export class MenuService {
   private _activeNumOfQuestions = 20;
   private _activeBlockTests = 1;
   private _settingMode = false;
-  private _route!: '/questions' | '/testing';
+  private _route: '/questions' | '/testing' = '/questions';
   public getData() {
     return dataMenu;
   }

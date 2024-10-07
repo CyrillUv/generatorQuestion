@@ -53,7 +53,4 @@ export class ScreenComponent {
     this.cdRef.detectChanges();
     this.activeScreen = this.screenService.nextScreen();
   }
-  public keyPressDown(event: any): void {
-    console.log(event);
-  }
 }
