@@ -19,6 +19,7 @@ import { MenuService } from '../../data/menu/menu.service';
 export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
   public categories!: NameDataType[];
   public questions!: IQuestion[];
+  public actualQuestions!: IQuestion[];
   public activeQuestion!: IQuestion;
   public time = 0;
   public timerFlag = false;
@@ -36,9 +37,24 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
     this.lastQuestion = this.ms.getActiveNumOfQuestions();
   }
 
+  public createActualQuestions(): void {
+    this.getQuestions('all');
+    this.actualQuestions = this.questions.filter(
+      (el) => !this.ms.getPassedQuestions().includes(el),
+    );
+  }
   public getCategories(): void {
     this.categories = this.qs.getCategories();
   }
+  public addPassedQuestions(passedQuestions: IQuestion): void {
+    this.randomizeQuestion();
+    if (!this.qs.getArrayOfUnanswered().includes(passedQuestions)) {
+      this.ms.setPassedQuestions(passedQuestions);
+    }
+    console.log('passed', this.ms.getPassedQuestions());
+    console.log('actual', this.actualQuestions);
+  }
+
   public nullingRequestsForQuest(questions: IQuestion[]): void {
     questions.forEach((question) => {
       question.active = false;
@@ -65,18 +81,24 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
   }
 
   public randomizeQuestion(): void {
+    this.createActualQuestions();
+    console.log('actual', this.actualQuestions);
+    console.log('passed', this.ms.getPassedQuestions());
     if (!this.timerFlag) this.startTimer();
     if (this.timerFlag) {
       this.qs.arrayTime.push(this.time);
-      console.log(this.qs.arrayTime);
-      this.numQuestion += 1;
     }
     this.getCategories();
-    this.getQuestions('Структуры данных');
+    this.getQuestions('all');
     this.activeQuestion =
       this.qs.getData()[
         Math.floor(Math.random() * this.categories.length)
       ].questions[Math.floor(Math.random() * this.questions.length)];
+    if (this.ms.getPassedQuestions().includes(this.activeQuestion)) {
+      this.randomizeQuestion();
+    } else {
+      this.numQuestion += 1;
+    }
   }
 
   public unansweredQuestion(): void {

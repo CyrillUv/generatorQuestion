@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { dataMenu } from './data-menu';
+import { IQuestion } from '../question/type';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ export class MenuService {
   private _activeBlockTests = 1;
   private _settingMode = false;
   private _route: '/questions' | '/testing' = '/questions';
+  private _passedQuestions: IQuestion[] = [];
   public getData() {
     return dataMenu;
   }
@@ -17,6 +19,12 @@ export class MenuService {
   }
   public setSettingMode(settingMode: boolean): void {
     this._settingMode = settingMode;
+  }
+  public getPassedQuestions(): IQuestion[] {
+    return this._passedQuestions;
+  }
+  public setPassedQuestions(passedQuestions: IQuestion): void {
+    this._passedQuestions.push(passedQuestions);
   }
   public getRoute(): '/questions' | '/testing' {
     return this._route;

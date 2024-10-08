@@ -21,11 +21,13 @@
           <button (click)="randomizeQuestion()">Начать</button>
         }
         @if (numQuestion !== 0) {
-          <button (click)="randomizeQuestion()">Следующий вопрос</button>
+          <button (click)="addPassedQuestions(activeQuestion)">
+            Следующий вопрос
+          </button>
         }
       </span>
     }
-    @if (qs.getArrayTime().length === lastQuestion) {
+    @if (numQuestion === lastQuestion) {
       <button (click)="setStatistic(time + '')" routerLink="/statistics">
         Готово
       </button>
