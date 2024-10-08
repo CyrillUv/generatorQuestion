@@ -7,15 +7,22 @@ import { IDataQuest, IQuestion, NameDataType } from './type';
 })
 export class QuestionService {
   public id = false;
-  private _data = dataQuestion;
-  private _statistic = '0';
   public arrayTime: number[] = [];
   public arrayOfUnanswered: IQuestion[] = [];
   public allQuestions!: IQuestion[];
+  private _actualQuestions: IQuestion[] = [];
+  private _data = dataQuestion;
+  private _statistic = '0';
+
   public getArrayTime(): number[] {
     return this.arrayTime;
   }
-
+  public getActualQuestions(): IQuestion[] {
+    return this._actualQuestions;
+  }
+  public setActualQuestions(actualQuestions: IQuestion[]): void {
+    this._actualQuestions = actualQuestions;
+  }
   public getArrayOfUnanswered(): IQuestion[] {
     return this.arrayOfUnanswered;
   }
@@ -37,6 +44,10 @@ export class QuestionService {
     this.allQuestions = newArray;
   }
   public getQuestions(category: NameDataType): IQuestion[] {
+    if (category === 'all') {
+      this.getAllQuestions();
+      return this.allQuestions;
+    }
     return (this._data.find((obj) => obj.name === category) as IDataQuest)
       .questions;
   }

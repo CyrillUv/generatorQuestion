@@ -20,14 +20,21 @@
         @if (numQuestion === 0) {
           <button (click)="randomizeQuestion()">Начать</button>
         }
-        @if (numQuestion !== 0) {
+        @if (
+          numQuestion !== questions.length &&
+          numQuestion !== 0 &&
+          ms.getPassedQuestions().length !== questions.length
+        ) {
           <button (click)="addPassedQuestions(activeQuestion)">
             Следующий вопрос
           </button>
         }
       </span>
     }
-    @if (numQuestion === lastQuestion) {
+    @if (
+      numQuestion === lastQuestion ||
+      ms.getPassedQuestions().length === questions.length
+    ) {
       <button (click)="setStatistic(time + '')" routerLink="/statistics">
         Готово
       </button>

@@ -8,16 +8,16 @@ import { IQuestion } from '../question/type';
 export class MenuService {
   private _activeNumOfQuestions = 20;
   private _activeBlockTests = 1;
-  private _settingMode = false;
+  private _settingMode: boolean | null = null;
   private _route: '/questions' | '/testing' = '/questions';
   private _passedQuestions: IQuestion[] = [];
   public getData() {
     return dataMenu;
   }
-  public getSettingMode(): boolean {
+  public getSettingMode(): boolean | null {
     return this._settingMode;
   }
-  public setSettingMode(settingMode: boolean): void {
+  public setSettingMode(settingMode: boolean | null): void {
     this._settingMode = settingMode;
   }
   public getPassedQuestions(): IQuestion[] {

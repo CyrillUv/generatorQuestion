@@ -19,13 +19,12 @@ import { MenuService } from '../../data/menu/menu.service';
 export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
   public categories!: NameDataType[];
   public questions!: IQuestion[];
-  public actualQuestions!: IQuestion[];
+
   public activeQuestion!: IQuestion;
   public time = 0;
   public timerFlag = false;
   public numQuestion = 0;
-  public lastQuestion = 10;
-
+  public lastQuestion!: number;
   constructor(
     public qs: QuestionService,
     public ms: MenuService,
@@ -34,13 +33,15 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
   }
 
   ngOnInit(): void {
+    this.qs.getAllQuestions();
     this.lastQuestion = this.ms.getActiveNumOfQuestions();
+    this.createActualQuestions();
   }
 
   public createActualQuestions(): void {
-    this.getQuestions('all');
-    this.actualQuestions = this.questions.filter(
-      (el) => !this.ms.getPassedQuestions().includes(el),
+    this.getQuestions();
+    this.qs.setActualQuestions(
+      this.questions.filter((el) => !this.ms.getPassedQuestions().includes(el)),
     );
   }
   public getCategories(): void {
@@ -48,11 +49,15 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
   }
   public addPassedQuestions(passedQuestions: IQuestion): void {
     this.randomizeQuestion();
-    if (!this.qs.getArrayOfUnanswered().includes(passedQuestions)) {
+    if (
+      !this.qs.getArrayOfUnanswered().includes(passedQuestions) &&
+      !this.ms.getPassedQuestions().includes(passedQuestions)
+    ) {
       this.ms.setPassedQuestions(passedQuestions);
     }
     console.log('passed', this.ms.getPassedQuestions());
-    console.log('actual', this.actualQuestions);
+    console.log('actual', this.qs.getActualQuestions());
+    console.log('question', this.questions);
   }
 
   public nullingRequestsForQuest(questions: IQuestion[]): void {
@@ -76,24 +81,20 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
     });
   }
 
-  public getQuestions(category: NameDataType): void {
+  public getQuestions(category: NameDataType = 'all'): void {
     this.questions = this.qs.getQuestions(category);
   }
 
   public randomizeQuestion(): void {
     this.createActualQuestions();
-    console.log('actual', this.actualQuestions);
-    console.log('passed', this.ms.getPassedQuestions());
     if (!this.timerFlag) this.startTimer();
     if (this.timerFlag) {
       this.qs.arrayTime.push(this.time);
     }
     this.getCategories();
-    this.getQuestions('all');
+    this.getQuestions();
     this.activeQuestion =
-      this.qs.getData()[
-        Math.floor(Math.random() * this.categories.length)
-      ].questions[Math.floor(Math.random() * this.questions.length)];
+      this.questions[Math.floor(Math.random() * this.questions.length)];
     if (this.ms.getPassedQuestions().includes(this.activeQuestion)) {
       this.randomizeQuestion();
     } else {

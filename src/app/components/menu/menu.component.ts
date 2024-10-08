@@ -5,7 +5,6 @@ import { NgForOf, NgIf } from '@angular/common';
 import { IDataMenu } from '../../data/menu/data-menu';
 import { MenuService } from '../../data/menu/menu.service';
 import { SettingsComponent } from '../settings/settings.component';
-
 @Component({
   selector: 'app-menu',
   standalone: true,

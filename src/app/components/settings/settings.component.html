@@ -1,33 +1,51 @@
 <div class="settings-page" [class.settings-page--active]="!ms.getSettingMode()">
+  <!--  Настройки вопросов-->
   <div
     *ngIf="ms.getRoute() === '/questions'"
     class="settings-page__options"
     [class.settings-page__options--active]="ms.getSettingMode()"
+    [class.settings-page__options--inactive]="ms.getSettingMode() === false"
   >
     <h3>Настройки вопросов</h3>
-    <main *ngFor="let option of dataMenu[0].options">
-      <div class="settings-page__options__dropdown">
-        <div
-          [class]="
-            activeNumOfQuestions === option.number
-              ? 'settings-page__options__dropdown__option--active'
-              : 'settings-page__options__dropdown__option'
-          "
-          (click)="changeNumOfQuestions(option.number)"
-        >
-          {{ option.number }} вопросов
+    @if (qs.getActualQuestions().length !== 1) {
+      <main *ngFor="let option of dataMenu[0].options">
+        <div class="settings-page__options__dropdown">
+          <div
+            [class]="
+              activeNumOfQuestions === option.number
+                ? 'settings-page__options__dropdown__option--active'
+                : 'settings-page__options__dropdown__option'
+            "
+            (click)="changeNumOfQuestions(option.number)"
+          >
+            {{ option.number }} вопросов
+          </div>
         </div>
-      </div>
-    </main>
-
+      </main>
+    }
     <main class="settings-page__options__buttons">
-      <div
-        class="settings-page__options__buttons__begin"
-        routerLink="{{ ms.getRoute() }}"
-        (click)="ms.setSettingMode(false)"
-      >
-        Начать
-      </div>
+      @if (qs.getActualQuestions().length === 1) {
+        <div
+          class="settings-page__options__buttons__begin"
+          [class.settings-page__options__buttons__begin--inactive]="
+            qs.getActualQuestions().length === 1
+          "
+        >
+          Начать ▶
+        </div>
+      } @else {
+        <div
+          class="settings-page__options__buttons__begin"
+          routerLink="{{ ms.getRoute() }}"
+          (click)="ms.setSettingMode(null)"
+          [class.settings-page__options__buttons__begin--inactive]="
+            qs.getActualQuestions().length === 1
+          "
+        >
+          Начать ▶
+        </div>
+      }
+
       <div
         class="settings-page__options__buttons__close"
         (click)="ms.setSettingMode(false)"
@@ -36,10 +54,12 @@
       </div>
     </main>
   </div>
+  <!--  Настройки тестирования-->
   <div
     *ngIf="ms.getRoute() === '/testing'"
     class="settings-page__options"
-    [class]="ms.getSettingMode() ? 'settings-page__options--active' : ''"
+    [class.settings-page__options--active]="ms.getSettingMode()"
+    [class.settings-page__options--inactive]="ms.getSettingMode() === false"
   >
     <h3>Настройки тестирования</h3>
     <main *ngFor="let option of dataMenu[1].options">
@@ -60,6 +80,7 @@
       <div
         class="settings-page__options__buttons__begin"
         routerLink="{{ ms.getRoute() }}"
+        (click)="ms.setSettingMode(null)"
       >
         Начать ▶
       </div>

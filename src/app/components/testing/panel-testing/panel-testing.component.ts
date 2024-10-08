@@ -44,7 +44,7 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
     this.arrTest = this.ts.getData();
     this.separatorResult = this.pack * this.ms.getActiveBlockTests();
     this.activeTest =
-      this.arrTest[this.pack * this.ms.getActiveBlockTests() - 15];
+      this.arrTest[this.pack * this.ms.getActiveBlockTests() - 20];
     this.startTimer();
   }
 

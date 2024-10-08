@@ -3,6 +3,7 @@ import { MenuService } from '../../data/menu/menu.service';
 import { RouterLink } from '@angular/router';
 import { NgForOf, NgIf } from '@angular/common';
 import { IDataMenu } from '../../data/menu/data-menu';
+import { QuestionService } from '../../data/question/question.service';
 
 @Component({
   selector: 'app-settings',
@@ -15,7 +16,10 @@ export class SettingsComponent implements OnInit {
   public dataMenu!: IDataMenu[];
   public activeNumOfQuestions = 20;
   public activeBlockTests = 1;
-  constructor(public ms: MenuService) {}
+  constructor(
+    public ms: MenuService,
+    public qs: QuestionService,
+  ) {}
 
   ngOnInit(): void {
     this.dataMenu = this.ms.getData();
