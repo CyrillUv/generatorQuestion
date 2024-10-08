@@ -1,4 +1,4 @@
-export type NameDataType = 'Структуры данных' | 'JavaScript' | 'all';
+export type NameDataType = 'Структуры данных' | 'JavaScript';
 
 export interface IQuestion {
   question: string;

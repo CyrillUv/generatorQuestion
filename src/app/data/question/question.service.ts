@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { dataQuestion } from './data-question';
 import { IDataQuest, IQuestion, NameDataType } from './type';
-import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +11,7 @@ export class QuestionService {
   private _statistic = '0';
   public arrayTime: number[] = [];
   public arrayOfUnanswered: IQuestion[] = [];
-
+  public allQuestions!: IQuestion[];
   public getArrayTime(): number[] {
     return this.arrayTime;
   }
@@ -29,16 +28,15 @@ export class QuestionService {
   public getCategories(): NameDataType[] {
     return this._data.map((obj) => obj.name);
   }
-
-  public getQuestions(category: NameDataType = 'all'): IQuestion[] {
-    if (category === 'all') {
-      const arr = this._data.map((el) => el.questions.map((el) => el));
-      let newArray: IQuestion[] = [];
-      for (let i = 0; i < arr.length - 1; i++) {
-        newArray = arr[i].concat(arr[i + 1]);
-      }
-      return newArray;
+  public getAllQuestions(): void {
+    const arr = this._data.map((el) => el.questions.map((el) => el));
+    let newArray: IQuestion[] = [];
+    for (let i = 0; i <= arr.length - 1; i++) {
+      newArray = newArray.concat(arr[i]);
     }
+    this.allQuestions = newArray;
+  }
+  public getQuestions(category: NameDataType): IQuestion[] {
     return (this._data.find((obj) => obj.name === category) as IDataQuest)
       .questions;
   }
