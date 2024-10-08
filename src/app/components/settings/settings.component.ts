@@ -16,6 +16,7 @@ export class SettingsComponent implements OnInit {
   public dataMenu!: IDataMenu[];
   public activeNumOfQuestions = 20;
   public activeBlockTests = 1;
+  public activeModal = false;
   constructor(
     public ms: MenuService,
     public qs: QuestionService,
@@ -24,6 +25,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.dataMenu = this.ms.getData();
   }
+  public startAgain(): void {}
   public changeNumOfQuestions(numOfQuestions: number): void {
     this.activeNumOfQuestions = numOfQuestions;
     this.ms.setActiveNumOfQuestions(numOfQuestions);
