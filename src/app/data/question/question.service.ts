@@ -31,7 +31,9 @@ export class QuestionService {
     this.arrayOfUnanswered = [];
     this.removeArrayTime();
   }
-
+  public nullingActualQuestions(): void {
+    this._actualQuestions = [];
+  }
   public getCategories(): NameDataType[] {
     return this._data.map((obj) => obj.name);
   }

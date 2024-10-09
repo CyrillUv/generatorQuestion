@@ -24,7 +24,7 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
   public time = 0;
   public timerFlag = false;
   public numQuestion = 0;
-  public lastQuestion!: number;
+  public lastQuestion = 20;
   constructor(
     public qs: QuestionService,
     public ms: MenuService,
@@ -86,6 +86,7 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
   }
 
   public randomizeQuestion(): void {
+    console.log(this.qs.getActualQuestions().length);
     this.createActualQuestions();
     if (!this.timerFlag) this.startTimer();
     if (this.timerFlag) {

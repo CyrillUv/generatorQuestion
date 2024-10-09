@@ -61,7 +61,12 @@
     position: fixed;
     width: 30%;
     left: -30%;
-
+    &__return{
+      display: flex;
+      align-items: center;
+      gap: 2ch;
+      justify-content: space-between;
+    }
     &--active{
       animation:  sidebar-active 1s ;
       left: 0;

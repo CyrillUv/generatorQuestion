@@ -1,0 +1,25 @@
+<div class="custom-page">
+  <h3>{{ label }}</h3>
+  <div class="custom-page__toggle__block">
+    @if (position === "right") {
+      <h3>{{ title }}</h3>
+      <input
+        [(ngModel)]="toggleActive"
+        (ngModelChange)="changeToggler()"
+        class="custom-page__toggle"
+        [class.custom-page__toggle--active]="toggleActive"
+        type="checkbox"
+      />
+    }
+    @if (position === "left") {
+      <input
+        [(ngModel)]="toggleActive"
+        (ngModelChange)="changeToggler()"
+        class="custom-page__toggle"
+        [class.custom-page__toggle--active]="toggleActive"
+        type="checkbox"
+      />
+      <h3>{{ title }}</h3>
+    }
+  </div>
+</div>

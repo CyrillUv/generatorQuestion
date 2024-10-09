@@ -23,6 +23,9 @@ export class MenuService {
   public getPassedQuestions(): IQuestion[] {
     return this._passedQuestions;
   }
+  public nullingPassedQuestions(): void {
+    this._passedQuestions = [];
+  }
   public setPassedQuestions(passedQuestions: IQuestion): void {
     this._passedQuestions.push(passedQuestions);
   }
