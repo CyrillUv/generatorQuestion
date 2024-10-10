@@ -1,0 +1,20 @@
+<div
+  class="sidebar"
+  [class.sidebar--active]="triggerSidebar"
+  [class.sidebar--inactive]="!triggerSidebar"
+>
+  <span class="sidebar__exit-cross" (click)="close()">✖</span>
+  <div>
+    <ng-container *ngTemplateOutlet="headerTemplate"> Это header </ng-container>
+  </div>
+  <div>
+    <ng-container *ngTemplateOutlet="bodyTemplate"> Это body </ng-container>
+  </div>
+  <div>
+    <ng-container *ngTemplateOutlet="footerTemplate"> Это footer </ng-container>
+  </div>
+  <main class="sidebar__buttons">
+    <div class="sidebar__save-button">Active</div>
+    <div (click)="close()" class="sidebar__exit-button">Inactive</div>
+  </main>
+</div>

@@ -1,0 +1,39 @@
+.modal-page{
+  width:100% ;
+  position: absolute;
+  height: 100%;
+  background-color: rgba(43, 43, 43, 0.5);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__modal{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 30%;
+    background-color: #2b2b2b;
+    border-radius: 30px;
+    border:gray 1px solid;
+    animation:modal-inactive 1s ;
+    &--inactive{
+      animation:modal-inactive 1s ;
+      @keyframes modal-inactive{
+        from{
+          top:50%
+        }
+        to{
+          top:0
+        }
+      }
+    }
+    &__choice{
+      display: flex;
+      width: 50%;
+      height: 60%;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}

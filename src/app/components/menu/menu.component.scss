@@ -7,6 +7,14 @@
 &__testing,&__questions,&__documents{
   cursor: pointer;
 }
-
+  &__test{
+    position: absolute;
+    top: 50%;
+  }
+  &__bounce{
+    width: 30%;
+    height: 30%;
+    background: gray;
+  }
 }
 

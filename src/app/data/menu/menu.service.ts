@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { dataMenu } from './data-menu';
+
 import { IQuestion } from '../question/type';
+import { dataMenu } from './data-menu';
 
 @Injectable({
   providedIn: 'root',

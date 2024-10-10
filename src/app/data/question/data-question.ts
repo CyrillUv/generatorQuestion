@@ -212,7 +212,7 @@ export const dataQuestion: IDataQuest[] = [
           '\n' +
           'Изменение replaseWith, cloneNode\n' +
           'удаление через element.remove()\n' +
-          'добавление классов - element.classList.add/remove/toggle.component.ts\n',
+          'добавление классов - element.classList.add/remove/sidebar.component.ts\n',
         active: false,
       },
       {

@@ -1,28 +1,21 @@
-import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../data/menu/menu.service';
 import { IDataMenu } from '../../data/menu/data-menu';
 import { QuestionService } from '../../data/question/question.service';
+import { inject } from '@angular/core';
 
-@Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrl: './settings.component.scss',
-})
-export class SettingsComponent implements OnInit {
+export class SettingsComponent {
   public dataMenu!: IDataMenu[];
   public activeNumOfQuestions = 20;
   public activeBlockTests = 1;
   public activeModal = false;
   public valueToggle: boolean | null = null;
-  constructor(
-    public ms: MenuService,
-    public qs: QuestionService,
-  ) {}
-
-  ngOnInit(): void {
-    this.dataMenu = this.ms.getData();
+  public ms = inject(MenuService);
+  public qs = inject(QuestionService);
+  constructor() {
     this.activeNumOfQuestions = this.ms.getActiveNumOfQuestions();
+    this.dataMenu = this.ms.getData();
   }
+
   public changeToggle(toggle: boolean): void {
     this.valueToggle = null;
     this.activeModal = toggle;
@@ -33,7 +26,6 @@ export class SettingsComponent implements OnInit {
     this.qs.nullingActualQuestions();
     this.ms.nullingPassedQuestions();
   }
-
   public changeNumOfQuestions(numOfQuestions: number): void {
     this.activeNumOfQuestions = numOfQuestions;
     this.ms.setActiveNumOfQuestions(numOfQuestions);
@@ -45,9 +37,11 @@ export class SettingsComponent implements OnInit {
     this.ms.setActiveBlockTests(blockTests);
     console.log(this.activeBlockTests);
   }
-
   public closeModal(): void {
     this.activeModal = false;
     this.valueToggle = false;
+  }
+  public closingSidebar(): void {
+    // this.ms.setSettingMode(false);
   }
 }

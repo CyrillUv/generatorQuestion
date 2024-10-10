@@ -1,0 +1,41 @@
+@mixin translateX($x){
+  transition: 1000ms all;
+  transform:translateX($x)
+}
+.sidebar{
+  z-index: 1000;
+  margin:0 0 0 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100vh;
+  &__exit-cross{
+    width: 95%;
+    text-align: right;
+  }
+  &__exit-button,&__exit-cross,&__save-button{
+    cursor:pointer;
+  }
+  &__options{
+    display: flex;
+    flex-direction: column;
+  }
+  &--active{
+    @include translateX(0);
+  }
+  &--inactive{
+   @include translateX(-100%);
+  }
+  &__buttons{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}

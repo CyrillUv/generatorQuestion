@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SettingsComponent } from './components/settings/settings.component';
-import { SidebarModule } from './components/settings/sidebar.module';
 
 interface Backend {
   title: string;
@@ -42,7 +40,7 @@ class DesantAdapter {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SidebarModule],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

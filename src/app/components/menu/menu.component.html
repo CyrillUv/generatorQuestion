@@ -1,12 +1,18 @@
 <div class="menu">
-  <app-settings />
+  {{ ms.getRoute() }}
+  @if (ms.getRoute() === "/questions") {
+    <app-setting-questions />
+  }
+  @if (ms.getRoute() === "/testing") {
+    <app-setting-testing />
+  }
   Меню
-  <div (mouseleave)="dataMenu[0].dropdownActive = false">
+  <div>
     <button class="menu__questions" (click)="changeRoute('/questions')">
       Вопросы
     </button>
   </div>
-  <div (mouseleave)="dataMenu[1].dropdownActive = false">
+  <div>
     <button class="menu__testing" (click)="changeRoute('/testing')">
       Тестирование
     </button>
