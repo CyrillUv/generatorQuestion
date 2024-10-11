@@ -8,21 +8,10 @@
 </ng-template>
 <ng-template #body>
   <main>
-    <div class="settings-sidebar__options__dropdown">
-      <select *ngFor="let option of dataMenu[1].options" name="select">
-        <!--Supplement an id here instead of using 'name'-->
-        <option
-          [class]="
-            activeBlockTests === option.number
-              ? 'settings-sidebar__options__dropdown__option--active'
-              : 'settings-sidebar__options__dropdown__option'
-          "
-          (click)="changeActiveBlockTests(option.number)"
-        >
-          {{ option.number }} блок
-        </option>
-      </select>
-    </div>
+    <app-select
+      (selectedBlockTestsEmitter)="selectHandler($event)"
+      [activeBlockTests]="activeBlockTests"
+    />
   </main>
 </ng-template>
 <ng-template #footer>
