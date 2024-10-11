@@ -1,20 +1,29 @@
-<div
-  class="sidebar"
-  [class.sidebar--active]="triggerSidebar"
-  [class.sidebar--inactive]="!triggerSidebar"
+<main
+  class="sidebar-page"
+  [class.sidebar-page--active]="triggerSidebar"
+  [class.sidebar-page--inactive]="!triggerSidebar"
 >
-  <span class="sidebar__exit-cross" (click)="close()">✖</span>
-  <div>
-    <ng-container *ngTemplateOutlet="headerTemplate"> Это header </ng-container>
+  <div
+    class="sidebar-page__sidebar"
+    [class.sidebar-page__sidebar--active]="triggerSidebar"
+    [class.sidebar-page__sidebar--inactive]="!triggerSidebar"
+  >
+    <span class="sidebar-page__sidebar__exit-cross" (click)="close()">✖</span>
+    <div>
+      <ng-container *ngTemplateOutlet="headerTemplate">
+        Это header
+      </ng-container>
+      <ng-content select="[header]"></ng-content>
+    </div>
+    <div>
+      <ng-container *ngTemplateOutlet="bodyTemplate"> Это body </ng-container>
+      <ng-content select="[body]"></ng-content>
+    </div>
+    <div>
+      <ng-container *ngTemplateOutlet="footerTemplate">
+        Это footer
+      </ng-container>
+      <ng-content select="[footer]"></ng-content>
+    </div>
   </div>
-  <div>
-    <ng-container *ngTemplateOutlet="bodyTemplate"> Это body </ng-container>
-  </div>
-  <div>
-    <ng-container *ngTemplateOutlet="footerTemplate"> Это footer </ng-container>
-  </div>
-  <main class="sidebar__buttons">
-    <div class="sidebar__save-button">Active</div>
-    <div (click)="close()" class="sidebar__exit-button">Inactive</div>
-  </main>
-</div>
+</main>

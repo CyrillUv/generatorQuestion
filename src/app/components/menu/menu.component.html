@@ -1,11 +1,4 @@
 <div class="menu">
-  {{ ms.getRoute() }}
-  @if (ms.getRoute() === "/questions") {
-    <app-setting-questions />
-  }
-  @if (ms.getRoute() === "/testing") {
-    <app-setting-testing />
-  }
   Меню
   <div>
     <button class="menu__questions" (click)="changeRoute('/questions')">

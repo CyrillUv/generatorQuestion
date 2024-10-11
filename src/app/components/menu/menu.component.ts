@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
@@ -27,10 +27,23 @@ import { SettingTestingComponent } from '../settings/testing/setting-testing.com
   animations: [test],
 })
 export class MenuComponent {
-  constructor(public ms: MenuService) {}
+  private readonly routeInComponent: {
+    '/questions': typeof SettingsQuestionsComponent;
+    '/testing': typeof SettingTestingComponent;
+  } = {
+    '/questions': SettingsQuestionsComponent,
+    '/testing': SettingTestingComponent,
+  };
+  constructor(
+    public ms: MenuService,
+    private vcr: ViewContainerRef,
+  ) {}
 
   public changeRoute(route: '/questions' | '/testing') {
     this.ms.setRoute(route);
     this.ms.setSettingMode(true);
+    console.log(route);
+    this.vcr.clear();
+    this.vcr.createComponent(this.routeInComponent[route]);
   }
 }

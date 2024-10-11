@@ -56,6 +56,7 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
   public clickAnswer(answer: IAnswer) {
     this.ts.setSuccessTestsMap(this.activeTest.id, answer);
     this.selectAnswer = true;
+    console.log(this.ts.getSuccessTestsMap());
   }
 
   public correctKeyInMap(id: number): boolean | undefined {
@@ -100,7 +101,6 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
     console.log(this.arrTest.length);
   }
   public setStatistic(timerValue: string): void {
-    console.log(this.ts.arrayTime);
     this.ts.setStatistic(timerValue);
     this.ts.arrayTime.shift();
     this.ts.arrayTime.push(this.time);

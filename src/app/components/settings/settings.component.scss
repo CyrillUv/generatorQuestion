@@ -97,10 +97,10 @@
     &__buttons{
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
-      width: 80%;
+      justify-content: space-between;
       &__close,&__begin{
         margin: 15px;
+
         cursor: pointer;
       }
       &__begin{

@@ -6,14 +6,14 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { MenuService } from '../../../data/menu/menu.service';
 @Component({
   selector: 'app-custom-sidebar',
   standalone: true,
   templateUrl: 'sidebar.component.html',
   styleUrl: 'sidebar.component.scss',
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, NgIf],
 })
 export class SidebarComponent {
   @Input() public headerTemplate!: TemplateRef<unknown>;

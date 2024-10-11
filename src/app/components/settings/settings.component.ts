@@ -42,6 +42,6 @@ export class SettingsComponent {
     this.valueToggle = false;
   }
   public closingSidebar(): void {
-    // this.ms.setSettingMode(false);
+    this.ms.setSettingMode(false);
   }
 }
