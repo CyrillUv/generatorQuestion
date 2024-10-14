@@ -85,7 +85,7 @@
       *ngIf="
         fullMode
           ? this.ts.getSuccessTestsMap().size === arrTest.length - 1
-          : this.ts.getSuccessTestsMap().size === separatorResult
+          : this.ts.getSuccessTestsMap().size === pack
       "
       (click)="setStatistic(time + '')"
       class="panel-testing__next-button"

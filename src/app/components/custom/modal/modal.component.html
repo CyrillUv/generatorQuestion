@@ -3,6 +3,8 @@
     class="modal-page__modal"
     [class.settings-sidebar__modal-page__modal--inactive]="false"
   >
+    <h2 (click)="this.activeModal = false">X</h2>
+
     <h2>Вы точно уверены?</h2>
     <main class="modal-page__modal__choice">
       <h2 (click)="startAgain()">Да</h2>

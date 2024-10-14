@@ -9,6 +9,7 @@ import { test } from './menu.animations';
 import { SidebarModule } from '../settings/sidebar.module';
 import { SettingsQuestionsComponent } from '../settings/questions/setting-questions.component';
 import { SettingTestingComponent } from '../settings/testing/setting-testing.component';
+import { ModalComponent } from '../custom/modal/modal.component';
 
 @Component({
   selector: 'app-menu',
@@ -21,12 +22,14 @@ import { SettingTestingComponent } from '../settings/testing/setting-testing.com
     SidebarModule,
     SettingsQuestionsComponent,
     SettingTestingComponent,
+    ModalComponent,
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
   animations: [test],
 })
 export class MenuComponent {
+  public activeModal!: boolean;
   private readonly routeInComponent: {
     '/questions': typeof SettingsQuestionsComponent;
     '/testing': typeof SettingTestingComponent;
@@ -37,13 +40,16 @@ export class MenuComponent {
   constructor(
     public ms: MenuService,
     private vcr: ViewContainerRef,
-  ) {}
+  ) {
+    this.activeModal = this.ms.getActiveModal();
+  }
 
   public changeRoute(route: '/questions' | '/testing') {
     this.ms.setRoute(route);
     this.ms.setSettingMode(true);
     console.log(route);
     this.vcr.clear();
+    // @ts-ignore
     this.vcr.createComponent(this.routeInComponent[route]);
   }
 }

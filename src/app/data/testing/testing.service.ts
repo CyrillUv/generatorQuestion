@@ -47,10 +47,10 @@ export class TestingService {
   public setSuccessTestsMap(key: number, value: IAnswer): void {
     this._successTestsMap.set(key, value);
   }
-
-  public nullingArrayOfUnanswered(): void {
+  public nullingArrayOfTests(): void {
     this.arrayOfWrongTest = [];
     this.removeArrayTime();
+    this._successTestsMap = new Map<number, IAnswer>();
   }
 
   public removeArrayTime() {

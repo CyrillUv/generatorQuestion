@@ -1,5 +1,8 @@
 <div class="menu">
-  Меню
+  <div>Меню</div>
+  @if (this.ms.getActiveModal()) {
+    <app-modal (closeEmitter)="this.ms.setActiveModal(false)" />
+  }
   <div>
     <button class="menu__questions" (click)="changeRoute('/questions')">
       Вопросы

@@ -10,6 +10,7 @@ export class MenuService {
   private _activeNumOfQuestions = 20;
   private _activeBlockTests = 1;
   private _settingMode: boolean | null = null;
+  private _activeModal = false;
   private _route: '/questions' | '/testing' = '/questions';
   private _passedQuestions: IQuestion[] = [];
   public getData() {
@@ -20,6 +21,12 @@ export class MenuService {
   }
   public setSettingMode(settingMode: boolean | null): void {
     this._settingMode = settingMode;
+  }
+  public getActiveModal(): boolean {
+    return this._activeModal;
+  }
+  public setActiveModal(activeModal: boolean): void {
+    this._activeModal = activeModal;
   }
   public getPassedQuestions(): IQuestion[] {
     return this._passedQuestions;

@@ -30,12 +30,11 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
   public time = 0;
   public separatorResult!: number;
   public fullMode = false;
-
-  private pack = 20;
+  public pack = 20;
 
   constructor(
     public ts: TestingService,
-    private ms: MenuService,
+    public ms: MenuService,
   ) {
     super();
   }
@@ -51,6 +50,8 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
   public findTest(id: number): void {
     this.activeTest = this.arrTest.find((test) => test.id === id) as IDataTest;
     this.selectAnswer = this.ts.getSuccessTestsMap().has(this.activeTest.id);
+    console.log('gstm', this.ts.getSuccessTestsMap().size);
+    console.log('sR', this.separatorResult);
   }
 
   public clickAnswer(answer: IAnswer) {

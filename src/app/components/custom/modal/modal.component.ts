@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -8,7 +8,16 @@ import { Component } from '@angular/core';
   styleUrl: './modal.component.scss',
 })
 export class ModalComponent {
-  startAgain() {}
+  @Input() activeModal = false;
 
-  closeModal() {}
+  @Output() closeEmitter = new EventEmitter();
+  public startAgain(): void {
+    console.log('start');
+    // this.qs.nullingActualQuestions();
+    // this.ms.nullingPassedQuestions();
+  }
+
+  public closeModal(): void {
+    this.closeEmitter.emit();
+  }
 }
