@@ -1,13 +1,18 @@
-<select [(ngModel)]="selectedOption" (click)="testsHandler()" name="select">
+<select
+  [(ngModel)]="selectedOption"
+  (click)="testsHandler()"
+  name="select"
+  class="select"
+>
   <!--Supplement an id here instead of using 'name'-->
   <option
     *ngFor="let option of dataMenu[1].options"
     [value]="option.number"
-    class="settings-sidebar__options__dropdown"
+    class="dropdown"
     [class]="
       activeBlockTests === option.number
-        ? 'settings-sidebar__options__dropdown__option--active'
-        : 'settings-sidebar__options__dropdown__option'
+        ? 'dropdown__select__option--active'
+        : 'dropdown__select__option'
     "
   >
     {{ option.number }} блок

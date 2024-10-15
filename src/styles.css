@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+.event-none {
+  pointer-events: none;
+}
+/*делает не активными для событий*/
+
+  .event-all {
+    pointer-events: all;
+  }
 body,button{
   background: #2b2b2b;
   color: #4e99c9;

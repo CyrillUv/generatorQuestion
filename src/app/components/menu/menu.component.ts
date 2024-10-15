@@ -10,6 +10,7 @@ import { SidebarModule } from '../settings/sidebar.module';
 import { SettingsQuestionsComponent } from '../settings/questions/setting-questions.component';
 import { SettingTestingComponent } from '../settings/testing/setting-testing.component';
 import { ModalComponent } from '../custom/modal/modal.component';
+import { QuestionService } from '../../data/question/question.service';
 
 @Component({
   selector: 'app-menu',
@@ -30,7 +31,7 @@ import { ModalComponent } from '../custom/modal/modal.component';
 })
 export class MenuComponent {
   public activeModal!: boolean;
-  public valueToggle!: boolean | null;
+
   private readonly routeInComponent: {
     '/questions': typeof SettingsQuestionsComponent;
     '/testing': typeof SettingTestingComponent;
@@ -40,6 +41,7 @@ export class MenuComponent {
   };
   constructor(
     public ms: MenuService,
+    private qs: QuestionService,
     private vcr: ViewContainerRef,
   ) {
     this.activeModal = this.ms.getActiveModal();
@@ -52,5 +54,15 @@ export class MenuComponent {
     this.vcr.clear();
     // @ts-ignore
     this.vcr.createComponent(this.routeInComponent[route]);
+  }
+  public startAgain(): void {
+    this.qs.nullingActualQuestions();
+    this.ms.nullingPassedQuestions();
+    console.log(
+      'gPQ',
+      this.ms.getPassedQuestions(),
+      'gAQ',
+      this.qs.getActualQuestions(),
+    );
   }
 }

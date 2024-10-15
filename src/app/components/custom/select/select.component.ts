@@ -9,7 +9,7 @@ import { IDataMenu } from '../../../data/menu/data-menu';
   standalone: true,
   imports: [FormsModule, NgForOf],
   templateUrl: './select.component.html',
-  styleUrl: './select.component.css',
+  styleUrl: './select.component.scss',
 })
 export class SelectComponent implements OnInit {
   @Input() public activeBlockTests!: number;

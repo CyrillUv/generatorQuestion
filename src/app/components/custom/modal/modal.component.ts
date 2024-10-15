@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -7,13 +7,20 @@ import { Component, EventEmitter, Output } from '@angular/core';
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
 })
-export class ModalComponent {
+export class ModalComponent implements OnDestroy {
   @Output() closeEmitter = new EventEmitter<boolean>();
   @Output() toggleEmitter = new EventEmitter<boolean | null>();
+  @Output() startEmitter = new EventEmitter();
+  constructor() {
+    document.body.classList.add('event-none');
+  }
+
+  ngOnDestroy(): void {
+    document.body.classList.remove('event-none');
+  }
   public startAgain(): void {
-    console.log('start');
-    // this.qs.nullingActualQuestions();
-    // this.ms.nullingPassedQuestions();
+    this.startEmitter.emit();
+    this.closeModal();
   }
 
   public closeModal(): void {

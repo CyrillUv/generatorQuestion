@@ -9,7 +9,7 @@
   <h3>Настройки вопросов</h3>
 </ng-template>
 <ng-template #bodyTemplate>
-  @if (qs.getActualQuestions().length === 1) {
+  @if (qs.getActualQuestions().length !== 1) {
     <main *ngFor="let option of dataMenu[0].options">
       <div class="settings-sidebar__options__dropdown">
         <div

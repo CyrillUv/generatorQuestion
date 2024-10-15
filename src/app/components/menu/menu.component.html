@@ -2,6 +2,7 @@
   <div>Меню</div>
   @if (this.ms.getActiveModal()) {
     <app-modal
+      (startEmitter)="startAgain()"
       (toggleEmitter)="this.ms.setValueToggle(false)"
       (closeEmitter)="this.ms.setActiveModal(false)"
     />
