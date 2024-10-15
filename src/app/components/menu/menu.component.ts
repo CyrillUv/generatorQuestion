@@ -30,6 +30,7 @@ import { ModalComponent } from '../custom/modal/modal.component';
 })
 export class MenuComponent {
   public activeModal!: boolean;
+  public valueToggle!: boolean | null;
   private readonly routeInComponent: {
     '/questions': typeof SettingsQuestionsComponent;
     '/testing': typeof SettingTestingComponent;

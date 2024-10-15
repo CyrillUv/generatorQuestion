@@ -1,7 +1,10 @@
 <div class="menu">
   <div>Меню</div>
   @if (this.ms.getActiveModal()) {
-    <app-modal (closeEmitter)="this.ms.setActiveModal(false)" />
+    <app-modal
+      (toggleEmitter)="this.ms.setValueToggle(false)"
+      (closeEmitter)="this.ms.setActiveModal(false)"
+    />
   }
   <div>
     <button class="menu__questions" (click)="changeRoute('/questions')">

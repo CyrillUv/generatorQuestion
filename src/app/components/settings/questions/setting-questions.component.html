@@ -30,7 +30,7 @@
     <main class="settings-sidebar__options__return">
       <app-custom-toggle
         [title]="'Пройти упражнение еще раз?'"
-        [defaultValue]="valueToggle"
+        [defaultValue]="ms.getValueToggle()"
         (toggleEmitter)="changeToggle($event)"
       />
     </main>

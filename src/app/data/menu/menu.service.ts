@@ -13,6 +13,7 @@ export class MenuService {
   private _activeModal = false;
   private _route: '/questions' | '/testing' = '/questions';
   private _passedQuestions: IQuestion[] = [];
+  private _valueToggle: boolean | null = null;
   public getData() {
     return dataMenu;
   }
@@ -22,11 +23,22 @@ export class MenuService {
   public setSettingMode(settingMode: boolean | null): void {
     this._settingMode = settingMode;
   }
+  public getValueToggle(): boolean | null {
+    console.log('_valueToggle', this._valueToggle);
+    return this._valueToggle;
+  }
+  public setValueToggle(value: boolean | null): void {
+    console.log('_valueToggle', this._valueToggle);
+    this._valueToggle = value;
+    console.log(this._valueToggle);
+  }
+
   public getActiveModal(): boolean {
     return this._activeModal;
   }
   public setActiveModal(activeModal: boolean): void {
     this._activeModal = activeModal;
+    console.log(this._activeModal);
   }
   public getPassedQuestions(): IQuestion[] {
     return this._passedQuestions;
