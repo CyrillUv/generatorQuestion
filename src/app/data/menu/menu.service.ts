@@ -18,6 +18,7 @@ export class MenuService {
     return dataMenu;
   }
   public getSettingMode(): boolean | null {
+    console.log('trigger', this._settingMode);
     return this._settingMode;
   }
   public setSettingMode(settingMode: boolean | null): void {

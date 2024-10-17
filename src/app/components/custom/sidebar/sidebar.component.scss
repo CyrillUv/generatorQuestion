@@ -21,7 +21,8 @@
     z-index: -1;
   }
   &__sidebar {
-
+    transform:translateX(-100%);
+    transition: transform 1s;
     margin: 0 0 0 0;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
@@ -33,43 +34,44 @@
     left: 0;
     width: 25%;
     height: 100vh;
-    &--active{
-      animation:  sidebar-active 1s ;
-      left: 0;
-      @keyframes sidebar-active {
-        from {
-          left: -30%;
-        }
-        to {
-          left: 0;
-        }
-      }
-    }
-    &--inactive{
-      animation: sidebar--inactive 1s;
-      left: -30%;
-      @keyframes sidebar--inactive {
-        from {
-          left: 0;
-
-        }
-
-        to {
-
-          left: -30%;
-        }
-      }
-    }
-    //&--inactive {
-    //  @include translateX(-100%);
+    //&--active{
+    //  animation:  sidebar-active 1s ;
+    //  left: 0;
+    //  @keyframes sidebar-active {
+    //    from {
+    //      left: -30%;
+    //    }
+    //    to {
+    //      left: 0;
+    //    }
+    //  }
     //}
+    //&--inactive{
+    //  animation: sidebar--inactive 1s;
+    //  left: -30%;
+    //  @keyframes sidebar--inactive {
+    //    from {
+    //      left: 0;
+    //
+    //    }
+    //
+    //    to {
+    //
+    //      left: -30%;
+    //    }
+    //  }
+    //}
+    &--activity {
+      @include translateX(0%);
+    }
+    &--inactive {
+      @include translateX(-100%);
+    }
 
     &__exit-cross {
       transform: translateX(900%);
     }
-    //&--activity {
-    //  @include translateX(0%);
-    //}
+
     &__exit-button, &__exit-cross, &__save-button {
       cursor: pointer;
     }

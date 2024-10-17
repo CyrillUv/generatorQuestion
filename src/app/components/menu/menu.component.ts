@@ -27,7 +27,6 @@ import { QuestionService } from '../../data/question/question.service';
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
-  animations: [test],
 })
 export class MenuComponent {
   public activeModal!: boolean;

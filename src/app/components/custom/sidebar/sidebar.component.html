@@ -4,9 +4,8 @@
   [class.sidebar-page--inactive]="!triggerSidebar"
 >
   <div
+    [@sidebar]="triggerSidebar ? 'open' : 'closed'"
     class="sidebar-page__sidebar"
-    [class.sidebar-page__sidebar--active]="triggerSidebar"
-    [class.sidebar-page__sidebar--inactive]="!triggerSidebar"
   >
     <span class="sidebar-page__sidebar__exit-cross" (click)="close()">✖</span>
     <div>
@@ -16,7 +15,7 @@
       <ng-content select="[header]"></ng-content>
     </div>
     <div>
-      <ng-container *ngTemplateOutlet="bodyTemplate"> Это body </ng-container>
+      <ng-container *ngTemplateOutlet="bodyTemplate"> Это body</ng-container>
       <ng-content select="[body]"></ng-content>
     </div>
     <div>
