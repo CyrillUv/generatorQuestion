@@ -3,11 +3,10 @@
     class="modal-page__modal"
     [class.settings-sidebar__modal-page__modal--inactive]="!toggleEmitter"
   >
-    <h2 class="modal-page__modal--exit" (click)="closeModal()">✖</h2>
-
-    <h2>{{ title }}</h2>
-    <main class="modal-page__modal__choice">
-      <ng-container *ngTemplateOutlet="bodyTemplate"> </ng-container>
-    </main>
+    <div class="modal-page__modal__header">
+      <h2>{{ title }}</h2>
+      <h2 class="modal-page__modal--exit" (click)="closeModal()">✖</h2>
+    </div>
+    <ng-container *ngTemplateOutlet="bodyTemplate"> </ng-container>
   </main>
 </div>

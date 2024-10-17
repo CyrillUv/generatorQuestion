@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { SettingsComponent } from './settings.component';
 import { RouterLink } from '@angular/router';
 import { NgForOf, NgIf, NgSwitch } from '@angular/common';
 import { SettingsQuestionsComponent } from './questions/setting-questions.component';

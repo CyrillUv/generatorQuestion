@@ -59,12 +59,6 @@ export class MenuComponent {
   public startAgain(): void {
     this.qs.nullingActualQuestions();
     this.ms.nullingPassedQuestions();
-    console.log(
-      'gPQ',
-      this.ms.getPassedQuestions(),
-      'gAQ',
-      this.qs.getActualQuestions(),
-    );
     this.closeModal();
   }
 }
