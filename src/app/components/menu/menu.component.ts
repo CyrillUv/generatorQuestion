@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
 
 import { MenuService } from '../../data/menu/menu.service';
-
-import { test } from './menu.animations';
 import { SidebarModule } from '../settings/sidebar.module';
 import { SettingsQuestionsComponent } from '../settings/questions/setting-questions.component';
 import { SettingTestingComponent } from '../settings/testing/setting-testing.component';
@@ -54,6 +52,10 @@ export class MenuComponent {
     // @ts-ignore
     this.vcr.createComponent(this.routeInComponent[route]);
   }
+  public closeModal(): void {
+    this.ms.setActiveModal(false);
+    this.ms.setValueToggle(false);
+  }
   public startAgain(): void {
     this.qs.nullingActualQuestions();
     this.ms.nullingPassedQuestions();
@@ -63,5 +65,6 @@ export class MenuComponent {
       'gAQ',
       this.qs.getActualQuestions(),
     );
+    this.closeModal();
   }
 }

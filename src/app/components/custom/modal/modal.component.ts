@@ -1,30 +1,39 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+  TemplateRef,
+} from '@angular/core';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [],
+  imports: [NgTemplateOutlet, NgIf],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
 })
 export class ModalComponent implements OnDestroy {
-  @Output() closeEmitter = new EventEmitter<boolean>();
-  @Output() toggleEmitter = new EventEmitter<boolean | null>();
-  @Output() startEmitter = new EventEmitter();
+  @Input() public title = 'Вы точно уверены?';
+  @Input() public bodyTemplate!: TemplateRef<unknown>;
+  @Output() public activeModalEmitter = new EventEmitter<boolean>();
+  @Output() public toggleEmitter = new EventEmitter<boolean | null>();
+  public activeModal = false;
   constructor() {
     document.body.classList.add('event-none');
+    this.activeModal = true;
   }
 
   ngOnDestroy(): void {
     document.body.classList.remove('event-none');
   }
-  public startAgain(): void {
-    this.startEmitter.emit();
-    this.closeModal();
-  }
 
   public closeModal(): void {
+    this.activeModalEmitter.emit();
     this.toggleEmitter.emit();
-    this.closeEmitter.emit();
+    this.activeModal = false;
+    document.body.classList.remove('event-none');
   }
 }

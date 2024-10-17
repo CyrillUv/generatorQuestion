@@ -1,18 +1,13 @@
-<div class="modal-page">
+<div *ngIf="activeModal" class="modal-page">
   <main
     class="modal-page__modal"
-    [class.settings-sidebar__modal-page__modal--inactive]="false"
+    [class.settings-sidebar__modal-page__modal--inactive]="!toggleEmitter"
   >
     <h2 class="modal-page__modal--exit" (click)="closeModal()">✖</h2>
 
-    <h2>Вы точно уверены?</h2>
+    <h2>{{ title }}</h2>
     <main class="modal-page__modal__choice">
-      <h2 class="modal-page__modal__choice__start" (click)="startAgain()">
-        Да
-      </h2>
-      <h2 class="modal-page__modal__choice__close" (click)="closeModal()">
-        Нет
-      </h2>
+      <ng-container *ngTemplateOutlet="bodyTemplate"> </ng-container>
     </main>
   </main>
 </div>

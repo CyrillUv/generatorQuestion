@@ -2,11 +2,17 @@
   <div>Меню</div>
   @if (this.ms.getActiveModal()) {
     <app-modal
-      (startEmitter)="startAgain()"
+      [bodyTemplate]="bodyTemplate"
+      (activeModalEmitter)="this.ms.setActiveModal(false)"
       (toggleEmitter)="this.ms.setValueToggle(false)"
-      (closeEmitter)="this.ms.setActiveModal(false)"
-    />
+    >
+      <ng-template #bodyTemplate>
+        <h2 class="menu__choice__start" (click)="startAgain()">Да</h2>
+        <h2 class="menu__choice__close" (click)="closeModal()">Нет</h2>
+      </ng-template>
+    </app-modal>
   }
+
   <div>
     <button class="menu__questions" (click)="changeRoute('/questions')">
       Вопросы

@@ -4,6 +4,9 @@
   padding: 10px;
   height: 100vh;
   font-weight: bold;
+  &__choice__start,&__choice__close{
+    cursor: pointer;
+  }
 &__testing,&__questions,&__documents{
   cursor: pointer;
 }
