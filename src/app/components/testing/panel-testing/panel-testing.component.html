@@ -8,40 +8,50 @@
     </h1>
     <h1 class="panel-testing__time">{{ time | Timer }}</h1>
   </div>
-  <div class="panel-testing__ceils">
-    <div
-      *ngIf="separatorResult - 20 !== 0 && fullMode"
-      class="panel-testing__prev-button"
-      (click)="prevPackTests()"
-    >
-      Предыдущий
-    </div>
-    <div *ngFor="let el of testsSeparator()">
-      <div
-        (click)="findTest(el.id)"
-        [class]="
-          activeTest.id === el.id
-            ? 'panel-testing__ceil--active panel-testing__ceil'
-            : 'panel-testing__ceil'
-        "
-      >
-        <span
-          [class.panel-testing__ceil--correct]="correctKeyInMap(el.id)"
-          [class.panel-testing__ceil--incorrect]="
-            correctKeyInMap(el.id) === false
-          "
-          >{{ el.id }}</span
-        >
-      </div>
-    </div>
-    <div
-      *ngIf="separatorResult < arrTest.length - 1 && fullMode"
-      class="panel-testing__next-button"
-      (click)="nextPackTests()"
-    >
-      Следующий
-    </div>
-  </div>
+  <app-paginator
+    [tests]="testsSeparator()"
+    [activeTest]="activeTest"
+    [fullMode]="fullMode"
+    [getSuccessTestsMap]="ts.getSuccessTestsMap()"
+    (activeTestEmitter)="findTest($event.id)"
+    [separatorResult]="separatorResult"
+    (nextPackTestsEmitter)="nextPackTests()"
+    (prevPackTestsEmitter)="prevPackTests()"
+  />
+  <!--  <div class="panel-testing__ceils">-->
+  <!--    <div-->
+  <!--      *ngIf="separatorResult - 20 !== 0 && fullMode"-->
+  <!--      class="panel-testing__prev-button"-->
+  <!--      (click)="prevPackTests()"-->
+  <!--    >-->
+  <!--      Предыдущий-->
+  <!--    </div>-->
+  <!--    <div *ngFor="let el of testsSeparator()">-->
+  <!--      <div-->
+  <!--        (click)="findTest(el.id)"-->
+  <!--        [class]="-->
+  <!--          activeTest.id === el.id-->
+  <!--            ? 'panel-testing__ceil&#45;&#45;active panel-testing__ceil'-->
+  <!--            : 'panel-testing__ceil'-->
+  <!--        "-->
+  <!--      >-->
+  <!--        <span-->
+  <!--          [class.panel-testing__ceil&#45;&#45;correct]="correctKeyInMap(el.id)"-->
+  <!--          [class.panel-testing__ceil&#45;&#45;incorrect]="-->
+  <!--            correctKeyInMap(el.id) === false-->
+  <!--          "-->
+  <!--          >{{ el.id }}</span-->
+  <!--        >-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--    <div-->
+  <!--      *ngIf="separatorResult < arrTest.length - 1 && fullMode"-->
+  <!--      class="panel-testing__next-button"-->
+  <!--      (click)="nextPackTests()"-->
+  <!--    >-->
+  <!--      Следующий-->
+  <!--    </div>-->
+  <!--  </div>-->
   <div class="panel-testing__block">
     <img class="panel-testing__block__image" src="takeUntil.png" alt="" />
     <h3 class="panel-testing__block__question">{{ activeTest["name"] }}</h3>
@@ -60,7 +70,7 @@
         (clickEmitter)="clickAnswer(answer)"
         [appCorrectAnswer]="answer.correct"
         [selectAnswer]="selectAnswer"
-        (click)="choiceOfAnswer(this.activeTest.id)"
+        (click)="choiceOfAnswer(activeTest.id)"
       >
         {{ answer.title }}
       </div>
@@ -68,14 +78,14 @@
   </div>
   <div class="panel-testing__buttons">
     <div
-      *ngIf="activeTest.id !== this.separatorResult - 19"
+      *ngIf="activeTest.id !== separatorResult - 19"
       (click)="findTest(activeTest.id - 1)"
       class="panel-testing__prev-button"
     >
       Предыдущий тест
     </div>
     <div
-      *ngIf="activeTest.id !== this.separatorResult && selectAnswer"
+      *ngIf="activeTest.id !== separatorResult && selectAnswer"
       (click)="findTest(activeTest.id + 1)"
       class="panel-testing__next-button"
     >
@@ -84,8 +94,8 @@
     <div
       *ngIf="
         fullMode
-          ? this.ts.getSuccessTestsMap().size === arrTest.length - 1
-          : this.ts.getSuccessTestsMap().size === pack
+          ? ts.getSuccessTestsMap().size === arrTest.length - 1
+          : ts.getSuccessTestsMap().size === pack
       "
       (click)="setStatistic(time + '')"
       class="panel-testing__next-button"
@@ -94,4 +104,14 @@
       Готово
     </div>
   </div>
+  <app-paginator
+    [tests]="testsSeparator()"
+    [activeTest]="activeTest"
+    [fullMode]="fullMode"
+    [getSuccessTestsMap]="ts.getSuccessTestsMap()"
+    (activeTestEmitter)="findTest($event.id)"
+    [separatorResult]="separatorResult"
+    (nextPackTestsEmitter)="nextPackTests()"
+    (prevPackTestsEmitter)="prevPackTests()"
+  />
 </div>

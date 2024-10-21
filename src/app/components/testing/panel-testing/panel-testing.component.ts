@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgForOf, NgIf, NgStyle } from '@angular/common';
+import { NgForOf, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { TestingService } from '../../../data/testing/testing.service';
 import { IAnswer, IDataTest } from '../../../data/testing/type';
 import { CorrectDirective } from '../../../directive/correct.directive';
@@ -8,6 +8,7 @@ import { interval } from 'rxjs';
 import { TakeUntilDestroy } from '../../../shared/take-until-destroy';
 import { QuestionsTimerPipe } from '../../questions/questions-timer.pipe';
 import { MenuService } from '../../../data/menu/menu.service';
+import { PaginatorComponent } from '../../custom/paginator/paginator.component';
 
 @Component({
   selector: 'app-panel-testing',
@@ -20,6 +21,8 @@ import { MenuService } from '../../../data/menu/menu.service';
     NgStyle,
     NgIf,
     QuestionsTimerPipe,
+    PaginatorComponent,
+    NgTemplateOutlet,
   ],
   styleUrl: 'panel-testing.component.scss',
 })
@@ -31,7 +34,7 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
   public separatorResult!: number;
   public fullMode = false;
   public pack = 20;
-
+  public correctKey!: boolean;
   constructor(
     public ts: TestingService,
     public ms: MenuService,
@@ -50,20 +53,17 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
   public findTest(id: number): void {
     this.activeTest = this.arrTest.find((test) => test.id === id) as IDataTest;
     this.selectAnswer = this.ts.getSuccessTestsMap().has(this.activeTest.id);
-    console.log('gstm', this.ts.getSuccessTestsMap().size);
-    console.log('sR', this.separatorResult);
   }
-
   public clickAnswer(answer: IAnswer) {
     this.ts.setSuccessTestsMap(this.activeTest.id, answer);
     this.selectAnswer = true;
     console.log(this.ts.getSuccessTestsMap());
   }
 
-  public correctKeyInMap(id: number): boolean | undefined {
-    if (!this.ts.getSuccessTestsMap().has(id)) return;
-    return this.ts.getSuccessTestsMap().get(id)?.correct as boolean;
-  }
+  // public correctKeyInMap(id: number): boolean | undefined {
+  //   if (!this.ts.getSuccessTestsMap().has(id)) return;
+  //   return this.ts.getSuccessTestsMap().get(id)?.correct as boolean;
+  // }
 
   public correctAnswerInMap(title: string): boolean | undefined {
     if (
@@ -111,4 +111,6 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
   public prevPackTests(): void {
     this.separatorResult -= 20;
   }
+
+  protected readonly event = event;
 }

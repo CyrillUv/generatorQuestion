@@ -1,0 +1,67 @@
+<div class="paginator">
+  <div
+    *ngIf="separatorResult - 20 !== 0 && fullMode"
+    class="panel-testing__prev-button"
+    (click)="prevPackTests()"
+  >
+    Предыдущий
+  </div>
+
+  <div *ngFor="let el of tests" (click)="activatePage(el)">
+    <div
+      [class]="
+        activeTest.id === el.id
+          ? 'paginator__ceil--active  paginator__ceil'
+          : 'paginator__ceil'
+      "
+    >
+      <span
+        [class.paginator__ceil--correct]="correctKeyInMap(el.id)"
+        [class.paginator__ceil--incorrect]="correctKeyInMap(el.id) === false"
+        >{{ el.id }}</span
+      >
+    </div>
+  </div>
+  <div
+    *ngIf="separatorResult < tests.length - 1 && fullMode"
+    class="panel-testing__next-button"
+    (click)="nextPackTests()"
+  >
+    Следующий
+  </div>
+</div>
+
+<!--  <div class="panel-testing__ceils">-->
+<!--    <div-->
+<!--      *ngIf="separatorResult - 20 !== 0 && fullMode"-->
+<!--      class="panel-testing__prev-button"-->
+<!--      (click)="prevPackTests()"-->
+<!--    >-->
+<!--      Предыдущий-->
+<!--    </div>-->
+<!--    <div *ngFor="let el of testsSeparator()">-->
+<!--      <div-->
+<!--        (click)="findTest(el.id)"-->
+<!--        [class]="-->
+<!--          activeTest.id === el.id-->
+<!--            ? 'panel-testing__ceil&#45;&#45;active panel-testing__ceil'-->
+<!--            : 'panel-testing__ceil'-->
+<!--        "-->
+<!--      >-->
+<!--        <span-->
+<!--          [class.panel-testing__ceil&#45;&#45;correct]="correctKeyInMap(el.id)"-->
+<!--          [class.panel-testing__ceil&#45;&#45;incorrect]="-->
+<!--            correctKeyInMap(el.id) === false-->
+<!--          "-->
+<!--          >{{ el.id }}</span-->
+<!--        >-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div-->
+<!--      *ngIf="separatorResult < arrTest.length - 1 && fullMode"-->
+<!--      class="panel-testing__next-button"-->
+<!--      (click)="nextPackTests()"-->
+<!--    >-->
+<!--      Следующий-->
+<!--    </div>-->
+<!--  </div>-->
