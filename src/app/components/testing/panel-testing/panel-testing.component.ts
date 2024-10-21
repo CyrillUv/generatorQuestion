@@ -27,14 +27,20 @@ import { PaginatorComponent } from '../../custom/paginator/paginator.component';
   styleUrl: 'panel-testing.component.scss',
 })
 export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
+  //Активный тест
   public activeTest!: IDataTest;
+  //Глобальный массив тестов(для удобства)
   public arrTest: IDataTest[] = [];
-  public selectAnswer = false;
+  //Свойство для разрешения выбора ответа
+  public isBlockingAnswer = false;
+  //Таймер прохождения
   public time = 0;
-  public separatorResult!: number;
+  //Длина глобального массива тестов (для удобства) (separatorResult)
+  public lengthOfAllData!: number;
+  //Режим прохождения всех тестов
   public fullMode = false;
-  public pack = 20;
-  public correctKey!: boolean;
+  //Пачка тестов
+  public packOfTests = 20;
   constructor(
     public ts: TestingService,
     public ms: MenuService,
@@ -43,74 +49,95 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
   }
 
   ngOnInit(): void {
+    //Присваивание переменной данных тестов из сервиса
     this.arrTest = this.ts.getData();
-    this.separatorResult = this.pack * this.ms.getActiveBlockTests();
-    this.activeTest =
-      this.arrTest[this.pack * this.ms.getActiveBlockTests() - 20];
+    //Длина глобального массива тестов
+    this.lengthOfAllData = this.arrTest.length;
+    //Выбор первого теста из блока
+    this.activeTest = this.arrTest[this.arrTest.length - this.packOfTests];
+    //Начало прохождения тестирования
     this.startTimer();
   }
-
-  public findTest(id: number): void {
+  //Выбор  теста
+  public pickTest(id: number): void {
+    //Присваивает активному тесту,подходящий по идентификатору тест
     this.activeTest = this.arrTest.find((test) => test.id === id) as IDataTest;
-    this.selectAnswer = this.ts.getSuccessTestsMap().has(this.activeTest.id);
+    //Проверка выбран ли ответ в этом тесте
+    this.isBlockingAnswer = this.ts
+      .getSuccessTestsMap()
+      .has(this.activeTest.id);
   }
-  public clickAnswer(answer: IAnswer) {
+  //Выбор ответа
+  public pickAnswer(answer: IAnswer) {
+    //Добавление ответа на определенный тест
     this.ts.setSuccessTestsMap(this.activeTest.id, answer);
-    this.selectAnswer = true;
-    console.log(this.ts.getSuccessTestsMap());
+    //Блокирование выбора ответа
+    this.isBlockingAnswer = true;
   }
-
+  //Метод закинут в пагинатор
   // public correctKeyInMap(id: number): boolean | undefined {
   //   if (!this.ts.getSuccessTestsMap().has(id)) return;
   //   return this.ts.getSuccessTestsMap().get(id)?.correct as boolean;
   // }
-
-  public correctAnswerInMap(title: string): boolean | undefined {
+  //
+  public selectedAnswerInMap(title: string): boolean | undefined {
     if (
+      //Если активный тест завершен
       this.ts.getSuccessTestsMap().has(this.activeTest.id) &&
+      //Ответ совпадает с входящим
       this.ts.getSuccessTestsMap().get(this.activeTest.id)?.title === title
     ) {
+      //Возвращается корректность ответа
       return this.ts.getSuccessTestsMap().get(this.activeTest.id)?.correct;
-    } else return undefined;
+    }
+    //Нужно чтобы не пройденные тесты были не отмечены цветом
+    else return undefined;
   }
-
+  //todo Перенести в геттер
+  //Разделяет тесты на блоки
   public testsSeparator(): IDataTest[] {
+    //Фильтрует массив всех тестов по условию сравнения первого и последнего элемента блока
     return this.arrTest.filter(
       (test) =>
-        test.id > this.separatorResult - 20 && test.id <= this.separatorResult,
+        test.id > this.lengthOfAllData - this.packOfTests &&
+        test.id <= this.lengthOfAllData,
     );
   }
 
   public choiceOfAnswer(id: number) {
+    //Добавляет неправильные ответы для статистики
     this.ts.changeArrayOfUnanswered(
       id,
       this.activeTest.description,
       this.activeTest.name,
     );
+    //Добавляет время прохождения одного теста
     this.ts.arrayTime.push(this.time);
   }
 
   public startTimer(): void {
+    //Работа таймера
     this.takeUntilDestroy(interval(1000)).subscribe(() => {
       this.time += 1;
     });
   }
-
+  //Следующий пак тестов
   public nextPackTests(): void {
-    this.separatorResult += 20;
-    console.log(this.pack);
-    console.log(this.arrTest.length);
+    this.lengthOfAllData += this.packOfTests;
   }
+  //Создание статистики тестирования
   public setStatistic(timerValue: string): void {
+    //Разчет статистики времени ответов на тесты
     this.ts.setStatistic(timerValue);
+    //Удаление первого элемента массива времени (мешал расчетам)
     this.ts.arrayTime.shift();
+    //Добавление времени в массив
     this.ts.arrayTime.push(this.time);
+    //Обнуление неправильных ответов
     this.ts.nullingRequestsForTest(this.ts.getArrayOfUnanswered());
   }
-
+  //Предыдущий пак тестов
   public prevPackTests(): void {
-    this.separatorResult -= 20;
+    this.lengthOfAllData -= this.packOfTests;
   }
-
-  protected readonly event = event;
 }

@@ -13,8 +13,8 @@
     [activeTest]="activeTest"
     [fullMode]="fullMode"
     [getSuccessTestsMap]="ts.getSuccessTestsMap()"
-    (activeTestEmitter)="findTest($event.id)"
-    [separatorResult]="separatorResult"
+    (activeTestEmitter)="pickTest($event.id)"
+    [lengthOfAllData]="lengthOfAllData"
     (nextPackTestsEmitter)="nextPackTests()"
     (prevPackTestsEmitter)="prevPackTests()"
   />
@@ -62,14 +62,14 @@
       *ngFor="let answer of activeTest.answers"
     >
       <div
-        [class]="!selectAnswer ? 'panel-testing__answer' : ''"
-        [class.panel-testing__ceil--correct]="correctAnswerInMap(answer.title)"
+        [class]="!isBlockingAnswer ? 'panel-testing__answer' : ''"
+        [class.panel-testing__ceil--correct]="selectedAnswerInMap(answer.title)"
         [class.panel-testing__ceil--incorrect]="
-          correctAnswerInMap(answer.title) === false
+          selectedAnswerInMap(answer.title) === false
         "
-        (clickEmitter)="clickAnswer(answer)"
+        (clickEmitter)="pickAnswer(answer)"
         [appCorrectAnswer]="answer.correct"
-        [selectAnswer]="selectAnswer"
+        [selectAnswer]="isBlockingAnswer"
         (click)="choiceOfAnswer(activeTest.id)"
       >
         {{ answer.title }}
@@ -78,15 +78,15 @@
   </div>
   <div class="panel-testing__buttons">
     <div
-      *ngIf="activeTest.id !== separatorResult - 19"
-      (click)="findTest(activeTest.id - 1)"
+      *ngIf="activeTest.id !== lengthOfAllData - 19"
+      (click)="pickTest(activeTest.id - 1)"
       class="panel-testing__prev-button"
     >
       Предыдущий тест
     </div>
     <div
-      *ngIf="activeTest.id !== separatorResult && selectAnswer"
-      (click)="findTest(activeTest.id + 1)"
+      *ngIf="activeTest.id !== lengthOfAllData && isBlockingAnswer"
+      (click)="pickTest(activeTest.id + 1)"
       class="panel-testing__next-button"
     >
       Следующий тест
@@ -95,7 +95,7 @@
       *ngIf="
         fullMode
           ? ts.getSuccessTestsMap().size === arrTest.length - 1
-          : ts.getSuccessTestsMap().size === pack
+          : ts.getSuccessTestsMap().size === packOfTests
       "
       (click)="setStatistic(time + '')"
       class="panel-testing__next-button"
@@ -109,8 +109,8 @@
     [activeTest]="activeTest"
     [fullMode]="fullMode"
     [getSuccessTestsMap]="ts.getSuccessTestsMap()"
-    (activeTestEmitter)="findTest($event.id)"
-    [separatorResult]="separatorResult"
+    (activeTestEmitter)="pickTest($event.id)"
+    [lengthOfAllData]="lengthOfAllData"
     (nextPackTestsEmitter)="nextPackTests()"
     (prevPackTestsEmitter)="prevPackTests()"
   />

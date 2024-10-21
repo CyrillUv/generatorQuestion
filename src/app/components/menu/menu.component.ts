@@ -47,7 +47,6 @@ export class MenuComponent {
   public changeRoute(route: '/questions' | '/testing') {
     this.ms.setRoute(route);
     this.ms.setSettingMode(true);
-    console.log(route);
     this.vcr.clear();
     // @ts-ignore
     this.vcr.createComponent(this.routeInComponent[route]);

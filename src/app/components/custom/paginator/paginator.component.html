@@ -1,13 +1,13 @@
 <div class="paginator">
   <div
-    *ngIf="separatorResult - 20 !== 0 && fullMode"
+    *ngIf="lengthOfAllData - 20 !== 0 && fullMode"
     class="panel-testing__prev-button"
     (click)="prevPackTests()"
   >
     Предыдущий
   </div>
 
-  <div *ngFor="let el of tests" (click)="activatePage(el)">
+  <div *ngFor="let el of tests; let i = index" (click)="activatePage(el)">
     <div
       [class]="
         activeTest.id === el.id
@@ -16,14 +16,14 @@
       "
     >
       <span
-        [class.paginator__ceil--correct]="correctKeyInMap(el.id)"
-        [class.paginator__ceil--incorrect]="correctKeyInMap(el.id) === false"
-        >{{ el.id }}</span
+        [class.paginator__ceil--correct]="answerToTheTest(el.id)"
+        [class.paginator__ceil--incorrect]="answerToTheTest(el.id) === false"
+        >{{ i + 1 }}</span
       >
     </div>
   </div>
   <div
-    *ngIf="separatorResult < tests.length - 1 && fullMode"
+    *ngIf="lengthOfAllData !== 60 && fullMode"
     class="panel-testing__next-button"
     (click)="nextPackTests()"
   >
