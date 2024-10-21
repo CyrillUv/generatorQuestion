@@ -9,7 +9,7 @@
     <h1 class="panel-testing__time">{{ time | Timer }}</h1>
   </div>
   <app-paginator
-    [tests]="testsSeparator()"
+    [tests]="testsSeparator"
     [activeTest]="activeTest"
     [fullMode]="fullMode"
     [getSuccessTestsMap]="ts.getSuccessTestsMap()"

@@ -41,6 +41,16 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
   public fullMode = false;
   //Пачка тестов
   public packOfTests = 20;
+  //todo Перенести в геттер
+  //Разделяет тесты на блоки
+  public get testsSeparator(): IDataTest[] {
+    //Фильтрует массив всех тестов по условию сравнения первого и последнего элемента блока
+    return this.arrTest.filter(
+      (test) =>
+        test.id > this.lengthOfAllData - this.packOfTests &&
+        test.id <= this.lengthOfAllData,
+    );
+  }
   constructor(
     public ts: TestingService,
     public ms: MenuService,
@@ -68,7 +78,7 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
       .has(this.activeTest.id);
   }
   //Выбор ответа
-  public pickAnswer(answer: IAnswer) {
+  public pickAnswer(answer: IAnswer): void {
     //Добавление ответа на определенный тест
     this.ts.setSuccessTestsMap(this.activeTest.id, answer);
     //Блокирование выбора ответа
@@ -93,18 +103,8 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
     //Нужно чтобы не пройденные тесты были не отмечены цветом
     else return undefined;
   }
-  //todo Перенести в геттер
-  //Разделяет тесты на блоки
-  public testsSeparator(): IDataTest[] {
-    //Фильтрует массив всех тестов по условию сравнения первого и последнего элемента блока
-    return this.arrTest.filter(
-      (test) =>
-        test.id > this.lengthOfAllData - this.packOfTests &&
-        test.id <= this.lengthOfAllData,
-    );
-  }
 
-  public choiceOfAnswer(id: number) {
+  public choiceOfAnswer(id: number): void {
     //Добавляет неправильные ответы для статистики
     this.ts.changeArrayOfUnanswered(
       id,
