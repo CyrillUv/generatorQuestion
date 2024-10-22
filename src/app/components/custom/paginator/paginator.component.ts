@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import { IAnswer, IDataTest } from '../../../data/testing/type';
 
@@ -10,13 +18,16 @@ import { IAnswer, IDataTest } from '../../../data/testing/type';
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss',
 })
-export class PaginatorComponent {
+export class PaginatorComponent implements OnChanges {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes['tests']);
+  }
   //Массив тестов (блок тестов разбитый сепаратором)
-  @Input() public tests!: IDataTest[];
+  @Input({ required: true }) public tests!: IDataTest[] | null;
   //Активный тест
-  @Input() public activeTest!: IDataTest;
+  @Input({ required: true }) public activeTest!: IDataTest;
   //Мапа с правильными ответами выбранными пользователем
-  @Input() public getSuccessTestsMap!: Map<number, IAnswer>;
+  @Input({ required: true }) public getSuccessTestsMap!: Map<number, IAnswer>;
   //Инпуты ниже нужны при прохождении всех тестов сразу,без деления на блоки
   //Длина глобального массива тестов
   @Input() public lengthOfAllData!: number;

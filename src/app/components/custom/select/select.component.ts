@@ -12,15 +12,21 @@ import { IDataMenu } from '../../../data/menu/data-menu';
   styleUrl: './select.component.scss',
 })
 export class SelectComponent implements OnInit {
+  //активный блок тестов
   @Input() public activeBlockTests!: number;
-  @Output() public selectedBlockTestsEmitter = new EventEmitter<number>();
+  //получение настроек
   @Input() public dataMenu!: IDataMenu[];
+  //выбранный блок тестов
+  @Output() public selectedBlockTestsEmitter = new EventEmitter<number>();
+  //Выбранная опция
   public selectedOption = 1; // Переменная для хранения выбранного option
   constructor(public ms: MenuService) {}
 
   ngOnInit(): void {
+    //Присваивание переменной данных настроек
     this.dataMenu = this.ms.getData();
   }
+  //Обработчик тестов
   public testsHandler() {
     this.selectedBlockTestsEmitter.emit(this.selectedOption);
   }

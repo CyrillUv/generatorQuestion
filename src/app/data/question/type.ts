@@ -6,7 +6,7 @@ export interface IQuestion {
   active: boolean;
 }
 
-export interface IDataQuest {
+export interface IDataQuestion {
   name: NameDataType;
   questions: IQuestion[];
   active: boolean;

@@ -19,16 +19,23 @@ import { sidebar } from './sidebar.animations';
   animations: sidebar,
 })
 export class SidebarComponent {
+  //Верхняя часть шаблона
   @Input() public headerTemplate!: TemplateRef<unknown>;
+  //Тело шаблона
   @Input() public bodyTemplate!: TemplateRef<unknown>;
+  //Нижняя часть шаблона
   @Input() public footerTemplate!: TemplateRef<unknown>;
+  //Флаг выдвижения сайдбара
   @Input() public triggerSidebar!: boolean | null;
-  @Output() public closeEmitter = new EventEmitter<boolean>();
+  //Закрытие сайдбара
+  @Output() public closingSidebarEmitter = new EventEmitter<boolean>();
 
   public ms = inject(MenuService);
-
-  public close(): void {
+  //Закрытие сайдбара
+  public closingSidebar(): void {
+    //Отключение режима настроек
     this.ms.setSettingMode(false);
-    this.closeEmitter.emit();
+    //Закрытие сайдбара
+    this.closingSidebarEmitter.emit();
   }
 }

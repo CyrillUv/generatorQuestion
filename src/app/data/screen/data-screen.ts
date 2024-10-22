@@ -6,7 +6,7 @@ export interface IScreen {
   description: string;
   description2?: string;
 }
-
+//Данные скринов
 export const dataScreen: IScreen[] = [
   {
     id: 1,

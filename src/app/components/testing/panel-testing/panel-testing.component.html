@@ -6,52 +6,16 @@
     <h1 *ngIf="!fullMode" (click)="fullMode = true" class="panel-testing__page">
       Пройти полное тестирование
     </h1>
-    <h1 class="panel-testing__time">{{ time | Timer }}</h1>
+    <app-timer />
   </div>
   <app-paginator
-    [tests]="testsSeparator"
+    [tests]="testsSeparator$ | async"
     [activeTest]="activeTest"
-    [fullMode]="fullMode"
     [getSuccessTestsMap]="ts.getSuccessTestsMap()"
     (activeTestEmitter)="pickTest($event.id)"
-    [lengthOfAllData]="lengthOfAllData"
     (nextPackTestsEmitter)="nextPackTests()"
     (prevPackTestsEmitter)="prevPackTests()"
   />
-  <!--  <div class="panel-testing__ceils">-->
-  <!--    <div-->
-  <!--      *ngIf="separatorResult - 20 !== 0 && fullMode"-->
-  <!--      class="panel-testing__prev-button"-->
-  <!--      (click)="prevPackTests()"-->
-  <!--    >-->
-  <!--      Предыдущий-->
-  <!--    </div>-->
-  <!--    <div *ngFor="let el of testsSeparator()">-->
-  <!--      <div-->
-  <!--        (click)="findTest(el.id)"-->
-  <!--        [class]="-->
-  <!--          activeTest.id === el.id-->
-  <!--            ? 'panel-testing__ceil&#45;&#45;active panel-testing__ceil'-->
-  <!--            : 'panel-testing__ceil'-->
-  <!--        "-->
-  <!--      >-->
-  <!--        <span-->
-  <!--          [class.panel-testing__ceil&#45;&#45;correct]="correctKeyInMap(el.id)"-->
-  <!--          [class.panel-testing__ceil&#45;&#45;incorrect]="-->
-  <!--            correctKeyInMap(el.id) === false-->
-  <!--          "-->
-  <!--          >{{ el.id }}</span-->
-  <!--        >-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--    <div-->
-  <!--      *ngIf="separatorResult < arrTest.length - 1 && fullMode"-->
-  <!--      class="panel-testing__next-button"-->
-  <!--      (click)="nextPackTests()"-->
-  <!--    >-->
-  <!--      Следующий-->
-  <!--    </div>-->
-  <!--  </div>-->
   <div class="panel-testing__block">
     <img class="panel-testing__block__image" src="takeUntil.png" alt="" />
     <h3 class="panel-testing__block__question">{{ activeTest["name"] }}</h3>
@@ -105,7 +69,7 @@
     </div>
   </div>
   <app-paginator
-    [tests]="testsSeparator()"
+    [tests]="testsSeparator$ | async"
     [activeTest]="activeTest"
     [fullMode]="fullMode"
     [getSuccessTestsMap]="ts.getSuccessTestsMap()"

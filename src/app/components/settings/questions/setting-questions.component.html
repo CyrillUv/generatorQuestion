@@ -14,7 +14,7 @@
       <div class="settings-sidebar__options__dropdown">
         <div
           [class]="
-            activeNumOfQuestions === option.number
+            currentNumOfQuestions === option.number
               ? 'settings-sidebar__options__dropdown__option--active'
               : 'settings-sidebar__options__dropdown__option'
           "
@@ -30,7 +30,7 @@
     <main class="settings-sidebar__options__return">
       <app-custom-toggle
         [title]="'Пройти упражнение еще раз?'"
-        [defaultValue]="ms.getValueToggle()"
+        [valueToggle]="ms.getValueToggle()"
         (toggleEmitter)="changeToggle($event)"
       />
     </main>

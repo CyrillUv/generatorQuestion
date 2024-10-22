@@ -22,31 +22,41 @@ import { IWrongTest, TestingService } from '../../data/testing/testing.service';
   styleUrl: './statistics.component.scss',
 })
 export class StatisticsComponent implements OnInit {
+  //среднее арифметическое время ответа
   public arithmeticMean = 0;
-  public hardQuestion = 0;
+  //Самое долгое время ответа
+  public hardQuest = 0;
   constructor(
-    public ds: QuestionService,
+    public qs: QuestionService,
     public ts: TestingService,
   ) {}
 
   ngOnInit(): void {
-    if (this.ds.arrayTime.length) this.statisticTime(this.ds.arrayTime);
+    //Выбор статистики при выполнении определенного раздела
+    //проверка длины массива прохождения вопросов
+    if (this.qs.arrayTime.length) this.statisticTime(this.qs.arrayTime);
+    //проверка длины массива прохождения тестов
     if (this.ts.arrayTime.length) this.statisticTime(this.ts.arrayTime);
   }
-
+  //Формирование статистики времени
   public statisticTime(arrayTime: number[]): void {
-    const array: number[] = [];
+    //массив отрезков времени между заданиями
+    const arrayIntervals: number[] = [];
     for (let i = 0; i < arrayTime.length - 1; i++) {
-      array.push(arrayTime[i + 1] - arrayTime[i]);
+      //добавление интервала в массив
+      arrayIntervals.push(arrayTime[i + 1] - arrayTime[i]);
     }
-    this.hardQuestion = Math.max(...array);
+    //Получение самого длительного задания
+    this.hardQuest = Math.max(...arrayIntervals);
+    //Получение среднего времени по прохождению задания
     this.arithmeticMean =
-      array.reduce((acc, el) => acc + el, 0) / arrayTime.length;
+      arrayIntervals.reduce((acc, el) => acc + el, 0) / arrayTime.length;
   }
-
+  //Открытие правильного ответа на вопрос
   public openRequestQuestion(unanswered: IQuestion): void {
     unanswered.active = !unanswered.active;
   }
+  //Открытие правильного ответа на тест
   public openRequestTest(unanswered: IWrongTest): void {
     unanswered.correct = !unanswered.correct;
   }

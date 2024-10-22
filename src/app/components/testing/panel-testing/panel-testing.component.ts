@@ -1,14 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgForOf, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
+import {
+  AsyncPipe,
+  NgForOf,
+  NgIf,
+  NgStyle,
+  NgTemplateOutlet,
+} from '@angular/common';
 import { TestingService } from '../../../data/testing/testing.service';
 import { IAnswer, IDataTest } from '../../../data/testing/type';
 import { CorrectDirective } from '../../../directive/correct.directive';
-import { interval } from 'rxjs';
+import { interval, Observable, of, take } from 'rxjs';
 import { TakeUntilDestroy } from '../../../shared/take-until-destroy';
 import { QuestionsTimerPipe } from '../../questions/questions-timer.pipe';
 import { MenuService } from '../../../data/menu/menu.service';
 import { PaginatorComponent } from '../../custom/paginator/paginator.component';
+import { TimerComponent } from '../../../shared/timer.component';
 
 @Component({
   selector: 'app-panel-testing',
@@ -23,7 +30,10 @@ import { PaginatorComponent } from '../../custom/paginator/paginator.component';
     QuestionsTimerPipe,
     PaginatorComponent,
     NgTemplateOutlet,
+    AsyncPipe,
+    TimerComponent,
   ],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: 'panel-testing.component.scss',
 })
 export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
@@ -43,17 +53,21 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
   public packOfTests = 20;
   //todo Перенести в геттер
   //Разделяет тесты на блоки
-  public get testsSeparator(): IDataTest[] {
+
+  public get testsSeparator$(): Observable<IDataTest[] | null> {
     //Фильтрует массив всех тестов по условию сравнения первого и последнего элемента блока
-    return this.arrTest.filter(
-      (test) =>
-        test.id > this.lengthOfAllData - this.packOfTests &&
-        test.id <= this.lengthOfAllData,
-    );
+    return of(
+      this.arrTest.filter(
+        (test) =>
+          test.id > this.lengthOfAllData - this.packOfTests &&
+          test.id <= this.lengthOfAllData,
+      ),
+    ).pipe(take(1));
   }
   constructor(
     public ts: TestingService,
     public ms: MenuService,
+    public cdRef: ChangeDetectorRef,
   ) {
     super();
   }
@@ -66,7 +80,7 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
     //Выбор первого теста из блока
     this.activeTest = this.arrTest[this.arrTest.length - this.packOfTests];
     //Начало прохождения тестирования
-    this.startTimer();
+    // this.startTimer();
   }
   //Выбор  теста
   public pickTest(id: number): void {
@@ -103,7 +117,7 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
     //Нужно чтобы не пройденные тесты были не отмечены цветом
     else return undefined;
   }
-
+  //Выбор ответа
   public choiceOfAnswer(id: number): void {
     //Добавляет неправильные ответы для статистики
     this.ts.changeArrayOfUnanswered(
@@ -119,6 +133,7 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
     //Работа таймера
     this.takeUntilDestroy(interval(1000)).subscribe(() => {
       this.time += 1;
+      this.cdRef.detectChanges();
     });
   }
   //Следующий пак тестов
@@ -134,7 +149,7 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
     //Добавление времени в массив
     this.ts.arrayTime.push(this.time);
     //Обнуление неправильных ответов
-    this.ts.nullingRequestsForTest(this.ts.getArrayOfUnanswered());
+    this.ts.nullingRequestsForTests(this.ts.getArrayOfUnanswered());
   }
   //Предыдущий пак тестов
   public prevPackTests(): void {

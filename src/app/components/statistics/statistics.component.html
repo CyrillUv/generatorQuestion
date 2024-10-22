@@ -1,17 +1,17 @@
 <div class="statistics">
   <h1 *ngIf="ts.arrayTime.length">Статистика тестирования</h1>
-  <h1 *ngIf="ds.arrayTime.length">Статистика ответов на вопросы</h1>
+  <h1 *ngIf="qs.arrayTime.length">Статистика ответов на вопросы</h1>
   <div *ngIf="ts.arrayTime.length" class="statistics__result">
     Затрачено на все тесты {{ +ts.getStatistic() | Timer }}
   </div>
-  <div *ngIf="ds.arrayTime.length" class="statistics__result">
-    Затрачено на все вопросы {{ +ds.getStatistic() | Timer }}
+  <div *ngIf="qs.arrayTime.length" class="statistics__result">
+    Затрачено на все вопросы {{ +qs.getStatistic() | Timer }}
   </div>
   <div class="statistics__result">
     Затрачено времени в среднем за вопрос {{ arithmeticMean | Timer }}
   </div>
   <div class="statistics__result">
-    Самый долгий вопрос по времени {{ hardQuestion | Timer }}
+    Самый долгий вопрос по времени {{ hardQuest | Timer }}
   </div>
   @if (ts.getArrayOfUnanswered().length) {
     <div class="statistics__unansweredQuestions">
@@ -35,10 +35,10 @@
       Вы прошли тесты без ошибок,поздравляю!!! ฅ^•ﻌ•^ฅ
     </h1>
   }
-  @if (ds.getArrayOfUnanswered().length) {
+  @if (qs.getArrayOfUnanswered().length) {
     <div class="statistics__unansweredQuestions">
       Неотвеченные вопросы:
-      @for (unanswered of ds.getArrayOfUnanswered(); track unanswered) {
+      @for (unanswered of qs.getArrayOfUnanswered(); track unanswered) {
         <li
           class="statistics__unansweredQuestions__mistake"
           (click)="openRequestQuestion(unanswered)"
@@ -53,7 +53,7 @@
       }
     </div>
   } @else {
-    <h1 *ngIf="ds.arrayTime.length" class="statistics__congratulation">
+    <h1 *ngIf="qs.arrayTime.length" class="statistics__congratulation">
       Вы ответили на все вопросы,поздравляю!!! ฅ^•ﻌ•^ฅ
     </h1>
   }
@@ -62,8 +62,8 @@
     (click)="
       ts.arrayTime.length
         ? ts.nullingArrayOfTests()
-        : ds.arrayTime.length
-          ? ds.nullingArrayOfUnanswered()
+        : qs.arrayTime.length
+          ? qs.nullingArrayOfUnanswered()
           : ''
     "
   >

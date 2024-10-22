@@ -1,6 +1,6 @@
-import { IDataQuest } from './type';
-
-export const dataQuestion: IDataQuest[] = [
+import { IDataQuestion } from './type';
+//Данные вопросов
+export const dataQuestion: IDataQuestion[] = [
   {
     name: 'Структуры данных',
     questions: [

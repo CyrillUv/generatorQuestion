@@ -30,6 +30,6 @@ export class SettingTestingComponent {
 
   public selectHandler(option: number): void {
     this.activeBlockTests = option;
-    this.ms.setActiveBlockTests(option);
+    this.ms.setCurrentBlockTests(option);
   }
 }

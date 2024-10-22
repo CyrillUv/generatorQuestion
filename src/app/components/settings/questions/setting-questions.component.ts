@@ -25,25 +25,38 @@ import { IDataMenu } from '../../../data/menu/data-menu';
   ],
 })
 export class SettingsQuestionsComponent {
+  //значение тогла
   public valueToggle!: boolean | null;
+  //массив данных настроек
   public dataMenu!: IDataMenu[];
-  public activeNumOfQuestions = 20;
+  //текущее количество вопросов
+  public currentNumOfQuestions = 20;
+  //Иньекция меню сервиса
   public ms = inject(MenuService);
+  //Иньекция сервиса вопросов
   public qs = inject(QuestionService);
   constructor() {
-    this.activeNumOfQuestions = this.ms.getActiveNumOfQuestions();
+    //получение количества вопросов
+    this.currentNumOfQuestions = this.ms.getCurrentNumOfQuestions();
+    //присваивание данных настроек в локальную переменную
     this.dataMenu = this.ms.getData();
+    //получение состояния тогла
     this.valueToggle = this.ms.getValueToggle();
   }
+  //изменение состояния тогла
   public changeToggle(toggle: boolean): void {
+    //обнуление состояния тогла
     this.valueToggle = null;
+    //изменение состояния тогла глобально
     this.ms.setValueToggle(toggle);
+    //открытие/закрытие модалки
     this.ms.setActiveModal(toggle);
-    console.log(this.ms.getValueToggle());
   }
+  //изменение количества вопросов
   public changeNumOfQuestions(numOfQuestions: number): void {
-    this.activeNumOfQuestions = numOfQuestions;
-    this.ms.setActiveNumOfQuestions(numOfQuestions);
-    console.log(this.activeNumOfQuestions);
+    //задание текущего количества вопросов локально
+    this.currentNumOfQuestions = numOfQuestions;
+    //задание текущего количества вопросов глобально
+    this.ms.setCurrentNumOfQuestions(numOfQuestions);
   }
 }

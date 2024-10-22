@@ -7,7 +7,9 @@
     [@sidebar]="triggerSidebar ? 'open' : 'closed'"
     class="sidebar-page__sidebar"
   >
-    <span class="sidebar-page__sidebar__exit-cross" (click)="close()">✖</span>
+    <span class="sidebar-page__sidebar__exit-cross" (click)="closingSidebar()"
+      >✖</span
+    >
     <div>
       <ng-container *ngTemplateOutlet="headerTemplate">
         Это header

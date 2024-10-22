@@ -1,5 +1,5 @@
 import { IDataTest } from './type';
-
+//Данные тестов
 export const dataTests: IDataTest[] = [
   {
     description: 'Какое-то описание теста',

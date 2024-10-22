@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IAnswer, IDataTest } from './type';
 import { dataTests } from './data-testing';
+import { of } from 'rxjs';
 
 export interface IWrongTest {
   title: string;
@@ -12,10 +13,15 @@ export interface IWrongTest {
   providedIn: 'root',
 })
 export class TestingService {
+  //Массив прохождения каждого теста
   public arrayTime: number[] = [];
-  public arrayOfWrongTest: IWrongTest[] = [];
+  //Массив ложно отвеченных тестов
+  public arrayOfWrongTests: IWrongTest[] = [];
+  //данные тестов
   private _data: IDataTest[] = dataTests;
+  //Мапа успешно отвеченных тестов
   private _successTestsMap = new Map<number, IAnswer>();
+  //Статистика времени всего прохождения
   private _statistic = '0';
 
   public getData(): IDataTest[] {
@@ -23,7 +29,7 @@ export class TestingService {
   }
 
   public getArrayOfUnanswered(): IWrongTest[] {
-    return this.arrayOfWrongTest;
+    return this.arrayOfWrongTests;
   }
 
   public getStatistic(): string {
@@ -34,7 +40,8 @@ export class TestingService {
     this._statistic = statistic;
   }
 
-  public nullingRequestsForTest(tests: IWrongTest[]): void {
+  //Обнуление ответов на тесты
+  public nullingRequestsForTests(tests: IWrongTest[]): void {
     tests.forEach((test) => {
       test.correct = false;
     });
@@ -47,28 +54,35 @@ export class TestingService {
   public setSuccessTestsMap(key: number, value: IAnswer): void {
     this._successTestsMap.set(key, value);
   }
+  //Обнуление массива тестов
   public nullingArrayOfTests(): void {
-    this.arrayOfWrongTest = [];
+    //Получается пустой массив ложных тестов
+    this.arrayOfWrongTests = [];
+    //массив времени прохождения пуст
     this.removeArrayTime();
+    //создание новой мапы
     this._successTestsMap = new Map<number, IAnswer>();
   }
 
   public removeArrayTime() {
     this.arrayTime = [];
   }
-
+  //изменение массива неправильно отвеченных тестов
   public changeArrayOfUnanswered(
     id: number,
     description: string,
     name: string,
   ): void {
+    //Добавляет неправильные ответы для статистики
     if (this.getSuccessTestsMap().get(id)) {
-      this.arrayOfWrongTest.push({
+      this.arrayOfWrongTests.push({
         title: name,
         correct: this.getSuccessTestsMap().get(id)?.correct,
         description: description,
       });
-      this.arrayOfWrongTest = this.arrayOfWrongTest.filter((el) => !el.correct);
+      this.arrayOfWrongTests = this.arrayOfWrongTests.filter(
+        (el) => !el.correct,
+      );
     }
   }
 }

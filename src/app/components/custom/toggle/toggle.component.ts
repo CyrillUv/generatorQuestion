@@ -9,20 +9,25 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule],
 })
 export class ToggleComponent {
-  @Input() set defaultValue(value: boolean | null) {
+  //Флаг активности тогла
+  @Input() set valueToggle(value: boolean | null) {
+    //если значение типа булеан,присваивает его локальной переменной
     if (typeof value === 'boolean') {
       this.toggleActive = value;
     }
   }
+  //Надпись
   @Input() public label!: string;
+  //Описание
   @Input() public title!: string;
+  //позиция тогла
   @Input() public position = 'right';
+  //состояние тогла в родителе
   @Output() toggleEmitter = new EventEmitter<boolean>();
-
+  //состояние тогла в локале
   public toggleActive = false;
-
+  //Изменение состояния тогла
   public changeToggler(): void {
     this.toggleEmitter.emit(this.toggleActive);
-    console.log(this.toggleActive);
   }
 }

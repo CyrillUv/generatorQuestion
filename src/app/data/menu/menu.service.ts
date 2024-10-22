@@ -7,31 +7,34 @@ import { dataMenu } from './data-menu';
   providedIn: 'root',
 })
 export class MenuService {
-  private _activeNumOfQuestions = 20;
-  private _activeBlockTests = 1;
+  //текущее кол-во вопросов
+  private _currentNumOfQuestions = 20;
+  //текущий блок тестов
+  private _currentBlockTests = 1;
+  //режим настроек
   private _settingMode: boolean | null = null;
+  //открытие/закрытие модалки
   private _activeModal = false;
+  //направление пути после настроек
   private _route: '/questions' | '/testing' = '/questions';
+  //массив прошедших вопросов
   private _passedQuestions: IQuestion[] = [];
+  //состояние тогла
   private _valueToggle: boolean | null = null;
   public getData() {
     return dataMenu;
   }
   public getSettingMode(): boolean | null {
-    console.log('trigger', this._settingMode);
     return this._settingMode;
   }
   public setSettingMode(settingMode: boolean | null): void {
     this._settingMode = settingMode;
   }
   public getValueToggle(): boolean | null {
-    console.log('_valueToggle', this._valueToggle);
     return this._valueToggle;
   }
   public setValueToggle(value: boolean | null): void {
-    console.log('_valueToggle', this._valueToggle);
     this._valueToggle = value;
-    console.log(this._valueToggle);
   }
 
   public getActiveModal(): boolean {
@@ -39,11 +42,11 @@ export class MenuService {
   }
   public setActiveModal(activeModal: boolean): void {
     this._activeModal = activeModal;
-    console.log(this._activeModal);
   }
   public getPassedQuestions(): IQuestion[] {
     return this._passedQuestions;
   }
+  //обнуление прошедших вопросов
   public nullingPassedQuestions(): void {
     this._passedQuestions = [];
   }
@@ -56,16 +59,16 @@ export class MenuService {
   public setRoute(route: '/questions' | '/testing'): void {
     this._route = route;
   }
-  public getActiveBlockTests(): number {
-    return this._activeBlockTests;
+  public getCurrentBlockTests(): number {
+    return this._currentBlockTests;
   }
-  public getActiveNumOfQuestions(): number {
-    return this._activeNumOfQuestions;
+  public getCurrentNumOfQuestions(): number {
+    return this._currentNumOfQuestions;
   }
-  public setActiveBlockTests(blockTests: number): void {
-    this._activeBlockTests = blockTests;
+  public setCurrentBlockTests(blockTests: number): void {
+    this._currentBlockTests = blockTests;
   }
-  public setActiveNumOfQuestions(numOfQuestions: number): void {
-    this._activeNumOfQuestions = numOfQuestions;
+  public setCurrentNumOfQuestions(numOfQuestions: number): void {
+    this._currentNumOfQuestions = numOfQuestions;
   }
 }

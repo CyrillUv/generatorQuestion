@@ -1,11 +1,11 @@
 <div class="questions">
   <div>
-    <div *ngIf="numQuestion !== 0">
-      {{ numQuestion }} Вопрос из {{ lastQuestion }}
+    <div *ngIf="questionNumber !== 0">
+      {{ questionNumber }} Вопрос из {{ numberOfQuestion }}
     </div>
     @if (activeQuestion) {
       <button
-        (click)="unansweredQuestion()"
+        (click)="incorrectQuestion()"
         [disabled]="this.activeQuestion.active"
       >
         Ответ
@@ -15,14 +15,14 @@
         <div>{{ activeQuestion.response }}</div>
       }
     }
-    @if (numQuestion !== lastQuestion) {
+    @if (questionNumber !== numberOfQuestion) {
       <span>
-        @if (numQuestion === 0) {
+        @if (questionNumber === 0) {
           <button (click)="randomizeQuestion()">Начать</button>
         }
         @if (
-          numQuestion !== questions.length &&
-          numQuestion !== 0 &&
+          questionNumber !== questions.length &&
+          questionNumber !== 0 &&
           ms.getPassedQuestions().length !== questions.length
         ) {
           <button (click)="addPassedQuestions(activeQuestion)">
@@ -32,13 +32,16 @@
       </span>
     }
     @if (
-      numQuestion === lastQuestion ||
+      questionNumber === numberOfQuestion ||
       ms.getPassedQuestions().length === questions.length
     ) {
-      <button (click)="setStatistic(time + '')" routerLink="/statistics">
+      <button
+        (click)="setStatistic(timeQuestion + '')"
+        routerLink="/statistics"
+      >
         Готово
       </button>
     }
   </div>
-  <h2>{{ time | Timer }}</h2>
+  <h2>{{ timeQuestion | Timer }}</h2>
 </div>

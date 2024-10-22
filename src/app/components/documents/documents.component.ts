@@ -12,16 +12,20 @@ import { QuestionService } from '../../data/question/question.service';
   styleUrl: './documents.component.scss',
 })
 export class DocumentsComponent implements OnInit {
+  //Массив категорий
   public categories!: NameDataType[];
+  //Массив вопросов
   public questions!: IQuestion[];
 
   constructor(private dataService: QuestionService) {}
 
   ngOnInit(): void {
+    //Получение категорий из сервиса
     this.categories = this.dataService.getCategories();
   }
 
   public getQuestions(category: NameDataType): void {
+    //Получение вопросов выбранной категории
     this.questions = this.dataService.getQuestions(category);
   }
 }
