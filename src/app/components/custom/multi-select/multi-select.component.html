@@ -1,0 +1,30 @@
+<div xmlns="http://www.w3.org/1999/html">
+  <!--  <input-->
+  <!--    *ngIf="options.join(' ').length > 20"-->
+  <!--    readonly-->
+  <!--    class="multi-select&#45;&#45;input"-->
+  <!--    (click)="this.openSelect()"-->
+  <!--    [value]="selectedOptions"-->
+  <!--  />-->
+  <!--  <input-->
+  <!--    readonly-->
+  <!--    class="multi-select&#45;&#45;input"-->
+  <!--    (click)="this.openSelect()"-->
+  <!--    [value]="selectedOptions"-->
+  <!--  />-->
+  <textarea
+    readonly
+    class="multi-select--input"
+    (click)="this.openSelect()"
+    [value]="selectedOptions"
+  ></textarea>
+  <main *ngIf="activeSelect">
+    <div
+      class="multi-select--option"
+      *ngFor="let option of options"
+      (click)="addOption(option)"
+    >
+      {{ option }}
+    </div>
+  </main>
+</div>

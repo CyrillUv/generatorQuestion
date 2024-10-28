@@ -55,7 +55,7 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
   //Формирование массива вопросов
   public createActualQuestions(): void {
     //получение массива по категориям
-    this.getQuestions();
+    this.getQuestions('TypeScript');
     //фильтрация массива вопросов от отвеченных
     this.qs.setActualQuestions(
       this.questions.filter((el) => !this.ms.getPassedQuestions().includes(el)),
@@ -127,7 +127,7 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
     //получение категорий
     this.getCategories();
     //получение вопросов
-    this.getQuestions();
+    this.getQuestions('TypeScript');
     //получение случайного вопроса
     this.activeQuestion =
       this.questions[Math.floor(Math.random() * this.questions.length)];

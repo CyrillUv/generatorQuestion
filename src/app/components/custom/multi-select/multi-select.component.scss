@@ -1,0 +1,20 @@
+.multi-select{
+  &--input{
+    background: #2b2b2b;
+    color: #4e99c9;
+    transition: height 0.2s;
+    overflow: hidden;
+    min-height: 20px;
+    width: 100%;
+    will-change: auto;
+    //text-overflow: ellipsis;
+  }
+  &--option,&--input{
+    cursor: pointer;
+  }
+  &--input:focus{
+    border-top: 2px solid #4e99c9;
+    border-left: 2px solid #4e99c9;
+    outline:none;
+  }
+}

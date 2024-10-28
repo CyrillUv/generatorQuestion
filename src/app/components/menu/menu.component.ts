@@ -9,6 +9,7 @@ import { SettingsQuestionsComponent } from '../settings/questions/setting-questi
 import { SettingTestingComponent } from '../settings/testing/setting-testing.component';
 import { ModalComponent } from '../custom/modal/modal.component';
 import { QuestionService } from '../../data/question/question.service';
+import { MultiSelectComponent } from '../custom/multi-select/multi-select.component';
 
 @Component({
   selector: 'app-menu',
@@ -22,6 +23,7 @@ import { QuestionService } from '../../data/question/question.service';
     SettingsQuestionsComponent,
     SettingTestingComponent,
     ModalComponent,
+    MultiSelectComponent,
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',

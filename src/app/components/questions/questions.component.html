@@ -33,7 +33,7 @@
     }
     @if (
       questionNumber === numberOfQuestion ||
-      ms.getPassedQuestions().length === questions.length
+      ms.getPassedQuestions().length >= questions.length
     ) {
       <button
         (click)="setStatistic(timeQuestion + '')"
