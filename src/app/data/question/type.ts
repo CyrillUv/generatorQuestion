@@ -1,7 +1,7 @@
 export type NameDataType =
   | 'Структуры данных'
   | 'JavaScript'
-  | 'Обьектно-оринетированное программирование'
+  | 'Обьектно-ориентированное программирование'
   | 'Тестирование'
   | 'Angular'
   | 'TypeScript'
@@ -10,6 +10,9 @@ export type NameDataType =
   | 'Алгоритмы'
   | 'Linux'
   | 'rxjs'
+  | 'Git'
+  | 'HTML'
+  | 'CSS'
   | 'all';
 
 export interface IQuestion {
