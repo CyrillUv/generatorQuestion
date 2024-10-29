@@ -1,5 +1,98 @@
 .multi-select{
-  &--input{
+  width: 300px;
+
+  &--select{
+    margin:20px;
+    width: 100%;
+    border: #4e99c9 3px solid;
+    height: 150px;
+    overflow: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+
+  &--search{
+    width: 100%;
+    margin: 10px;
+
+    &--filter-button,&--exit{
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    &--field{
+      padding: 5px;
+      margin:15px 0 0 15px;
+      background: #2b2b2b;
+      color: #4e99c9;
+      transition: height 0.2s;
+      overflow: hidden;
+      min-height: 20px;
+      width: 50%;
+      will-change: auto;
+      border: 2px solid #4b4747;
+    }
+  }
+    &--checkbox {
+      display: none;
+    }
+
+    &--option{
+      margin:10px;
+    }
+    /* Стиль для метки, которая будет выглядеть как чекбокс */
+    &--checkbox-label {
+      padding-top: 8px;
+      position: relative;
+      padding-left: 35px;
+      cursor: pointer;
+      user-select: none; /* предотвращает выделение текста */
+      /* Создаем квадратный элемент, который будет имитировать чекбокс */
+      &:before {
+        margin:5px;
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        border: 2px solid #888;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+    }
+
+
+
+    /* Стили для активированного состояния */
+    &--checkbox:checked + &--checkbox-label:before {
+      background-color: #4e99c9; /* Цвет фона при активации */
+      border-color: #0080ff; /* Цвет границы при активации */
+    }
+
+    /* Стили для галочки */
+    &--checkbox-label:after {
+      content: "";
+      position: absolute;
+      left: 13px;
+      top: 8px;
+      width: 6px;
+      height: 12px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      opacity: 0; /* Скрываем галочку по умолчанию */
+      transition: opacity 0.3s ease; /* Эффект появления */
+    }
+
+    /* Показать галочку при активации чекбокса */
+    &--checkbox:checked + &--checkbox-label:after {
+      opacity: 1; /* Показать галочку при активации */
+    }}
+
+  &--field{
+    padding: 5px;
+    margin:15px 0 0 15px;
     background: #2b2b2b;
     color: #4e99c9;
     transition: height 0.2s;
@@ -7,14 +100,15 @@
     min-height: 20px;
     width: 100%;
     will-change: auto;
-    //text-overflow: ellipsis;
+    border: 2px solid #4b4747;
   }
-  &--option,&--input{
+ &--field{
     cursor: pointer;
   }
-  &--input:focus{
-    border-top: 2px solid #4e99c9;
-    border-left: 2px solid #4e99c9;
+
+  &--field:focus{
+    border: 2px solid #4e99c9;
     outline:none;
   }
+
 }

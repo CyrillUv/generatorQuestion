@@ -1,30 +1,49 @@
-<div xmlns="http://www.w3.org/1999/html">
-  <!--  <input-->
-  <!--    *ngIf="options.join(' ').length > 20"-->
-  <!--    readonly-->
-  <!--    class="multi-select&#45;&#45;input"-->
-  <!--    (click)="this.openSelect()"-->
-  <!--    [value]="selectedOptions"-->
-  <!--  />-->
-  <!--  <input-->
-  <!--    readonly-->
-  <!--    class="multi-select&#45;&#45;input"-->
-  <!--    (click)="this.openSelect()"-->
-  <!--    [value]="selectedOptions"-->
-  <!--  />-->
-  <textarea
-    readonly
-    class="multi-select--input"
-    (click)="this.openSelect()"
-    [value]="selectedOptions"
-  ></textarea>
-  <main *ngIf="activeSelect">
+<div class="multi-select" (focus)="this.openSelect()">
+  <div class="multi-select--field" tabindex="0" (click)="this.openSelect()">
+    {{ selectedOptions }}
+  </div>
+
+  <main class="multi-select--select" *ngIf="activeSelect">
+    <div class="multi-select--select--search">
+      <input
+        id="id"
+        type="checkbox"
+        class="multi-select--select--checkbox"
+        [checked]="allSelect"
+        (click)="allOptions()"
+      />
+      <label class="multi-select--select--checkbox-label" for="id"></label>
+      <input
+        class="multi-select--select--search--field"
+        [(ngModel)]="searchField"
+        (keyup.enter)="filterOptions()"
+      />
+      <label
+        class="multi-select--select--search--filter-button"
+        (click)="filterOptions()"
+        >🔍</label
+      >
+      <label
+        class="multi-select--select--search--exit"
+        (click)="removeOptions()"
+        >✖</label
+      >
+    </div>
     <div
-      class="multi-select--option"
-      *ngFor="let option of options"
-      (click)="addOption(option)"
+      class="multi-select--select--option"
+      *ngFor="let option of searchOptions"
     >
-      {{ option }}
+      <input
+        id="{{ option }}"
+        type="checkbox"
+        [checked]="selectedOptions.includes(option)"
+        class="multi-select--select--checkbox"
+        [value]="option"
+        (click)="addOption(option)"
+      />
+      <label class="multi-select--select--checkbox-label" for="{{ option }}">
+        {{ option }}</label
+      >
     </div>
   </main>
 </div>
