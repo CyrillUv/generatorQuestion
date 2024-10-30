@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class MultiSelectComponent {
   public options: string[] = [
+    'Опsadasdastyffsayuhjcnikzxlmvlkdszvsdfasl;kndfhbytgyuajp;adsvkmjnhzxcция8',
     'Опция 1',
     'Опция 242',
     'Опция 3',
@@ -54,14 +55,14 @@ export class MultiSelectComponent {
       return;
     }
     this.searchOptions = this.options.filter(
-      (el) => el.toLowerCase().indexOf(this.searchField.toLowerCase()) > -1,
+      (el) =>
+        el.toLowerCase().indexOf(this.searchField.toLowerCase().trim()) > -1,
     );
   }
 
   public removeOptions() {
     this.searchOptions = this.options;
     this.selectedOptions = [];
-    this.activeSelect = false;
     this.allSelect = false;
     this.searchField = '';
   }

@@ -1,46 +1,64 @@
-.multi-select{
+.multi-select {
   width: 300px;
+  margin: 15px 0 0 15px;
 
-  &--select{
-    margin:20px;
-    width: 100%;
-    border: #4e99c9 3px solid;
+  &__active {
+    display: block;
+  }
+
+  &__inactive {
+    display: flex;
+
+  }
+
+  &--remove {
+    width: 0;
+    cursor: pointer;
+    transform: translate(-23px, 5px);
+  }
+
+  &__select {
+
+    border: #4e99c9 2px solid;
     height: 150px;
     overflow: auto;
     overflow-x: hidden;
+    padding: 5px;
     scrollbar-width: thin;
 
-  &--search{
-    width: 100%;
-    margin: 10px;
+    &__search {
+      margin: 0 0 0 10px;
 
-    &--filter-button,&--exit{
-      cursor: pointer;
-      margin: 5px;
+      &__filter-button, &__exit {
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      &__field {
+        padding: 5px;
+
+        background: #2b2b2b;
+        color: #4e99c9;
+        overflow: hidden;
+        min-height: 20px;
+        width: 50%;
+        will-change: auto;
+        border: 2px solid #4b4747;
+      }
     }
 
-    &--field{
-      padding: 5px;
-      margin:15px 0 0 15px;
-      background: #2b2b2b;
-      color: #4e99c9;
-      transition: height 0.2s;
-      overflow: hidden;
-      min-height: 20px;
-      width: 50%;
-      will-change: auto;
-      border: 2px solid #4b4747;
-    }
-  }
-    &--checkbox {
+    &__checkbox {
       display: none;
     }
 
-    &--option{
-      margin:10px;
+    &__option {
+      margin: 10px;
+      white-space: nowrap;
+      text-overflow:ellipsis ;
     }
+
     /* Стиль для метки, которая будет выглядеть как чекбокс */
-    &--checkbox-label {
+    &__checkbox-label {
       padding-top: 8px;
       position: relative;
       padding-left: 35px;
@@ -48,7 +66,7 @@
       user-select: none; /* предотвращает выделение текста */
       /* Создаем квадратный элемент, который будет имитировать чекбокс */
       &:before {
-        margin:5px;
+        margin: 5px;
         content: "";
         position: absolute;
         left: 0;
@@ -63,15 +81,14 @@
     }
 
 
-
     /* Стили для активированного состояния */
-    &--checkbox:checked + &--checkbox-label:before {
+    &__checkbox:checked + &__checkbox-label:before {
       background-color: #4e99c9; /* Цвет фона при активации */
       border-color: #0080ff; /* Цвет границы при активации */
     }
 
     /* Стили для галочки */
-    &--checkbox-label:after {
+    &__checkbox-label:after {
       content: "";
       position: absolute;
       left: 13px;
@@ -86,29 +103,30 @@
     }
 
     /* Показать галочку при активации чекбокса */
-    &--checkbox:checked + &--checkbox-label:after {
+    &__checkbox:checked + &__checkbox-label:after {
       opacity: 1; /* Показать галочку при активации */
-    }}
+    }
+  }
 
-  &--field{
+  &__field {
     padding: 5px;
-    margin:15px 0 0 15px;
     background: #2b2b2b;
     color: #4e99c9;
     transition: height 0.2s;
     overflow: hidden;
     min-height: 20px;
-    width: 100%;
+    cursor: pointer;
     will-change: auto;
     border: 2px solid #4b4747;
-  }
- &--field{
-    cursor: pointer;
+    text-overflow: ellipsis;
+    &__inactive{
+      width: 100%;
+    }
   }
 
-  &--field:focus{
+
+  &__field:focus {
     border: 2px solid #4e99c9;
-    outline:none;
   }
 
 }
