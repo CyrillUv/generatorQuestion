@@ -9,6 +9,8 @@ import { ModalComponent } from '../../custom/modal/modal.component';
 import { MenuService } from '../../../data/menu/menu.service';
 import { QuestionService } from '../../../data/question/question.service';
 import { IDataMenu } from '../../../data/menu/data-menu';
+import { MultiSelectComponent } from '../../custom/multi-select/multi-select.component';
+import { SelectComponent } from '../../custom/select/select.component';
 
 @Component({
   selector: 'app-setting-questions',
@@ -22,6 +24,8 @@ import { IDataMenu } from '../../../data/menu/data-menu';
     NgIf,
     SidebarComponent,
     ModalComponent,
+    MultiSelectComponent,
+    SelectComponent,
   ],
 })
 export class SettingsQuestionsComponent {
@@ -30,14 +34,15 @@ export class SettingsQuestionsComponent {
   //массив данных настроек
   public dataMenu!: IDataMenu[];
   //текущее количество вопросов
-  public currentNumOfQuestions = 20;
+  public currentNumOfQuestions = '20 вопросов';
   //Иньекция меню сервиса
   public ms = inject(MenuService);
   //Иньекция сервиса вопросов
   public qs = inject(QuestionService);
   constructor() {
     //получение количества вопросов
-    this.currentNumOfQuestions = this.ms.getCurrentNumOfQuestions();
+    this.currentNumOfQuestions =
+      this.ms.getCurrentNumOfQuestions() + ' вопросов';
     //присваивание данных настроек в локальную переменную
     this.dataMenu = this.ms.getData();
     //получение состояния тогла
@@ -55,7 +60,7 @@ export class SettingsQuestionsComponent {
   //изменение количества вопросов
   public changeNumOfQuestions(numOfQuestions: number): void {
     //задание текущего количества вопросов локально
-    this.currentNumOfQuestions = numOfQuestions;
+    this.currentNumOfQuestions = numOfQuestions + 'вопросов';
     //задание текущего количества вопросов глобально
     this.ms.setCurrentNumOfQuestions(numOfQuestions);
   }

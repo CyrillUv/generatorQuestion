@@ -3,14 +3,21 @@ export interface IDataMenu {
 }
 
 interface IOptions {
-  number: number;
+  option: string;
 }
 
 export const dataMenu: IDataMenu[] = [
   {
-    options: [{ number: 10 }, { number: 20 }, { number: 30 }],
+    options: [
+      { option: '10 вопросов' },
+      { option: '20 вопросов' },
+      { option: '30 вопросов' },
+    ],
   },
   {
-    options: [{ number: 1 }, { number: 2 }, { number: 3 }],
+    options: [{ option: '1 блок' }, { option: '2 блок' }, { option: '3 блок' }],
+  },
+  {
+    options: [{ option: 'Junior' }, { option: 'Middle' }, { option: 'Senior' }],
   },
 ];

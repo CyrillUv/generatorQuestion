@@ -1,8 +1,135 @@
-.select{
-    height: 50px;
-    width: 100px;
-    background: #2b2b2b;
-    color: #4e99c9;
-    border-radius: 10px;
+.multi-select {
+  width: 300px;
+  margin: 15px 0 0 15px;
+
+  &__active {
+    display: block;
   }
 
+  &__inactive {
+    display: flex;
+
+  }
+
+  &--remove {
+    width: 0;
+    cursor: pointer;
+    transform: translate(-23px, 5px);
+  }
+
+  &__select {
+
+    border: #4e99c9 2px solid;
+    height: 150px;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 5px;
+    scrollbar-width: thin;
+
+    &__search {
+      margin: 0 0 0 10px;
+
+      &__filter-button, &__exit {
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      &__field {
+        padding: 5px;
+
+        background: #2b2b2b;
+        color: #4e99c9;
+        overflow: hidden;
+        min-height: 20px;
+        width: 50%;
+        will-change: auto;
+        border: 2px solid #4b4747;
+      }
+    }
+
+    &__checkbox {
+      display: none;
+    }
+
+    &__option {
+      margin: 10px;
+      white-space: nowrap;
+      text-overflow:ellipsis ;
+      &:hover{
+        color: #410877;
+      }
+    }
+
+    /* Стиль для метки, которая будет выглядеть как чекбокс */
+    &__checkbox-label {
+      padding-top: 8px;
+      position: relative;
+      padding-left: 35px;
+      cursor: pointer;
+      user-select: none; /* предотвращает выделение текста */
+      /* Создаем квадратный элемент, который будет имитировать чекбокс */
+      &:before {
+        margin: 5px;
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        border: 2px solid #888;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+    }
+
+
+    /* Стили для активированного состояния */
+    &__checkbox:checked + &__checkbox-label:before {
+      background-color: #4e99c9; /* Цвет фона при активации */
+      border-color: #0080ff; /* Цвет границы при активации */
+    }
+
+    /* Стили для галочки */
+    &__checkbox-label:after {
+      content: "";
+      position: absolute;
+      left: 13px;
+      top: 8px;
+      width: 6px;
+      height: 12px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      opacity: 0; /* Скрываем галочку по умолчанию */
+      transition: opacity 0.3s ease; /* Эффект появления */
+    }
+
+    /* Показать галочку при активации чекбокса */
+    &__checkbox:checked + &__checkbox-label:after {
+      opacity: 1; /* Показать галочку при активации */
+    }
+  }
+
+  &__field {
+    padding: 5px;
+    background: #2b2b2b;
+    color: #4e99c9;
+    transition: height 0.2s;
+    overflow: hidden;
+    min-height: 20px;
+    cursor: pointer;
+    will-change: auto;
+    border: 2px solid #4b4747;
+    text-overflow: ellipsis;
+    &__inactive{
+      width: 100%;
+    }
+  }
+
+
+  &__field:focus {
+    border: 2px solid #4e99c9;
+  }
+
+}

@@ -1,18 +1,18 @@
 <div
   class="multi-select"
+  #multiselectContainer
   [class.multi-select__inactive]="!activeSelect"
-  (focus)="this.openSelect()"
 >
   <div
     class="multi-select__field"
     [class.multi-select__field__inactive]="!activeSelect"
     tabindex="0"
-    (click)="this.openSelect()"
+    (click)="changeSelect()"
   >
     {{ selectedOptions }}
   </div>
   <label
-    *ngIf="!activeSelect"
+    *ngIf="!activeSelect && selectedOptions.length"
     class="multi-select--remove"
     (click)="removeOptions()"
     >✖</label

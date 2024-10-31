@@ -830,7 +830,7 @@ export const dataTests: IDataTest[] = [
   {
     description: 'Какое-то описание теста',
     id: 60,
-    name: 'Вопросик10',
+    name: 'Вопросик10adfdsf',
     answers: [
       { title: '1ответ', correct: false },
       { title: '2ответ', correct: false },

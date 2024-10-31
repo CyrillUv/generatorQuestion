@@ -51,7 +51,6 @@ export class PanelTestingComponent extends TakeUntilDestroy implements OnInit {
   public fullMode = false;
   //Пачка тестов
   public packOfTests = 20;
-  //todo Перенести в геттер
   //Разделяет тесты на блоки
 
   public get testsSeparator$(): Observable<IDataTest[] | null> {

@@ -10,7 +10,8 @@
   <main>
     <app-select
       (selectedBlockTestsEmitter)="selectHandler($event)"
-      [activeBlockTests]="activeBlockTests"
+      [activeBlock]="activeBlockTests"
+      [data]="ms.getData()[1]"
     />
   </main>
 </ng-template>
@@ -31,5 +32,3 @@
     </div>
   </main>
 </ng-template>
-
-<!--</div>-->

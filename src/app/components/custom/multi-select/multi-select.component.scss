@@ -55,6 +55,9 @@
       margin: 10px;
       white-space: nowrap;
       text-overflow:ellipsis ;
+      &:hover{
+        color: #410877;
+      }
     }
 
     /* Стиль для метки, которая будет выглядеть как чекбокс */

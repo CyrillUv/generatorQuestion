@@ -19,6 +19,7 @@ export interface IQuestion {
   question: string;
   response: string;
   active: boolean;
+  level?: 'Junior' | 'Middle' | 'Senior';
 }
 
 export interface IDataQuestion {

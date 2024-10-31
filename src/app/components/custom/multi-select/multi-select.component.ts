@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { NgForOf, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -10,8 +10,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './multi-select.component.scss',
 })
 export class MultiSelectComponent {
+  @ViewChild('multiselectContainer') multiselectContainer!: ElementRef;
+
   public options: string[] = [
-    'Опsadasdastyffsayuhjcnikzxlmvlkdszvsdfasl;kndfhbytgyuajp;adsvkmjnhzxcция8',
     'Опция 1',
     'Опция 242',
     'Опция 3',
@@ -27,8 +28,21 @@ export class MultiSelectComponent {
   public allSelect = false;
   public searchField = '';
 
-  public openSelect(): void {
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    // Закрывает список, если клик был за пределами input и dropdown-list
+    const target = event.target as HTMLElement;
+    const container = this.multiselectContainer.nativeElement;
+    // Проверяем, кликнули ли на dropdown или его элементы
+    if (!container.contains(target)) {
+      this.closeSelect();
+    }
+  }
+  public changeSelect(): void {
     this.activeSelect = !this.activeSelect;
+  }
+  public closeSelect(): void {
+    this.activeSelect = false;
   }
   public allOptions(): void {
     this.allSelect = !this.allSelect;
@@ -39,6 +53,7 @@ export class MultiSelectComponent {
       this.selectedOptions = [];
     }
   }
+
   public addOption(option: string): void {
     console.log(this.selectedOptions);
     if (this.selectedOptions.includes(option)) {
@@ -66,4 +81,6 @@ export class MultiSelectComponent {
     this.allSelect = false;
     this.searchField = '';
   }
+
+  protected readonly event = event;
 }

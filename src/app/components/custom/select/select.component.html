@@ -1,19 +1,42 @@
-<select
-  [(ngModel)]="selectedOption"
-  (click)="testsHandler()"
-  name="select"
-  class="select"
+<div
+  #selectContainer
+  class="multi-select"
+  [class.multi-select__inactive]="!activeSelect"
 >
-  <option
-    *ngFor="let option of dataMenu[1].options"
-    [value]="option.number"
-    class="dropdown"
-    [class]="
-      activeBlockTests === option.number
-        ? 'dropdown__select__option--active'
-        : 'dropdown__select__option'
-    "
+  <div
+    class="multi-select__field"
+    [class.multi-select__field__inactive]="!activeSelect"
+    tabindex="0"
+    (click)="this.changeSelect()"
   >
-    {{ option.number }} блок
-  </option>
-</select>
+    {{ activeBlock }}
+  </div>
+
+  <main class="multi-select__select" *ngIf="activeSelect">
+    <div class="multi-select__select__search">
+      <input
+        class="multi-select__select__search__field"
+        [(ngModel)]="searchField"
+        (keyup.enter)="filterOptions()"
+      />
+      <label
+        class="multi-select__select__search__filter-button"
+        (click)="filterOptions()"
+        >🔍</label
+      >
+      <label
+        class="multi-select__select__search__exit"
+        (click)="removeOptions()"
+        >✖</label
+      >
+    </div>
+    <div
+      class="multi-select__select__option"
+      *ngFor="let option of searchOptions.options"
+    >
+      <label for="{{ option.option }}" (click)="selectOption(option.option)">
+        {{ option.option }}</label
+      >
+    </div>
+  </main>
+</div>

@@ -1,33 +1,80 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgForOf } from '@angular/common';
-import { MenuService } from '../../../data/menu/menu.service';
+import { NgForOf, NgIf } from '@angular/common';
 import { IDataMenu } from '../../../data/menu/data-menu';
 
 @Component({
   selector: 'app-select',
   standalone: true,
-  imports: [FormsModule, NgForOf],
+  imports: [FormsModule, NgForOf, NgIf],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
 })
 export class SelectComponent implements OnInit {
-  //активный блок тестов
-  @Input() public activeBlockTests!: number;
+  @ViewChild('selectContainer') selectContainer!: ElementRef;
+  //активный блок задач
+  @Input() public activeBlock!: string;
   //получение настроек
-  @Input() public dataMenu!: IDataMenu[];
+  @Input() data!: IDataMenu;
   //выбранный блок тестов
-  @Output() public selectedBlockTestsEmitter = new EventEmitter<number>();
+  @Output() public selectedBlockTestsEmitter = new EventEmitter<string>();
   //Выбранная опция
-  public selectedOption = 1; // Переменная для хранения выбранного option
-  constructor(public ms: MenuService) {}
-
+  // Переменная для хранения выбранного option
+  public searchOptions!: IDataMenu;
+  public activeSelect = false;
+  public searchField = '';
   ngOnInit(): void {
-    //Присваивание переменной данных настроек
-    this.dataMenu = this.ms.getData();
+    this.searchOptions = this.data;
   }
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    // Закрывает список, если клик был за пределами input и dropdown-list
+    const target = event.target as HTMLElement;
+    const container = this.selectContainer.nativeElement;
+    // Проверяем, кликнули ли на dropdown или его элементы
+    if (!container.contains(target)) {
+      this.activeSelect = false;
+    }
+  }
+
+  public changeSelect(): void {
+    this.activeSelect = !this.activeSelect;
+    console.log(this.searchOptions);
+  }
+
+  public filterOptions() {
+    if (!this.searchField) {
+      this.searchOptions = this.data;
+      return;
+    }
+
+    this.data.options.filter(
+      (el) =>
+        el.option.toLowerCase().indexOf(this.searchField.toLowerCase().trim()) >
+        -1,
+    );
+  }
+
   //Обработчик тестов
   public testsHandler() {
-    this.selectedBlockTestsEmitter.emit(this.selectedOption);
+    this.selectedBlockTestsEmitter.emit(this.activeBlock);
+  }
+
+  public removeOptions() {
+    this.searchOptions = this.data;
+    this.searchField = '';
+  }
+
+  public selectOption(option: string) {
+    this.activeBlock = option;
   }
 }
