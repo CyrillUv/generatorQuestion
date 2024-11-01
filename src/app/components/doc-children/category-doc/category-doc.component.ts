@@ -14,12 +14,9 @@ export class CategoryComponent implements OnInit {
   private route = inject(ActivatedRoute);
 
   ngOnInit() {
-    this.route.data.subscribe((r) => {
-      console.log('data', r);
-    });
+    this.route.data.subscribe((r) => {});
 
     (this.route.params as Observable<CategoryRoute>).subscribe((res) => {
-      console.log('params', res);
       this.name = res.title;
     });
   }

@@ -48,7 +48,6 @@ export class SelectComponent implements OnInit {
 
   public changeSelect(): void {
     this.activeSelect = !this.activeSelect;
-    console.log(this.searchOptions);
   }
 
   public filterOptions() {
@@ -76,5 +75,6 @@ export class SelectComponent implements OnInit {
 
   public selectOption(option: string) {
     this.activeBlock = option;
+    this.testsHandler();
   }
 }

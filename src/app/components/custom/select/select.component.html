@@ -34,7 +34,13 @@
       class="multi-select__select__option"
       *ngFor="let option of searchOptions.options"
     >
-      <label for="{{ option.option }}" (click)="selectOption(option.option)">
+      <label
+        [class.multi-select__select__option--active]="
+          activeBlock === option.option
+        "
+        for="{{ option.option }}"
+        (click)="selectOption(option.option)"
+      >
         {{ option.option }}</label
       >
     </div>

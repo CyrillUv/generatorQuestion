@@ -26,6 +26,6 @@ export class DocumentsComponent implements OnInit {
 
   public getQuestions(category: NameDataType): void {
     //Получение вопросов выбранной категории
-    this.questions = this.dataService.getQuestions(category);
+    this.questions = this.dataService.getDocuments(category);
   }
 }

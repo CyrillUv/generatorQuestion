@@ -8,9 +8,10 @@ import { SidebarComponent } from '../../custom/sidebar/sidebar.component';
 import { ModalComponent } from '../../custom/modal/modal.component';
 import { MenuService } from '../../../data/menu/menu.service';
 import { QuestionService } from '../../../data/question/question.service';
-import { IDataMenu } from '../../../data/menu/data-menu';
+import { IDataMenu, IOptions } from '../../../data/menu/data-menu';
 import { MultiSelectComponent } from '../../custom/multi-select/multi-select.component';
 import { SelectComponent } from '../../custom/select/select.component';
+import { NameDataType } from '../../../data/question/type';
 
 @Component({
   selector: 'app-setting-questions',
@@ -58,10 +59,16 @@ export class SettingsQuestionsComponent {
     this.ms.setActiveModal(toggle);
   }
   //изменение количества вопросов
-  public changeNumOfQuestions(numOfQuestions: number): void {
+  public changeNumOfQuestions(numOfQuestions: string): void {
     //задание текущего количества вопросов локально
-    this.currentNumOfQuestions = numOfQuestions + 'вопросов';
+    this.currentNumOfQuestions = numOfQuestions.split(' ')[0];
     //задание текущего количества вопросов глобально
-    this.ms.setCurrentNumOfQuestions(numOfQuestions);
+    this.ms.setCurrentNumOfQuestions(+this.currentNumOfQuestions);
+  }
+  public selectionCategory(categories: IOptions[]): void {
+    this.qs.setActualCategories(categories);
+  }
+  public selectionLevels(levels: IOptions[]): void {
+    this.qs.setActualLevels(levels);
   }
 }

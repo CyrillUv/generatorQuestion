@@ -2,7 +2,7 @@ export interface IDataMenu {
   options: IOptions[];
 }
 
-interface IOptions {
+export interface IOptions {
   option: string;
 }
 
@@ -19,5 +19,23 @@ export const dataMenu: IDataMenu[] = [
   },
   {
     options: [{ option: 'Junior' }, { option: 'Middle' }, { option: 'Senior' }],
+  },
+  {
+    options: [
+      { option: 'Структуры данных' },
+      { option: 'JavaScript' },
+      { option: 'Обьектно-ориентированное программирование' },
+      { option: 'Тестирование' },
+      { option: 'Angular' },
+      { option: 'TypeScript' },
+      { option: 'Паттерны проектирования' },
+      { option: 'Сетевые протоколы' },
+      { option: 'Алгоритмы' },
+      { option: 'Linux' },
+      { option: 'rxjs' },
+      { option: 'Git' },
+      { option: 'HTML' },
+      { option: 'CSS' },
+    ],
   },
 ];

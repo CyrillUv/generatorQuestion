@@ -9,7 +9,9 @@
     tabindex="0"
     (click)="changeSelect()"
   >
-    {{ selectedOptions }}
+    <span *ngFor="let option of selectedOptions">
+      {{ option.option }}
+    </span>
   </div>
   <label
     *ngIf="!activeSelect && selectedOptions.length"
@@ -49,15 +51,18 @@
       *ngFor="let option of searchOptions"
     >
       <input
-        id="{{ option }}"
         type="checkbox"
-        [checked]="selectedOptions.includes(option)"
+        [checked]="checkedOption(option.option)"
         class="multi-select__select__checkbox"
-        [value]="option"
         (click)="addOption(option)"
+        [value]="option.option"
       />
-      <label class="multi-select__select__checkbox-label" for="{{ option }}">
-        {{ option }}</label
+      <label
+        (click)="addOption(option)"
+        class="multi-select__select__checkbox-label"
+        for="{{ option.option }}"
+      >
+        {{ option.option }}</label
       >
     </div>
   </main>

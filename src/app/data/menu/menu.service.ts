@@ -8,9 +8,9 @@ import { dataMenu } from './data-menu';
 })
 export class MenuService {
   //текущее кол-во вопросов
-  private _currentNumOfQuestions = 20;
+  private _currentNumOfQuestions = '20';
   //текущий блок тестов
-  private _currentBlockTests = 1;
+  private _currentBlockTests = '1';
   //режим настроек
   private _settingMode: boolean | null = null;
   //открытие/закрытие модалки
@@ -60,15 +60,15 @@ export class MenuService {
     this._route = route;
   }
   public getCurrentBlockTests(): number {
-    return this._currentBlockTests;
+    return +this._currentBlockTests;
   }
   public getCurrentNumOfQuestions(): number {
-    return this._currentNumOfQuestions;
+    return +this._currentNumOfQuestions;
   }
-  public setCurrentBlockTests(blockTests: number): void {
+  public setCurrentBlockTests(blockTests: string): void {
     this._currentBlockTests = blockTests;
   }
   public setCurrentNumOfQuestions(numOfQuestions: number): void {
-    this._currentNumOfQuestions = numOfQuestions;
+    this._currentNumOfQuestions = numOfQuestions + '';
   }
 }

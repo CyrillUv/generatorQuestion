@@ -1,6 +1,16 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { NgForOf, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { IOptions } from '../../../data/menu/data-menu';
 
 @Component({
   selector: 'app-multi-select',
@@ -9,24 +19,24 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.scss',
 })
-export class MultiSelectComponent {
+export class MultiSelectComponent implements OnInit {
   @ViewChild('multiselectContainer') multiselectContainer!: ElementRef;
 
-  public options: string[] = [
-    'Опция 1',
-    'Опция 242',
-    'Опция 3',
-    'Опция 45',
-    'Опция 57',
-    'Опция 6',
-    'Опция 7',
-    'Опция 8',
-  ];
-  public searchOptions: string[] = this.options;
-  public selectedOptions: string[] = [];
+  @Input() public dataOptions!: IOptions[];
+
+  @Output() public selectedOptionsEmitter = new EventEmitter<IOptions[]>();
+
+  public options!: IOptions[];
+  public searchOptions!: IOptions[];
+  public selectedOptions: IOptions[] = [];
   public activeSelect = false;
   public allSelect = false;
   public searchField = '';
+
+  ngOnInit(): void {
+    this.options = this.dataOptions;
+    this.searchOptions = this.options;
+  }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -38,12 +48,18 @@ export class MultiSelectComponent {
       this.closeSelect();
     }
   }
+  public selectedOptionsHandler() {
+    this.selectedOptionsEmitter.emit(this.selectedOptions);
+  }
+
   public changeSelect(): void {
     this.activeSelect = !this.activeSelect;
   }
+
   public closeSelect(): void {
     this.activeSelect = false;
   }
+
   public allOptions(): void {
     this.allSelect = !this.allSelect;
     if (this.allSelect) {
@@ -54,14 +70,16 @@ export class MultiSelectComponent {
     }
   }
 
-  public addOption(option: string): void {
-    console.log(this.selectedOptions);
-    if (this.selectedOptions.includes(option)) {
-      this.selectedOptions = this.selectedOptions.filter((el) => el !== option);
+  public addOption(option: IOptions): void {
+    if (this.selectedOptions.map((el) => el.option).includes(option.option)) {
+      this.selectedOptions = this.selectedOptions.filter(
+        (el) => el.option !== option.option,
+      );
     } else {
       this.selectedOptions.push(option);
       this.selectedOptions = this.selectedOptions.map((option) => option);
     }
+    this.selectedOptionsHandler();
   }
 
   public filterOptions() {
@@ -71,7 +89,8 @@ export class MultiSelectComponent {
     }
     this.searchOptions = this.options.filter(
       (el) =>
-        el.toLowerCase().indexOf(this.searchField.toLowerCase().trim()) > -1,
+        el.option.toLowerCase().indexOf(this.searchField.toLowerCase().trim()) >
+        -1,
     );
   }
 
@@ -82,5 +101,7 @@ export class MultiSelectComponent {
     this.searchField = '';
   }
 
-  protected readonly event = event;
+  public checkedOption(option: string) {
+    return this.selectedOptions.map((el) => el.option).includes(option);
+  }
 }

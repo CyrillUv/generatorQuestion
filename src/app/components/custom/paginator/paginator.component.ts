@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import { IAnswer, IDataTest } from '../../../data/testing/type';
 
@@ -18,10 +10,7 @@ import { IAnswer, IDataTest } from '../../../data/testing/type';
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss',
 })
-export class PaginatorComponent implements OnChanges {
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes['tests']);
-  }
+export class PaginatorComponent {
   //Массив тестов (блок тестов разбитый сепаратором)
   @Input({ required: true }) public tests!: IDataTest[] | null;
   //Активный тест
@@ -47,14 +36,17 @@ export class PaginatorComponent implements OnChanges {
     //Прокидывание входящего теста для изменения активного в родительском компоненте
     this.activeTestEmitter.emit(test);
   }
+
   //Получение предыдущей пачки тестов
   public prevPackTests() {
     this.prevPackTestsEmitter.emit();
   }
+
   //Получение следующей пачки тестов
   public nextPackTests() {
     this.nextPackTestsEmitter.emit();
   }
+
   //Отображение правильно и неправильно отвеченного теста
   public answerToTheTest(id: number): boolean | undefined {
     //Если в мапе не найден обьект с таким идентификатором,выходим из метода

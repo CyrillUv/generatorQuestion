@@ -20,7 +20,7 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
   //Массив категорий
   public categories!: NameDataType[];
   //Массив вопросов
-  public questions!: IQuestion[];
+  public questions: IQuestion[] = [];
   //Активный вопрос
   public activeQuestion!: IQuestion;
   //Время ответов на вопросы
@@ -48,14 +48,20 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
     this.createActualQuestions();
   }
 
-  public getQuestions(category: NameDataType = 'all'): void {
-    this.questions = this.qs.getQuestions(category);
+  public getQuestions(): void {
+    this.questions = this.qs.getQuestions().flatMap((item) => item.questions);
+    console.log(this.questions);
+    // for (let i = 0; i < this.qs.getQuestions().length; i++) {
+    //   for (let j = 0; j < this.qs.getQuestions()[i].questions.length; j++) {
+    //     this.questions.push(this.qs.getQuestions()[i].questions[j]);
+    //   }
+    // }
   }
 
   //Формирование массива вопросов
   public createActualQuestions(): void {
     //получение массива по категориям
-    this.getQuestions('TypeScript');
+    this.getQuestions();
     //фильтрация массива вопросов от отвеченных
     this.qs.setActualQuestions(
       this.questions.filter((el) => !this.ms.getPassedQuestions().includes(el)),
@@ -127,7 +133,7 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
     //получение категорий
     this.getCategories();
     //получение вопросов
-    this.getQuestions('TypeScript');
+    this.getQuestions();
     //получение случайного вопроса
     this.activeQuestion =
       this.questions[Math.floor(Math.random() * this.questions.length)];
@@ -140,6 +146,7 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
       this.questionNumber += 1;
     }
   }
+
   //Добавление ложного ответа на вопрос
   public incorrectQuestion(): void {
     //Появление правильного ответа

@@ -24,12 +24,12 @@ import { MenuService } from '../../../data/menu/menu.service';
   standalone: true,
 })
 export class SettingTestingComponent {
-  public activeBlockTests = 1;
+  public activeBlockTests = '1 блок';
   @ViewChild('optionRef') option!: TemplateRef<unknown>;
   public ms = inject(MenuService);
 
-  public selectHandler(option: number): void {
-    this.activeBlockTests = option;
-    this.ms.setCurrentBlockTests(option);
+  public selectHandler(option: string): void {
+    this.activeBlockTests = option.split(' ')[0];
+    this.ms.setCurrentBlockTests(this.activeBlockTests);
   }
 }

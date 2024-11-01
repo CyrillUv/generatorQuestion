@@ -25,11 +25,21 @@
     <!--      </div>-->
     <!--    </main>-->
     Количество
-    <app-select [data]="dataMenu[0]" [activeBlock]="currentNumOfQuestions" />
+    <app-select
+      [data]="dataMenu[0]"
+      [activeBlock]="currentNumOfQuestions"
+      (selectedBlockTestsEmitter)="changeNumOfQuestions($event)"
+    />
     Сложности
-    <app-multi-select></app-multi-select>
+    <app-multi-select
+      [dataOptions]="dataMenu[2].options"
+      (selectedOptionsEmitter)="selectionLevels($event)"
+    ></app-multi-select>
     Категории
-    <app-multi-select></app-multi-select>
+    <app-multi-select
+      [dataOptions]="dataMenu[3].options"
+      (selectedOptionsEmitter)="selectionCategory($event)"
+    ></app-multi-select>
   } @else {
     <h3>Вы успешно ответили на все вопросы 🛈</h3>
 
