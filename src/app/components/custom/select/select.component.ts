@@ -4,13 +4,14 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  OnChanges,
   OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
-import { IDataMenu } from '../../../data/menu/data-menu';
+import { IOptions } from '../../../data/menu/data-menu';
 
 @Component({
   selector: 'app-select',
@@ -19,22 +20,31 @@ import { IDataMenu } from '../../../data/menu/data-menu';
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
 })
-export class SelectComponent implements OnInit {
+export class SelectComponent implements OnInit, OnChanges {
   @ViewChild('selectContainer') selectContainer!: ElementRef;
-  //активный блок задач
-  @Input() public activeBlock!: string;
   //получение настроек
-  @Input() data!: IDataMenu;
+  @Input() data!: IOptions[];
+  //активный блок задач
+  @Input() public defaultItem!: string;
   //выбранный блок тестов
-  @Output() public selectedBlockTestsEmitter = new EventEmitter<string>();
+  @Output() public selectedItemEmitter = new EventEmitter<IOptions>();
   //Выбранная опция
   // Переменная для хранения выбранного option
-  public searchOptions!: IDataMenu;
-  public activeSelect = false;
+  public searchData!: IOptions[];
+  public showPanel = false;
   public searchField = '';
+  public activeItem: IOptions | null = null;
   ngOnInit(): void {
-    this.searchOptions = this.data;
+    this.searchData = this.data;
   }
+  ngOnChanges() {
+    if (this.defaultItem) {
+      this.activeItem = this.data.find((el) =>
+        el.title.includes(this.defaultItem),
+      ) as IOptions;
+    }
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     // Закрывает список, если клик был за пределами input и dropdown-list
@@ -42,39 +52,34 @@ export class SelectComponent implements OnInit {
     const container = this.selectContainer.nativeElement;
     // Проверяем, кликнули ли на dropdown или его элементы
     if (!container.contains(target)) {
-      this.activeSelect = false;
+      this.showPanel = false;
     }
   }
 
-  public changeSelect(): void {
-    this.activeSelect = !this.activeSelect;
+  public showHidePanel(): void {
+    this.showPanel = !this.showPanel;
   }
 
   public filterOptions() {
     if (!this.searchField) {
-      this.searchOptions = this.data;
+      this.searchData = this.data;
       return;
     }
 
-    this.data.options.filter(
+    this.data.filter(
       (el) =>
-        el.option.toLowerCase().indexOf(this.searchField.toLowerCase().trim()) >
+        el.title.toLowerCase().indexOf(this.searchField.toLowerCase().trim()) >
         -1,
     );
   }
 
-  //Обработчик тестов
-  public testsHandler() {
-    this.selectedBlockTestsEmitter.emit(this.activeBlock);
-  }
-
   public removeOptions() {
-    this.searchOptions = this.data;
+    this.searchData = this.data;
     this.searchField = '';
   }
 
-  public selectOption(option: string) {
-    this.activeBlock = option;
-    this.testsHandler();
+  public selectOption(option: IOptions) {
+    this.activeItem = option;
+    this.selectedItemEmitter.emit(this.activeItem);
   }
 }

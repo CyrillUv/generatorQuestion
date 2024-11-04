@@ -26,16 +26,14 @@ export class MultiSelectComponent implements OnInit {
 
   @Output() public selectedOptionsEmitter = new EventEmitter<IOptions[]>();
 
-  public options!: IOptions[];
   public searchOptions!: IOptions[];
   public selectedOptions: IOptions[] = [];
-  public activeSelect = false;
+  public showPanel = false;
   public allSelect = false;
   public searchField = '';
 
   ngOnInit(): void {
-    this.options = this.dataOptions;
-    this.searchOptions = this.options;
+    this.searchOptions = this.dataOptions;
   }
 
   @HostListener('document:click', ['$event'])
@@ -48,16 +46,17 @@ export class MultiSelectComponent implements OnInit {
       this.closeSelect();
     }
   }
+
   public selectedOptionsHandler() {
     this.selectedOptionsEmitter.emit(this.selectedOptions);
   }
 
   public changeSelect(): void {
-    this.activeSelect = !this.activeSelect;
+    this.showPanel = !this.showPanel;
   }
 
   public closeSelect(): void {
-    this.activeSelect = false;
+    this.showPanel = false;
   }
 
   public allOptions(): void {
@@ -71,9 +70,9 @@ export class MultiSelectComponent implements OnInit {
   }
 
   public addOption(option: IOptions): void {
-    if (this.selectedOptions.map((el) => el.option).includes(option.option)) {
+    if (this.selectedOptions.map((el) => el.title).includes(option.title)) {
       this.selectedOptions = this.selectedOptions.filter(
-        (el) => el.option !== option.option,
+        (el) => el.title !== option.title,
       );
     } else {
       this.selectedOptions.push(option);
@@ -84,24 +83,24 @@ export class MultiSelectComponent implements OnInit {
 
   public filterOptions() {
     if (!this.searchField) {
-      this.searchOptions = this.options;
+      this.searchOptions = this.dataOptions;
       return;
     }
-    this.searchOptions = this.options.filter(
+    this.searchOptions = this.dataOptions.filter(
       (el) =>
-        el.option.toLowerCase().indexOf(this.searchField.toLowerCase().trim()) >
+        el.title.toLowerCase().indexOf(this.searchField.toLowerCase().trim()) >
         -1,
     );
   }
 
   public removeOptions() {
-    this.searchOptions = this.options;
+    this.searchOptions = this.dataOptions;
     this.selectedOptions = [];
     this.allSelect = false;
     this.searchField = '';
   }
 
   public checkedOption(option: string) {
-    return this.selectedOptions.map((el) => el.option).includes(option);
+    return this.selectedOptions.map((el) => el.title).includes(option);
   }
 }

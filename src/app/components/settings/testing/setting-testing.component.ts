@@ -7,6 +7,7 @@ import { SidebarComponent } from '../../custom/sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
 import { SelectComponent } from '../../custom/select/select.component';
 import { MenuService } from '../../../data/menu/menu.service';
+import { IOptions } from '../../../data/menu/data-menu';
 
 @Component({
   selector: 'app-setting-testing',
@@ -24,12 +25,12 @@ import { MenuService } from '../../../data/menu/menu.service';
   standalone: true,
 })
 export class SettingTestingComponent {
-  public activeBlockTests = '1 блок';
+  public activeBlockTests = '1';
   @ViewChild('optionRef') option!: TemplateRef<unknown>;
   public ms = inject(MenuService);
 
-  public selectHandler(option: string): void {
-    this.activeBlockTests = option.split(' ')[0];
+  public selectHandler(option: IOptions): void {
+    this.activeBlockTests = option.title;
     this.ms.setCurrentBlockTests(this.activeBlockTests);
   }
 }

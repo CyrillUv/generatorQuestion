@@ -3,39 +3,44 @@ export interface IDataMenu {
 }
 
 export interface IOptions {
-  option: string;
+  title: string;
+  value?: number;
 }
 
 export const dataMenu: IDataMenu[] = [
   {
     options: [
-      { option: '10 вопросов' },
-      { option: '20 вопросов' },
-      { option: '30 вопросов' },
+      { title: '10 вопросов', value: 10 },
+      { title: '20 вопросов', value: 20 },
+      { title: '30 вопросов', value: 30 },
     ],
   },
   {
-    options: [{ option: '1 блок' }, { option: '2 блок' }, { option: '3 блок' }],
+    options: [
+      { title: '1 блок', value: 1 },
+      { title: '2 блок', value: 2 },
+      { title: '3 блок', value: 3 },
+    ],
   },
   {
-    options: [{ option: 'Junior' }, { option: 'Middle' }, { option: 'Senior' }],
+    options: [{ title: 'Junior' }, { title: 'Middle' }, { title: 'Senior' }],
   },
   {
     options: [
-      { option: 'Структуры данных' },
-      { option: 'JavaScript' },
-      { option: 'Обьектно-ориентированное программирование' },
-      { option: 'Тестирование' },
-      { option: 'Angular' },
-      { option: 'TypeScript' },
-      { option: 'Паттерны проектирования' },
-      { option: 'Сетевые протоколы' },
-      { option: 'Алгоритмы' },
-      { option: 'Linux' },
-      { option: 'rxjs' },
-      { option: 'Git' },
-      { option: 'HTML' },
-      { option: 'CSS' },
+      { title: 'Структуры данных' },
+      { title: 'JavaScript' },
+      { title: 'Обьектно-ориентированное программирование' },
+      { title: 'Тестирование' },
+      { title: 'Angular' },
+      { title: 'TypeScript' },
+      { title: 'Паттерны проектирования' },
+      { title: 'Сетевые протоколы' },
+      { title: 'Алгоритмы' },
+      { title: 'Linux' },
+      { title: 'rxjs' },
+      { title: 'Git' },
+      { title: 'HTML' },
+      { title: 'CSS' },
     ],
   },
 ];

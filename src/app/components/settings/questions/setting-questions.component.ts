@@ -11,7 +11,6 @@ import { QuestionService } from '../../../data/question/question.service';
 import { IDataMenu, IOptions } from '../../../data/menu/data-menu';
 import { MultiSelectComponent } from '../../custom/multi-select/multi-select.component';
 import { SelectComponent } from '../../custom/select/select.component';
-import { NameDataType } from '../../../data/question/type';
 
 @Component({
   selector: 'app-setting-questions',
@@ -35,15 +34,13 @@ export class SettingsQuestionsComponent {
   //массив данных настроек
   public dataMenu!: IDataMenu[];
   //текущее количество вопросов
-  public currentNumOfQuestions = '20 вопросов';
+  public currentNumOfQuestions = 20;
   //Иньекция меню сервиса
   public ms = inject(MenuService);
   //Иньекция сервиса вопросов
   public qs = inject(QuestionService);
   constructor() {
     //получение количества вопросов
-    this.currentNumOfQuestions =
-      this.ms.getCurrentNumOfQuestions() + ' вопросов';
     //присваивание данных настроек в локальную переменную
     this.dataMenu = this.ms.getData();
     //получение состояния тогла
@@ -59,11 +56,9 @@ export class SettingsQuestionsComponent {
     this.ms.setActiveModal(toggle);
   }
   //изменение количества вопросов
-  public changeNumOfQuestions(numOfQuestions: string): void {
-    //задание текущего количества вопросов локально
-    this.currentNumOfQuestions = numOfQuestions.split(' ')[0];
+  public changeNumOfQuestions(option: IOptions): void {
     //задание текущего количества вопросов глобально
-    this.ms.setCurrentNumOfQuestions(+this.currentNumOfQuestions);
+    this.ms.setCurrentNumOfQuestions(option.title);
   }
   public selectionCategory(categories: IOptions[]): void {
     this.qs.setActualCategories(categories);

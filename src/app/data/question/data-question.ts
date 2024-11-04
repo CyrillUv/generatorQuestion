@@ -11,9 +11,11 @@ import { dataPatterns } from '../global/data-patterns';
 import { dataLinux } from '../global/data-linux';
 import { dataHtml } from '../global/data-html';
 import { dataCss } from '../global/data-css';
+import { dataTesting } from '../global/data-testing';
 //Данные вопросов
 export const dataQuestion: IDataQuestion[] = [
   dataTS,
+  dataTesting,
   dataOOP,
   dataAngular,
   dataRxjs,

@@ -42,30 +42,24 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
   ngOnInit(): void {
     //Получение всех вопросов
     this.qs.getAllQuestions();
-    //Задание количества вопросов
-    this.numberOfQuestion = this.ms.getCurrentNumOfQuestions();
+
     //Формирование массива вопросов
     this.createActualQuestions();
   }
 
   public getQuestions(): void {
     this.questions = this.qs.getQuestions().flatMap((item) => item.questions);
-    console.log(this.questions);
-    // for (let i = 0; i < this.qs.getQuestions().length; i++) {
-    //   for (let j = 0; j < this.qs.getQuestions()[i].questions.length; j++) {
-    //     this.questions.push(this.qs.getQuestions()[i].questions[j]);
-    //   }
-    // }
   }
 
   //Формирование массива вопросов
   public createActualQuestions(): void {
-    //получение массива по категориям
+    //получение массива вопрос
     this.getQuestions();
     //фильтрация массива вопросов от отвеченных
     this.qs.setActualQuestions(
       this.questions.filter((el) => !this.ms.getPassedQuestions().includes(el)),
     );
+    console.log(this.qs.getActualQuestions());
   }
 
   //Получение категорий

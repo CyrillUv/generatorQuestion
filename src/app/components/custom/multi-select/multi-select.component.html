@@ -1,26 +1,26 @@
 <div
   class="multi-select"
   #multiselectContainer
-  [class.multi-select__inactive]="!activeSelect"
+  [class.multi-select__inactive]="!showPanel"
 >
   <div
     class="multi-select__field"
-    [class.multi-select__field__inactive]="!activeSelect"
+    [class.multi-select__field__inactive]="!showPanel"
     tabindex="0"
     (click)="changeSelect()"
   >
-    <span *ngFor="let option of selectedOptions">
-      {{ option.option }}
+    <span *ngFor="let option of selectedOptions; let i = index">
+      {{ option.title }}<span *ngIf="i !== selectedOptions.length - 1">,</span>
     </span>
   </div>
   <label
-    *ngIf="!activeSelect && selectedOptions.length"
+    *ngIf="!showPanel && selectedOptions.length"
     class="multi-select--remove"
     (click)="removeOptions()"
     >✖</label
   >
 
-  <main class="multi-select__select" *ngIf="activeSelect">
+  <main class="multi-select__select" *ngIf="showPanel">
     <div class="multi-select__select__search">
       <input
         id="id"
@@ -52,17 +52,17 @@
     >
       <input
         type="checkbox"
-        [checked]="checkedOption(option.option)"
+        [checked]="checkedOption(option.title)"
         class="multi-select__select__checkbox"
         (click)="addOption(option)"
-        [value]="option.option"
+        [value]="option.title"
       />
       <label
         (click)="addOption(option)"
         class="multi-select__select__checkbox-label"
-        for="{{ option.option }}"
+        for="{{ option.title }}"
       >
-        {{ option.option }}</label
+        {{ option.title }}</label
       >
     </div>
   </main>

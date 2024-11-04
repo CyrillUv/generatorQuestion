@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { dataQuestion } from './data-question';
 import { IDataQuestion, IQuestion, NameDataType } from './type';
 import { IOptions } from '../menu/data-menu';
-import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +37,7 @@ export class QuestionService {
   }
 
   public setActualLevels(levels: IOptions[]): void {
+    console.log(this._actualLevels);
     this._actualLevels = levels;
   }
 
@@ -94,22 +94,21 @@ export class QuestionService {
   }
   //Получение вопросов по категориям и уровням
   public getQuestions(): IDataQuestion[] {
+    // Если хоть одна категория выбрана
     if (this._actualCategories.length) {
-      console.log(this._actualCategories);
       return this._data.filter((el) => {
-        for (let i = 0; i < this._actualCategories.length; i++) {
-          this._actualCategories[i].option.includes(el.name);
-        }
+        return this._actualCategories.some(
+          (category) => el.name === category.title,
+        );
       });
     }
+    //Если хоть один уровень сложности выбран
     if (this._actualLevels.length) {
-      return this._data.filter((el) =>
-        el.questions.map((el) => {
-          for (let i = 0; i < this._actualCategories.length; i++) {
-            this._actualLevels[i].option?.includes(el.level as string);
-          }
-        }),
-      );
+      return this._data.filter((el) => {
+        return this._actualLevels.some((level) =>
+          el.questions.some((el) => el.level === level.title),
+        );
+      });
     }
     return this._data;
   }

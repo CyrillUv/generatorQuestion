@@ -1,18 +1,18 @@
 <div
   #selectContainer
   class="multi-select"
-  [class.multi-select__inactive]="!activeSelect"
+  [class.multi-select__inactive]="!showPanel"
 >
   <div
     class="multi-select__field"
-    [class.multi-select__field__inactive]="!activeSelect"
+    [class.multi-select__field__inactive]="!showPanel"
     tabindex="0"
-    (click)="this.changeSelect()"
+    (click)="this.showHidePanel()"
   >
-    {{ activeBlock }}
+    {{ activeItem?.title }}
   </div>
 
-  <main class="multi-select__select" *ngIf="activeSelect">
+  <main class="multi-select__select" *ngIf="showPanel">
     <div class="multi-select__select__search">
       <input
         class="multi-select__select__search__field"
@@ -30,18 +30,15 @@
         >✖</label
       >
     </div>
-    <div
-      class="multi-select__select__option"
-      *ngFor="let option of searchOptions.options"
-    >
+    <div class="multi-select__select__option" *ngFor="let option of searchData">
       <label
         [class.multi-select__select__option--active]="
-          activeBlock === option.option
+          activeItem?.title === option.title
         "
-        for="{{ option.option }}"
-        (click)="selectOption(option.option)"
+        for="{{ option.title }}"
+        (click)="selectOption(option)"
       >
-        {{ option.option }}</label
+        {{ option.title }}</label
       >
     </div>
   </main>

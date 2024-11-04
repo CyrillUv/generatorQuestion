@@ -26,9 +26,9 @@
     <!--    </main>-->
     Количество
     <app-select
-      [data]="dataMenu[0]"
-      [activeBlock]="currentNumOfQuestions"
-      (selectedBlockTestsEmitter)="changeNumOfQuestions($event)"
+      [data]="dataMenu[0].options"
+      [defaultItem]="ms.getCurrentNumOfQuestions()"
+      (selectedItemEmitter)="changeNumOfQuestions($event)"
     />
     Сложности
     <app-multi-select

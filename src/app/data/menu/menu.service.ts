@@ -62,13 +62,13 @@ export class MenuService {
   public getCurrentBlockTests(): number {
     return +this._currentBlockTests;
   }
-  public getCurrentNumOfQuestions(): number {
-    return +this._currentNumOfQuestions;
+  public getCurrentNumOfQuestions(): string {
+    return this._currentNumOfQuestions;
   }
   public setCurrentBlockTests(blockTests: string): void {
     this._currentBlockTests = blockTests;
   }
-  public setCurrentNumOfQuestions(numOfQuestions: number): void {
-    this._currentNumOfQuestions = numOfQuestions + '';
+  public setCurrentNumOfQuestions(numOfQuestions: string): void {
+    this._currentNumOfQuestions = numOfQuestions;
   }
 }
