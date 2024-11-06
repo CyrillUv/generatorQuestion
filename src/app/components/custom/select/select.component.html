@@ -6,6 +6,7 @@
   <div
     class="multi-select__field"
     [class.multi-select__field__inactive]="!showPanel"
+    [class.multi-select__field__error]="!invalidField"
     tabindex="0"
     (click)="this.showHidePanel()"
   >

@@ -10,6 +10,7 @@ import { SettingTestingComponent } from '../settings/testing/setting-testing.com
 import { ModalComponent } from '../custom/modal/modal.component';
 import { QuestionService } from '../../data/question/question.service';
 import { MultiSelectComponent } from '../custom/multi-select/multi-select.component';
+import { MyFormComponent } from '../custom/my-form/my-form.component';
 
 @Component({
   selector: 'app-menu',
@@ -24,6 +25,7 @@ import { MultiSelectComponent } from '../custom/multi-select/multi-select.compon
     SettingTestingComponent,
     ModalComponent,
     MultiSelectComponent,
+    MyFormComponent,
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',

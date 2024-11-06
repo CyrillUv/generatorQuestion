@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  forwardRef,
   HostListener,
   Input,
   OnInit,
@@ -9,7 +10,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgForOf, NgIf } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { IOptions } from '../../../data/menu/data-menu';
 
 @Component({
@@ -18,12 +23,19 @@ import { IOptions } from '../../../data/menu/data-menu';
   imports: [NgForOf, FormsModule, NgIf],
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => MultiSelectComponent),
+      multi: true,
+    },
+  ],
 })
-export class MultiSelectComponent implements OnInit {
+export class MultiSelectComponent implements OnInit, ControlValueAccessor {
   @ViewChild('multiselectContainer') multiselectContainer!: ElementRef;
 
   @Input() public dataOptions!: IOptions[];
-
+  @Input() public defaultInvalid!: boolean;
   @Output() public selectedOptionsEmitter = new EventEmitter<IOptions[]>();
 
   public searchOptions!: IOptions[];
@@ -31,9 +43,13 @@ export class MultiSelectComponent implements OnInit {
   public showPanel = false;
   public allSelect = false;
   public searchField = '';
+  public valueAccessor!: IOptions[];
+  public invalidField = false;
+  private onTouched!: () => void;
 
   ngOnInit(): void {
     this.searchOptions = this.dataOptions;
+    this.invalidField = !!this.searchOptions.length;
   }
 
   @HostListener('document:click', ['$event'])
@@ -47,11 +63,33 @@ export class MultiSelectComponent implements OnInit {
     }
   }
 
+  // Функция, вызываемая при изменении значения
+  public onChange!: (value: IOptions[]) => void;
+
+  public writeValue(value: IOptions[]): void {
+    this.valueAccessor = value;
+    this.selectedOptions = this.valueAccessor;
+    this.invalidField = this.defaultInvalid;
+  }
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  public registerOnChange(fn: () => void): void {
+    this.onChange = fn;
+  }
+
   public selectedOptionsHandler() {
-    this.selectedOptionsEmitter.emit(this.selectedOptions);
+    //эмитер для работы без формгруппы и ngmodel
+    // this.selectedOptionsEmitter.emit(this.selectedOptions);
+    this.onChange(this.selectedOptions);
+    this.invalidField = this.defaultInvalid;
   }
 
   public changeSelect(): void {
+    if (!this.selectedOptions.length) {
+      this.removeOptions();
+    }
     this.showPanel = !this.showPanel;
   }
 
@@ -67,6 +105,7 @@ export class MultiSelectComponent implements OnInit {
     if (!this.allSelect) {
       this.selectedOptions = [];
     }
+    this.selectedOptionsHandler();
   }
 
   public addOption(option: IOptions): void {
@@ -78,6 +117,7 @@ export class MultiSelectComponent implements OnInit {
       this.selectedOptions.push(option);
       this.selectedOptions = this.selectedOptions.map((option) => option);
     }
+
     this.selectedOptionsHandler();
   }
 
@@ -98,6 +138,7 @@ export class MultiSelectComponent implements OnInit {
     this.selectedOptions = [];
     this.allSelect = false;
     this.searchField = '';
+    this.selectedOptionsHandler();
   }
 
   public checkedOption(option: string) {

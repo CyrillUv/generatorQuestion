@@ -8,7 +8,7 @@ import { dataMenu } from './data-menu';
 })
 export class MenuService {
   //текущее кол-во вопросов
-  private _currentNumOfQuestions = '20';
+  private _currentNumOfQuestions: string | null = null;
   //текущий блок тестов
   private _currentBlockTests = '1';
   //режим настроек
@@ -62,7 +62,7 @@ export class MenuService {
   public getCurrentBlockTests(): number {
     return +this._currentBlockTests;
   }
-  public getCurrentNumOfQuestions(): string {
+  public getCurrentNumOfQuestions(): string | null {
     return this._currentNumOfQuestions;
   }
   public setCurrentBlockTests(blockTests: string): void {

@@ -6,6 +6,7 @@
   <div
     class="multi-select__field"
     [class.multi-select__field__inactive]="!showPanel"
+    [class.multi-select__field__error]="invalidField"
     tabindex="0"
     (click)="changeSelect()"
   >
@@ -14,7 +15,7 @@
     </span>
   </div>
   <label
-    *ngIf="!showPanel && selectedOptions.length"
+    *ngIf="!showPanel && selectedOptions"
     class="multi-select--remove"
     (click)="removeOptions()"
     >✖</label

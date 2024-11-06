@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  forwardRef,
   HostListener,
   Input,
   OnChanges,
@@ -9,7 +10,11 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
 import { IOptions } from '../../../data/menu/data-menu';
 
@@ -19,31 +24,55 @@ import { IOptions } from '../../../data/menu/data-menu';
   imports: [FormsModule, NgForOf, NgIf],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SelectComponent),
+      multi: true,
+    },
+  ],
 })
-export class SelectComponent implements OnInit, OnChanges {
+export class SelectComponent implements OnInit, ControlValueAccessor {
   @ViewChild('selectContainer') selectContainer!: ElementRef;
   //получение настроек
-  @Input() data!: IOptions[];
+  @Input() public data!: IOptions[];
   //активный блок задач
-  @Input() public defaultItem!: string;
+  @Input() public defaultItem!: string | null;
+  @Input() public defaultInvalid!: boolean;
+
   //выбранный блок тестов
   @Output() public selectedItemEmitter = new EventEmitter<IOptions>();
-  //Выбранная опция
+
   // Переменная для хранения выбранного option
   public searchData!: IOptions[];
   public showPanel = false;
   public searchField = '';
   public activeItem: IOptions | null = null;
+  public valueAccessor!: IOptions;
+  public invalidField!: boolean;
+  public writeValue(value: IOptions): void {
+    this.valueAccessor = value;
+    this.activeItem = this.valueAccessor;
+    this.invalidField = !this.defaultInvalid;
+  }
+  public registerOnChange(fn: () => void): void {
+    this.onChange = fn;
+  }
+  public registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+  public onTouched!: () => void;
+  public onChange!: (value: IOptions) => void;
   ngOnInit(): void {
     this.searchData = this.data;
   }
-  ngOnChanges() {
-    if (this.defaultItem) {
-      this.activeItem = this.data.find((el) =>
-        el.title.includes(this.defaultItem),
-      ) as IOptions;
-    }
-  }
+  // ngOnChanges() {
+  //   if (this.defaultItem) {
+  //     this.activeItem = this.data.find((el) =>
+  //       el.title.includes(this.defaultItem),
+  //     ) as IOptions;
+  //   }
+  // }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -80,6 +109,9 @@ export class SelectComponent implements OnInit, OnChanges {
 
   public selectOption(option: IOptions) {
     this.activeItem = option;
+    this.onChange(this.activeItem);
+    this.onTouched();
+    this.invalidField = !!this.activeItem;
     this.selectedItemEmitter.emit(this.activeItem);
   }
 }
