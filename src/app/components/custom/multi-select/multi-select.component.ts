@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -47,6 +48,7 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
   public invalidField = false;
   private onTouched!: () => void;
 
+  constructor(private cdRef: ChangeDetectorRef) {}
   ngOnInit(): void {
     this.searchOptions = this.dataOptions;
     this.invalidField = !!this.searchOptions.length;
@@ -83,7 +85,7 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
     //эмитер для работы без формгруппы и ngmodel
     // this.selectedOptionsEmitter.emit(this.selectedOptions);
     this.onChange(this.selectedOptions);
-    this.invalidField = this.defaultInvalid;
+    // this.invalidField = this.defaultInvalid;
   }
 
   public changeSelect(): void {
