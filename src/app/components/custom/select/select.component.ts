@@ -37,7 +37,6 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   //получение настроек
   @Input() public data!: IOptions[];
   //активный блок задач
-  @Input() public defaultItem!: string | null;
   @Input() public defaultInvalid!: boolean;
 
   //выбранный блок тестов
@@ -48,12 +47,11 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   public showPanel = false;
   public searchField = '';
   public activeItem: IOptions | null = null;
-  public valueAccessor!: IOptions;
+
   public invalidField!: boolean;
   public writeValue(value: IOptions): void {
-    this.valueAccessor = value;
-    this.activeItem = this.valueAccessor;
-    this.invalidField = !this.defaultInvalid;
+    this.activeItem = value;
+    this.invalidField = !!value;
   }
   public registerOnChange(fn: () => void): void {
     this.onChange = fn;
@@ -112,6 +110,5 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
     this.onChange(this.activeItem);
     this.onTouched();
     this.invalidField = !!this.activeItem;
-    this.selectedItemEmitter.emit(this.activeItem);
   }
 }

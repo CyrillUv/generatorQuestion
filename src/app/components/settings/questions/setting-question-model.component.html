@@ -1,0 +1,122 @@
+<main>
+  <app-custom-sidebar
+    [headerTemplate]="headerTemplate"
+    [bodyTemplate]="bodyTemplate"
+    [footerTemplate]="footerTemplate"
+    [triggerSidebar]="ms.getSettingMode()"
+  >
+  </app-custom-sidebar>
+  <ng-template #headerTemplate>
+    <h3>Настройки вопросов</h3>
+  </ng-template>
+  <ng-template #bodyTemplate>
+    @if (qs.getActualQuestions().length !== 1) {
+      <label
+        >Количество<span class="settings-sidebar__options--important"
+          >*</span
+        ></label
+      >
+      <app-select
+        [data]="dataMenu[0].options"
+        [(ngModel)]="models.numberOfQuestions"
+        (ngModelChange)="modelsChange()"
+        (selectedItemEmitter)="changeNumOfQuestions($event)"
+      />
+      <main>
+        <label *ngIf="this.models.numberOfQuestions === null"
+          >Обязательно для заполнения!</label
+        >
+      </main>
+      <br />
+      <label
+        >Сложности<span class="settings-sidebar__options--important"
+          >*</span
+        ></label
+      >
+      <app-multi-select
+        [(ngModel)]="models.levels"
+        (ngModelChange)="modelsChange()"
+        [dataOptions]="dataMenu[2].options"
+        (selectedOptionsEmitter)="selectionLevels($event)"
+      ></app-multi-select>
+      <main>
+        <label *ngIf="!this.models.levels?.length"
+          >Обязательно для заполнения!</label
+        >
+      </main>
+      <br />
+      <label
+        >Категории<span class="settings-sidebar__options--important"
+          >*</span
+        ></label
+      >
+
+      <app-multi-select
+        [dataOptions]="dataMenu[3].options"
+        [(ngModel)]="models.categories"
+        (ngModelChange)="modelsChange()"
+        (selectedOptionsEmitter)="selectionCategory($event)"
+      ></app-multi-select>
+      <label *ngIf="!this.models.categories?.length"
+        >Обязательно для заполнения!</label
+      >
+    } @else {
+      <h3>Вы успешно ответили на все вопросы 🛈</h3>
+
+      <main class="settings-sidebar__options__return">
+        <app-custom-toggle
+          [title]="'Пройти упражнение еще раз?'"
+          [valueToggle]="ms.getValueToggle()"
+          (toggleEmitter)="changeToggle($event)"
+        />
+      </main>
+    }
+  </ng-template>
+
+  <ng-template #footerTemplate>
+    <main class="settings-sidebar__options__buttons">
+      @if (
+        qs.getActualQuestions().length === 1 &&
+        this.models.numberOfQuestions === null &&
+        !this.models.categories?.length &&
+        !this.models.levels?.length
+      ) {
+        <div
+          class="settings-sidebar__options__buttons__begin"
+          [class.settings-sidebar__options__buttons__begin--inactive]="
+            qs.getActualQuestions().length === 1
+          "
+        >
+          Начать ▶
+        </div>
+      } @else {
+        <div
+          class="settings-sidebar__options__buttons__begin"
+          routerLink="{{ ms.getRoute() }}"
+          (click)="ms.setSettingMode(null)"
+        >
+          Начать ▶
+        </div>
+      }
+
+      <div
+        class="settings-sidebar__options__buttons__close"
+        (click)="hidePanel()"
+      >
+        Отмена
+      </div>
+      <div
+        class="settings-sidebar__options__buttons__close"
+        (click)="resetModels()"
+      >
+        Reset
+      </div>
+      <div
+        class="settings-sidebar__options__buttons__close"
+        (click)="fillingModels()"
+      >
+        Fill
+      </div>
+    </main>
+  </ng-template>
+</main>

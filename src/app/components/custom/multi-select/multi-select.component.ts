@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -36,22 +35,18 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
   @ViewChild('multiselectContainer') multiselectContainer!: ElementRef;
 
   @Input() public dataOptions!: IOptions[];
-  @Input() public defaultInvalid!: boolean;
-  @Output() public selectedOptionsEmitter = new EventEmitter<IOptions[]>();
 
+  @Output() public selectedOptionsEmitter = new EventEmitter<IOptions[]>();
   public searchOptions!: IOptions[];
-  public selectedOptions: IOptions[] = [];
+  public selectedOptions!: IOptions[];
   public showPanel = false;
   public allSelect = false;
   public searchField = '';
-  public valueAccessor!: IOptions[];
-  public invalidField = false;
+  public invalidField!: boolean;
   private onTouched!: () => void;
 
-  constructor(private cdRef: ChangeDetectorRef) {}
   ngOnInit(): void {
     this.searchOptions = this.dataOptions;
-    this.invalidField = !!this.searchOptions.length;
   }
 
   @HostListener('document:click', ['$event'])
@@ -69,10 +64,10 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
   public onChange!: (value: IOptions[]) => void;
 
   public writeValue(value: IOptions[]): void {
-    this.valueAccessor = value;
-    this.selectedOptions = this.valueAccessor;
-    this.invalidField = this.defaultInvalid;
+    this.selectedOptions = value;
+    this.invalidField = !value?.length;
   }
+
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
@@ -85,13 +80,12 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
     //эмитер для работы без формгруппы и ngmodel
     // this.selectedOptionsEmitter.emit(this.selectedOptions);
     this.onChange(this.selectedOptions);
-    // this.invalidField = this.defaultInvalid;
+    this.invalidField = !this.selectedOptions?.length;
+    this.onTouched();
+    console.log(this.invalidField, this.selectedOptions);
   }
 
   public changeSelect(): void {
-    if (!this.selectedOptions.length) {
-      this.removeOptions();
-    }
     this.showPanel = !this.showPanel;
   }
 
@@ -111,16 +105,23 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
   }
 
   public addOption(option: IOptions): void {
-    if (this.selectedOptions.map((el) => el.title).includes(option.title)) {
+    if (
+      this.selectedOptions &&
+      this.selectedOptions.map((el) => el.title).includes(option.title)
+    ) {
       this.selectedOptions = this.selectedOptions.filter(
         (el) => el.title !== option.title,
       );
+      this.selectedOptionsHandler();
     } else {
-      this.selectedOptions.push(option);
-      this.selectedOptions = this.selectedOptions.map((option) => option);
+      if (this.selectedOptions) {
+        this.selectedOptions = this.selectedOptions.map((option) => option);
+        this.selectedOptions.push(option);
+      } else {
+        this.selectedOptions = [];
+      }
+      this.selectedOptionsHandler();
     }
-
-    this.selectedOptionsHandler();
   }
 
   public filterOptions() {
@@ -133,6 +134,7 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
         el.title.toLowerCase().indexOf(this.searchField.toLowerCase().trim()) >
         -1,
     );
+    this.selectedOptionsHandler();
   }
 
   public removeOptions() {
@@ -143,7 +145,9 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
     this.selectedOptionsHandler();
   }
 
-  public checkedOption(option: string) {
-    return this.selectedOptions.map((el) => el.title).includes(option);
+  public checkedOption(option: string): boolean | undefined | void {
+    if (this.selectedOptions?.length) {
+      return this.selectedOptions.map((el) => el.title).includes(option);
+    }
   }
 }

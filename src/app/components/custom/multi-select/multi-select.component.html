@@ -15,7 +15,7 @@
     </span>
   </div>
   <label
-    *ngIf="!showPanel && selectedOptions"
+    *ngIf="!showPanel && selectedOptions?.length"
     class="multi-select--remove"
     (click)="removeOptions()"
     >✖</label

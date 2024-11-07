@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
 import { IQuestion } from '../question/type';
-import { dataMenu } from './data-menu';
+import { dataMenu, IOptions } from './data-menu';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MenuService {
   //текущее кол-во вопросов
-  private _currentNumOfQuestions: string | null = null;
+  private _currentNumOfQuestions: IOptions | null = null;
   //текущий блок тестов
   private _currentBlockTests = '1';
   //режим настроек
@@ -62,13 +62,13 @@ export class MenuService {
   public getCurrentBlockTests(): number {
     return +this._currentBlockTests;
   }
-  public getCurrentNumOfQuestions(): string | null {
+  public getCurrentNumOfQuestions(): IOptions | null {
     return this._currentNumOfQuestions;
   }
   public setCurrentBlockTests(blockTests: string): void {
     this._currentBlockTests = blockTests;
   }
-  public setCurrentNumOfQuestions(numOfQuestions: string): void {
+  public setCurrentNumOfQuestions(numOfQuestions: IOptions): void {
     this._currentNumOfQuestions = numOfQuestions;
   }
 }
