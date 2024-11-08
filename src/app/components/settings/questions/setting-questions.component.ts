@@ -12,11 +12,14 @@ import { IDataMenu, IOptions } from '../../../data/menu/data-menu';
 import { MultiSelectComponent } from '../../custom/multi-select/multi-select.component';
 import { SelectComponent } from '../../custom/select/select.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { retry } from 'rxjs';
+
 interface IModels {
   levels: IOptions[] | null;
   categories: IOptions[] | null;
   numberOfQuestions: IOptions | null;
 }
+
 @Component({
   selector: 'app-setting-questions',
   templateUrl: 'setting-question-model.component.html',
@@ -47,6 +50,7 @@ export class SettingsQuestionsComponent implements OnInit {
   public ms = inject(MenuService);
   //Иньекция сервиса вопросов
   public qs = inject(QuestionService);
+
   public models: IModels = {
     levels: null,
     categories: null,
@@ -68,8 +72,8 @@ export class SettingsQuestionsComponent implements OnInit {
       numberOfQuestions: this.ms.getCurrentNumOfQuestions(),
       categories: this.qs.getActualCategories(),
     };
-
-    console.log('models', this.models);
+    this.modelsValidator();
+    console.log('models', Object.values(this.models));
     // this.settingsForm = this.fb.group({
     //   numOfQuestions: [
     //     this.ms.getCurrentNumOfQuestions(),
@@ -110,10 +114,12 @@ export class SettingsQuestionsComponent implements OnInit {
   }
 
   public resetModels(): void {
-    this.models.levels = null;
-    this.models.categories = null;
-    this.models.numberOfQuestions = null;
+    // Object.values(this.models)
+    (Object.keys(this.models) as (keyof IModels)[]).forEach((key) => {
+      this.models[key] = null; // Зануляем все свойства
+    });
   }
+
   // public resetForm() {
   //   this.settingsForm.reset();
   //   this.triggerControls();
@@ -135,6 +141,11 @@ export class SettingsQuestionsComponent implements OnInit {
   // public onCastType(value: boolean | undefined): boolean {
   //   return value as boolean;
   // }
+  public modelsValidator(): boolean {
+    return Object.values(this.models).some(
+      (value) => value === null || value.length === 0,
+    );
+  }
 
   public hidePanel(): void {
     this.ms.setSettingMode(false);
@@ -163,12 +174,21 @@ export class SettingsQuestionsComponent implements OnInit {
   }
 
   public fillingModels() {
-    this.models.categories = [
-      { title: 'Структуры данных' },
-      { title: 'TypeScript' },
-      { title: 'JavaScript' },
-    ];
-    this.models.levels = [{ title: 'Junior' }, { title: 'Middle' }];
-    this.models.numberOfQuestions = { title: '20 вопросов' };
+    // this.models.categories = [
+    //   { title: 'Структуры данных' },
+    //   { title: 'TypeScript' },
+    //   { title: 'JavaScript' },
+    // ];
+    // this.models.levels = [{ title: 'Junior' }, { title: 'Middle' }];
+    // this.models.numberOfQuestions = { title: '20 вопросов' };
+    this.models = {
+      categories: [
+        { title: 'Структуры данных' },
+        { title: 'TypeScript' },
+        { title: 'JavaScript' },
+      ],
+      levels: [{ title: 'Junior' }, { title: 'Middle' }],
+      numberOfQuestions: { title: '20 вопросов' },
+    };
   }
 }

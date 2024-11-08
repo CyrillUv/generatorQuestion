@@ -75,16 +75,11 @@
 
   <ng-template #footerTemplate>
     <main class="settings-sidebar__options__buttons">
-      @if (
-        qs.getActualQuestions().length === 1 &&
-        this.models.numberOfQuestions === null &&
-        !this.models.categories?.length &&
-        !this.models.levels?.length
-      ) {
+      @if (qs.getActualQuestions().length === 1 || modelsValidator()) {
         <div
           class="settings-sidebar__options__buttons__begin"
           [class.settings-sidebar__options__buttons__begin--inactive]="
-            qs.getActualQuestions().length === 1
+            qs.getActualQuestions().length === 1 || modelsValidator()
           "
         >
           Начать ▶

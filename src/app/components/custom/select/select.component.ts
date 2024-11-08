@@ -5,7 +5,6 @@ import {
   forwardRef,
   HostListener,
   Input,
-  OnChanges,
   OnInit,
   Output,
   ViewChild,

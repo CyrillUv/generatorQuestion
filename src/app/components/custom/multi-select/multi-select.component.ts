@@ -82,7 +82,6 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
     this.onChange(this.selectedOptions);
     this.invalidField = !this.selectedOptions?.length;
     this.onTouched();
-    console.log(this.invalidField, this.selectedOptions);
   }
 
   public changeSelect(): void {

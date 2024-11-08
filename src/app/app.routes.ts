@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { MenuComponent } from './components/menu/menu.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
-import { CategoryComponent } from './components/doc-children/category-doc/category-doc.component';
+
 import { ActivateStatistics } from './guards/activate-statistics.guard';
 
 //documents/category/js

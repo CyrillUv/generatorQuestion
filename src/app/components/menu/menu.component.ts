@@ -11,6 +11,7 @@ import { ModalComponent } from '../custom/modal/modal.component';
 import { QuestionService } from '../../data/question/question.service';
 import { MultiSelectComponent } from '../custom/multi-select/multi-select.component';
 import { MyFormComponent } from '../custom/my-form/my-form.component';
+import { ApiGitService } from '../../data/api/api-git.service';
 
 @Component({
   selector: 'app-menu',
@@ -43,12 +44,58 @@ export class MenuComponent {
   };
   constructor(
     public ms: MenuService,
-    private qs: QuestionService,
-    private vcr: ViewContainerRef,
+    private _qs: QuestionService,
+    private _vcr: ViewContainerRef,
+    private _apiService: ApiGitService,
   ) {
     //Задание значения отображению модалки
     this.activeModal = this.ms.getActiveModal();
   }
+  public getAllGitQuestions(): void {
+    this._apiService.getAllGitQuestions().subscribe((res) => {
+      console.log(res);
+    });
+  }
+  public getGitQuestions(): void {
+    this._apiService.getGitQuestion().subscribe((res) => {
+      console.log(res);
+    });
+  }
+  public postGitQuestion(): void {
+    this._apiService.postGitQuestion().subscribe((res) => {
+      console.log(res);
+    });
+  }
+  public putGitQuestion(): void {
+    this._apiService.putGitQuestion().subscribe((res) => {
+      console.log(res);
+    });
+  }
+  public deleteGitQuestion(): void {
+    this._apiService.deleteGitQuestion().subscribe((res) => {
+      console.log(res);
+    });
+  }
+  public patchGitQuestion(): void {
+    this._apiService.patchGitQuestion().subscribe((res) => {
+      console.log(res);
+    });
+  }
+  //  public getGitQuestion(): Observable<IGit> {
+  //     return this.http.get<IGit>(this._baseUrl+'/10');
+  //   }
+  //   public postGitQuestion():Observable<IGit> {
+  //     return this.http.post<IGit>(this._baseUrl,this.mockObject)
+  //   }
+  //   public putGitQuestion():Observable<IGit> {
+  //     return this.http.put<IGit>(this._baseUrl+'/5',this.mockObject)
+  //   }
+  //   public deleteGitQuestion():Observable<IGit> {
+  //     return this.http.delete<IGit>(this._baseUrl+'/3');
+  //   }
+  //   public patchGitQuestion():Observable<IGit> {
+  //     return this.http.patch<IGit>(this._baseUrl+'/15',this.mockObject)
+  //   }
   //Изменяет путь
   public changeRoute(route: '/questions' | '/testing') {
     //изменяет путь в сервисе
@@ -56,10 +103,10 @@ export class MenuComponent {
     //активирует режим настроек
     this.ms.setSettingMode(true);
     //предотвращение накладывания сайдбаров
-    this.vcr.clear();
+    this._vcr.clear();
     // @ts-ignore
     //создание компонента
-    this.vcr.createComponent(this.routeInComponent[route]);
+    this._vcr.createComponent(this.routeInComponent[route]);
   }
   //Закрытие модалки
   public closeModal(): void {
@@ -71,7 +118,7 @@ export class MenuComponent {
   //Позволяет обнулить все данные и начать заново работу программы
   public startAgain(): void {
     //Обнуление массива неотвеченных вопросов
-    this.qs.nullingActualQuestions();
+    this._qs.nullingActualQuestions();
     //Обнуление массива отвеченных вопросов
     this.ms.nullingPassedQuestions();
     //Закрытие модалки
