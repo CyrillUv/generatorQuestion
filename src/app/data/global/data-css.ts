@@ -4,6 +4,7 @@ export const dataCss: IDataQuestion = {
   name: 'CSS',
   questions: [
     {
+      level: 'Junior',
       question: 'Что такое CSS3 и чем он отличается от предыдущих версий CSS?',
       response:
         'CSS3 (Cascading Style Sheets Level 3) — это третья версия' +
@@ -57,6 +58,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Какие новые селекторы были добавлены в CSS3? Приведите примеры.',
       response:
@@ -93,6 +95,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         ' Что такое медиазапросы в CSS3, и как они используются для адаптивного дизайна?',
       response:
@@ -114,6 +117,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Какие знаете методологии верстки? (БЭМ, SMACSS, ECSS, RSCSS, OOCSS)',
       response:
@@ -152,6 +156,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Шаблонизаторы css. Фреймворки на серверной стороне',
       response:
         'Шаблонизаторы CSS и серверные фреймворки играют важную роль в разработке веб-приложений. Давайте рассмотрим их подробнее.\n' +
@@ -171,6 +176,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Основные правила БЭМ. Максимальная вложенность по БЭМ. Где в БЭМ может быть\n' +
         'каскад? Где можно использовать/где нельзя' +
@@ -213,6 +219,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'border-box особенности, отличия от стандартного',
       response:
         ' Свойство box-sizing в CSS определяет, как рассчитываются размеры элемента, включая его ширину и высоту. Значение border-box — одно из возможных значений для этого свойства, и оно имеет определённые особенности по сравнению со стандартным значением content-box. Давайте рассмотрим эти особенности и отличия:\n' +
@@ -237,12 +244,9 @@ export const dataCss: IDataQuestion = {
         'Использование| Широко используется в адаптивной и гибкой вёрстке |\n',
       active: false,
     },
+
     {
-      question: 'Что такое уникальность (специфичность) селектора',
-      response: '',
-      active: false,
-    },
-    {
+      level: 'Junior',
       question: 'Что такое уникальность (специфичность) селектора',
       response:
         'Уникальность (или специфичность) селектора в CSS — это мера того, как браузер определяет, какие стили применяются к элементу, когда к нему применяется несколько правил CSS. Специфичность помогает избежать конфликтов и обеспечивает правильное применение стилей, когда несколько селекторов совпадают с одним и тем же элементом. Она рассчитывается на основе различных типов селекторов с учётом их значимости.\n' +
@@ -275,11 +279,14 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Какой атрибут делает поле формы обязательным для заполнения?',
-      response: '',
+      response:
+        'Чтобы сделать поле формы обязательным для заполнения в HTML, используется атрибут required. Когда этот атрибут добавлен к элементу формы (например, к input>, textarea>, или select>), браузер будет проверять, заполнено ли это поле перед отправкой формы.\n',
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Важны ли стили для SEO?',
       response:
         'Стили (CSS) не влияют напрямую на SEO (поисковую оптимизацию) с точки зрения ранжирования в поисковых системах, но они играют косвенно важную роль в улучшении общего пользовательского опыта и восприятии сайта. Вот несколько аспектов, в которых стили могут повлиять на SEO:\n' +
@@ -302,6 +309,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое препроцессор? Приведите примеры препроцессоров.',
       response:
         'Препроцессор — это инструмент, который предварительно обрабатывает исходный код, написанный на одном языке, переводя его в другой язык или в простой машинный код. Препроцессоры часто используются в веб-разработке для улучшения структуры, читаемости и удобства работы с кодом. Они позволяют применять различные функциональные возможности, такие как переменные, вложенные правила, функции и миксины, что делает написание и сопровождение кода более эффективным.\n' +
@@ -318,6 +326,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Миксины в less',
       response:
         'Миксины в Less — это один из ключевых инструментов, который позволяет повторно использовать группы стилей в вашем CSS-коде. Они более удобны, чем простые классы, так как позволяют инкапсулировать стиль и применять его к различным элементам. Это особенно полезно при создании сложных стилей, которые могут применяться к нескольким селекторам или в разных контекстах.\n' +
@@ -330,6 +339,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Амперсанд (&) в less',
       response:
         'В Less символ амперсанда (&) используется для обозначения родительского селектора в контексте вложенных стилей. Это позволяет создавать более структурированные и организованные правила CSS, избегая дублирования кода и делая его более читабельным. Рассмотрим подробнее, как и где можно использовать амперсанд в Less.\n' +
@@ -347,6 +357,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         'Что такое постпроцессор? Как пост-процессор работает «под капотом»?',
       response:
@@ -372,6 +383,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Расскажите как работает z-index? Если z-index не задан?',
       response:
         'z-index — это CSS-свойство, которое контролирует порядок наложения элементов в трехмерном пространстве веб-страницы. Оно определяет, какой элемент будет располагаться "над" или "под" другим элементом, когда они накладываются друг на друга. Чтобы правильно понять, как работает z-index, нужно учитывать несколько вещей.\n' +
@@ -395,6 +407,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Зачем нужны mediaQueries?',
       response:
         'Media queries (медиа-запросы) — это важный инструмент в CSS, предназначенный для создания адаптивных и отзывчивых веб-дизайнов. Они позволяют изменять стиль веб-страницы в зависимости от различных характеристик устройства, на котором она отображается. Вот основные причины, зачем нужны media queries:\n' +
@@ -421,6 +434,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Чем отличается {display: none} от {visibility: hidden}',
       response:
         'Свойства CSS {display: none} и {visibility: hidden} часто используются для управления видимостью элементов на веб-странице, но они имеют разные эффекты на элементы и их поведение в документе. Вот основные различия между ними:\n' +
@@ -453,12 +467,14 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое свойство Position',
       response:
         'Свойство position в CSS определяет, как элемент будет позиционирован на странице, а также взаимодействие с другими элементами в документе. Оно играет важную роль в компоновке веб-страниц. Значения свойства position определяют контекст позиционирования для элемента.',
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Назовите возможные свойства position',
       response:
         '1. static\n' +
@@ -481,6 +497,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Объясните, что такое Flexbox и как он упрощает работу с расположением элементов на странице',
       response:
@@ -546,6 +563,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'В чем разница между display: block, display: inline, и display: inline-block?',
       response:
@@ -558,6 +576,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Как работают трансформации (transform) и трансляции (transition) в CSS3? Приведите примеры использования.\n',
       response:
@@ -584,6 +603,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Что такое градиенты в CSS3 и как их можно использовать? Приведите пример градиента.',
       response:
@@ -609,6 +629,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Как использовать псевдоэлементы и псевдоклассы в CSS3? Приведите примеры',
       response:
@@ -638,6 +659,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Что такое свойства box-shadow и text-shadow и как они работают?',
       response:
@@ -673,6 +695,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Объясните, как делать анимации с помощью CSS3. Каковы различные ключевые кадры (keyframes)?',
       response:
@@ -710,6 +733,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое CSS-препроцессоры и почему они были созданы?',
       response:
         'CSS-препроцессоры — это инструменты, которые расширяют возможности стандартного CSS,' +
@@ -737,6 +761,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Объясните основные преимущества использования SASS в проекте.',
       response:
         'SASS (Syntactically Awesome Style Sheets) — это один из самых популярных CSS-препроцессоров, который добавляет' +
@@ -776,6 +801,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: ' Каковы основные синтаксические отличия между SASS и LESS?',
       response:
         'SASS и LESS — это два популярных CSS-препроцессора, и хотя они оба предназначены для расширения возможностей CSS,' +
@@ -821,6 +847,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         '  Объясните концепцию переменных в SASS и LESS. Приведите пример.',
       response:
@@ -834,6 +861,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Что такое вложенность правил (nesting), и как она работает в препроцессорах?',
       response:
@@ -865,6 +893,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         ' Как работают миксины (mixins) в SASS и LESS, и для чего они используются?',
       response:
@@ -892,6 +921,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         '   Что такое функции и операции в SASS? Приведите примеры их использования.',
       response:
@@ -927,6 +957,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         '  Объясните, что такое "partials" в SASS и как их можно использовать для организации кода.',
       response:
@@ -973,6 +1004,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         ' Как происходит компиляция файлов SASS или LESS в CSS? Какие инструменты вы можете использовать для этого?',
       response:
@@ -1047,6 +1079,7 @@ export const dataCss: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         ' Что такое @import в SASS и LESS, и как он помогает в управлении файлами стилей?',
       response:

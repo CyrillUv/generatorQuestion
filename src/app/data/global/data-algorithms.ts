@@ -4,6 +4,7 @@ export const dataAlgorithms: IDataQuestion = {
   name: 'Алгоритмы',
   questions: [
     {
+      level: 'Junior',
       question: 'Что такое алгоритмы?',
       response:
         'Алгоритмы в программировании представляют собой последовательность четко определенных ' +
@@ -16,6 +17,7 @@ export const dataAlgorithms: IDataQuestion = {
     },
 
     {
+      level: 'Junior',
       question: 'Сортировка массива пузырьком ',
       response:
         ' Сортировка пузырьком (Bubble Sort) — один из самых простых алгоритмов сортировки. ' +
@@ -32,6 +34,7 @@ export const dataAlgorithms: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Поиск числа в массиве',
       response:
         'Поиск числа в массиве может быть выполнен различными алгоритмами в зависимости ' +
@@ -56,6 +59,7 @@ export const dataAlgorithms: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Поиск в глубину',
       response:
         'Поиск в глубину (Depth-First Search, DFS) — это алгоритм для обхода или поиска в структуре данных,' +
@@ -77,6 +81,7 @@ export const dataAlgorithms: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Обход дерева',
       response:
         '  Обходы дерева — это методы, с помощью которых можно пройти по всем узлам дерева' +
@@ -99,6 +104,7 @@ export const dataAlgorithms: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Алгоритм рекурсивного спуска',
       response:
         'Алгоритм рекурсивного спуска — это метод, который применяется для решения различных задач, включая анализ и ' +

@@ -4,11 +4,13 @@ export const dataStructures: IDataQuestion = {
   name: 'Структуры данных',
   questions: [
     {
+      level: 'Junior',
       question: 'Названия  типов данных',
       response: 'Number,string,boolean,object,null,undefined,Symbol,BigInt',
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Скалярные типы и строки',
       response:
         'Они же простые типы данных.' +
@@ -19,6 +21,7 @@ export const dataStructures: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Массивы',
       response:
         'Массив — это структура, в которой можно хранить' +
@@ -27,6 +30,7 @@ export const dataStructures: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Списки, словари (хэш-таблицы), множества',
       response:
         '1.В javascript в качестве списка выступает обычный массив.' +
@@ -37,6 +41,7 @@ export const dataStructures: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: '  Кортежи',
       response:
         'Кортежи (tuples) в TypeScript представляют собой особый вид массивов,' +
@@ -45,6 +50,7 @@ export const dataStructures: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: '  Изменяемость типов данных',
       response:
         'В JavaScript у нас есть примитивные типы и ссылочные типы.' +
@@ -54,6 +60,7 @@ export const dataStructures: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: '  Сложности операций вставки и поиска',
       response:
         'Сложность операций вставки и поиска в ' +
@@ -78,6 +85,7 @@ export const dataStructures: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Внутреннее устройство стандартных контейнеров (список, словарь)',
       response:
@@ -106,6 +114,7 @@ export const dataStructures: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Графы',
       response:
         'Графы — это абстрактные структуры данных, которые представляют собой множество объектов (вершин), связанных между собой' +
@@ -147,6 +156,7 @@ export const dataStructures: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: '    Деревья',
       response:
         ' Деревья — это иерархические структуры данных, которые представляют собой набор узлов, где каждый узел может иметь дочерние узлы.' +
@@ -188,6 +198,7 @@ export const dataStructures: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: ' Самобалансирующиеся деревья(АВЛ, красно-черное)',
       response:
         'Самобалансирующиеся деревья — это тип структуры данных, которые автоматически поддерживают сбалансированное состояние, чтобы' +
@@ -234,6 +245,7 @@ export const dataStructures: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Понимание вычислительной сложности поиска и вставки данных',
       response:
         'Вычислительная сложность — это важная концепция в информатике, используемая для оценки эффективности алгоритмов в зависимости от ' +
@@ -289,6 +301,7 @@ export const dataStructures: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Совместимость структур данных и многопоточная обработка',
       response:
         'В JavaScript возможность работы с многопоточностью реализуется с помощью Web Workers, которые позволяют выполнять JavaScript-код ' +

@@ -4,12 +4,14 @@ export const dataLinux: IDataQuestion = {
   name: 'Linux',
   questions: [
     {
+      level: 'Junior',
       question: 'Что такое Linux?',
       response:
         'Это операционная система из семейства Unix - подобных операционных систем,на базе ядра Linux, разработанная Линуксом Товальдсом ',
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Основы командной строки',
       response:
         'Основные команды:\n' +
@@ -25,6 +27,7 @@ export const dataLinux: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Создание папки ',
       response:
         'Создание папки в Linux можно выполнить с помощью команды mkdir.Чтобы создать новую папку,' +
@@ -34,6 +37,7 @@ export const dataLinux: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Смена владельца',
       response:
         'В Linux для изменения владельца файла или директории используется команда chown (от английского "change owner").' +
@@ -49,6 +53,7 @@ export const dataLinux: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое SSH',
       response:
         'SSH (Secure Shell)\n' +
@@ -76,6 +81,7 @@ export const dataLinux: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Что такое SCP',
       response:
         'SCP (Secure Copy Protocol)\n' +
@@ -120,6 +126,7 @@ export const dataLinux: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Копирование в Linux',
       response:
         'В Linux для копирования файлов и директорий используется команда cp.' +
@@ -139,6 +146,7 @@ export const dataLinux: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: ' awk в linux',
       response:
         'awk — это мощный текстовый процессор и язык программирования, используемый для обработки ' +
@@ -147,6 +155,7 @@ export const dataLinux: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Как убить процесс в Linux?',
       response:
         '1. Использование команды kill\n' +
@@ -194,6 +203,7 @@ export const dataLinux: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Поиск файлов в Linux',
       response:
         'В Linux для поиска файлов и текстов в файлах используются несколько команд, наиболее распространенные из которых — это find, locate и grep.' +

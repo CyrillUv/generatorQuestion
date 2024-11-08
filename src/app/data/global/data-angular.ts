@@ -4,6 +4,7 @@ export const dataAngular: IDataQuestion = {
   name: 'Angular',
   questions: [
     {
+      level: 'Junior',
       question: 'Что такое Angular?',
       response:
         'Angular – это фреймворк для создания клиентских веб-приложений' +
@@ -12,6 +13,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Как на Angular2 и Angular8 при получении данных с бэка парсить их в модель?\n ',
       response:
@@ -40,6 +42,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Расскажи про guardы? ',
       response:
         'Гарды (guards) в Angular — это механизм, который позволяет контролировать доступ к определённым маршрутам (pages) в вашем приложении. Они действуют как защитные слои, проверяя, имеет ли пользователь право переходить на определённые страницы или выполнять определённые действия. Гарды помогают реализовать маршрутизацию с учетом авторизации, аутентификации и других условий.\n' +
@@ -82,6 +85,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Использовали ли сторонние библиотеки для форм? Angular Material? ',
       response:
@@ -111,6 +115,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Пользуетесь типизацией в typescript или используете как дефолтный инструмент для\n' +
         'Angular?\n',
@@ -143,6 +148,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Что такое change detection? В чём разница между default и push?',
       response:
@@ -174,6 +180,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'ngZone',
       response:
         'NgZone — это сервис в Angular, который позволяет управлять контекстом выполнения асинхронного кода и обеспечивать обнаружение изменений. Он является частью механизма, который позволяет Angular отслеживать изменения в приложении и обновлять представление в соответствии с изменениями состояния. NgZone использует библиотеку Zone.js для работы с зонами, изолированными контекстами выполнения, которые позволяют отслеживать асинхронные операции.\n' +
@@ -192,6 +199,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Чем e2e-тесты отличаются от unit-тестов?',
       response:
         'E2E-тесты (end-to-end тесты) и unit-тесты (модульные тесты) являются двумя различными уровнями тестирования программного обеспечения, и каждый из них имеет свои особенности, цели и области применения.\n' +
@@ -237,6 +245,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое pipe? Расскажите про async pipe?',
       response:
         'В Angular pipe (пайп) — это специальный механизм, позволяющий трансформировать данные в шаблонах. Пайпы применяются для изменения форматирования, преобразования и фильтрации данных при их отображении в UI. Они представляют собой функции, которые могут быть использованы в выражениях Angular для изменения значений, прежде чем они будут отображены в HTML.\n' +
@@ -261,6 +270,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Жизненный цикл компоненты',
       response:
         ' В Angular жизненный цикл компонента описывает последовательность событий и методов, через которые проходит компонент с момента его создания до уничтожения. Понимание жизненного цикла компонентов позволяет разработчикам лучше управлять состоянием и поведением компонентов, а также выполнять определенные действия на различных этапах их существования.\n' +
@@ -285,6 +295,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Почему change работает раньше onInit (чендж детекшн)',
       response:
         'почему изменение данных может вызвать обнаружение изменений до выполнения метода ngOnInit.\n' +
@@ -300,6 +311,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Viewchild от contentChild',
       response:
         'В Angular @ViewChild и @ContentChild — это декораторы, которые используются для получения ссылок на компоненты, директивы или элементы DOM, но у них есть разные области применения и методы работы. Давайте рассмотрим каждую из этих аннотаций более подробно.\n' +
@@ -334,6 +346,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Как стили навесить на viewChild (renderer2) ',
       response:
         'В Angular, чтобы навесить стили на элемент, полученный с помощью @ViewChild, вы можете использовать Renderer2. Это позволяет вам динамически изменять стили элемента в безопасном и независимом от платформы способом. Ниже приведен пример того, как это можно сделать.\n' +
@@ -346,6 +359,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'У нас есть код модули, как разбить код на модули ',
       response:
         'Разбиение кода на модули - это важный аспект организации и управления проектом в Angular. Модули позволяют вам структурировать приложение, улучшить его читаемость и повторное использование кода. Вот шаги и рекомендации о том, как разбить код на модули в Angular:\n' +
@@ -373,16 +387,38 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: ' Стал бы ты провайдить сервисы в шаред модуль',
-      response: '',
+      response:
+        'Да, обычно сервисы провайдятся в shared модуль, чтобы их можно было использовать ' +
+        'в разных модулях приложения. Это помогает избежать дублирования кода и упрощает управление ' +
+        'зависимостями. Убедитесь, что сервисы являются stateless (без состояния) или могут безопасно ' +
+        'работать с состоянием, если это необходимо',
       active: false,
     },
     {
+      level: 'Middle',
       question: ' Реактивные формы плюсы в чем\n',
-      response: '',
+      response:
+        'Плюсы реактивных форм в Angular:\n' +
+        '\n' +
+        '1. Контроль состояния: Обеспечивает строгий контроль над состоянием формы и её элементами.\n' +
+        '\n' +
+        '2. Модульность: Упрощает разделение форм на мелкие, управляемые компоненты.\n' +
+        '\n' +
+        '3. Тестируемость: Упрощает тестирование, так как логика формы отделена от представления.\n' +
+        '\n' +
+        '4. Удобное управление валидаторами: Легко добавлять и изменять валидаторы в реальном времени.\n' +
+        '\n' +
+        '5. Лучше с асинхронными данными: Удобнее работать с асинхронными операциями, такими как запросы к серверу.\n' +
+        '\n' +
+        '6. Императивный подход: Позволяет управлять формами через программный код, что может быть более понятно для разработчиков.\n' +
+        '\n' +
+        '7. Динамическое изменение форм: Упрощает создание форм с динамическим набором полей и зависимостями между ними.',
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Разница между 6-ым и 9-ым Angular? Что поменялось в плане работы с backEnd',
       response:
@@ -417,12 +453,14 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: ' Что такое компонент в Angular?',
       response:
         'Компоненты являются основными строительными блоками Angular-приложений и содержат логику и представление.',
       active: false,
     },
     {
+      level: 'Junior',
       question: ' Что такое сервисы и как их использовать?',
       response:
         'сервисы — это классы, которые предоставляют определённый функционал и могут быть использованы для ' +
@@ -448,6 +486,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Каковы основные характеристики Angular?',
       response:
         '### 1. Компонентный подход\n' +
@@ -505,6 +544,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое NgModule?',
       response:
         'NgModule — это основной строительный блок приложения в Angular, который используется для организации и ' +
@@ -544,6 +584,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Data binding (привязка к данным)',
       response:
         'В шаблоне Angular привязка создает живую связь между частью пользовательского интерфейса, ' +
@@ -563,6 +604,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое @Pipe',
       response:
         ' функция которая преобразует разметку через | если есть доп свойства то через :\n' +
@@ -594,6 +636,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Хуки жизненного цикла',
       response:
         ' 1.OnChanges - вызывается каждый раз, при установлении свойства\n' +
@@ -607,6 +650,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Модуль и его свойства',
       response:
         '6.Модуль - класс с декоратором @ngModule - обьединяющая структура  для компонент, сервисов, пайпов, директив\n' +
@@ -618,12 +662,14 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Lazy loading',
       response:
         'Асинхронная маршрутизация, позволяет не сразу создавать модуль, а когда пользователь переходит по определённому роутингу ',
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Что такое интерсепторы (interceptors) в Angular?',
       response:
         ' Интерсепторы (interceptors) в Angular являются частью модуля HttpClient и предоставляют' +
@@ -653,6 +699,7 @@ export const dataAngular: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Взаимодействие с формами',
       response:
         'В Angular взаимодействие с формами осуществляется с помощью двух основных подходов: реактивные формы и шаблонные формы.' +

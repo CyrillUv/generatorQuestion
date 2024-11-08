@@ -4,6 +4,7 @@ export const dataGit: IDataQuestion = {
   name: 'Git',
   questions: [
     {
+      level: 'Junior',
       question: 'Что такое Git?',
       response:
         'Git — это система контроля версий, которая широко используется для' +
@@ -19,6 +20,7 @@ export const dataGit: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Основные понятия Git',
       response:
         '1. Репозиторий (repository): Это основное хранилище для вашего проекта, где хранится вся история изменений.\n' +
@@ -30,6 +32,7 @@ export const dataGit: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Основные команды Git',
       response:
         '1. git init: Инициализация нового репозитория.\n' +
@@ -46,6 +49,7 @@ export const dataGit: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Git hooks',
       response:
         'Git hooks — это специальные скрипты, которые выполняются автоматически при выполнении' +
@@ -94,6 +98,7 @@ export const dataGit: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: ' Рабочие пространства (Worktrees)',
       response:
         'Рабочие пространства (Worktrees) в Git' +
@@ -146,6 +151,7 @@ export const dataGit: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Отмена изменений',
       response:
         'Git предоставляет несколько способов отмены изменений:' +
@@ -153,6 +159,7 @@ export const dataGit: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Работа с удалёнными репозиториями',
       response:
         'Git поддерживает работу с несколькими удалёнными репозиториями, что позволяет легко клонировать, передавать и получать ' +

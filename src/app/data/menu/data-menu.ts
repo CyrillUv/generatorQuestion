@@ -44,3 +44,8 @@ export const dataMenu: IDataMenu[] = [
     ],
   },
 ];
+const dataMap = new Map();
+
+dataMenu.forEach((item, index) => {
+  dataMap.set(index, item.options);
+});

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { IQuestion } from '../question/type';
 import { dataMenu, IOptions } from './data-menu';
+import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,7 @@ export class MenuService {
   //состояние тогла
   private _valueToggle: boolean | null = null;
   public getData() {
+    console.log(dataMenu);
     return dataMenu;
   }
   public getSettingMode(): boolean | null {

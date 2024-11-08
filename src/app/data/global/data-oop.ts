@@ -4,6 +4,7 @@ export const dataOOP: IDataQuestion = {
   name: 'Обьектно-ориентированное программирование',
   questions: [
     {
+      level: 'Junior',
       question: 'Что такое ООП?',
       response:
         'Методология программирования, основанная на представлении программы ' +
@@ -12,6 +13,7 @@ export const dataOOP: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Принципы ООП?',
       response:
         '  Инкапсуляция (сокрытие ) - принцип ооп который гласит что мы можем изолировать доступ к внутренним членам объекта\n' +
@@ -25,6 +27,7 @@ export const dataOOP: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Расшифруй аббревиатуру SOLID',
       response:
         'S(single responsibility) - принцип единственной ответственности - для класса должно быть одно назначение.\n' +
@@ -38,12 +41,14 @@ export const dataOOP: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое абстрактный класс',
       response:
         'Базовый класс, который нужен не для создания экземпляров,а как образец или шаблон.Может содержать абстрактные методы и свойства',
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Отличие абстрактного класса и интерфейса',
       response:
         ' Интерфейс описывает шаблон описание поведения, у него нет состояния\n' +
@@ -51,6 +56,7 @@ export const dataOOP: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Статические методы и свойства',
       response:
         'Кроме обычных полей и методов класс может иметь статические. Статические поля и методы относятся не к' +
@@ -58,6 +64,7 @@ export const dataOOP: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Плюсы и минусы наследования',
       response:
         '  - ключевое слово (extends)\n' +
@@ -71,6 +78,7 @@ export const dataOOP: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         'Как понимается  композиция в объектно-ориентированном программировании?',
       response:
@@ -81,6 +89,7 @@ export const dataOOP: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         'Как понимается  делегирование в объектно-ориентированном программировании?',
       response:

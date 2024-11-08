@@ -4,6 +4,7 @@ export const dataJS: IDataQuestion = {
   name: 'JavaScript',
   questions: [
     {
+      level: 'Junior',
       question: 'Что такое JavaScript?',
       response:
         'Это язык программирования с ' +
@@ -11,6 +12,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Типы данных',
       response:
         '1.Строка\n' +
@@ -24,6 +26,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Отличие null от undefined ',
       response:
         'undefined - отсутствие значение, null - намеренное присвоение' +
@@ -37,6 +40,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Какие из типов данных являются ссылочными типами в JavaScript? ',
       response:
@@ -62,6 +66,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Symbol, что такое, когда и для чего используется?  ',
       response:
         'Symbol — это примитивный тип данных в JavaScript, который был введен в ECMAScript 2015 (ES6). ' +
@@ -96,6 +101,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Генераторы/итераторы?',
       response:
         'Генераторы и итераторы — это понятия, связанные с обходом коллекций данных в JavaScript, но они представляют разные концепции.\n' +
@@ -127,6 +133,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Как работает наследование в JS?',
       response:
         'Наследование в JavaScript представляет собой механизм, позволяющий создавать новые объекты на основе существующих,' +
@@ -161,6 +168,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Прототипная модель. Что это? Как организуется родительская цепочка? ',
       response:
@@ -195,6 +203,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Чем отличается __proto__ от prototype?',
       response:
         'В JavaScript __proto__ и prototype — это два разных, но связанных понятия, которые касаются прототипного наследования. ' +
@@ -230,6 +239,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Как узнать есть ли св-во у объекта или оно находится в цепочке прототипов?',
       response:
@@ -254,6 +264,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Сколько может быть прототипов у одного объекта? Какой существует подход для\n' +
         'реализации двух прототипов у объекта?',
@@ -279,6 +290,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что делает instanceof? Когда он может быть полезен?',
       response:
         'Оператор instanceof в JavaScript используется для проверки, является ли объект экземпляром определённого класса или конструктора. Он возвращает логическое значение' +
@@ -295,6 +307,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Какие типы копируются по ссылке, а какие по значению? ',
       response:
         '- Примитивные типы (string, number, boolean, undefined, null, symbol и bigint) копируются по значению.\n' +
@@ -308,6 +321,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Разница между == и ===? ',
       response:
         '1. Нестрогое равенство (==)\n' +
@@ -323,6 +337,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Как изменить свойство объекта возвращая новый объект? (Object.DefineProperty) ',
       response:
@@ -341,6 +356,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Сколько потоков в JavaScript?',
       response:
         'JavaScript является однопоточным языком программирования, что означает, что он выполняет операции' +
@@ -363,6 +379,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Как реализована и работает асинхронность? (В браузере и под капотом)\n',
       response:
@@ -399,6 +416,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Чем отличается асинхронность от многопоточности? ',
       response:
         'Асинхронность:\n' +
@@ -421,6 +439,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое promise? Когда и для чего используется?',
       response:
         'Promise (промис) в JavaScript — это объект, представляющий промежуточный результат асинхронной операции. Промисы позволяют работать с асинхронным кодом более структурированно и упрощают обработку успеха или ошибки выполнения операции. Давайте рассмотрим подробнее, что такое промисы, как они работают и когда их использовать.\n' +
@@ -448,6 +467,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'В чём разница между стеком вызовов (call stack) и очередью событий (task queue)?',
       response:
@@ -509,6 +529,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Какие паттерны проектирования вы знаете? Какие из них использовали? Расскажите\n' +
         'поподробнее про один из них? (такое синглтон, фабрика, модуль, декоратор,\n' +
@@ -543,6 +564,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Какие типы модулей вы знаете? (AMD, UMD, CommonJs)\n',
       response:
         'Существует несколько типов модульных систем, которые используются для организации кода в JavaScript. Они обеспечивают решение проблемы "глобального пространства имен" и позволяют разделять код на части, чтобы улучшить его структуру и повторное использование. Вот краткий обзор трех основных типов модулей: AMD, UMD и CommonJS.\n' +
@@ -578,6 +600,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Use strict? ',
       response:
         '«use strict» — это директива в JavaScript, которая включает строгий режим. Этот режим позволяет выбрать ограниченный вариант JavaScript, который помогает выявить типичные ошибки кодирования и «небезопасные» действия.\n' +
@@ -602,6 +625,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое рекурсия и для чего используется?',
       response:
         'Рекурсия — это метод, при котором функция вызывает саму себя с целью решения задачи. В рекурсивном подходе задача разбивается на меньшие подзадачи, которые имеют ту же структуру, что и оригинальная проблема, и решаются последовательно. Каждый рекурсивный вызов стремится к достижению базового случая, который завершает рекурсию и возвращает результат.\n' +
@@ -629,6 +653,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое замыкания и для чего они используются? ',
       response:
         'Замыкание — это функция, которая "запоминает" окружающий её контекст (лексическую область видимости), даже после того, как функция была вызвана вне этого контекста. Замыкания позволяют функции иметь доступ к внешним переменным, даже если они находятся вне её текущего контекста выполнения. В JavaScript замыкания создаются всякий раз, когда функция создаётся внутри другой функции.\n' +
@@ -655,6 +680,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Блочная видимость переменных ',
       response:
         'Блочная видимость переменных в JavaScript относится к области видимости, которая ограничена определённым блоком кода, например, внутри фигурных скобок {}. С введением ключевых слов let и const в ES6 (ECMAScript 2015) была добавлена поддержка блочной видимости, которая отличается от функциональной и глобальной видимости, используемой с ключевым словом var.\n' +
@@ -679,6 +705,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое лексическое окружение? ',
       response:
         'Лексическое окружение (или лексическая область видимости) — это концепция в JavaScript (и в других языках программирования), которая определяет, как и где функции имеют доступ к переменным. Лексическое окружение создаётся всякий раз, когда создаётся контекст исполнения, и оно хранит ссылки на переменные, доступные в момент создания функции. Эта концепция важна для понимания работы замыканий и области видимости переменных.\n' +
@@ -697,6 +724,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Чем отличается push от unshift? Какой из них быстрее?',
       response:
         ' В большинстве случаев push будет быстрее, чем unshift, особенно для больших массивов. Это связано с тем, что push добавляет элементы в конец массива, что обычно требует меньше операций с памятью,' +
@@ -704,6 +732,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Отличия function expression и function declaration ',
       response:
         '\n' +
@@ -738,6 +767,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'try/catch и finally? ',
       response:
         'В JavaScript блоки try, catch, и finally служат для обработки исключений и управления ошибками в коде. Позволяют вам обрабатывать ошибки и гарантируют выполнение определенного кода, независимо от того, возникли ли ошибки или нет. Давайте подробнее рассмотрим их назначение и синтаксис.\n' +
@@ -757,6 +787,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Что такое всплытие в JavaScript? Погружение событий? (бамблинг)\n',
       response:
@@ -779,6 +810,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Что нового принес последний стандарт ES? (сейчас ES9)\n',
       response:
         'Стандарт ECMAScript 2018, также известный как ES9, был выпущен в июне 2018 года и внёс несколько интересных новых возможностей в JavaScript. Вот основные новшества, которые были добавлены в ES9:\n' +
@@ -801,6 +833,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'В чем суть стрелочной функции? Ее отличия от обычной функции? ',
       response:
@@ -831,6 +864,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Spread/rest операторы? ',
       response:
         'Spread и Rest операторы в JavaScript имеют схожий синтаксис, но служат разным целям. Они оба обозначаются тремя точками (...). Давайте рассмотрим их более подробно.\n' +
@@ -904,6 +938,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Деструктивное присваивание? (...arguments)',
       response:
         'Деструктивное присваивание (или деструктуризация) — это удобная синтаксическая конструкция в JavaScript, добавленная в ES6 (ECMAScript 2015), которая позволяет извлекать значения из массивов или объектов и присваивать их переменным. Это упрощает процесс работы с данными и делает код более читабельным.\n' +
@@ -942,6 +977,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Иммутабельность, что это и для чего нужна?',
       response:
         'Иммутабельность (или неизменяемость) — это принцип в программировании, который подразумевает, что после создания объекта его состояние не может быть изменено. Вместо этого, всякий раз, когда требуется изменить объект, создается новый объект с необходимыми изменениями, оставляя оригинал без изменений.\n' +
@@ -971,6 +1007,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'WebRTC ',
       response:
         'WebRTC (Web Real-Time Communication) — это открытая технология, позволяющая осуществлять реальное время передачи аудио, видео и данных между браузерами и мобильными приложениями без необходимости установки плагинов или дополнительных программ. Она была разработана с целью упрощения создания приложений для видеозвонков, обмена данными и других видов коммуникации в реальном времени.\n' +
@@ -1019,6 +1056,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Где можно сохранить какие либо данные в браузере? Слышали и работали ли вы с\n' +
         'indexedDB?  ',
@@ -1043,6 +1081,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Чем localStorage отличается от sessionStorage, cookieStorage? В чём преимущества?',
       response:
@@ -1087,6 +1126,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Можно ли в js вызвать функцию до ее объявления? Как это работает?',
       response:
@@ -1109,6 +1149,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Расскажите об Object.create() ',
       response:
         ' Object.create() — это метод в JavaScript, который используется для создания нового объекта, используя другой объект в качестве прототипа. Это позволяет создавать объекты и наследовать свойства и методы от другого объекта.' +
@@ -1125,6 +1166,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Чем отличается спрэд-оператор от Object.assign? Как быть, если браузер не\n' +
         'поддерживает спрэд-оператор? ',
@@ -1157,6 +1199,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Различия var, const и let? ',
       response:
         'В JavaScript, var, let и const — это ключевые слова, используемые для объявления переменных. Вот основные различия между ними:\n' +
@@ -1203,6 +1246,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Prototype ',
       response:
         'Прототип — это один из основных механизмов наследования в JavaScript. Он позволяет объектам делиться свойствами и методами' +
@@ -1231,6 +1275,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'this,call,apply,bind',
       response:
         'this - контекст, ссылка на обьект\n' +
@@ -1266,6 +1311,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'const, let, arrow fn, class, шаблонные строки, spread, rest, итератор, генератор ',
       response:
@@ -1283,6 +1329,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Веб-воркеры и сервис-вореры? ',
       response:
         ' В веб-разработке два типа рабочих процессов, которые часто обсуждаются — это веб-воркеры (Web Workers) и сервис-воркеры (Service Workers). Оба они используются для выполнения фоновых задач, но имеют разные цели и функционал. Давайте разберем каждую из этих технологий по отдельности.\n' +
@@ -1326,6 +1373,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Что вы знаете о функциональном подходе? ',
       response:
         'Функциональный подход (или функциональное программирование) — это парадигма программирования, которая рассматривает вычисления как оценку математических функций и избегает изменения состояния и изменяемых данных. В функциональном программировании функции являются первичными элементами композиции, и сами они рассматриваются как "первоклассные" сущности. Давайте рассмотрим основные концепции и принципы функционального программирования более подробно.\n' +
@@ -1360,6 +1408,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Что такое чистая функция? Является ли функция делающая запрос чистой? ',
       response:
@@ -1378,6 +1427,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Мемоизация функции? ',
       response:
         'Мемоизация функции\n' +
@@ -1399,23 +1449,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
-      question:
-        'const, let, arrow fn, class, шаблонные строки, spread, rest, итератор, генератор ',
-      response:
-        'const и let - ключевые слова let - можно обьявить,присвоить значение позже, также можно переприсвоить\n' +
-        'const - начальное значение нужно, переприсвоить не получится, только обьект или массив\n' +
-        'const && let - блочной области видимости\n' +
-        'arrow fn(стрелочная функция ) -  () => {} нет своего контекста ,запоминает где была обьявлена, нет методов функций, аргументс,\n' +
-        'более короткая запись, анонимна\n' +
-        'spread - не глубокое копирование [...spread] || {...spread}\n' +
-        'rest  - когда мы не знаем сколько у нас аргументов - используем rest ( function(a, ...rest){} )' +
-        '\n' +
-        'Генератор - это функция, которая можно запустить приостановить и возобновить на разных стадиях выполнения. Первый вызов функции вызовет итератор,' +
-        ' у этого обьекта есть next для возобновления функции. При каждом вызове функция возобновляет свою' +
-        ' работу пока не наткнется на yield и опять станет на паузу ',
-      active: false,
-    },
-    {
+      level: 'Junior',
       question: 'Понятие каррирования функции? ',
       response:
         'Каррирование — это техника, используемая в функциональном программировании, которая превращает функцию, принимающую несколько аргументов, в последовательность функций, каждая из которых принимает один аргумент. Это позволяет вызывать функцию поэтапно, передавая аргументы по одному.\n' +
@@ -1433,6 +1467,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Чем отличаются способы обработки ошибок для async/await и promises?',
       response:
@@ -1458,6 +1493,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Глубокое и неглубокое копирование объектов?',
       response:
         'В JavaScript существует две основные техники копирования объектов: глубокое копирование (deep copy) и неглубокое копирование (shallow copy). Эти два метода отличаются тем, как они обрабатывают вложенные объекты и массивы.\n' +
@@ -1482,6 +1518,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Какие коллекции в JavaScript вы знаете? С какими работали? Приведите пример\n' +
         'использования и основные плюсы какой либо коллекции? (Set, Map, WeakSet и\n' +
@@ -1533,6 +1570,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Какие есть базовые события JS (Генерация событий на элементах) ',
       response:
@@ -1572,6 +1610,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Поднятие переменных в ES5 что это?\n ',
       response:
         'Поднятие переменных (hoisting) в JavaScript — это механизм, при котором переменные и функции "поднимаются" в начало их контекста выполнения (scope), что позволяет им использоваться до их объявления в коде. Обычно это относится к переменным, объявленным с помощью var, а также к объявлениям функций.\n' +
@@ -1595,6 +1634,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Функции первого класса',
       response:
         'В JavaScript функции являются первоклассными объектами (first-class objects), что означает, что функции могут рассматриваться и использоваться так же, как и другие значения. Это позволяет выполнять множество интересных операций с функциями. Давайте рассмотрим, что именно это означает и какие возможности оно предоставляет.\n' +
@@ -1619,6 +1659,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Как восстановить контекст this?',
       response:
         'В JavaScript контекст this — это важная концепция, которая определяет, на какой объект ссылается код в пределах функции. В зависимости от того, как вызывается функция, контекст this может меняться. Однако иногда возникает необходимость установить или восстановить желаемый контекст для функции. Здесь рассмотрим несколько способов этого добиться.\n' +
@@ -1643,6 +1684,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Можно ли разбиндить контекст',
       response:
         'Да, можно "восстановить" или "разбиндить" контекст this в JavaScript, используя различные методы' +
@@ -1670,6 +1712,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Два подхода к обработке событий в DOM(onevent,addEventListener).Пользовательские события.Стадии прохода события',
       response:
@@ -1696,6 +1739,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Web Worker ',
       response:
         'aссинхронная система позволяет выполнять тяжелые в вычислительном плане и длительные задачи\n' +
@@ -1710,6 +1754,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'В чем отличие вебсокетов от пулинга',
       response:
         'Веб-сокеты и пуллинг (polling) — это два разных подхода для реализации взаимодействия между клиентом и сервером в веб-приложениях, особенно для работы в режиме реального времени. Давайте рассмотрим их основные отличия.\n' +
@@ -1761,6 +1806,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Какие операторы в JavaScript знаете?',
       response:
         ' В JavaScript существует множество операторов, которые могут быть классифицированы на несколько категорий. Вот основные из них:\n' +
@@ -1837,6 +1883,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Как перебрать в цикле все свойства объекта? ',
       response:
         '1. Использование for...in' +
@@ -1856,6 +1903,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Как работает setTimeout, setInterval? Что возвращают?',
       response:
         'В JavaScript функции setTimeout и setInterval используются для работы с таймерами, позволяя выполнять код с задержкой или через определенные интервалы времени. Давайте рассмотрим, как они работают и что они возвращают.\n' +
@@ -1871,6 +1919,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'С помощью какой операции можно отбросить дробную часть числа? ',
       response:
@@ -1887,6 +1936,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Каковы особенности сравнения с null и undefined?Каковы особенности сравнения с null и\n' +
         'undefined? ',
@@ -1922,6 +1972,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         ' К чему преобразуются null и undefined в численном преобразовании типов?\n',
       response:
@@ -1935,6 +1986,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: '  Объяснить разницу между !!(a && b) и (a && b)',
       response:
         '!!(a && b) и (a && b) — это два различных выражения в JavaScript, и их разница заключается в том, как они обрабатываются и какое значение возвращают. Давайте рассмотрим их подробнее.\n' +
@@ -1965,6 +2017,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         ' Как реализовать сложение числа с объектом(в результате должно получиться число)?',
       response:
@@ -2000,6 +2053,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: ' Что является областью видимости для переменных в JavaScript?',
       response:
         'Область видимости (scope) в JavaScript определяет, где доступна переменная в коде и откуда она может быть использована или изменена. Понимание области видимости является важной частью работы с JavaScript, так как это влияет на жизненный цикл переменных и управление памятью. В JavaScript существуют несколько типов областей видимости: глобальная и локальная (функциональная и блочная). Давайте рассмотрим каждый из этих типов подробно.\n' +
@@ -2018,12 +2072,14 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: ' Реализация аргументов по умолчанию в функции',
       response:
         'Аргументы по умолчанию определяются простым присваиванием значения в объявлении функции',
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Как работает чтение и запись свойств объекта в прототипном наследовании?',
       response:
@@ -2044,6 +2100,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: ' Что такое контекст функции?',
       response:
         'Контекст функции в JavaScript — это объект, который определяет, к каким данным имеет доступ функция, когда она вызывается. Контекст функции определяет значение слова this внутри функции. Понимание контекста является важным аспектом написания корректного и предсказуемого кода на JavaScript. Давайте разберемся с основными аспектами контекста функции подробнее.\n' +
@@ -2072,6 +2129,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Каков результат выполнения var obj = Object.create(null);?',
       response:
         ' Выражение var obj = Object.create(null); создает новый объект obj, который не имеет прототипа. Это означает, что он не наследует никаких свойств и методов от стандартного объекта Object, таких как toString, hasOwnProperty, и других.\n' +
@@ -2093,6 +2151,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Как скопировать функцию со всеми свойствами?',
       response:
         'В JavaScript для копирования функции вместе со всеми её свойствами можно воспользоваться либо встроенными методами, либо инструментами, предоставляемыми языком. Однако стоит иметь в виду, что функции в JavaScript являются объектами, поэтому простое присваивание не скопирует их свойства. Ниже приведены несколько подходов к решению этой задачи:\n' +
@@ -2113,6 +2172,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Как выглядит модуль в JavaScript?',
       response:
         ' Модули в JavaScript представляют собой способ структурирования кода в отдельные файлы или модули и позволяют импортировать и экспортировать функции, объекты или переменные между этими модулями. С введением ECMAScript 6 (ES6) появилась официальная поддержка модулей в JavaScript, что сделало работу с модулями более удобной и понятной. Вот как выглядит модуль в JavaScript.\n' +
@@ -2139,6 +2199,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Какие способы назначения обработчиков событий вы знаете?',
       response:
         ' В JavaScript существует несколько способов назначения обработчиков событий на элементы DOM. Вот основные из них:\n' +
@@ -2163,6 +2224,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Как предотвратить распространение события?',
       response:
         ' В JavaScript для предотвращения распространения события (всплытия) можно использовать два метода: stopPropagation() и stopImmediatePropagation(). Оба метода доступны на объекте события, который передается в обработчик. Вот как они работают:\n' +
@@ -2178,6 +2240,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Как отменить стандартное дествие браузера при наступлении события?\n',
       response:
@@ -2186,6 +2249,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: ' Как получить тэг html?',
       response:
         'Для получения (или создания) HTML-тегов можно использовать различные подходы в зависимости от контекста: разработки веб-страниц или взаимодействия с DOM (Document Object Model) с помощью JavaScript. Ниже приведены основные способы получения HTML-тегов.\n' +
@@ -2205,6 +2269,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         'Какое событие позволяет отловить загрузку страницы? (разница между onload и\n' +
         'DocumentContentLoaded)\n',
@@ -2225,6 +2290,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Как подписаться на событие OnLoad?\n',
       response:
         'Подписаться на событие onload можно несколькими способами в JavaScript. Вот основные подходы, которые можно использовать для этого:\n' +
@@ -2242,6 +2308,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Как можно перебрать коллекцию html элементов',
       response:
         'еребрать коллекцию HTML-элементов можно с помощью различных методов и подходов в JavaScript. Ниже приведены некоторые из наиболее распространенных способов:\n' +
@@ -2257,6 +2324,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Как перевести html коллекцию в массив',
       response:
         'HTML-коллекцию можно перевести в массив несколькими способами в JavaScript. Такие коллекции часто возвращаются методами, такими как getElementsByClassName, getElementsByTagName и children. Поскольку эти коллекции являются живыми списками (Live NodeList), они не поддерживают методы массива, такие как forEach, map, и т. д. Поэтому их необходимо преобразовать в массив. Вот несколько способов сделать это:\n' +
@@ -2270,6 +2338,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Разница между атрибутами async элемента script>?',
       response:
         'Атрибуты async и defer элемента script> в HTML используются для управления загрузкой и выполнением JavaScript на веб-странице. Хотя оба атрибута позволяют загружать скрипты асинхронно, они работают по-разному. Вот основные различия между ними:\n' +
@@ -2288,11 +2357,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
-      question: '',
-      response: '',
-      active: false,
-    },
-    {
+      level: 'Junior',
       question: 'Какие методы выборки элементов DOM вы знаете?',
       response:
         'В JavaScript есть несколько методов для выборки элементов из DOM (Document Object Model). Вот основные из них:\n' +
@@ -2318,6 +2383,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Как добавить новый элемент DOM в дерево?',
       response:
         'Добавление нового элемента в дерево DOM в JavaScript можно сделать с помощью методов, которые предоставляют API DOM. Вот основные шаги, как это сделать:\n' +
@@ -2357,6 +2423,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Объяснить как работать с AJAX запросами в JS',
       response:
         'AJAX (Asynchronous JavaScript and XML) позволяет выполнять асинхронные запросы к серверу без необходимости перезагрузки страницы. В JavaScript для работы с AJAX-запросами можно использовать как устаревший объект XMLHttpRequest, так и более современный Fetch API. Давайте рассмотрим оба способа.\n' +
@@ -2372,6 +2439,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'element.cloneNode — как копируются свойства элемента?',
       response:
         'Метод cloneNode() в JavaScript используется для создания клона (копии) элемента и может копировать его свойства и структуру. Давайте подробнее рассмотрим, как работает этот метод и какие свойства копируются при клонировании элементов.\n' +
@@ -2394,6 +2462,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'События, работа с DOM',
       response:
         'Работа с DOM (Document Object Model) и событиями — это ключевые аспекты взаимодействия с веб-страницами на JavaScript. В этой области вы можете манипулировать элементами документа, изменять их содержимое и реагировать на действия пользователя. Давайте подробнее рассмотрим эти концепции.\n' +
@@ -2435,6 +2504,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Манипуляции с DOM',
       response:
         'Dom - поиск через getElementById - по id, querySelector - по селектору, querySelectorAll\n' +
@@ -2448,6 +2518,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Какие способы реализации ООП есть в JS(ES6) ',
       response:
         'ООП в JS - наследование prototype,  у классов через new\n' +
@@ -2455,6 +2526,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Как устроена асинхронность в js',
       response:
         'Асинхронность в JavaScript — это важная концепция, которая позволяет выполнять операции' +
@@ -2483,6 +2555,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Функциональные конструкции map,reduce,filter',
       response:
         ' Метод reduce() применяет функцию reducer к каждому элементу массива' +
@@ -2494,6 +2567,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Работа с ассинхронностью',
       response:
         '' +
@@ -2507,6 +2581,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Async/await',
       response:
         'async/await - специальный синтаксис над промисом\n' +
@@ -2541,6 +2616,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         'Способы оптимизации работы с Dom.  Список самых дорогих операций',
       response:
@@ -2555,6 +2631,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Modules, Proxy, Reflect,',
       response:
         'Модули - файл с use strict режимом, у них есть импорт и экспорт\n' +
@@ -2563,6 +2640,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'localStorage, sessionStorage, cookie',
       response:
         'localStorage - хранит данные без срока годности session- во время жизни вкладки, если дублировать вкладку создаст для каждой\n' +
@@ -2572,6 +2650,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Сборщик мусора  ',
       response:
         'Сборщик мусора периодически находит ' +
@@ -2580,6 +2659,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'repaint, reflow',
       response:
         'repaint -перерисовка элементов стили визуальный слой, ' +
@@ -2600,6 +2680,7 @@ export const dataJS: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Web Assembly',
       response:
         'язык программирования низкого уровня, призванный внести программируемость ' +

@@ -4,6 +4,7 @@ export const dataHtml: IDataQuestion = {
   name: 'HTML',
   questions: [
     {
+      level: 'Junior',
       question: 'Что такое HTML и для чего он используется?',
       response:
         'HTML (HyperText Markup Language) — это стандартный язык разметки,' +
@@ -12,6 +13,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Объясните структуру базового HTML-документа. Каковы обязательные элементы?',
       response:
@@ -57,6 +59,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: ' Что такое теги и атрибуты в HTML? Приведите примеры.',
       response:
         'В HTML теги и атрибуты являются основными строительными блоками для создания веб-страниц.' +
@@ -76,6 +79,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Каковы различия между блочными и строчными элементами в HTML?',
       response:
         'В HTML элементы можно классифицировать на блочные (block-level) и строчные (inline) элементы. Они различаются по своему поведению, отображению на странице и тому, как они взаимодействуют друг с другом. Давайте рассмотрим основные различия между ними.\n' +
@@ -115,6 +119,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое DOCTYPE, и почему он важен?',
       response:
         '!DOCTYPE> является декларацией, которая определяет версию HTML, используемую в документе.' +
@@ -142,6 +147,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Какие теги используются для создания заголовков (H1-H6) в HTML?',
       response:
@@ -153,6 +159,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Какой атрибут делает поле формы обязательным для заполнения?',
       response:
         ' Атрибут, который делает поле формы обязательным для заполнения, называется' +
@@ -160,6 +167,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Как решалась проблема с SEO-оптимизацией',
       response:
         'Проблемы с SEO-оптимизацией решаются множеством методов и стратегий, которые помогают улучшить видимость сайта в поисковых системах и повысить его рейтинг. Вот основные способы, которыми организации и веб-мастера решают проблемы с SEO:\n' +
@@ -195,6 +203,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Различия между html4 и html5',
       response:
         'HTML4 и HTML5 — это две версии языка разметки HTML (HyperText Markup Language), которые используются для создания веб-страниц. HTML5 предоставляет множество усовершенствований и новых возможностей по сравнению с HTML4. Вот основные различия между ними:\n' +
@@ -233,6 +242,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         'Ретина. Что это такое, как используются варианты изображения для обычного экрана и для ретины в html|css ',
       response:
@@ -252,6 +262,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'SVG. Для чего нужен, как используется, приемы применения',
       response:
         'SVG (Scalable Vector Graphics) — это формат векторной графики на основе XML, который используется для описания двухмерной графики. Он обладает рядом преимуществ по сравнению с растровыми изображениями и широко применяется в веб-дизайне и разработке.\n' +
@@ -288,6 +299,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Что такое параграфы в HTML, и какой тег используется для их создания?',
       response:
@@ -302,6 +314,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Как вставить изображения в HTML? Каковы атрибуты для тега img?',
       response:
@@ -330,6 +343,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Как создать ссылки в HTML? Каковы основные атрибуты тега a?',
       response:
         ' В HTML для создания ссылок используется тег a>, который обозначает анкор (или ссылку).' +
@@ -363,6 +377,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Какие теги используются для создания списков в HTML и в чем разница между маркированным и нумерованным списками?',
       response:
@@ -387,6 +402,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: 'Что такое форма в HTML и зачем она нужна?',
       response:
         'Форма в HTML — это специальная структура, предназначенная для сбора данных от пользователей.' +
@@ -409,6 +425,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Как создать текстовое поле, радио-кнопки и выпадающий список в HTML? Приведите примеры.',
       response:
@@ -428,6 +445,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: ' Как работают атрибуты action и method в теге form',
       response:
         'Атрибуты action и method в теге form> в HTML играют важную роль в определении того,' +
@@ -456,6 +474,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question: ' Что такое атрибут placeholder, и как его использовать?',
       response:
         'Атрибут placeholder в HTML используется для отображения' +
@@ -476,6 +495,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Junior',
       question:
         'Как создать кнопку отправки формы в HTML? Каковы основные атрибуты тега button?',
       response:
@@ -500,6 +520,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: ' Что такое семантические элементы в HTML5?',
       response:
         'Семантические элементы в HTML5 — это элементы, которые передают значение ' +
@@ -534,6 +555,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         'Что такое адаптивный веб-дизайн, и как HTML может помочь в его реализации?',
       response:
@@ -579,6 +601,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: ' Как использовать теги article, section, nav и aside в HTML5?',
       response:
         'В HTML5 теги article>, section>, nav> и aside> являются семантическими элементами, которые помогают' +
@@ -611,6 +634,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         'Что такое canvas, и как его использовать для рисования графики на веб-странице?',
       response:
@@ -642,6 +666,7 @@ export const dataHtml: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         ' Что такое video и audio элементы в HTML5? Как их использовать?',
       response:

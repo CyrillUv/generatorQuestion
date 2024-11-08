@@ -4,12 +4,14 @@ export const dataPatterns: IDataQuestion = {
   name: 'Паттерны проектирования',
   questions: [
     {
+      level: 'Junior',
       question: 'Что такое паттерны проектирования',
       response:
         'Это способы решения часто встречающихся  проблем при проектировании программ',
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Типы паттернов проектирования',
       response:
         '1. Паттерны порождения (Creational Patterns):\n' +
@@ -49,6 +51,7 @@ export const dataPatterns: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question:
         ' Можете кратко описать паттерн «Singleton»? В каких ситуациях он полезен?',
       response:
@@ -67,6 +70,7 @@ export const dataPatterns: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Объясните паттерн «Factory Method» и его преимущества',
       response:
         'Паттерн «Factory Method» (фабричный метод) — это порождающий паттерн проектирования, который предоставляет интерфейс для создания ' +
@@ -98,6 +102,7 @@ export const dataPatterns: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Что такое «Observer» паттерн и как он используется?',
       response:
         ' Паттерн «Observer» (наблюдатель) — это поведенческий паттерн проектирования, который определяет зависимость один-ко-многим между ' +
@@ -128,6 +133,7 @@ export const dataPatterns: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Преимущества и недостатки паттернов проектирования',
       response:
         'Преимущества паттернов проектирования:\n' +
@@ -168,6 +174,7 @@ export const dataPatterns: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Middle',
       question: 'Как вы применяли паттерны проектирования в своих проектах?',
       response:
         '1. Паттерн «Singleton»:\n' +
@@ -198,6 +205,7 @@ export const dataPatterns: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         'Можете привести пример, когда использование паттерна решило конкретную проблему?',
       response:
@@ -216,6 +224,7 @@ export const dataPatterns: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Еще один пример использования паттерна',
       response:
         'Давайте рассмотрим другой пример, на этот раз с применением паттерна «Strategy» (Стратегия) в контексте электронной коммерции,' +
@@ -248,6 +257,7 @@ export const dataPatterns: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question:
         'Как выбрать между различными паттернами проектирования для решения одной и той же задачи?',
       response:
@@ -306,6 +316,7 @@ export const dataPatterns: IDataQuestion = {
       active: false,
     },
     {
+      level: 'Senior',
       question: 'Как вы бы выбрали между паттернами «Strategy» и «State»?',
       response:
         'Выбор между паттернами «Strategy» и «State» может быть сложным, поскольку оба паттерна в некоторой степени управляют ' +
