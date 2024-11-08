@@ -68,7 +68,7 @@ export class MenuService {
   public setCurrentBlockTests(blockTests: string): void {
     this._currentBlockTests = blockTests;
   }
-  public setCurrentNumOfQuestions(numOfQuestions: IOptions): void {
+  public setCurrentNumOfQuestions(numOfQuestions: IOptions | null): void {
     this._currentNumOfQuestions = numOfQuestions;
   }
 }

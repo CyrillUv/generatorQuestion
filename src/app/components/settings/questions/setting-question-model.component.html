@@ -23,7 +23,7 @@
         (selectedItemEmitter)="changeNumOfQuestions($event)"
       />
       <main>
-        <label *ngIf="this.models.numberOfQuestions === null"
+        <label *ngIf="!this.models.numberOfQuestions"
           >Обязательно для заполнения!</label
         >
       </main>

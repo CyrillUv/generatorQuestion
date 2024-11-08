@@ -10,16 +10,21 @@
     tabindex="0"
     (click)="changeSelect()"
   >
-    <span *ngFor="let option of selectedOptions; let i = index">
-      {{ option.title }}<span *ngIf="i !== selectedOptions.length - 1">,</span>
-    </span>
+    <main>
+      <span *ngFor="let option of selectedOptions; let i = index">
+        {{ option.title
+        }}<span *ngIf="i !== selectedOptions.length - 1">,</span>
+      </span>
+    </main>
+    <main>
+      <label
+        *ngIf="selectedOptions?.length"
+        class="multi-select--remove"
+        (click)="removeOptions()"
+        >✖</label
+      >
+    </main>
   </div>
-  <label
-    *ngIf="!showPanel && selectedOptions?.length"
-    class="multi-select--remove"
-    (click)="removeOptions()"
-    >✖</label
-  >
 
   <main class="multi-select__select" *ngIf="showPanel">
     <div class="multi-select__select__search">
@@ -42,8 +47,9 @@
         >🔍</label
       >
       <label
+        *ngIf="searchField"
         class="multi-select__select__search__exit"
-        (click)="removeOptions()"
+        (click)="searchField = ''"
         >✖</label
       >
     </div>

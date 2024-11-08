@@ -35,8 +35,6 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   @ViewChild('selectContainer') selectContainer!: ElementRef;
   //получение настроек
   @Input() public data!: IOptions[];
-  //активный блок задач
-  @Input() public defaultInvalid!: boolean;
 
   //выбранный блок тестов
   @Output() public selectedItemEmitter = new EventEmitter<IOptions>();
@@ -59,7 +57,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
   public onTouched!: () => void;
-  public onChange!: (value: IOptions) => void;
+  public onChange!: (value: IOptions | null) => void;
   ngOnInit(): void {
     this.searchData = this.data;
   }
@@ -92,7 +90,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
       return;
     }
 
-    this.data.filter(
+    this.searchData = this.data.filter(
       (el) =>
         el.title.toLowerCase().indexOf(this.searchField.toLowerCase().trim()) >
         -1,
@@ -102,6 +100,12 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   public removeOptions() {
     this.searchData = this.data;
     this.searchField = '';
+    this.invalidField = !this.activeItem;
+
+    this.activeItem = null;
+
+    this.onChange(this.activeItem);
+    this.invalidField = !!this.activeItem;
   }
 
   public selectOption(option: IOptions) {

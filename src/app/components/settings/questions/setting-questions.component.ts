@@ -12,7 +12,6 @@ import { IDataMenu, IOptions } from '../../../data/menu/data-menu';
 import { MultiSelectComponent } from '../../custom/multi-select/multi-select.component';
 import { SelectComponent } from '../../custom/select/select.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { retry } from 'rxjs';
 
 interface IModels {
   levels: IOptions[] | null;
@@ -73,7 +72,6 @@ export class SettingsQuestionsComponent implements OnInit {
       categories: this.qs.getActualCategories(),
     };
     this.modelsValidator();
-    console.log('models', Object.values(this.models));
     // this.settingsForm = this.fb.group({
     //   numOfQuestions: [
     //     this.ms.getCurrentNumOfQuestions(),
@@ -143,7 +141,7 @@ export class SettingsQuestionsComponent implements OnInit {
   // }
   public modelsValidator(): boolean {
     return Object.values(this.models).some(
-      (value) => value === null || value.length === 0,
+      (value) => value === null || value?.length === 0,
     );
   }
 

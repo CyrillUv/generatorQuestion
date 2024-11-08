@@ -14,11 +14,12 @@
   &--remove {
     width: 0;
     cursor: pointer;
+    padding: 5px;
     transform: translate(-23px, 5px);
+    color: #4e99c9;
   }
 
   &__select {
-
     border: #4e99c9 2px solid;
     height: 150px;
     overflow: auto;
@@ -112,6 +113,8 @@
   }
 
   &__field {
+    display: flex;
+    justify-content: space-between;
     padding: 5px;
     background: #2b2b2b;
     color: #4e99c9;

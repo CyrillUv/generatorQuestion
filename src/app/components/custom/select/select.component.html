@@ -10,7 +10,17 @@
     tabindex="0"
     (click)="this.showHidePanel()"
   >
-    {{ activeItem?.title }}
+    <main>
+      {{ activeItem?.title }}
+    </main>
+    <main>
+      <label
+        *ngIf="activeItem"
+        class="multi-select--remove"
+        (click)="removeOptions()"
+        >✖</label
+      >
+    </main>
   </div>
 
   <main class="multi-select__select" *ngIf="showPanel">
@@ -27,7 +37,7 @@
       >
       <label
         class="multi-select__select__search__exit"
-        (click)="removeOptions()"
+        (click)="this.searchField = ''"
         >✖</label
       >
     </div>

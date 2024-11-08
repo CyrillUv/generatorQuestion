@@ -140,7 +140,6 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
     this.searchOptions = this.dataOptions;
     this.selectedOptions = [];
     this.allSelect = false;
-    this.searchField = '';
     this.selectedOptionsHandler();
   }
 
