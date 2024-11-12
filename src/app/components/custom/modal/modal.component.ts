@@ -20,10 +20,9 @@ export class ModalComponent implements OnDestroy {
   @Input() public title = 'Вы точно уверены?';
   //Тело компонента
   @Input() public bodyTemplate!: TemplateRef<unknown>;
-  //показывает/скрывает модалку
-  @Output() public activeModalEmitter = new EventEmitter<boolean>();
-  //двигает тогл
-  @Output() public toggleEmitter = new EventEmitter<boolean | null>();
+  //закрытие модалки
+  @Output() public closeEmitter = new EventEmitter<boolean>();
+
   //активность модалки
   public activeModal = false;
   constructor() {
@@ -39,11 +38,9 @@ export class ModalComponent implements OnDestroy {
   }
   //Закрытие модалки
   public closeModal(): void {
-    //показывает/скрывает модалку
-    this.activeModalEmitter.emit();
-    //двигает тогл
-    this.toggleEmitter.emit();
-    //закрыватие модалки
+    //закрывает модалку
+    this.closeEmitter.emit();
+    //закрывает модалку
     this.activeModal = false;
     //глобальная рабочая область
     document.body.classList.remove('event-none');

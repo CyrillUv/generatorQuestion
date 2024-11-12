@@ -2,13 +2,35 @@
   <div class="categories">
     <div routerLink="/menu">← Меню</div>
     @for (category of categories; track category) {
-      <div class="documents__category" (click)="getQuestions(category)">
-        {{ category }}
+      <div
+        class="documents__category"
+        (click)="getQuestionsCurrentCategory(category.endpoint)"
+      >
+        {{ category.name }}
+        @if (adminMode) {
+          <main>
+            <span
+              class="documents__category--action"
+              (click)="changeCategory(category.id, newCategory)"
+              >✎</span
+            >
+            <span
+              class="documents__category--action"
+              (click)="removeCategory(category.id)"
+              >✖</span
+            >
+          </main>
+        }
       </div>
     }
     <div [routerLink]="'/screen'">Скрины</div>
+    @if (adminMode) {
+      <div>
+        <input [(ngModel)]="newCategory" (keydown.enter)="addCategory()" />
+        <button (click)="addCategory()">Добавить категорию</button>
+      </div>
+    }
   </div>
-  <hr />
   <div class="documents__questions">
     @for (question of questions; track question.question; let i = $index) {
       <div (click)="question.active = !question.active">
@@ -22,5 +44,128 @@
     } @empty {
       <div class="response">Выберите категорию</div>
     }
+    <app-custom-sidebar
+      [bodyTemplate]="bodyTemplate"
+      [footerTemplate]="footerTemplate"
+      [headerTemplate]="headerTemplate"
+      [triggerSidebar]="creatingQuestion"
+      (closingSidebarEmitter)="closeModal()"
+    >
+      <ng-template #headerTemplate>
+        <span>Создание вопроса</span>
+      </ng-template>
+      <ng-template #bodyTemplate>
+        <main>
+          <div>
+            <p>Вопрос</p>
+            <input
+              name="question"
+              class="documents__questions--addition__question"
+              [class.documents__questions--addition__error]="
+                !newQuestion.question.length || checkAnalogyValidator()
+              "
+              [(ngModel)]="newQuestion.question"
+            />
+            @if (!newQuestion.question.length) {
+              <div>Обязательное поле ввода</div>
+            }
+            @if (checkAnalogyValidator()) {
+              <div>Такой вопрос существует</div>
+            }
+          </div>
+          <div>
+            <p>Ответ</p>
+            <textarea
+              [style.height]="heightTextarea"
+              rows="1"
+              (input)="autoResize($event)"
+              class="documents__questions--addition__response"
+              [class.documents__questions--addition__error]="
+                !newQuestion.response.length
+              "
+              name="response"
+              [(ngModel)]="newQuestion.response"
+            ></textarea>
+            @if (!newQuestion.response.length) {
+              <div>Обязательное поле ввода</div>
+            }
+          </div>
+          <div class="documents__questions--addition__levels">
+            <p>Уровень сложности</p>
+            <label class="documents__questions--addition__levels__level">
+              <span>Junior</span>
+              <input
+                type="radio"
+                [defaultValue]="newQuestion.level"
+                name="option"
+                [value]="'Junior'"
+                [(ngModel)]="newQuestion.level"
+              />
+            </label>
+            <label class="documents__questions--addition__levels__level">
+              <span>Middle</span>
+              <input
+                type="radio"
+                name="option"
+                [value]="'Middle'"
+                [(ngModel)]="newQuestion.level"
+              />
+            </label>
+            <label class="documents__questions--addition__levels__level">
+              <span>Senior</span>
+              <input
+                type="radio"
+                name="option"
+                [value]="'Senior'"
+                [(ngModel)]="newQuestion.level"
+              />
+            </label>
+          </div>
+        </main>
+      </ng-template>
+      <ng-template #footerTemplate>
+        <button
+          (click)="
+            addQuestion(
+              newQuestion.question,
+              newQuestion.response,
+              newQuestion.level
+            )
+          "
+        >
+          Добавить вопрос
+        </button>
+        <button (click)="closeModal()">Отмена</button>
+      </ng-template>
+    </app-custom-sidebar>
+    <button *ngIf="currentCategory" (click)="creatingQuestion = true">
+      Создать вопрос
+    </button>
   </div>
 </div>
+<!--<div class="documents">-->
+<!--<div class="categories">-->
+<!--  <div routerLink="/menu">← Меню</div>-->
+<!--  @for (category of categories; track category) {-->
+<!--    <div class="documents__category" (click)="getQuestions(category)">-->
+<!--      {{ category }}-->
+<!--    </div>-->
+<!--  }-->
+<!--  <div [routerLink]="'/screen'">Скрины</div>-->
+<!--</div>-->
+<!--  <hr />-->
+<!--  <div class="documents__questions">-->
+<!--    @for (question of questions; track question.question; let i = $index) {-->
+<!--      <div (click)="question.active = !question.active">-->
+<!--        <span class="documents__question">{{-->
+<!--          i + 1 + ". " + question.question-->
+<!--        }}</span>-->
+<!--        <div class="documents__response" *ngIf="question.active">-->
+<!--          {{ question.response }}-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    } @empty {-->
+<!--      <div class="response">Выберите категорию</div>-->
+<!--    }-->
+<!--  </div>-->
+<!--</div>-->

@@ -114,4 +114,9 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
     this.onTouched();
     this.invalidField = !!this.activeItem;
   }
+
+  public clearSearch() {
+    this.searchField = '';
+    this.searchData = this.data;
+  }
 }

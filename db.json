@@ -1,28 +1,90 @@
 {
-  "git": [
+  "categories": [
     {
-      "name": "jopa!",
-      "id": "5"
+      "id": "0",
+      "name": "Структуры данных",
+      "endpoint": "data-struct"
+    },
+    {
+      "id": "1",
+      "name": "JavaScript",
+      "endpoint": "/js"
+    },
+    {
+      "id": "2",
+      "name": "Обьектно-ориентированное программирование",
+      "endpoint": "/oop"
+    },
+    {
+      "id": "3",
+      "name": "Тестирование",
+      "endpoint": "/testing"
+    },
+    {
+      "id": "4",
+      "name": "Angular",
+      "endpoint": "/ng"
+    },
+    {
+      "id": "5",
+      "name": "TypeScript",
+      "endpoint": "/ts"
+    },
+    {
+      "id": "6",
+      "name": "Паттерны проектирования",
+      "endpoint": "/pp"
+    },
+    {
+      "id": "7",
+      "name": "Сетевые протоколы",
+      "endpoint": "/net-prot"
+    },
+    {
+      "id": "8",
+      "name": "Алгоритмы",
+      "endpoint": "/algorithms"
+    },
+    {
+      "id": "9",
+      "name": "Linux",
+      "endpoint": "/linux"
     },
     {
       "id": "10",
-      "name": "sadasd",
-      "age": 123
-    },
-    {
-      "id": "15",
-      "name": "jopa!",
-      "age": 23
+      "name": "rxjs",
+      "endpoint": "/rxjs"
     },
     {
       "id": "11",
-      "name": "Hello World!",
-      "age": 23
+      "name": "Git",
+      "endpoint": "/git"
     },
     {
-      "id": "11",
-      "name": "Hello World!",
-      "age": 23
+      "id": "12",
+      "name": "HTML",
+      "endpoint": "/html"
+    },
+    {
+      "id": "13",
+      "name": "CSS",
+      "endpoint": "/css"
+    }
+  ],
+  "git": [
+    {
+      "question": "Что такое Git?",
+      "response": "Система контроля версий",
+      "active": false,
+      "level": "Junior",
+      "id": "dae9"
+    },
+    {
+      "id": "b369",
+      "question": "iuhh",
+      "response": "kjjhjh",
+      "level": "Junior",
+      "active": false
     }
   ]
 }

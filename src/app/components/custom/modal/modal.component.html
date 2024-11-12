@@ -1,7 +1,7 @@
 <div *ngIf="activeModal" class="modal-page">
   <main
     class="modal-page__modal"
-    [class.settings-sidebar__modal-page__modal--inactive]="!toggleEmitter"
+    [class.settings-sidebar__modal-page__modal--inactive]="!activeModal"
   >
     <div class="modal-page__modal__header">
       <h2>{{ title }}</h2>

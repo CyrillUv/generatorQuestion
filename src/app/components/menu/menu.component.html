@@ -4,8 +4,9 @@
     <app-modal
       [title]="'Повторное прохождение'"
       [bodyTemplate]="bodyTemplate"
-      (activeModalEmitter)="this.ms.setActiveModal(false)"
-      (toggleEmitter)="this.ms.setValueToggle(false)"
+      (closeEmitter)="
+        this.ms.setActiveModal(false); this.ms.setValueToggle(false)
+      "
     >
       <ng-template #bodyTemplate>
         <p>Вы действительно хотите пройти вопросы заново?</p>
@@ -51,5 +52,8 @@
   </div>
   <div>
     <button (click)="patchGitQuestion()">patch</button>
+  </div>
+  <div>
+    <button (click)="getAllCategories()">all categories</button>
   </div>
 </div>

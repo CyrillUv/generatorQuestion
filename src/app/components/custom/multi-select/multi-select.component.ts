@@ -148,4 +148,9 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
       return this.selectedOptions.map((el) => el.title).includes(option);
     }
   }
+
+  public clearSearch() {
+    this.searchOptions = this.dataOptions;
+    this.searchField = '';
+  }
 }

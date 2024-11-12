@@ -12,6 +12,7 @@ import { QuestionService } from '../../data/question/question.service';
 import { MultiSelectComponent } from '../custom/multi-select/multi-select.component';
 import { MyFormComponent } from '../custom/my-form/my-form.component';
 import { ApiGitService } from '../../data/api/api-git.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -56,6 +57,11 @@ export class MenuComponent {
       console.log(res);
     });
   }
+  public getAllCategories(): void {
+    this._apiService.getAllCategories().subscribe((res) => {
+      console.log(res);
+    });
+  }
   public getGitQuestions(): void {
     this._apiService.getGitQuestion().subscribe((res) => {
       console.log(res);
@@ -81,21 +87,7 @@ export class MenuComponent {
       console.log(res);
     });
   }
-  //  public getGitQuestion(): Observable<IGit> {
-  //     return this.http.get<IGit>(this._baseUrl+'/10');
-  //   }
-  //   public postGitQuestion():Observable<IGit> {
-  //     return this.http.post<IGit>(this._baseUrl,this.mockObject)
-  //   }
-  //   public putGitQuestion():Observable<IGit> {
-  //     return this.http.put<IGit>(this._baseUrl+'/5',this.mockObject)
-  //   }
-  //   public deleteGitQuestion():Observable<IGit> {
-  //     return this.http.delete<IGit>(this._baseUrl+'/3');
-  //   }
-  //   public patchGitQuestion():Observable<IGit> {
-  //     return this.http.patch<IGit>(this._baseUrl+'/15',this.mockObject)
-  //   }
+
   //Изменяет путь
   public changeRoute(route: '/questions' | '/testing') {
     //изменяет путь в сервисе

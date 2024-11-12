@@ -31,13 +31,15 @@
         (keyup.enter)="filterOptions()"
       />
       <label
+        *ngIf="searchField"
         class="multi-select__select__search__filter-button"
         (click)="filterOptions()"
         >🔍</label
       >
       <label
+        *ngIf="searchField"
         class="multi-select__select__search__exit"
-        (click)="this.searchField = ''"
+        (click)="clearSearch()"
         >✖</label
       >
     </div>

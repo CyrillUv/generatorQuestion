@@ -28,6 +28,7 @@
       text-align: right;
       cursor: pointer;
     }
+    //todo доработать анимацию вылета модалки
     &--inactive{
       animation:modal-inactive 1s ;
       @keyframes modal-inactive{
