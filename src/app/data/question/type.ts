@@ -16,12 +16,14 @@ export type NameDataType =
   | 'all';
 
 export interface IQuestion {
-  question: string;
+  title: string;
   response: string;
   active: boolean;
   level: 'Junior' | 'Middle' | 'Senior';
 }
-
+export interface IQuestionDB extends IQuestion {
+  id?: string;
+}
 export interface IDataQuestion {
   name: NameDataType;
   questions: IQuestion[];

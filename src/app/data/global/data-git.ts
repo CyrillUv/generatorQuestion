@@ -5,7 +5,7 @@ export const dataGit: IDataQuestion = {
   questions: [
     {
       level: 'Junior',
-      question: 'Что такое Git?',
+      title: 'Что такое Git?',
       response:
         'Git — это система контроля версий, которая широко используется для' +
         ' управления изменениями в коде и совместной работы над проектами.' +
@@ -21,7 +21,7 @@ export const dataGit: IDataQuestion = {
     },
     {
       level: 'Junior',
-      question: 'Основные понятия Git',
+      title: 'Основные понятия Git',
       response:
         '1. Репозиторий (repository): Это основное хранилище для вашего проекта, где хранится вся история изменений.\n' +
         '2. Коммит (commit): Это сохранение изменений в репозитории. Каждый коммит содержит сообщение о том, что было изменено.\n' +
@@ -33,7 +33,7 @@ export const dataGit: IDataQuestion = {
     },
     {
       level: 'Junior',
-      question: 'Основные команды Git',
+      title: 'Основные команды Git',
       response:
         '1. git init: Инициализация нового репозитория.\n' +
         '2. git clone [url]: Клонирование существующего репозитория.\n' +
@@ -50,7 +50,7 @@ export const dataGit: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question: 'Git hooks',
+      title: 'Git hooks',
       response:
         'Git hooks — это специальные скрипты, которые выполняются автоматически при выполнении' +
         ' определённых действий с репозиторием Git. Они позволяют настраивать процессы автоматизации ' +
@@ -99,7 +99,7 @@ export const dataGit: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question: ' Рабочие пространства (Worktrees)',
+      title: ' Рабочие пространства (Worktrees)',
       response:
         'Рабочие пространства (Worktrees) в Git' +
         ' позволяют вам создавать несколько рабочих каталогов для одного' +
@@ -152,7 +152,7 @@ export const dataGit: IDataQuestion = {
     },
     {
       level: 'Junior',
-      question: 'Отмена изменений',
+      title: 'Отмена изменений',
       response:
         'Git предоставляет несколько способов отмены изменений:' +
         ' git checkout, git revert и git reset. Это позволяет разработчикам гибко обрабатывать различные ошибки или откатывать изменения.',
@@ -160,7 +160,7 @@ export const dataGit: IDataQuestion = {
     },
     {
       level: 'Senior',
-      question: 'Работа с удалёнными репозиториями',
+      title: 'Работа с удалёнными репозиториями',
       response:
         'Git поддерживает работу с несколькими удалёнными репозиториями, что позволяет легко клонировать, передавать и получать ' +
         'данные из них. Команды git push и git pull делают это быстро и эффективно.\n',

@@ -5,7 +5,7 @@ import { NgForOf, NgIf } from '@angular/common';
 import { ApiGitService, ICategory } from '../../data/api/api-git.service';
 import { FormsModule } from '@angular/forms';
 import { tap } from 'rxjs';
-import { IQuestion } from '../../data/question/type';
+import { IQuestion, IQuestionDB } from '../../data/question/type';
 import { SidebarComponent } from '../custom/sidebar/sidebar.component';
 
 @Component({
@@ -28,8 +28,15 @@ export class DocumentsComponent implements OnInit {
   public newCategory = '';
   public adminMode = false;
   public creatingQuestion = false;
-  public newQuestion: IQuestion = {
-    question: '',
+  public changingQuestion = false;
+  public currentQuestion: IQuestionDB = {
+    title: '',
+    response: '',
+    level: 'Junior',
+    active: false,
+  };
+  public newQuestion: IQuestionDB = {
+    title: '',
     response: '',
     level: 'Junior',
     active: false,
@@ -77,7 +84,7 @@ export class DocumentsComponent implements OnInit {
       this.newCategory &&
       !this.categories.some((el) => el.name === this.newCategory) &&
       this.newQuestion.level &&
-      this.newQuestion.question &&
+      this.newQuestion.title &&
       this.newQuestion.response
     )
       this.apiService
@@ -102,20 +109,44 @@ export class DocumentsComponent implements OnInit {
       this.currentCategory = endpoint;
     });
   }
-
+  public getQuestionCurrentCategory(
+    endpoint: string,
+    nameQuestion: string,
+  ): void {
+    this.apiService.getQuestionsCurrentCategory(endpoint).subscribe((res) => {
+      this.currentQuestion = res.find(
+        (el) => el.title === nameQuestion,
+      ) as IQuestionDB;
+    });
+  }
+  public changeQuestion(nameQuestion: string) {
+    this.getQuestionCurrentCategory(this.currentCategory, nameQuestion);
+    this.changingQuestion = true;
+  }
+  public editQuestion(): void {
+    if (this.currentQuestion.title && this.currentQuestion.response) {
+      this.apiService
+        .patchQuestion(
+          this.currentCategory + '/' + this.currentQuestion.id,
+          this.currentQuestion,
+        )
+        .pipe(
+          tap((n) => this.getQuestionsCurrentCategory(this.currentCategory)),
+        )
+        .subscribe((res) => res);
+      this.closeSidebar();
+      console.log(this.currentQuestion);
+    }
+  }
   public addQuestion(
-    question: string,
+    title: string,
     response: string,
     level: 'Junior' | 'Middle' | 'Senior',
   ): void {
     //Нужно обработать валидатором этот кэйс
-    if (
-      question &&
-      response &&
-      !this.questions.some((el) => el.question === question)
-    ) {
+    if (title && response && !this.questions.some((el) => el.title === title)) {
       this.apiService
-        .postQuestion(this.currentCategory, question, response, level)
+        .postQuestion(this.currentCategory, title, response, level)
         .pipe(
           tap((n) => {
             this.getQuestionsCurrentCategory(this.currentCategory);
@@ -124,13 +155,14 @@ export class DocumentsComponent implements OnInit {
         )
         .subscribe();
       this.creatingQuestion = false;
-      this.closeModal();
+      this.closeSidebar();
     }
   }
-  public closeModal() {
-    this.creatingQuestion = false;
+  public closeSidebar() {
+    if (this.creatingQuestion) this.creatingQuestion = false;
+    if (this.changingQuestion) this.changingQuestion = false;
     this.newQuestion = {
-      question: '',
+      title: '',
       response: '',
       level: 'Junior',
       active: false,

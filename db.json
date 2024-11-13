@@ -62,7 +62,7 @@
     },
     {
       "id": "12",
-      "name": "HTML",
+      "name": "jksakjfashnk",
       "endpoint": "/html"
     },
     {
@@ -73,7 +73,7 @@
   ],
   "git": [
     {
-      "question": "Что такое Git?",
+      "title": "Что такое Git?",
       "response": "Система контроля версий",
       "active": false,
       "level": "Junior",
@@ -81,15 +81,22 @@
     },
     {
       "id": "b369",
-      "question": "iuhh",
-      "response": "kjjhjh",
+      "title": "iuhh12312",
+      "response": "bdfbnfdlb",
       "level": "Junior",
       "active": false
     },
     {
       "id": "9d92",
-      "question": "dddd",
-      "response": "aaaaaaa",
+      "title": "ddddwqewqe",
+      "response": "aaa",
+      "level": "Senior",
+      "active": false
+    },
+    {
+      "id": "bb7d",
+      "title": "asd2131421341",
+      "response": "sadiiiii",
       "level": "Middle",
       "active": false
     }

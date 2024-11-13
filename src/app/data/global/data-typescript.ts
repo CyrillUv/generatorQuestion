@@ -4,7 +4,7 @@ export const dataTS: IDataQuestion = {
   name: 'TypeScript',
   questions: [
     {
-      question: 'Что такое TypeScript',
+      title: 'Что такое TypeScript',
       response:
         'TypeScript - это язык программирования, со строгой типизацией, расширяет возможности JS,\n' +
         '  // обратно совместимый с JS, и компилируется в JS, явная Типизация, поддержка использования ' +
@@ -13,8 +13,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question:
-        'Что за операторы & и |, их особенности и различия в TypeScript?',
+      title: 'Что за операторы & и |, их особенности и различия в TypeScript?',
       response:
         'В TypeScript, как и в JavaScript, операторы & и | используются для выполнения битовых ' +
         'и логических операций.Оператор & (битовый И):\n' +
@@ -28,7 +27,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question:
+      title:
         'Как в TypeScript реализовать свойство класса являющуюся константой?',
       response:
         'В TypeScript вы можете реализовать свойство класса как константу, используя модификатор доступа readonly.' +
@@ -37,7 +36,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question:
+      title:
         'Расскажи про классы? Если я хочу переопределить в дочернем классе конструктор, есть\n' +
         'ли с этим какая-то особенность? let, const? Если я в const запишу объект, я смогу его\n' +
         'менять?',
@@ -59,7 +58,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question: 'Что представляют собой .map-файлы в TypeScript?',
+      title: 'Что представляют собой .map-файлы в TypeScript?',
       response:
         '.map-файлы (source map files) в TypeScript представляют собой файлы, которые связывают скомпилированный JavaScript-код ' +
         'с его исходным кодом на TypeScript. Это позволяет разработчикам отлаживать и анализировать код в браузере' +
@@ -77,7 +76,7 @@ export const dataTS: IDataQuestion = {
     },
 
     {
-      question: 'Что такое геттеры и сеттеры в TypeScript?',
+      title: 'Что такое геттеры и сеттеры в TypeScript?',
       response:
         'Геттеры и сеттеры в TypeScript представляют собой специальные методы, которые позволяют управлять доступом к' +
         ' свойствам объекта. Они помогают инкапсулировать логику доступа к свойству и могут использоваться' +
@@ -89,7 +88,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question: 'Можно ли использовать TypeScript на бэке?',
+      title: 'Можно ли использовать TypeScript на бэке?',
       response:
         'Да, TypeScript можно использовать на бэкенде. TypeScript является ' +
         'надмножеством JavaScript, что означает, что любой код JavaScript является допустимым ' +
@@ -116,7 +115,7 @@ export const dataTS: IDataQuestion = {
       level: 'Middle',
     },
     {
-      question:
+      title:
         'Поддерживает ли TypeScript перегрузку функций? Как это реализовать?',
       response:
         'Перегрузка функций — это возможность определять несколько версий одной и той же функции с разными наборами ' +
@@ -130,7 +129,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question: 'В чем разница между interface и type в TypeScript?\n',
+      title: 'В чем разница между interface и type в TypeScript?\n',
       response:
         'В TypeScript как interface, так и type используются для описания структур данных и типов, но между ' +
         'ними есть некоторые различия, которые стоит учитывать. Ниже приведены основные отличия:\n' +
@@ -171,7 +170,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question: 'Что такое утиная типизация?',
+      title: 'Что такое утиная типизация?',
       response:
         ' Утиная типизация (duck typing) — это концепция в динамически типизированных языках программирования, ' +
         'которая основывается на проверке поведения объектов, а не их конкретном типе. Основной принцип ' +
@@ -199,7 +198,7 @@ export const dataTS: IDataQuestion = {
       level: 'Senior',
     },
     {
-      question: 'Что такое union type?',
+      title: 'Что такое union type?',
       response:
         'Union type (объединяющий тип) в TypeScript — это тип, который может представлять одно из нескольких значений. ' +
         'Он позволяет объединить несколько типов в один,' +
@@ -209,7 +208,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question:
+      title:
         'Как сводить к определенному типу в TypeScript? (type assertion)\n',
       response:
         ' В TypeScript вы можете использовать приведение типов (type assertion) для указания компилятору,' +
@@ -232,7 +231,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question: 'Как проверить тип объекта в TypeScript?',
+      title: 'Как проверить тип объекта в TypeScript?',
       response:
         'В TypeScript вы можете проверить тип объекта несколькими способами. Наиболее распространенные ' +
         'методы включают использование оператора typeof, операторов in, а также собственных функций для' +
@@ -261,7 +260,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question: 'Когда в TypeScript используется ключевое слово declare?',
+      title: 'Когда в TypeScript используется ключевое слово declare?',
       response:
         'Ключевое слово declare в TypeScript используется для объявления типов, которые существуют вне' +
         ' контекста вашего проекта, и помогает TypeScript правильно интерпретировать эти типы. Это ' +
@@ -295,7 +294,7 @@ export const dataTS: IDataQuestion = {
       level: 'Senior',
     },
     {
-      question:
+      title:
         'Расскажите об основных компонентах TypeScript? (язык, компилятор, вспомогательные\n' +
         'инструменты)',
       response:
@@ -351,7 +350,7 @@ export const dataTS: IDataQuestion = {
       level: 'Middle',
     },
     {
-      question:
+      title:
         ' Можно ли в TypeScript использовать строго типизированные функции использовать в\n' +
         'качестве параметров?',
       response:
@@ -362,8 +361,7 @@ export const dataTS: IDataQuestion = {
       level: 'Middle',
     },
     {
-      question:
-        ' Как сделать классы объявленные внутри модуля доступными извне?',
+      title: ' Как сделать классы объявленные внутри модуля доступными извне?',
       response:
         'В TypeScript, если вы хотите сделать классы, объявленные внутри модуля, доступными извне, необходимо использовать' +
         ' модификатор доступа export. Это позволит экспортировать класс из модуля, и другие модули смогут импортировать его.',
@@ -371,7 +369,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question: 'Типизация в typescript',
+      title: 'Типизация в typescript',
       response:
         '2.let, const - переменные, функции принимают значение с типизацией и возвращают типизированное значение\n' +
         '         Типы данных -\n' +
@@ -433,7 +431,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question: 'Наследование в TypeScript',
+      title: 'Наследование в TypeScript',
       response:
         'механизм, который позволяет создавать новые классы на основе уже существующих. Это позволяет переиспользовать ' +
         'код и организовывать его более структурированно. TypeScript поддерживает как однонаследование (один класс может наследоваться от одного родительского),' +
@@ -470,7 +468,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question: 'Пользовательские охранники типов (User Defined Type Guards) ',
+      title: 'Пользовательские охранники типов (User Defined Type Guards) ',
       response:
         'Пользовательские охранники типов (User Defined Type Guards) в TypeScript — это способ тестирования' +
         ' и проверки типов во время выполнения' +
@@ -495,7 +493,7 @@ export const dataTS: IDataQuestion = {
       level: 'Middle',
     },
     {
-      question: 'Enum в TypeScript',
+      title: 'Enum в TypeScript',
       response:
         'Enums (перечисления) в TypeScript — это способ определения наборов связанных констант. Они помогают организовать код ' +
         'и делают его более читаемым, понятным и удобным для сопровождения. Enums могут быть числовыми, строковыми или гибридными.' +
@@ -513,7 +511,7 @@ export const dataTS: IDataQuestion = {
       level: 'Middle',
     },
     {
-      question: 'Что такое интерфейс?',
+      title: 'Что такое интерфейс?',
       response:
         'Интерфейсы в TypeScript используются для определения структуры объектов. Они позволяют описать типы свойств ' +
         'и методов, которые должен иметь объект.' +
@@ -522,7 +520,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question: 'Что такое Mixins?',
+      title: 'Что такое Mixins?',
       response:
         'Mixins в TypeScript представляют собой способ комбинирования функциональности из нескольких классов в один класс. ' +
         'Они позволяют переиспользовать код и добавлять поведение к классам без необходимости наследования от нескольких базовых классов.\n' +
@@ -533,7 +531,7 @@ export const dataTS: IDataQuestion = {
       level: 'Middle',
     },
     {
-      question: 'Что такое Mapped types?',
+      title: 'Что такое Mapped types?',
       response:
         'Mapped types (порядковые типы) позволяют преобразовывать свойства одного типа в новый тип,' +
         ' применяя определенные операции к каждому из их свойств. Mapped types позволяют делать это ' +
@@ -549,7 +547,7 @@ export const dataTS: IDataQuestion = {
       level: 'Middle',
     },
     {
-      question: 'Для чего используется оператор keyof?',
+      title: 'Для чего используется оператор keyof?',
       response:
         'Оператор keyof в TypeScript используется для получения объединения строковых литералов, представляющих имена ' +
         'свойств объекта. Он позволяет получить ' +
@@ -558,7 +556,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question: 'Есть ли в TS возможность перегрузить методы? Конструкторы?',
+      title: 'Есть ли в TS возможность перегрузить методы? Конструкторы?',
       response:
         'Да, в TypeScript есть возможность перегрузки методов, но стоит отметить, что перегрузка конструкторов ' +
         'в TypeScript работает несколько иначе, чем в других языках программирования. Давайте рассмотрим оба случая подробнее.\n' +
@@ -576,7 +574,7 @@ export const dataTS: IDataQuestion = {
       level: 'Middle',
     },
     {
-      question: 'Что такое модуль в TypeScript?',
+      title: 'Что такое модуль в TypeScript?',
       response:
         'Модули в TypeScript - это набор связанных переменных, функций, классов и интерфейсов.\n' +
         '\n' +
@@ -586,8 +584,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question:
-        'Есть ли в TS возможность создать рекурсивный тип или интерфейс?',
+      title: 'Есть ли в TS возможность создать рекурсивный тип или интерфейс?',
       response:
         'Да, в TypeScript действительно есть возможность создавать рекурсивные типы и интерфейсы. ' +
         'Рекурсивные типы полезны для описания структур данных, которые могут содержать вложенные ' +
@@ -599,7 +596,7 @@ export const dataTS: IDataQuestion = {
       level: 'Senior',
     },
     {
-      question:
+      title:
         ' Если в базовом классе какой-то метод или геттер был помечен как abstract, обязательно ли его реализовывать в дочернем?',
       response:
         'Да, если метод или геттер в базовом классе помечен как abstract, то он обязательно должен ' +
@@ -610,8 +607,7 @@ export const dataTS: IDataQuestion = {
       level: 'Middle',
     },
     {
-      question:
-        ' Можно ли в дочернем классе переопределять метод родительского?',
+      title: ' Можно ли в дочернем классе переопределять метод родительского?',
       response:
         'Да, в TypeScript (как и в других объектно-ориентированных языках программирования) ' +
         'вы можете переопределять методы родительского класса в дочернем классе. Это называется переопределение' +
@@ -629,7 +625,7 @@ export const dataTS: IDataQuestion = {
       level: 'Middle',
     },
     {
-      question: 'Что можешь рассказать о generics?',
+      title: 'Что можешь рассказать о generics?',
       response:
         'Концепция, позволяющая создавать функции, классы и интерфейсы, которые работают с различными ' +
         'типами данных, не теряя при этом информацию о типах.' +
@@ -647,7 +643,7 @@ export const dataTS: IDataQuestion = {
       level: 'Junior',
     },
     {
-      question: 'Декораторы и их разновидности',
+      title: 'Декораторы и их разновидности',
       response:
         'Декораторы в TypeScript — это специальный вид аннотирования, который позволяет добавлять метаданные ' +
         'к классам, методам, свойствам и параметрам.' +
@@ -685,7 +681,7 @@ export const dataTS: IDataQuestion = {
       level: 'Middle',
     },
     {
-      question: 'Что такое фабрика декораторов',
+      title: 'Что такое фабрика декораторов',
       response:
         'Фабрика декораторов в TypeScript — это паттерн проектирования, который позволяет создавать' +
         ' декораторы (например, для классов, методов, свойств и параметров) с использованием дополнительных ' +
@@ -699,7 +695,7 @@ export const dataTS: IDataQuestion = {
       level: 'Middle',
     },
     {
-      question: 'Отличие абстрактного класса от абстрактного интерфейса?',
+      title: 'Отличие абстрактного класса от абстрактного интерфейса?',
       response:
         ' TypeScript абстрактные классы и интерфейсы представляют разные подходы к организации типов ' +
         'и архитектурной модели вашего приложения. ' +
@@ -739,7 +735,7 @@ export const dataTS: IDataQuestion = {
       active: false,
     },
     {
-      question: 'Фабрика декораторов в TypeScript ',
+      title: 'Фабрика декораторов в TypeScript ',
       response:
         'Фабрика декораторов в TypeScript — это паттерн проектирования, который позволяет создавать' +
         ' декораторы (например, для классов, методов, свойств и параметров) с использованием дополнительных ' +
@@ -753,7 +749,7 @@ export const dataTS: IDataQuestion = {
       active: false,
     },
     {
-      question: 'Объясните, как необязательная цепочка работает в TypeScript.',
+      title: 'Объясните, как необязательная цепочка работает в TypeScript.',
       response:
         'Необязательная цепочка (optional chaining) в TypeScript — это синтаксическая конструкция, ' +
         'которая позволяет безопасно обращаться к вложенным свойствам объектов, не вызывая ошибок,' +
@@ -766,7 +762,7 @@ export const dataTS: IDataQuestion = {
       active: false,
     },
     {
-      question: 'В чем разница между extends и implements в TypeScript?',
+      title: 'В чем разница между extends и implements в TypeScript?',
       response:
         '1. extends\n' +
         '\n' +
@@ -797,7 +793,7 @@ export const dataTS: IDataQuestion = {
       active: false,
     },
     {
-      question: 'Утилитные типы',
+      title: 'Утилитные типы',
       response:
         'Утилитные типы в TypeScript — это встроенные типы, которые помогают разработчикам выполнять общие' +
         ' операции с типами данных, значительно ' +
@@ -835,7 +831,7 @@ export const dataTS: IDataQuestion = {
       active: false,
     },
     {
-      question: 'Что такое условные типы в TypeScript?',
+      title: 'Что такое условные типы в TypeScript?',
       response:
         'Условные типы в TypeScript — это мощный инструмент для создания типов на основе других типов.' +
         ' Они позволяют определить тип в зависимости от того, выполняется ли какое-либо условие.' +
@@ -856,7 +852,7 @@ export const dataTS: IDataQuestion = {
       active: false,
     },
     {
-      question: 'В чем разница между выводом типа и контекстной типизацией?',
+      title: 'В чем разница между выводом типа и контекстной типизацией?',
       response:
         '1. Вывод типа (Type Inference)\n' +
         'Вывод типа — это механизм, с помощью которого TypeScript автоматически определяет тип переменной на основе её значения ' +
@@ -884,7 +880,7 @@ export const dataTS: IDataQuestion = {
       active: false,
     },
     {
-      question: 'Когда следует использовать unknown тип?',
+      title: 'Когда следует использовать unknown тип?',
       response:
         'Тип unknown в TypeScript вводит более строгую семантику по сравнению с типом any. Он предназначен для ситуаций, когда' +
         ' вы не знаете тип значения заранее, но хотите сохранить типовую безопасность.' +
@@ -914,7 +910,7 @@ export const dataTS: IDataQuestion = {
       active: false,
     },
     {
-      question:
+      title:
         'Когда вы используете возвращаемый тип never и чем он отличается от void?',
       response:
         'Типы never и void в TypeScript имеют разные значения и предназначение, хотя они могут показаться похожими.\n' +
@@ -932,7 +928,7 @@ export const dataTS: IDataQuestion = {
       active: false,
     },
     {
-      question: 'Когда вы видите полезность TypeScript?',
+      title: 'Когда вы видите полезность TypeScript?',
       response:
         '1. Большие и сложные проекты\n' +
         '- Упрощение управления типами: В больших кодовых базах сложность ' +

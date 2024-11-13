@@ -5,7 +5,7 @@ export const dataRxjs: IDataQuestion = {
   questions: [
     {
       level: 'Junior',
-      question: 'Observable и его отличие от промиса ',
+      title: 'Observable и его отличие от промиса ',
       response:
         'Объекты RxJS Observable создаются либо с использованием операторов создания (of, from, fromEvent), либо через new Observable.' +
         'Каждый Observable может отправлять своим "потребителям" уведомления вызовом одного из трех методов:\n' +
@@ -20,7 +20,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Junior',
-      question: 'Subject и его разновидности',
+      title: 'Subject и его разновидности',
       response:
         'Разновидность обьектов Observable - стрим где не нужно начальное значение и возвращает последнее\n' +
         '        BehaviorSubject - есть начальное и возвращает последнее\n' +
@@ -29,7 +29,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Junior',
-      question: 'Что можешь сказать об RXjs ?',
+      title: 'Что можешь сказать об RXjs ?',
       response:
         ' RxJS (Reactive Extensions for JavaScript) — это библиотека для управления асинхронными и событийными данными с использованием реактивного программирования. RxJS позволяет разработчикам собирать и обрабатывать потоки данных, обеспечивая инструменты для работы с асинхронными запросами, событиями и изменениями состояния приложения.\n' +
         '\n' +
@@ -62,7 +62,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Junior',
-      question: 'Что такое Observables?',
+      title: 'Что такое Observables?',
       response:
         'Observables — это один из основополагающих концептов библиотеки RxJS (Reactive Extensions for JavaScript) и являются основным строительным блоком реактивного программирования. Они представляют собой поток данных, который может эмитировать (выдавать) значения во время своей жизненного цикла. Observables позволяют работать с асинхронными данными и событиями, предоставляя простой и мощный способ управления ими.\n' +
         '\n' +
@@ -95,7 +95,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question: 'Какие бывают observable?',
+      title: 'Какие бывают observable?',
       response:
         ' В RxJS существует несколько видов или типов Observables, которые могут быть использованы для работы с различными сценариями и источниками данных. Вот основные типы Observables:\n' +
         '\n' +
@@ -125,7 +125,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question: 'Чем отличается map от switchmap?',
+      title: 'Чем отличается map от switchmap?',
       response:
         ' map и switchMap — это два распространенных оператора в RxJS, которые применяются к Observable. Они используются для преобразования или изменения данных, но имеют разные механизмы работы и области применения. Ниже приведены основные различия между ними:\n' +
         '\n' +
@@ -151,7 +151,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question:
+      title:
         'Как сделать в observable кеширование результата (бехавиор сабджект, паблиш)',
       response:
         'Кеширование результатов в RxJS с использованием Observable, таких как BehaviorSubject, — это хороший способ избежать повторных вызовов API или других затратных операций для одних и тех же данных. В этом подходе вы можете хранить последнюю' +
@@ -171,7 +171,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question: 'Различия switchmap, exhaustMap, concatMap и тд',
+      title: 'Различия switchmap, exhaustMap, concatMap и тд',
       response:
         'Операторы switchMap, exhaustMap, concatMap и другие являются частью библиотеки RxJS и используются для управления асинхронными потоками данных, особенно в контексте работы с Observables. Вот основные различия между этими операторами:\n' +
         '\n' +
@@ -209,7 +209,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question: 'Операторы forkJoin,combineLatest,take',
+      title: 'Операторы forkJoin,combineLatest,take',
       response:
         'Оператор forkJoin принимает любой количество Observables, ожидает их завершения, а затем возвращает массив значений ' +
         'завешенных Observables. Оператор combineLatest() - это еще один полезный оператор RxJS, который позволяет ' +
@@ -221,7 +221,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question: 'Операторы skip, tap, map, filter,',
+      title: 'Операторы skip, tap, map, filter,',
       response:
         'Skip Пропускает значения до тех пор, пока отправленные уведомления не будут равны или меньше указанного количества пропусков. ' +
         'Вызывает ошибку, если количество пропусков равно или больше фактического количества эмиттов, и источник выдает ошибку.' +
@@ -232,7 +232,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question: 'Операторы takeuntil, switchmap, mergemap, cancatmap',
+      title: 'Операторы takeuntil, switchmap, mergemap, cancatmap',
       response:
         ' TakeUntil Позволяет значениям передаваться до тех пор, пока второй Observable, не выдаст значение. Затем он завершается.' +
         'Switchmap Сопоставляет каждое значение с наблюдаемым, затем выравнивает все эти внутренние наблюдаемые с помощью switchAll(Сглаживает наблюдаемое из наблюдаемых.). ' +
@@ -242,7 +242,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question: 'Операторы exhaustMap,zip,pluck,iif',
+      title: 'Операторы exhaustMap,zip,pluck,iif',
       response:
         'exhaustMap Сопоставляет каждое значение с наблюдаемым, затем выравнивает все эти внутренние наблюдаемые с помощью exhaustAll' +
         '(Выравнивает Observable-of-Observables, отбрасывая следующий внутренний Observables, пока текущий внутренний Observable все еще выполняется).' +
@@ -254,7 +254,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Senior',
-      question: 'Операторы timer,interval,of,from,fromEvent',
+      title: 'Операторы timer,interval,of,from,fromEvent',
       response:
         'timer Используется для отправки уведомления после задержки. ' +
         'interval Используется для отправки уведомления через отрезки времени.' +
@@ -265,7 +265,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Senior',
-      question: 'Операторы startWith,catch,catchError,retry',
+      title: 'Операторы startWith,catch,catchError,retry',
       response:
         'startWith Сначала по порядку выдает свои аргументы, а затем все выбросы из источника. ' +
         'debounce Выдает уведомление из исходного наблюдаемого только по истечении определенного промежутка времени,' +
@@ -279,8 +279,7 @@ export const dataRxjs: IDataQuestion = {
     },
     {
       level: 'Senior',
-      question:
-        'Операторы distinctUntilChanged,distinctUntilKeyChanged,toPromise',
+      title: 'Операторы distinctUntilChanged,distinctUntilKeyChanged,toPromise',
       response:
         ' distinctUntilChanged Возвращает результат Observable, который выдает все значения, отправленные исходным ' +
         'наблюдаемым объектом, если они отличаются от последнего значения, отправленного результирующим наблюдаемым объектом.' +

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IQuestion } from '../question/type';
+import { IQuestion, IQuestionDB } from '../question/type';
 
 interface IGit {
   id: string;
@@ -28,7 +28,7 @@ export class ApiGitService {
   private _categoriesUrl = 'http://localhost:3000/categories';
   constructor(public http: HttpClient) {}
   public getQuestionsCurrentCategory(endpoint: string) {
-    return this.http.get<IQuestion[]>(`${this._baseUrl}${endpoint}`);
+    return this.http.get<IQuestionDB[]>(`${this._baseUrl}${endpoint}`);
   }
   public getAllCategories(): Observable<ICategory[]> {
     return this.http.get<ICategory[]>(`${this._categoriesUrl}`);
@@ -50,8 +50,8 @@ export class ApiGitService {
     question: string,
     response: string,
     level: 'Junior' | 'Middle' | 'Senior',
-  ) {
-    return this.http.post<IQuestion>(`${this._baseUrl}${endpoint}`, {
+  ): Observable<IQuestionDB> {
+    return this.http.post<IQuestionDB>(`${this._baseUrl}${endpoint}`, {
       question: question,
       response: response,
       level: level,
@@ -60,6 +60,13 @@ export class ApiGitService {
   }
   public putGitQuestion(): Observable<IGit> {
     return this.http.put<IGit>(`${this._gitUrl}/5`, this.mockObject2);
+  }
+  public patchQuestion(
+    endpoint: string,
+    item: IQuestionDB,
+  ): Observable<IQuestion> {
+    console.log(`${this._baseUrl}${endpoint}`);
+    return this.http.patch<IQuestionDB>(`${this._baseUrl}${endpoint}`, item);
   }
   public patchCategory(id: string, name: string) {
     return this.http.patch<ICategory>(`${this._categoriesUrl}/${id}`, { name });

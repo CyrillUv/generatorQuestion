@@ -5,14 +5,14 @@ export const dataLinux: IDataQuestion = {
   questions: [
     {
       level: 'Junior',
-      question: 'Что такое Linux?',
+      title: 'Что такое Linux?',
       response:
         'Это операционная система из семейства Unix - подобных операционных систем,на базе ядра Linux, разработанная Линуксом Товальдсом ',
       active: false,
     },
     {
       level: 'Junior',
-      question: 'Основы командной строки',
+      title: 'Основы командной строки',
       response:
         'Основные команды:\n' +
         '- ls: просмотр содержимого директории.\n' +
@@ -28,7 +28,7 @@ export const dataLinux: IDataQuestion = {
     },
     {
       level: 'Junior',
-      question: 'Создание папки ',
+      title: 'Создание папки ',
       response:
         'Создание папки в Linux можно выполнить с помощью команды mkdir.Чтобы создать новую папку,' +
         ' откройте терминал и введите команду:\n' +
@@ -38,7 +38,7 @@ export const dataLinux: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question: 'Смена владельца',
+      title: 'Смена владельца',
       response:
         'В Linux для изменения владельца файла или директории используется команда chown (от английского "change owner").' +
         ' Эта команда позволяет не только менять владельца, но и группу файла.' +
@@ -54,7 +54,7 @@ export const dataLinux: IDataQuestion = {
     },
     {
       level: 'Junior',
-      question: 'Что такое SSH',
+      title: 'Что такое SSH',
       response:
         'SSH (Secure Shell)\n' +
         '\n' +
@@ -82,7 +82,7 @@ export const dataLinux: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question: 'Что такое SCP',
+      title: 'Что такое SCP',
       response:
         'SCP (Secure Copy Protocol)\n' +
         '\n' +
@@ -127,7 +127,7 @@ export const dataLinux: IDataQuestion = {
     },
     {
       level: 'Junior',
-      question: 'Копирование в Linux',
+      title: 'Копирование в Linux',
       response:
         'В Linux для копирования файлов и директорий используется команда cp.' +
         'Для копирования директорий измените поведение команды cp с помощью опции -r (или --recursive):\n' +
@@ -147,7 +147,7 @@ export const dataLinux: IDataQuestion = {
     },
     {
       level: 'Senior',
-      question: ' awk в linux',
+      title: ' awk в linux',
       response:
         'awk — это мощный текстовый процессор и язык программирования, используемый для обработки ' +
         'и анализа текстовых файлов и потоковых данных.Читает за один раз строку выполняет определённые действия, а далее выводит результат.' +
@@ -156,7 +156,7 @@ export const dataLinux: IDataQuestion = {
     },
     {
       level: 'Junior',
-      question: 'Как убить процесс в Linux?',
+      title: 'Как убить процесс в Linux?',
       response:
         '1. Использование команды kill\n' +
         '\n' +
@@ -204,7 +204,7 @@ export const dataLinux: IDataQuestion = {
     },
     {
       level: 'Middle',
-      question: 'Поиск файлов в Linux',
+      title: 'Поиск файлов в Linux',
       response:
         'В Linux для поиска файлов и текстов в файлах используются несколько команд, наиболее распространенные из которых — это find, locate и grep.' +
         'Команда find используется для поиска файлов и директорий по заданным критериям.\n' +
