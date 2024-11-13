@@ -33,10 +33,19 @@
   </div>
   <div class="documents__questions">
     @for (question of questions; track question.question; let i = $index) {
-      <div (click)="question.active = !question.active">
-        <span class="documents__question">{{
-          i + 1 + ". " + question.question
-        }}</span>
+      <div
+        class="documents__question"
+        (click)="question.active = !question.active"
+      >
+        <main class="documents__question__items">
+          <span class="documents__question__items__item">{{
+            i + 1 + ". " + question.question
+          }}</span>
+          <div>
+            <span class="documents__question__items--action">✎</span>
+            <span class="documents__question__items--action">✖</span>
+          </div>
+        </main>
         <div class="documents__response" *ngIf="question.active">
           {{ question.response }}
         </div>
@@ -62,15 +71,12 @@
               name="question"
               class="documents__questions--addition__question"
               [class.documents__questions--addition__error]="
-                !newQuestion.question.length || checkAnalogyValidator()
+                !newQuestion.question.length
               "
               [(ngModel)]="newQuestion.question"
             />
             @if (!newQuestion.question.length) {
               <div>Обязательное поле ввода</div>
-            }
-            @if (checkAnalogyValidator()) {
-              <div>Такой вопрос существует</div>
             }
           </div>
           <div>
@@ -138,6 +144,7 @@
         <button (click)="closeModal()">Отмена</button>
       </ng-template>
     </app-custom-sidebar>
+
     <button *ngIf="currentCategory" (click)="creatingQuestion = true">
       Создать вопрос
     </button>

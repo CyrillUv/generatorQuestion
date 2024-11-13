@@ -10,6 +10,7 @@
 
   &__questions {
     width: 70%;
+
     &--addition {
 
       &__response,&__question{
@@ -54,7 +55,19 @@
       }
     }
   }
-  &__question, &__category {
+  &__question{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  &__items{
+    display: flex;
+    justify-content: space-between;
+    &--action{
+      margin:0 10px;
+    }
+  }
+  }
+  &__question__item,&__question--action, &__category {
     cursor: pointer;
     &:hover {
       color: lightyellow;

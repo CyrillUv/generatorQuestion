@@ -137,11 +137,6 @@ export class DocumentsComponent implements OnInit {
     };
     this.heightTextarea = 'auto';
   }
-  public checkAnalogyValidator(): boolean {
-    return this.questions.some(
-      (el) => el.question === this.newQuestion.question,
-    );
-  }
   //Массив категорий
   //   public categories!: NameDataType[];
   //   //Массив вопросов

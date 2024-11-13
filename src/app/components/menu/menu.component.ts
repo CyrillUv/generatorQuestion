@@ -12,7 +12,6 @@ import { QuestionService } from '../../data/question/question.service';
 import { MultiSelectComponent } from '../custom/multi-select/multi-select.component';
 import { MyFormComponent } from '../custom/my-form/my-form.component';
 import { ApiGitService } from '../../data/api/api-git.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
