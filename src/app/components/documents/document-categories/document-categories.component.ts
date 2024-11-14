@@ -14,6 +14,7 @@ import { IQuestionDB } from '../../../data/question/type';
 })
 export class DocumentCategoriesComponent implements OnInit {
   @Input({ required: true }) public questions!: IQuestionDB[];
+  @Output() loadingEmitter = new EventEmitter<boolean>();
   @Output() currentCategoryEmitter = new EventEmitter<string>();
   public currentCategory!: string;
   public newCategory = '';

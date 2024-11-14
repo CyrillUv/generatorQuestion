@@ -12,6 +12,8 @@ import { QuestionService } from '../../data/question/question.service';
 import { MultiSelectComponent } from '../custom/multi-select/multi-select.component';
 import { MyFormComponent } from '../custom/my-form/my-form.component';
 import { ApiGitService } from '../../data/api/api-git.service';
+import { ToastComponent } from '../custom/toast/toast.component';
+import { LoaderComponent } from '../custom/loader/loader.component';
 
 @Component({
   selector: 'app-menu',
@@ -27,6 +29,8 @@ import { ApiGitService } from '../../data/api/api-git.service';
     ModalComponent,
     MultiSelectComponent,
     MyFormComponent,
+    ToastComponent,
+    LoaderComponent,
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
@@ -34,6 +38,7 @@ import { ApiGitService } from '../../data/api/api-git.service';
 export class MenuComponent {
   //Флаг для отображения модального окна
   public activeModal!: boolean;
+  public loading = true;
   //Константный обьект содержащий компоненты ключ(направление пути),значение(компонент)
   private readonly routeInComponent: {
     '/questions': typeof SettingsQuestionsComponent;
@@ -50,6 +55,9 @@ export class MenuComponent {
   ) {
     //Задание значения отображению модалки
     this.activeModal = this.ms.getActiveModal();
+  }
+  public setLoading(loading: boolean) {
+    this.loading = loading;
   }
   public getAllGitQuestions(): void {
     this._apiService.getAllGitQuestions().subscribe((res) => {

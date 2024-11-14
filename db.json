@@ -68,16 +68,30 @@
   ],
   "git": [
     {
-      "title": "Что такое Git?",
-      "response": "Система контроля версий",
-      "active": false,
+      "id": "039e",
+      "title": "норм",
+      "response": "выйв",
       "level": "Junior",
-      "id": "dae9"
+      "active": false
     },
     {
-      "id": "9911",
-      "title": "zcxvcxzv",
-      "response": "wqeqweqwr",
+      "id": "dedc",
+      "title": "xzcsa",
+      "response": "zxczsassa",
+      "level": "Junior",
+      "active": false
+    },
+    {
+      "id": "174a",
+      "title": "sad",
+      "response": "123",
+      "level": "Junior",
+      "active": false
+    },
+    {
+      "id": "4607",
+      "title": "qweqw",
+      "response": "dsfvv",
       "level": "Junior",
       "active": false
     }

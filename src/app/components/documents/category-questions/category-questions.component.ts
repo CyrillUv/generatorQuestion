@@ -15,6 +15,7 @@ import { NgIf } from '@angular/common';
 
 import { ApiGitService } from '../../../data/api/api-git.service';
 import { ModalComponent } from '../../custom/modal/modal.component';
+import { ToastComponent } from '../../custom/toast/toast.component';
 
 @Component({
   selector: 'app-category-questions',
@@ -26,6 +27,7 @@ import { ModalComponent } from '../../custom/modal/modal.component';
     FormsModule,
     NgIf,
     ModalComponent,
+    ToastComponent,
   ],
   templateUrl: './category-questions.component.html',
   styleUrl: '../documents.component.scss',
@@ -33,9 +35,12 @@ import { ModalComponent } from '../../custom/modal/modal.component';
 export class CategoryQuestionsComponent implements OnChanges, OnInit {
   @Input({ required: true }) public currentCategory!: string;
   @Input() deletedQuestion!: boolean;
+  @Output() loadingEmitter = new EventEmitter<boolean>();
+
   @Output() public questionsEmitter = new EventEmitter<IQuestionDB[]>();
   @Output() public deletedQuestionEmitter = new EventEmitter<boolean>();
   public questions!: IQuestionDB[];
+  public toastData = { title: '', description: '', active: false };
   public creatingQuestion = false;
   public changingQuestion = false;
   public currentQuestion: IQuestionDB = {
@@ -109,6 +114,8 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
     console.log(this.questions);
     //Нужно обработать валидатором этот кэйс
     if (title && response && !this.questions.some((el) => el.title === title)) {
+      this.loadingEmitter.emit(true);
+
       this.apiService
         .postQuestion(this.currentCategory, title, response, level)
         .pipe(
@@ -121,6 +128,9 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
         .subscribe();
       this.creatingQuestion = false;
       this.closeSidebar();
+      this.toastData.active = true;
+      this.toastData.title = 'Успех';
+      this.toastData.description = 'Добавление нового вопроса прошло успешно!';
     }
   }
 
@@ -130,6 +140,7 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
   }
   public editQuestion(): void {
     if (this.currentQuestion.title && this.currentQuestion.response) {
+      this.loadingEmitter.emit(true);
       this.apiService
         .patchQuestion(
           this.currentCategory + '/' + this.currentQuestion.id,
@@ -140,11 +151,15 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
         )
         .subscribe((res) => res);
       this.closeSidebar();
+      this.toastData.active = true;
+      this.toastData.title = 'Успех';
+      this.toastData.description = 'Изменение вопроса прошло успешно!';
       console.log(this.currentQuestion);
     }
   }
   public removeQuestion() {
     if (this.currentQuestion.id) {
+      this.loadingEmitter.emit(true);
       this.apiService
         .deleteQuestion(this.currentCategory + '/' + this.currentQuestion.id)
         .pipe(
@@ -152,10 +167,16 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
         )
         .subscribe((res) => res);
       this.deletedQuestionEmitter.emit(false);
+      this.toastData.active = true;
     }
+    this.toastData.title = 'Успех';
+    this.toastData.description = 'Удаление вопроса прошло успешно!';
   }
   public deletingQuestion(nameQuestion: string, state: boolean) {
     this.deletedQuestionEmitter.emit(state);
     this.getQuestionCurrentCategory(this.currentCategory, nameQuestion);
+  }
+  public toastHandler(state: boolean) {
+    this.toastData.active = state;
   }
 }

@@ -1,4 +1,10 @@
 <div class="documents">
+  <app-toast
+    (toastStateEmitter)="toastHandler($event)"
+    [activeToast]="toastData.active"
+    [description]="toastData.description"
+    [title]="toastData.title"
+  />
   @if (deletedQuestion) {
     <app-modal
       [title]="'Удаление вопроса'"

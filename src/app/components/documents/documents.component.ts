@@ -9,6 +9,7 @@ import { DocumentCategoriesComponent } from './document-categories/document-cate
 import { ModalComponent } from '../custom/modal/modal.component';
 import { tap } from 'rxjs';
 import { ApiGitService } from '../../data/api/api-git.service';
+import { LoaderComponent } from '../custom/loader/loader.component';
 
 @Component({
   selector: 'app-documents',
@@ -23,6 +24,7 @@ import { ApiGitService } from '../../data/api/api-git.service';
     CategoryQuestionsComponent,
     DocumentCategoriesComponent,
     ModalComponent,
+    LoaderComponent,
   ],
   templateUrl: './documents.component.html',
   styleUrl: './documents.component.scss',
@@ -31,7 +33,7 @@ export class DocumentsComponent {
   public questions!: IQuestion[];
   public currentCategory!: string;
   public deletedQuestion = false;
-
+  public loading = true;
   public setQuestions(questions: IQuestion[]): void {
     this.questions = questions;
   }
@@ -40,7 +42,9 @@ export class DocumentsComponent {
     this.currentCategory = category;
     console.log(this.currentCategory);
   }
-
+  public setLoading(loading: boolean) {
+    this.loading = loading;
+  }
   public changeDeletedQuestion(state: boolean): void {
     this.deletedQuestion = state;
   }

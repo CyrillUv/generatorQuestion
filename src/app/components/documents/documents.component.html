@@ -1,11 +1,15 @@
-<div class="documents">
+<app-loader [loading]="loading" (loadingEmitter)="setLoading($event)" />
+
+<div class="documents" [class.loading-veil]="loading">
   <app-document-categories
     [questions]="questions"
+    (loadingEmitter)="setLoading($event)"
     (currentCategoryEmitter)="setCurrentCategory($event)"
   />
   <app-category-questions
     [deletedQuestion]="deletedQuestion"
     [currentCategory]="currentCategory"
+    (loadingEmitter)="setLoading($event)"
     (deletedQuestionEmitter)="changeDeletedQuestion($event)"
     (questionsEmitter)="setQuestions($event)"
   />
