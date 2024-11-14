@@ -77,7 +77,9 @@ export class ApiGitService {
   public deleteCategory(id: string): Observable<ICategory> {
     return this.http.delete<ICategory>(`${this._categoriesUrl}/${id}`);
   }
-
+  public deleteQuestion(endpoint: string) {
+    return this.http.delete<IQuestionDB>(`${this._baseUrl}${endpoint}`);
+  }
   public patchGitQuestion(): Observable<IGit> {
     return this.http.patch<IGit>(`${this._gitUrl}/15`, this.mockObject2);
   }

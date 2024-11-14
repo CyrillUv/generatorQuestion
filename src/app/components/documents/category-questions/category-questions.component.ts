@@ -14,6 +14,7 @@ import { SidebarComponent } from '../../custom/sidebar/sidebar.component';
 import { NgIf } from '@angular/common';
 
 import { ApiGitService } from '../../../data/api/api-git.service';
+import { ModalComponent } from '../../custom/modal/modal.component';
 
 @Component({
   selector: 'app-category-questions',
@@ -24,13 +25,16 @@ import { ApiGitService } from '../../../data/api/api-git.service';
     SidebarComponent,
     FormsModule,
     NgIf,
+    ModalComponent,
   ],
   templateUrl: './category-questions.component.html',
   styleUrl: '../documents.component.scss',
 })
-export class CategoryQuestionsComponent implements OnChanges {
+export class CategoryQuestionsComponent implements OnChanges, OnInit {
   @Input({ required: true }) public currentCategory!: string;
+  @Input() deletedQuestion!: boolean;
   @Output() public questionsEmitter = new EventEmitter<IQuestionDB[]>();
+  @Output() public deletedQuestionEmitter = new EventEmitter<boolean>();
   public questions!: IQuestionDB[];
   public creatingQuestion = false;
   public changingQuestion = false;
@@ -47,6 +51,12 @@ export class CategoryQuestionsComponent implements OnChanges {
     active: false,
   };
   public heightTextarea = 'auto';
+
+  ngOnInit() {
+    if (this.currentCategory) {
+      this.getQuestionsCurrentCategory(this.currentCategory);
+    }
+  }
 
   ngOnChanges() {
     if (this.currentCategory) {
@@ -91,25 +101,6 @@ export class CategoryQuestionsComponent implements OnChanges {
       ) as IQuestionDB;
     });
   }
-  public changeQuestion(nameQuestion: string) {
-    this.getQuestionCurrentCategory(this.currentCategory, nameQuestion);
-    this.changingQuestion = true;
-  }
-  public editQuestion(): void {
-    if (this.currentQuestion.title && this.currentQuestion.response) {
-      this.apiService
-        .patchQuestion(
-          this.currentCategory + '/' + this.currentQuestion.id,
-          this.currentQuestion,
-        )
-        .pipe(
-          tap((n) => this.getQuestionsCurrentCategory(this.currentCategory)),
-        )
-        .subscribe((res) => res);
-      this.closeSidebar();
-      console.log(this.currentQuestion);
-    }
-  }
   public addQuestion(
     title: string,
     response: string,
@@ -131,5 +122,40 @@ export class CategoryQuestionsComponent implements OnChanges {
       this.creatingQuestion = false;
       this.closeSidebar();
     }
+  }
+
+  public changeQuestion(nameQuestion: string) {
+    this.getQuestionCurrentCategory(this.currentCategory, nameQuestion);
+    this.changingQuestion = true;
+  }
+  public editQuestion(): void {
+    if (this.currentQuestion.title && this.currentQuestion.response) {
+      this.apiService
+        .patchQuestion(
+          this.currentCategory + '/' + this.currentQuestion.id,
+          this.currentQuestion,
+        )
+        .pipe(
+          tap((n) => this.getQuestionsCurrentCategory(this.currentCategory)),
+        )
+        .subscribe((res) => res);
+      this.closeSidebar();
+      console.log(this.currentQuestion);
+    }
+  }
+  public removeQuestion() {
+    if (this.currentQuestion.id) {
+      this.apiService
+        .deleteQuestion(this.currentCategory + '/' + this.currentQuestion.id)
+        .pipe(
+          tap((n) => this.getQuestionsCurrentCategory(this.currentCategory)),
+        )
+        .subscribe((res) => res);
+      this.deletedQuestionEmitter.emit(false);
+    }
+  }
+  public deletingQuestion(nameQuestion: string, state: boolean) {
+    this.deletedQuestionEmitter.emit(state);
+    this.getQuestionCurrentCategory(this.currentCategory, nameQuestion);
   }
 }

@@ -1,4 +1,25 @@
 <div class="documents">
+  @if (deletedQuestion) {
+    <app-modal
+      [title]="'Удаление вопроса'"
+      (closeEmitter)="deletingQuestion(this.currentQuestion.title, false)"
+      [bodyTemplate]="bodyTemplate"
+    >
+      <ng-template #bodyTemplate>
+        <div class="documents__modal">
+          <h3>Вы точно хотите удалить этот вопрос?</h3>
+          <div class="documents__modal__actions">
+            <button (click)="removeQuestion()">Удалить</button>
+            <button
+              (click)="deletingQuestion(this.currentQuestion.title, false)"
+            >
+              Отмена
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </app-modal>
+  }
   <div class="documents__questions">
     @for (question of questions; track question.title; let i = $index) {
       <div
@@ -16,7 +37,11 @@
               (click)="changeQuestion(question.title)"
               >✎</span
             >
-            <span class="documents__question__items--action">✖</span>
+            <span
+              class="documents__question__items--action"
+              (click)="deletingQuestion(question.title, true)"
+              >✖</span
+            >
           </div>
         </main>
         <div class="documents__response" *ngIf="question.active">

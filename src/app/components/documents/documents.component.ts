@@ -6,6 +6,9 @@ import { IQuestion } from '../../data/question/type';
 import { SidebarComponent } from '../custom/sidebar/sidebar.component';
 import { CategoryQuestionsComponent } from './category-questions/category-questions.component';
 import { DocumentCategoriesComponent } from './document-categories/document-categories.component';
+import { ModalComponent } from '../custom/modal/modal.component';
+import { tap } from 'rxjs';
+import { ApiGitService } from '../../data/api/api-git.service';
 
 @Component({
   selector: 'app-documents',
@@ -19,6 +22,7 @@ import { DocumentCategoriesComponent } from './document-categories/document-cate
     SidebarComponent,
     CategoryQuestionsComponent,
     DocumentCategoriesComponent,
+    ModalComponent,
   ],
   templateUrl: './documents.component.html',
   styleUrl: './documents.component.scss',
@@ -26,15 +30,19 @@ import { DocumentCategoriesComponent } from './document-categories/document-cate
 export class DocumentsComponent {
   public questions!: IQuestion[];
   public currentCategory!: string;
+  public deletedQuestion = false;
 
   public setQuestions(questions: IQuestion[]): void {
     this.questions = questions;
-    console.log(this.questions);
   }
 
   public setCurrentCategory(category: string): void {
     this.currentCategory = category;
     console.log(this.currentCategory);
+  }
+
+  public changeDeletedQuestion(state: boolean): void {
+    this.deletedQuestion = state;
   }
 
   // Функция для изменения высоты

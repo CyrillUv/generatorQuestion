@@ -4,7 +4,9 @@
     (currentCategoryEmitter)="setCurrentCategory($event)"
   />
   <app-category-questions
+    [deletedQuestion]="deletedQuestion"
     [currentCategory]="currentCategory"
+    (deletedQuestionEmitter)="changeDeletedQuestion($event)"
     (questionsEmitter)="setQuestions($event)"
   />
 </div>
