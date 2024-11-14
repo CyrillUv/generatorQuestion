@@ -62,13 +62,8 @@
     },
     {
       "id": "12",
-      "name": "jksakjfashnk",
-      "endpoint": "/html"
-    },
-    {
-      "id": "13",
       "name": "CSS",
-      "endpoint": "/css"
+      "endpoint": "CSS"
     }
   ],
   "git": [
@@ -98,6 +93,13 @@
       "title": "asd2131421341",
       "response": "sadiiiii",
       "level": "Middle",
+      "active": false
+    },
+    {
+      "id": "af57",
+      "title": "Кайфуем",
+      "response": "segodnya mi s taboi kaifuem а я опять тебя целую\n",
+      "level": "Senior",
       "active": false
     }
   ]

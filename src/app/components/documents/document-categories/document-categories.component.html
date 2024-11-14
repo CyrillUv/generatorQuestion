@@ -1,0 +1,34 @@
+<div class="documents">
+  <div class="categories">
+    <div routerLink="/menu">← Меню</div>
+    @for (category of categories; track category) {
+      <div
+        class="documents__category"
+        (click)="getQuestionsCurrentCategory(category.endpoint)"
+      >
+        {{ category.name }}
+        @if (adminMode) {
+          <main>
+            <span
+              class="documents__category--action"
+              (click)="changeCategory(category.id, newCategory)"
+              >✎</span
+            >
+            <span
+              class="documents__category--action"
+              (click)="removeCategory(category.id)"
+              >✖</span
+            >
+          </main>
+        }
+      </div>
+    }
+    <div [routerLink]="'/screen'">Скрины</div>
+    @if (adminMode) {
+      <div>
+        <input [(ngModel)]="newCategory" (keydown.enter)="addCategory()" />
+        <button (click)="addCategory()">Добавить категорию</button>
+      </div>
+    }
+  </div>
+</div>

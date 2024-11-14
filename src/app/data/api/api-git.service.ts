@@ -47,12 +47,12 @@ export class ApiGitService {
   }
   public postQuestion(
     endpoint: string,
-    question: string,
+    title: string,
     response: string,
     level: 'Junior' | 'Middle' | 'Senior',
   ): Observable<IQuestionDB> {
     return this.http.post<IQuestionDB>(`${this._baseUrl}${endpoint}`, {
-      question: question,
+      title: title,
       response: response,
       level: level,
       active: false,
