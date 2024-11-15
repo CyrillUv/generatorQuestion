@@ -15,7 +15,10 @@ import { NgIf } from '@angular/common';
 
 import { ApiGitService } from '../../../data/api/api-git.service';
 import { ModalComponent } from '../../custom/modal/modal.component';
-import { ToastComponent } from '../../custom/toast/toast.component';
+import {
+  ToastComponent,
+  ToastStatus,
+} from '../../custom/toast/toast.component';
 
 @Component({
   selector: 'app-category-questions',
@@ -36,11 +39,15 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
   @Input({ required: true }) public currentCategory!: string;
   @Input() deletedQuestion!: boolean;
   @Output() loadingEmitter = new EventEmitter<boolean>();
-
   @Output() public questionsEmitter = new EventEmitter<IQuestionDB[]>();
   @Output() public deletedQuestionEmitter = new EventEmitter<boolean>();
   public questions!: IQuestionDB[];
-  public toastData = { title: '', description: '', active: false };
+  public toastData = {
+    title: '',
+    description: '',
+    active: false,
+    type: ToastStatus.success,
+  };
   public creatingQuestion = false;
   public changingQuestion = false;
   public currentQuestion: IQuestionDB = {
@@ -68,6 +75,7 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
       this.getQuestionsCurrentCategory(this.currentCategory);
     }
   }
+
   constructor(private apiService: ApiGitService) {}
 
   public autoResize(event: Event) {
@@ -88,6 +96,7 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
     };
     this.heightTextarea = 'auto';
   }
+
   public getQuestionsCurrentCategory(endpoint: string): void {
     this.apiService.getQuestionsCurrentCategory(endpoint).subscribe((res) => {
       this.questions = res;
@@ -96,6 +105,7 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
       console.log(this.questions);
     });
   }
+
   public getQuestionCurrentCategory(
     endpoint: string,
     nameQuestion: string,
@@ -106,6 +116,7 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
       ) as IQuestionDB;
     });
   }
+
   public addQuestion(
     title: string,
     response: string,
@@ -118,19 +129,35 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
 
       this.apiService
         .postQuestion(this.currentCategory, title, response, level)
-        .pipe(
-          tap((n) => {
+        // .pipe(
+        // todo catchError
+        //   tap((n) => {
+        //     // Todo switchMAp
+        //     this.getQuestionsCurrentCategory(this.currentCategory);
+        //     console.log(n);
+        //   }),
+        // )
+        .subscribe(
+          () => {
+            console.log('good');
+            this.creatingQuestion = false;
+            this.closeSidebar();
+            this.toastData.active = true;
+            this.toastData.title = 'Успех';
+            this.toastData.description =
+              'Добавление нового вопроса прошло успешно!';
             this.getQuestionsCurrentCategory(this.currentCategory);
-
-            console.log(n);
-          }),
-        )
-        .subscribe();
-      this.creatingQuestion = false;
-      this.closeSidebar();
-      this.toastData.active = true;
-      this.toastData.title = 'Успех';
-      this.toastData.description = 'Добавление нового вопроса прошло успешно!';
+            this.loadingEmitter.emit(false);
+          },
+          (error) => {
+            console.log(error);
+            this.toastData.active = true;
+            this.toastData.title = 'Ошибка';
+            this.toastData.description = error.error;
+            this.loadingEmitter.emit(false);
+            this.toastData.type = ToastStatus.error;
+          },
+        );
     }
   }
 
@@ -138,6 +165,7 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
     this.getQuestionCurrentCategory(this.currentCategory, nameQuestion);
     this.changingQuestion = true;
   }
+
   public editQuestion(): void {
     if (this.currentQuestion.title && this.currentQuestion.response) {
       this.loadingEmitter.emit(true);
@@ -149,14 +177,25 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
         .pipe(
           tap((n) => this.getQuestionsCurrentCategory(this.currentCategory)),
         )
-        .subscribe((res) => res);
-      this.closeSidebar();
-      this.toastData.active = true;
-      this.toastData.title = 'Успех';
-      this.toastData.description = 'Изменение вопроса прошло успешно!';
-      console.log(this.currentQuestion);
+        .subscribe(
+          (res) => {
+            this.closeSidebar();
+            this.toastData.type = ToastStatus.success;
+            this.toastData.active = true;
+            this.toastData.title = 'Успех';
+            this.toastData.description = 'Изменение вопроса прошло успешно!';
+            this.loadingEmitter.emit(false);
+          },
+          (error) => {
+            this.toastData.active = true;
+            this.toastData.title = 'Ошибка';
+            this.toastData.description = error.error;
+            this.toastData.type = ToastStatus.error;
+          },
+        );
     }
   }
+
   public removeQuestion() {
     if (this.currentQuestion.id) {
       this.loadingEmitter.emit(true);
@@ -165,18 +204,32 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
         .pipe(
           tap((n) => this.getQuestionsCurrentCategory(this.currentCategory)),
         )
-        .subscribe((res) => res);
-      this.deletedQuestionEmitter.emit(false);
-      this.toastData.active = true;
+        .subscribe(
+          (res) => {
+            this.loadingEmitter.emit(false);
+            this.deletedQuestionEmitter.emit(false);
+            this.toastData.active = true;
+            this.toastData.title = 'Успех';
+            this.toastData.description = 'Удаление вопроса прошло успешно!';
+          },
+          (error) => {
+            this.toastData.active = true;
+            this.toastData.title = 'Ошибка';
+            this.toastData.description = error.error;
+            this.toastData.type = ToastStatus.error;
+          },
+        );
     }
-    this.toastData.title = 'Успех';
-    this.toastData.description = 'Удаление вопроса прошло успешно!';
   }
+
   public deletingQuestion(nameQuestion: string, state: boolean) {
     this.deletedQuestionEmitter.emit(state);
     this.getQuestionCurrentCategory(this.currentCategory, nameQuestion);
   }
+
   public toastHandler(state: boolean) {
     this.toastData.active = state;
   }
+
+  protected readonly ToastStatus = ToastStatus;
 }
