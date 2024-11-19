@@ -1,40 +1,39 @@
 <div class="menu">
-  <app-loader [loading]="loading" (loadingEmitter)="setLoading($event)" />
-  @if (!loading) {
-    <div>Меню</div>
-    @if (this.ms.getActiveModal()) {
-      <app-modal
-        [title]="'Повторное прохождение'"
-        [bodyTemplate]="bodyTemplate"
-        (closeEmitter)="
-          this.ms.setActiveModal(false); this.ms.setValueToggle(false)
-        "
-      >
-        <ng-template #bodyTemplate>
-          <p>Вы действительно хотите пройти вопросы заново?</p>
-          <div class="menu__choice">
-            <h2 class="menu__choice__start" (click)="startAgain()">Да</h2>
-            <h2 class="menu__choice__close" (click)="closeModal()">Нет</h2>
-          </div>
-        </ng-template>
-      </app-modal>
-    }
-
-    <div>
-      <button class="menu__questions" (click)="changeRoute('/questions')">
-        Вопросы
-      </button>
-    </div>
-    <div>
-      <button class="menu__testing" (click)="changeRoute('/testing')">
-        Тестирование
-      </button>
-    </div>
-    <div>
-      <button class="menu__documents" routerLink="/documents">
-        Документация
-      </button>
-    </div>
-    <div></div>
+  <div>Меню</div>
+  @if (this.ms.getActiveModal()) {
+    <app-modal
+      [title]="'Повторное прохождение'"
+      [bodyTemplate]="bodyTemplate"
+      (closeEmitter)="
+        this.ms.setActiveModal(false); this.ms.setValueToggle(false)
+      "
+    >
+      <ng-template #bodyTemplate>
+        <p>Вы действительно хотите пройти вопросы заново?</p>
+        <div class="menu__choice">
+          <h2 class="menu__choice__start" (click)="startAgain()">Да</h2>
+          <h2 class="menu__choice__close" (click)="closeModal()">Нет</h2>
+        </div>
+      </ng-template>
+    </app-modal>
   }
+
+  <div>
+    <button class="menu__questions" (click)="changeRoute('/questions')">
+      Вопросы
+    </button>
+  </div>
+  <div>
+    <button class="menu__testing" (click)="changeRoute('/testing')">
+      Тестирование
+    </button>
+  </div>
+  <div>
+    <button class="menu__documents" routerLink="/documents">
+      Документация
+    </button>
+  </div>
+  <div>
+    <!--    <button (click)="loader.isLoading$.next(true)">123123123</button>-->
+  </div>
 </div>

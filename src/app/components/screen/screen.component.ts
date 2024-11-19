@@ -4,6 +4,7 @@ import { NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ScreenService } from '../../data/screen/screen.service';
 import { IScreen } from '../../data/screen/data-screen';
+import { LoaderService } from '../custom/loader/loader.service';
 
 @Component({
   selector: 'app-screen',
@@ -24,6 +25,7 @@ export class ScreenComponent {
   constructor(
     private screenService: ScreenService,
     private cdRef: ChangeDetectorRef,
+    private _loader: LoaderService,
   ) {
     //Получение первого скрина из сервиса,задание его по умолчанию
     this.activeScreen = this.screenService.getScreen();

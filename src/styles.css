@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./app/components/documents/documents.component.scss";
+
 .event-none {
   pointer-events: none;
 }
@@ -36,6 +38,10 @@ body button{
   margin: 10px;
   padding: 10px;
   border-radius: 10px;
+}
+
+.test:not(.loading) {
+    opacity: 0.6;
 }
 
 

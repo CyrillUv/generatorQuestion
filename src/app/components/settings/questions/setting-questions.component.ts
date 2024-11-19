@@ -1,4 +1,4 @@
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { Component, inject, OnInit } from '@angular/core';
 
@@ -12,6 +12,7 @@ import { IDataMenu, IOptions } from '../../../data/menu/data-menu';
 import { MultiSelectComponent } from '../../custom/multi-select/multi-select.component';
 import { SelectComponent } from '../../custom/select/select.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { timer } from 'rxjs';
 
 interface IModels {
   levels: IOptions[] | null;
@@ -56,7 +57,7 @@ export class SettingsQuestionsComponent implements OnInit {
     numberOfQuestions: null,
   };
 
-  constructor() {
+  constructor(private router: Router) {
     // private cdRef: ChangeDetectorRef, // private fb: FormBuilder,
     //получение количества вопросов
     //присваивание данных настроек в локальную переменную
@@ -188,5 +189,15 @@ export class SettingsQuestionsComponent implements OnInit {
       levels: [{ title: 'Junior' }, { title: 'Middle' }],
       numberOfQuestions: { title: '20 вопросов' },
     };
+  }
+
+  public begin() {
+    timer(3000).subscribe(() => {
+      this.ms.setSettingMode(null);
+      const route = this.ms.getRoute();
+      setTimeout(() => {
+        this.router.navigate([route]).then((r) => r);
+      }, 2000);
+    });
   }
 }

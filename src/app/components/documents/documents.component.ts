@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgForOf, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,9 +7,8 @@ import { SidebarComponent } from '../custom/sidebar/sidebar.component';
 import { CategoryQuestionsComponent } from './category-questions/category-questions.component';
 import { DocumentCategoriesComponent } from './document-categories/document-categories.component';
 import { ModalComponent } from '../custom/modal/modal.component';
-import { tap } from 'rxjs';
-import { ApiGitService } from '../../data/api/api-git.service';
 import { LoaderComponent } from '../custom/loader/loader.component';
+import { LoaderService } from '../custom/loader/loader.service';
 
 @Component({
   selector: 'app-documents',
@@ -24,16 +23,15 @@ import { LoaderComponent } from '../custom/loader/loader.component';
     CategoryQuestionsComponent,
     DocumentCategoriesComponent,
     ModalComponent,
-    LoaderComponent,
   ],
   templateUrl: './documents.component.html',
-  styleUrl: './documents.component.scss',
 })
 export class DocumentsComponent {
+  constructor(private _loader: LoaderService) {}
   public questions!: IQuestion[];
   public currentCategory!: string;
   public deletedQuestion = false;
-  public loading = true;
+
   public setQuestions(questions: IQuestion[]): void {
     this.questions = questions;
   }
@@ -42,9 +40,7 @@ export class DocumentsComponent {
     this.currentCategory = category;
     console.log(this.currentCategory);
   }
-  public setLoading(loading: boolean) {
-    this.loading = loading;
-  }
+
   public changeDeletedQuestion(state: boolean): void {
     this.deletedQuestion = state;
   }

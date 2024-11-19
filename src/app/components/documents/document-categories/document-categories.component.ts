@@ -10,7 +10,6 @@ import { IQuestionDB } from '../../../data/question/type';
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink, FormsModule],
   templateUrl: './document-categories.component.html',
-  styleUrl: '../documents.component.scss',
 })
 export class DocumentCategoriesComponent implements OnInit {
   @Input({ required: true }) public questions!: IQuestionDB[];

@@ -1,0 +1,24 @@
+<div
+  class="toast toast__{{ settings.type }}"
+  [class.toast--active]="activeToast"
+  [class.toast--inactive]="!activeToast"
+>
+  @if (settings.type === "success") {
+    <div class="toast__icon">✔</div>
+  }
+  @if (settings.type === "info") {
+    <div class="toast__icon">ⓘ</div>
+  }
+  @if (settings.type === "error") {
+    <div class="toast__icon">⊗</div>
+  }
+  @if (settings.type === "warning") {
+    <div class="toast__icon">⚠︎</div>
+  }
+
+  <div class="toast__body">
+    <span class="toast__body__title">{{ settings.title }}</span>
+    <span class="toast__body__description">{{ settings.description }}</span>
+  </div>
+  <span class="toast__exit" (click)="closeToast()">✖</span>
+</div>

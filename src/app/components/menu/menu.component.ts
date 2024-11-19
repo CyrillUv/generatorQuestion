@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
@@ -14,6 +14,8 @@ import { MyFormComponent } from '../custom/my-form/my-form.component';
 import { ApiGitService } from '../../data/api/api-git.service';
 import { ToastComponent } from '../custom/toast/toast.component';
 import { LoaderComponent } from '../custom/loader/loader.component';
+import { LoaderService } from '../custom/loader/loader.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -51,54 +53,16 @@ export class MenuComponent {
     public ms: MenuService,
     private _qs: QuestionService,
     private _vcr: ViewContainerRef,
-    private _apiService: ApiGitService,
   ) {
     //Задание значения отображению модалки
     this.activeModal = this.ms.getActiveModal();
-  }
-  public setLoading(loading: boolean) {
-    this.loading = loading;
-  }
-  public getAllGitQuestions(): void {
-    this._apiService.getAllGitQuestions().subscribe((res) => {
-      console.log(res);
-    });
-  }
-  public getAllCategories(): void {
-    this._apiService.getAllCategories().subscribe((res) => {
-      console.log(res);
-    });
-  }
-  public getGitQuestions(): void {
-    this._apiService.getGitQuestion().subscribe((res) => {
-      console.log(res);
-    });
-  }
-  public postGitQuestion(): void {
-    this._apiService.postGitQuestion().subscribe((res) => {
-      console.log(res);
-    });
-  }
-  public putGitQuestion(): void {
-    this._apiService.putGitQuestion().subscribe((res) => {
-      console.log(res);
-    });
-  }
-  public deleteGitQuestion(): void {
-    this._apiService.deleteGitQuestion().subscribe((res) => {
-      console.log(res);
-    });
-  }
-  public patchGitQuestion(): void {
-    this._apiService.patchGitQuestion().subscribe((res) => {
-      console.log(res);
-    });
   }
 
   //Изменяет путь
   public changeRoute(route: '/questions' | '/testing') {
     //изменяет путь в сервисе
     this.ms.setRoute(route);
+
     //активирует режим настроек
     this.ms.setSettingMode(true);
     //предотвращение накладывания сайдбаров

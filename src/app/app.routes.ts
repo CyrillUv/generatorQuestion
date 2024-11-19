@@ -4,7 +4,6 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 
 import { ActivateStatistics } from './guards/activate-statistics.guard';
 
-//documents/category/js
 export const routes: Routes = [
   { path: '', component: MenuComponent },
   { path: 'menu', component: MenuComponent },
@@ -41,5 +40,5 @@ export const routes: Routes = [
         (c) => c.QuestionsComponent,
       ),
   },
-  { path: '**', component: MenuComponent },
+  // { path: '**', component: MenuComponent },
 ];

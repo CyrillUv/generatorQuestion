@@ -9,7 +9,7 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IQuestionDB } from '../../../data/question/type';
-import { tap } from 'rxjs';
+import { delay, finalize, tap } from 'rxjs';
 import { SidebarComponent } from '../../custom/sidebar/sidebar.component';
 import { NgIf } from '@angular/common';
 
@@ -19,6 +19,8 @@ import {
   ToastComponent,
   ToastStatus,
 } from '../../custom/toast/toast.component';
+import { ToastService } from '../../custom/toast/toast.service';
+import { LoaderService } from '../../custom/loader/loader.service';
 
 @Component({
   selector: 'app-category-questions',
@@ -33,7 +35,6 @@ import {
     ToastComponent,
   ],
   templateUrl: './category-questions.component.html',
-  styleUrl: '../documents.component.scss',
 })
 export class CategoryQuestionsComponent implements OnChanges, OnInit {
   @Input({ required: true }) public currentCategory!: string;
@@ -42,12 +43,6 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
   @Output() public questionsEmitter = new EventEmitter<IQuestionDB[]>();
   @Output() public deletedQuestionEmitter = new EventEmitter<boolean>();
   public questions!: IQuestionDB[];
-  public toastData = {
-    title: '',
-    description: '',
-    active: false,
-    type: ToastStatus.success,
-  };
   public creatingQuestion = false;
   public changingQuestion = false;
   public currentQuestion: IQuestionDB = {
@@ -64,6 +59,12 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
   };
   public heightTextarea = 'auto';
 
+  constructor(
+    private apiService: ApiGitService,
+    private toastService: ToastService,
+    private loader: LoaderService,
+  ) {}
+
   ngOnInit() {
     if (this.currentCategory) {
       this.getQuestionsCurrentCategory(this.currentCategory);
@@ -75,8 +76,6 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
       this.getQuestionsCurrentCategory(this.currentCategory);
     }
   }
-
-  constructor(private apiService: ApiGitService) {}
 
   public autoResize(event: Event) {
     const textarea = event.target as HTMLTextAreaElement;
@@ -98,12 +97,14 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
   }
 
   public getQuestionsCurrentCategory(endpoint: string): void {
-    this.apiService.getQuestionsCurrentCategory(endpoint).subscribe((res) => {
-      this.questions = res;
-      this.questionsEmitter.emit(res);
-      this.currentCategory = endpoint;
-      console.log(this.questions);
-    });
+    this.loader
+      .loading(this.apiService.getQuestionsCurrentCategory(endpoint))
+      .subscribe((res) => {
+        this.questions = res;
+        this.questionsEmitter.emit(res);
+        this.currentCategory = endpoint;
+        console.log(this.questions);
+      });
   }
 
   public getQuestionCurrentCategory(
@@ -112,7 +113,7 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
   ): void {
     this.apiService.getQuestionsCurrentCategory(endpoint).subscribe((res) => {
       this.currentQuestion = res.find(
-        (el) => el.title === nameQuestion,
+        (el: IQuestionDB) => el.title === nameQuestion,
       ) as IQuestionDB;
     });
   }
@@ -126,36 +127,35 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
     //Нужно обработать валидатором этот кэйс
     if (title && response && !this.questions.some((el) => el.title === title)) {
       this.loadingEmitter.emit(true);
-
-      this.apiService
-        .postQuestion(this.currentCategory, title, response, level)
-        // .pipe(
-        // todo catchError
-        //   tap((n) => {
-        //     // Todo switchMAp
-        //     this.getQuestionsCurrentCategory(this.currentCategory);
-        //     console.log(n);
-        //   }),
-        // )
+      this.loader
+        .loading(
+          this.apiService.postQuestion(
+            this.currentCategory,
+            title,
+            response,
+            level,
+          ),
+        )
         .subscribe(
           () => {
-            console.log('good');
             this.creatingQuestion = false;
             this.closeSidebar();
-            this.toastData.active = true;
-            this.toastData.title = 'Успех';
-            this.toastData.description =
-              'Добавление нового вопроса прошло успешно!';
+            this.toastService.openToast({
+              title: 'Успех',
+              description: 'Добавление вопроса прошло успешно!',
+            });
             this.getQuestionsCurrentCategory(this.currentCategory);
             this.loadingEmitter.emit(false);
           },
           (error) => {
             console.log(error);
-            this.toastData.active = true;
-            this.toastData.title = 'Ошибка';
-            this.toastData.description = error.error;
+            this.toastService.openToast({
+              title: 'Ошибка',
+              description: error.error,
+              type: ToastStatus.error,
+            });
+
             this.loadingEmitter.emit(false);
-            this.toastData.type = ToastStatus.error;
           },
         );
     }
@@ -169,28 +169,33 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
   public editQuestion(): void {
     if (this.currentQuestion.title && this.currentQuestion.response) {
       this.loadingEmitter.emit(true);
-      this.apiService
-        .patchQuestion(
-          this.currentCategory + '/' + this.currentQuestion.id,
-          this.currentQuestion,
-        )
-        .pipe(
-          tap((n) => this.getQuestionsCurrentCategory(this.currentCategory)),
+      this.loader
+        .loading(
+          this.apiService
+            .patchQuestion(
+              this.currentCategory + '/' + this.currentQuestion.id,
+              this.currentQuestion,
+            )
+            .pipe(
+              tap((n) =>
+                this.getQuestionsCurrentCategory(this.currentCategory),
+              ),
+            ),
         )
         .subscribe(
           (res) => {
             this.closeSidebar();
-            this.toastData.type = ToastStatus.success;
-            this.toastData.active = true;
-            this.toastData.title = 'Успех';
-            this.toastData.description = 'Изменение вопроса прошло успешно!';
-            this.loadingEmitter.emit(false);
+            this.toastService.openToast({
+              title: 'Успех',
+              description: 'Изменение прошло успешно!',
+            });
           },
           (error) => {
-            this.toastData.active = true;
-            this.toastData.title = 'Ошибка';
-            this.toastData.description = error.error;
-            this.toastData.type = ToastStatus.error;
+            this.toastService.openToast({
+              title: 'Ошибка',
+              description: error.error,
+              type: ToastStatus.error,
+            });
           },
         );
     }
@@ -198,25 +203,27 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
 
   public removeQuestion() {
     if (this.currentQuestion.id) {
-      this.loadingEmitter.emit(true);
-      this.apiService
-        .deleteQuestion(this.currentCategory + '/' + this.currentQuestion.id)
-        .pipe(
-          tap((n) => this.getQuestionsCurrentCategory(this.currentCategory)),
+      this.loader
+        .loading(
+          this.apiService.deleteQuestion(
+            this.currentCategory + '/' + this.currentQuestion.id,
+          ),
         )
         .subscribe(
           (res) => {
-            this.loadingEmitter.emit(false);
             this.deletedQuestionEmitter.emit(false);
-            this.toastData.active = true;
-            this.toastData.title = 'Успех';
-            this.toastData.description = 'Удаление вопроса прошло успешно!';
+            this.toastService.openToast({
+              title: 'Успех',
+              description: 'Удаление вопроса прошло успешно!',
+            });
+            this.getQuestionsCurrentCategory(this.currentCategory);
           },
           (error) => {
-            this.toastData.active = true;
-            this.toastData.title = 'Ошибка';
-            this.toastData.description = error.error;
-            this.toastData.type = ToastStatus.error;
+            this.toastService.openToast({
+              title: 'Ошибка',
+              description: error.error,
+              type: ToastStatus.error,
+            });
           },
         );
     }
@@ -226,10 +233,4 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
     this.deletedQuestionEmitter.emit(state);
     this.getQuestionCurrentCategory(this.currentCategory, nameQuestion);
   }
-
-  public toastHandler(state: boolean) {
-    this.toastData.active = state;
-  }
-
-  protected readonly ToastStatus = ToastStatus;
 }

@@ -1,0 +1,58 @@
+.loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background-color: #007bff;
+  z-index: 1000;
+  &__end{
+    animation: loading 2s forwards,ending 2s 2s forwards,ending2 4s 4s forwards;
+
+    @keyframes loading {
+      0% {
+        width: 0;
+      }
+      100% {
+        width: 75%;
+      }
+    }
+    @keyframes ending {
+      0%{
+        width: 75%;
+        opacity: 1;
+      }
+      100%{
+        width: 100%;
+      }
+    }
+    @keyframes ending2 {
+      0%{
+        width: 100%;
+        opacity: 1;
+      }
+      100%{
+        width: 100%;
+        opacity: 0;
+      }
+    }
+
+  }
+  &__failed{
+    animation: loading-failed 6s forwards;
+  }
+  @keyframes loading-failed {
+    0% {
+      width: 0;
+      background-color: #007bff;
+    }
+    75%{
+      background-color:#bd1111;
+    }
+    100% {
+      width: 75%;
+      background-color:#bd1111;
+    }
+  }
+}
+
