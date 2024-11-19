@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import {
   NavigationCancel,
   NavigationEnd,
@@ -7,9 +7,14 @@ import {
   Router,
   RouterOutlet,
 } from '@angular/router';
-import { ToastComponent } from './components/custom/toast/toast.component';
+import {
+  ToastComponent,
+  ToastStatus,
+} from './components/custom/toast/toast.component';
 import { LoaderComponent } from './components/custom/loader/loader.component';
 import { LoadingBarComponent } from './components/custom/loader/loading-bar/loading-bar.component';
+import { ToastService } from './components/custom/toast/toast.service';
+import { timer } from 'rxjs';
 
 interface Backend {
   title: string;
@@ -59,12 +64,33 @@ type CurrentEventType = 0 | 1 | 2 | 3;
 export class AppComponent {
   public navigationType: CurrentEventType = 0;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private toastService: ToastService,
+  ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) this.navigationType = 0;
       if (event instanceof NavigationEnd) this.navigationType = 1;
-      if (event instanceof NavigationCancel) this.navigationType = 2;
-      if (event instanceof NavigationError) this.navigationType = 3;
+      if (event instanceof NavigationCancel) {
+        this.navigationType = 2;
+        this.toastService.openToast({
+          title: 'Страница не найдена!',
+          type: ToastStatus.warning,
+          description: 'Вы будете перенаправлены на главную страницу',
+          timer: 1000,
+        });
+        timer(5000).subscribe(() => this.router.navigate(['/menu']));
+      }
+      if (event instanceof NavigationError) {
+        this.navigationType = 3;
+        this.toastService.openToast({
+          title: 'Страница не найдена!',
+          type: ToastStatus.warning,
+          description: 'Вы будете перенаправлены на главную страницу',
+          timer: 1000,
+        });
+        timer(5000).subscribe(() => this.router.navigate(['/menu']));
+      }
     });
   }
 }

@@ -1,9 +1,14 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  ErrorHandler,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
+// import { GlobalErrorHandler } from './components/handlers/global-error-handler';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,5 +16,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(),
+    // { provide: ErrorHandler, useClass: GlobalErrorHandler },
   ],
 };

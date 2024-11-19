@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, finalize, Observable, timer } from 'rxjs';
+import { IQuestion, IQuestionDB } from '../../../data/question/type';
 
 @Injectable({
   providedIn: 'root',
