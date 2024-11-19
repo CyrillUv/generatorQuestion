@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { NgClass, NgIf } from '@angular/common';
 import { EventType } from '@angular/router';

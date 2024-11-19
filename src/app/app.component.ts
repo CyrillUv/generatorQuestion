@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {
-  EventType,
   NavigationCancel,
   NavigationEnd,
   NavigationError,
@@ -11,7 +10,6 @@ import {
 import { ToastComponent } from './components/custom/toast/toast.component';
 import { LoaderComponent } from './components/custom/loader/loader.component';
 import { LoadingBarComponent } from './components/custom/loader/loading-bar/loading-bar.component';
-import { filter } from 'rxjs';
 
 interface Backend {
   title: string;
@@ -48,6 +46,7 @@ class DesantAdapter {
     };
   }
 }
+
 type CurrentEventType = 0 | 1 | 2 | 3;
 
 @Component({
@@ -59,6 +58,7 @@ type CurrentEventType = 0 | 1 | 2 | 3;
 })
 export class AppComponent {
   public navigationType: CurrentEventType = 0;
+
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) this.navigationType = 0;

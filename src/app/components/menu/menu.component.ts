@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
@@ -11,11 +11,8 @@ import { ModalComponent } from '../custom/modal/modal.component';
 import { QuestionService } from '../../data/question/question.service';
 import { MultiSelectComponent } from '../custom/multi-select/multi-select.component';
 import { MyFormComponent } from '../custom/my-form/my-form.component';
-import { ApiGitService } from '../../data/api/api-git.service';
 import { ToastComponent } from '../custom/toast/toast.component';
 import { LoaderComponent } from '../custom/loader/loader.component';
-import { LoaderService } from '../custom/loader/loader.service';
-import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -49,6 +46,7 @@ export class MenuComponent {
     '/questions': SettingsQuestionsComponent,
     '/testing': SettingTestingComponent,
   };
+
   constructor(
     public ms: MenuService,
     private _qs: QuestionService,
@@ -71,6 +69,7 @@ export class MenuComponent {
     //создание компонента
     this._vcr.createComponent(this.routeInComponent[route]);
   }
+
   //Закрытие модалки
   public closeModal(): void {
     //Удаляет модалку с поля зрения
@@ -78,6 +77,7 @@ export class MenuComponent {
     //Возвращает положение тогла в начальное положение
     this.ms.setValueToggle(false);
   }
+
   //Позволяет обнулить все данные и начать заново работу программы
   public startAgain(): void {
     //Обнуление массива неотвеченных вопросов

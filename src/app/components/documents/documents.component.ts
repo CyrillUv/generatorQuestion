@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgForOf, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +7,6 @@ import { SidebarComponent } from '../custom/sidebar/sidebar.component';
 import { CategoryQuestionsComponent } from './category-questions/category-questions.component';
 import { DocumentCategoriesComponent } from './document-categories/document-categories.component';
 import { ModalComponent } from '../custom/modal/modal.component';
-import { LoaderComponent } from '../custom/loader/loader.component';
 import { LoaderService } from '../custom/loader/loader.service';
 
 @Component({
@@ -28,6 +27,7 @@ import { LoaderService } from '../custom/loader/loader.service';
 })
 export class DocumentsComponent {
   constructor(private _loader: LoaderService) {}
+
   public questions!: IQuestion[];
   public currentCategory!: string;
   public deletedQuestion = false;

@@ -9,7 +9,7 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IQuestionDB } from '../../../data/question/type';
-import { delay, finalize, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { SidebarComponent } from '../../custom/sidebar/sidebar.component';
 import { NgIf } from '@angular/common';
 
@@ -169,36 +169,34 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
   public editQuestion(): void {
     if (this.currentQuestion.title && this.currentQuestion.response) {
       this.loadingEmitter.emit(true);
-      this.loader
-        .loading(
-          this.apiService
-            .patchQuestion(
-              this.currentCategory + '/' + this.currentQuestion.id,
-              this.currentQuestion,
-            )
-            .pipe(
-              tap((n) =>
-                this.getQuestionsCurrentCategory(this.currentCategory),
-              ),
-            ),
-        )
-        .subscribe(
-          (res) => {
-            this.closeSidebar();
-            this.toastService.openToast({
-              title: 'Успех',
-              description: 'Изменение прошло успешно!',
-            });
-          },
-          (error) => {
-            this.toastService.openToast({
-              title: 'Ошибка',
-              description: error.error,
-              type: ToastStatus.error,
-            });
-          },
-        );
     }
+    this.loader
+      .loading(
+        this.apiService
+          .patchQuestion(
+            this.currentCategory + '/' + this.currentQuestion.id,
+            this.currentQuestion,
+          )
+          .pipe(
+            tap(() => this.getQuestionsCurrentCategory(this.currentCategory)),
+          ),
+      )
+      .subscribe(
+        () => {
+          this.closeSidebar();
+          this.toastService.openToast({
+            title: 'Успех',
+            description: 'Изменение прошло успешно!',
+          });
+        },
+        (error) => {
+          this.toastService.openToast({
+            title: 'Ошибка',
+            description: error.error,
+            type: ToastStatus.error,
+          });
+        },
+      );
   }
 
   public removeQuestion() {
@@ -210,7 +208,7 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
           ),
         )
         .subscribe(
-          (res) => {
+          () => {
             this.deletedQuestionEmitter.emit(false);
             this.toastService.openToast({
               title: 'Успех',

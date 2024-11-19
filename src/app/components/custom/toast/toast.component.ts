@@ -49,7 +49,7 @@ export class ToastComponent implements OnInit {
 
   private closeToastOfTime() {
     timer(this.settings.timer)
-      .pipe(tap((n) => this.closeToast()))
+      .pipe(tap(() => this.closeToast()))
       .subscribe();
   }
 }

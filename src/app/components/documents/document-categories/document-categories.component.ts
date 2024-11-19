@@ -34,14 +34,14 @@ export class DocumentCategoriesComponent implements OnInit {
   public removeCategory(id: string) {
     this.apiService
       .deleteCategory(id)
-      .pipe(tap((n) => this.getAllCategories()))
+      .pipe(tap(() => this.getAllCategories()))
       .subscribe();
   }
   public changeCategory(id: string, name: string): void {
     if (this.newCategory)
       this.apiService
         .patchCategory(id, name)
-        .pipe(tap((n) => this.getAllCategories()))
+        .pipe(tap(() => this.getAllCategories()))
         .subscribe();
   }
   public addCategory() {
@@ -56,8 +56,7 @@ export class DocumentCategoriesComponent implements OnInit {
           endpoint: this.newCategory,
         })
         .pipe(
-          tap((n) => {
-            console.log(n);
+          tap(() => {
             this.getAllCategories();
           }),
         )
