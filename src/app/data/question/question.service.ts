@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { dataQuestion } from './data-question';
 import { IDataQuestion, IQuestion, NameDataType } from './type';
 import { IOptions } from '../menu/data-menu';
-import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

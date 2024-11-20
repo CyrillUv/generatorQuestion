@@ -3,13 +3,12 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IQuestionDB } from '../../../data/question/type';
-import { tap } from 'rxjs';
 import { SidebarComponent } from '../../custom/sidebar/sidebar.component';
 import { NgIf } from '@angular/common';
 
@@ -36,10 +35,9 @@ import { LoaderService } from '../../custom/loader/loader.service';
   ],
   templateUrl: './category-questions.component.html',
 })
-export class CategoryQuestionsComponent implements OnChanges, OnInit {
+export class CategoryQuestionsComponent implements OnChanges {
   @Input({ required: true }) public currentCategory!: string;
   @Input() deletedQuestion!: boolean;
-  @Output() loadingEmitter = new EventEmitter<boolean>();
   @Output() public questionsEmitter = new EventEmitter<IQuestionDB[]>();
   @Output() public deletedQuestionEmitter = new EventEmitter<boolean>();
   public questions!: IQuestionDB[];
@@ -65,16 +63,9 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
     private loader: LoaderService,
   ) {}
 
-  ngOnInit() {
-    if (this.currentCategory) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes['deletedQuestion'])
       this.getQuestionsCurrentCategory(this.currentCategory);
-    }
-  }
-
-  ngOnChanges() {
-    if (this.currentCategory) {
-      this.getQuestionsCurrentCategory(this.currentCategory);
-    }
   }
 
   public autoResize(event: Event) {
@@ -103,11 +94,10 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
         this.questions = res;
         this.questionsEmitter.emit(res);
         this.currentCategory = endpoint;
-        console.log(this.questions);
       });
   }
 
-  public getQuestionCurrentCategory(
+  public getCurrentQuestionCurrentCategory(
     endpoint: string,
     nameQuestion: string,
   ): void {
@@ -126,7 +116,6 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
     console.log(this.questions);
     //Нужно обработать валидатором этот кэйс
     if (title && response && !this.questions.some((el) => el.title === title)) {
-      this.loadingEmitter.emit(true);
       this.loader
         .loading(
           this.apiService.postQuestion(
@@ -145,7 +134,6 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
               description: 'Добавление вопроса прошло успешно!',
             });
             this.getQuestionsCurrentCategory(this.currentCategory);
-            this.loadingEmitter.emit(false);
           },
           (error) => {
             console.log(error);
@@ -154,35 +142,27 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
               description: error.error,
               type: ToastStatus.error,
             });
-
-            this.loadingEmitter.emit(false);
           },
         );
     }
   }
 
   public changeQuestion(nameQuestion: string) {
-    this.getQuestionCurrentCategory(this.currentCategory, nameQuestion);
+    this.getCurrentQuestionCurrentCategory(this.currentCategory, nameQuestion);
     this.changingQuestion = true;
   }
 
   public editQuestion(): void {
-    if (this.currentQuestion.title && this.currentQuestion.response) {
-      this.loadingEmitter.emit(true);
-    }
     this.loader
       .loading(
-        this.apiService
-          .patchQuestion(
-            this.currentCategory + '/' + this.currentQuestion.id,
-            this.currentQuestion,
-          )
-          .pipe(
-            tap(() => this.getQuestionsCurrentCategory(this.currentCategory)),
-          ),
+        this.apiService.patchQuestion(
+          this.currentCategory + '/' + this.currentQuestion.id,
+          this.currentQuestion,
+        ),
       )
       .subscribe(
         () => {
+          this.getQuestionsCurrentCategory(this.currentCategory);
           this.closeSidebar();
           this.toastService.openToast({
             title: 'Успех',
@@ -229,6 +209,6 @@ export class CategoryQuestionsComponent implements OnChanges, OnInit {
 
   public deletingQuestion(nameQuestion: string, state: boolean) {
     this.deletedQuestionEmitter.emit(state);
-    this.getQuestionCurrentCategory(this.currentCategory, nameQuestion);
+    this.getCurrentQuestionCurrentCategory(this.currentCategory, nameQuestion);
   }
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, delay, finalize, Observable, timer } from 'rxjs';
-import { IQuestion, IQuestionDB } from '../../../data/question/type';
+import { BehaviorSubject, delay, finalize, Observable, tap, timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +8,10 @@ export class LoaderService {
   public isLoading$ = new BehaviorSubject<boolean>(false);
 
   public loading(req: Observable<any>): Observable<any> {
-    this.isLoading$.next(true);
     return req.pipe(
+      tap(() => {
+        this.isLoading$.next(true);
+      }),
       delay(1000),
       finalize(() => {
         console.log('finalize');

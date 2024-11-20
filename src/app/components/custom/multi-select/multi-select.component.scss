@@ -114,12 +114,13 @@
 
   &__field {
     display: flex;
+
     justify-content: space-between;
     padding: 5px;
     background: #2b2b2b;
     color: #4e99c9;
     transition: height 0.2s;
-    overflow: hidden;
+
     min-height: 20px;
     cursor: pointer;
     will-change: auto;

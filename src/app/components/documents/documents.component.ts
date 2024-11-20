@@ -7,7 +7,6 @@ import { SidebarComponent } from '../custom/sidebar/sidebar.component';
 import { CategoryQuestionsComponent } from './category-questions/category-questions.component';
 import { DocumentCategoriesComponent } from './document-categories/document-categories.component';
 import { ModalComponent } from '../custom/modal/modal.component';
-import { LoaderService } from '../custom/loader/loader.service';
 
 @Component({
   selector: 'app-documents',
@@ -26,8 +25,6 @@ import { LoaderService } from '../custom/loader/loader.service';
   templateUrl: './documents.component.html',
 })
 export class DocumentsComponent {
-  constructor(private _loader: LoaderService) {}
-
   public questions!: IQuestion[];
   public currentCategory!: string;
   public deletedQuestion = false;
