@@ -20,6 +20,7 @@ import {
 } from '../../custom/toast/toast.component';
 import { ToastService } from '../../custom/toast/toast.service';
 import { LoaderService } from '../../custom/loader/loader.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-category-questions',
@@ -114,6 +115,13 @@ export class CategoryQuestionsComponent implements OnChanges {
     level: 'Junior' | 'Middle' | 'Senior',
   ): void {
     console.log(this.questions);
+    if (this.questions.some((el) => el.title === title)) {
+      this.toastService.openToast({
+        title: 'Предупреждение',
+        description: 'Этот вопрос уже существует',
+        type: ToastStatus.warning,
+      });
+    }
     //Нужно обработать валидатором этот кэйс
     if (title && response && !this.questions.some((el) => el.title === title)) {
       this.loader
@@ -125,10 +133,11 @@ export class CategoryQuestionsComponent implements OnChanges {
             level,
           ),
         )
+        .pipe(tap(() => {}))
         .subscribe(
           () => {
-            this.creatingQuestion = false;
             this.closeSidebar();
+            this.creatingQuestion = false;
             this.toastService.openToast({
               title: 'Успех',
               description: 'Добавление вопроса прошло успешно!',
