@@ -17,13 +17,6 @@ export interface ICategory {
   providedIn: 'root',
 })
 export class ApiGitService {
-  public readonly mockObject: IGit = {
-    id: '11',
-    name: 'Hello World!',
-    age: 23,
-  };
-  public readonly mockObject2: any = {};
-  private _gitUrl = 'http://localhost:3000/git';
   private _baseUrl = 'http://localhost:3000';
   private _categoriesUrl = 'http://localhost:3000/categories';
   constructor(public http: HttpClient) {}
@@ -32,15 +25,6 @@ export class ApiGitService {
   }
   public getAllCategories(): Observable<ICategory[]> {
     return this.http.get<ICategory[]>(`${this._categoriesUrl}`);
-  }
-  public getAllGitQuestions(): Observable<IGit[]> {
-    return this.http.get<IGit[]>(`${this._gitUrl}`);
-  }
-  public getGitQuestion(): Observable<IGit> {
-    return this.http.get<IGit>(`${this._gitUrl}/10`);
-  }
-  public postGitQuestion(): Observable<IGit> {
-    return this.http.post<IGit>(`${this._gitUrl}`, this.mockObject);
   }
   public postCategory(category: ICategory): Observable<ICategory> {
     return this.http.post<ICategory>(`${this._categoriesUrl}`, category);
@@ -58,30 +42,21 @@ export class ApiGitService {
       active: false,
     });
   }
-  public putGitQuestion(): Observable<IGit> {
-    return this.http.put<IGit>(`${this._gitUrl}/5`, this.mockObject2);
-  }
   public patchQuestion(
     endpoint: string,
     item: IQuestionDB,
   ): Observable<IQuestion> {
-    console.log(`${this._baseUrl}${endpoint}`);
     return this.http.patch<IQuestionDB>(`${this._baseUrl}${endpoint}`, item);
   }
   public patchCategory(id: string, name: string) {
     return this.http.patch<ICategory>(`${this._categoriesUrl}/${id}`, { name });
   }
-  public deleteGitQuestion(): Observable<IGit> {
-    return this.http.delete<IGit>(`${this._gitUrl}/3`);
-  }
+
   public deleteCategory(id: string): Observable<ICategory> {
     return this.http.delete<ICategory>(`${this._categoriesUrl}/${id}`);
   }
   public deleteQuestion(endpoint: string) {
     return this.http.delete<IQuestionDB>(`${this._baseUrl}${endpoint}`);
-  }
-  public patchGitQuestion(): Observable<IGit> {
-    return this.http.patch<IGit>(`${this._gitUrl}/15`, this.mockObject2);
   }
 }
 

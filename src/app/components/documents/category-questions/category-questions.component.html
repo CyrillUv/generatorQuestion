@@ -21,6 +21,11 @@
     </app-modal>
   }
   <div class="documents__questions">
+    @if (currentCategory) {
+      <main class="documents__name-category">
+        {{ currentCategory.split("/").join("").toUpperCase() }}
+      </main>
+    }
     @for (question of questions; track question.title; let i = $index) {
       <div
         class="documents__question"

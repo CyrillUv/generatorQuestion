@@ -66,6 +66,13 @@
       }
     }
   }
+  &__name-category{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    font-size: large;
+    font-weight: bold;
+  }
   &__question{
     display: flex;
     flex-direction: column;
