@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IQuestionDB } from '../../../data/question/type';
@@ -20,7 +13,6 @@ import {
 } from '../../custom/toast/toast.component';
 import { ToastService } from '../../custom/toast/toast.service';
 import { LoaderService } from '../../custom/loader/loader.service';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-category-questions',
@@ -36,11 +28,10 @@ import { tap } from 'rxjs';
   ],
   templateUrl: './category-questions.component.html',
 })
-export class CategoryQuestionsComponent implements OnChanges {
+export class CategoryQuestionsComponent implements OnInit {
   @Input({ required: true }) public currentCategory!: string;
-  @Input() deletedQuestion!: boolean;
-  @Output() public questionsEmitter = new EventEmitter<IQuestionDB[]>();
-  @Output() public deletedQuestionEmitter = new EventEmitter<boolean>();
+  @Input({ required: true }) public localStorageAPI = false;
+  public deletedQuestion: boolean = false;
   public questions!: IQuestionDB[];
   public creatingQuestion = false;
   public changingQuestion = false;
@@ -64,9 +55,8 @@ export class CategoryQuestionsComponent implements OnChanges {
     private loader: LoaderService,
   ) {}
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (!changes['deletedQuestion'])
-      this.getQuestionsCurrentCategory(this.currentCategory);
+  public ngOnInit(): void {
+    this.getQuestionsCurrentCategory(this.currentCategory);
   }
 
   public autoResize(event: Event) {
@@ -93,20 +83,8 @@ export class CategoryQuestionsComponent implements OnChanges {
       .loading(this.apiService.getQuestionsCurrentCategory(endpoint))
       .subscribe((res) => {
         this.questions = res;
-        this.questionsEmitter.emit(res);
         this.currentCategory = endpoint;
       });
-  }
-
-  public getCurrentQuestionCurrentCategory(
-    endpoint: string,
-    nameQuestion: string,
-  ): void {
-    this.apiService.getQuestionsCurrentCategory(endpoint).subscribe((res) => {
-      this.currentQuestion = res.find(
-        (el: IQuestionDB) => el.title === nameQuestion,
-      ) as IQuestionDB;
-    });
   }
 
   public addQuestion(
@@ -114,7 +92,6 @@ export class CategoryQuestionsComponent implements OnChanges {
     response: string,
     level: 'Junior' | 'Middle' | 'Senior',
   ): void {
-    console.log(this.questions);
     if (this.questions.some((el) => el.title === title)) {
       this.toastService.openToast({
         title: 'Предупреждение',
@@ -133,7 +110,6 @@ export class CategoryQuestionsComponent implements OnChanges {
             level,
           ),
         )
-        .pipe(tap(() => {}))
         .subscribe(
           () => {
             this.closeSidebar();
@@ -142,6 +118,9 @@ export class CategoryQuestionsComponent implements OnChanges {
               title: 'Успех',
               description: 'Добавление вопроса прошло успешно!',
             });
+
+            // this.questions.push();
+            this.setDefaultValueCurrentQuestion();
             this.getQuestionsCurrentCategory(this.currentCategory);
           },
           (error) => {
@@ -156,8 +135,17 @@ export class CategoryQuestionsComponent implements OnChanges {
     }
   }
 
-  public changeQuestion(nameQuestion: string) {
-    this.getCurrentQuestionCurrentCategory(this.currentCategory, nameQuestion);
+  public setDefaultValueCurrentQuestion(): void {
+    this.currentQuestion = {
+      title: '',
+      response: '',
+      level: 'Junior',
+      active: false,
+    };
+  }
+
+  public changeQuestion(question: IQuestionDB) {
+    this.currentQuestion = question;
     this.changingQuestion = true;
   }
 
@@ -188,7 +176,7 @@ export class CategoryQuestionsComponent implements OnChanges {
       );
   }
 
-  public removeQuestion() {
+  public approveDelete() {
     if (this.currentQuestion.id) {
       this.loader
         .loading(
@@ -198,7 +186,6 @@ export class CategoryQuestionsComponent implements OnChanges {
         )
         .subscribe(
           () => {
-            this.deletedQuestionEmitter.emit(false);
             this.toastService.openToast({
               title: 'Успех',
               description: 'Удаление вопроса прошло успешно!',
@@ -216,8 +203,12 @@ export class CategoryQuestionsComponent implements OnChanges {
     }
   }
 
-  public deletingQuestion(nameQuestion: string, state: boolean) {
-    this.deletedQuestionEmitter.emit(state);
-    this.getCurrentQuestionCurrentCategory(this.currentCategory, nameQuestion);
+  public cancelDelete() {
+    this.deletedQuestion = false;
+  }
+
+  public deleteQuestion(question: any, state: boolean) {
+    this.currentQuestion = question;
+    this.deletedQuestion = true;
   }
 }

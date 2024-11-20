@@ -15,6 +15,7 @@ import { LoaderComponent } from './components/custom/loader/loader.component';
 import { LoadingBarComponent } from './components/custom/loader/loading-bar/loading-bar.component';
 import { ToastService } from './components/custom/toast/toast.service';
 import { timer } from 'rxjs';
+import { AuthComponent } from './components/auth/auth.component';
 
 interface Backend {
   title: string;
@@ -57,7 +58,13 @@ type CurrentEventType = 0 | 1 | 2 | 3;
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ToastComponent, LoaderComponent, LoadingBarComponent],
+  imports: [
+    RouterOutlet,
+    ToastComponent,
+    LoaderComponent,
+    LoadingBarComponent,
+    AuthComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

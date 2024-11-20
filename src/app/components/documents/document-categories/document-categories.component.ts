@@ -12,10 +12,8 @@ import { IQuestionDB } from '../../../data/question/type';
   templateUrl: './document-categories.component.html',
 })
 export class DocumentCategoriesComponent implements OnInit {
-  @Input({ required: true }) public questions!: IQuestionDB[];
   @Output() loadingEmitter = new EventEmitter<boolean>();
   @Output() currentCategoryEmitter = new EventEmitter<string>();
-  public currentCategory!: string;
   public newCategory = '';
   public adminMode = false;
   public categories!: ICategory[];
@@ -64,11 +62,6 @@ export class DocumentCategoriesComponent implements OnInit {
     this.newCategory = '';
   }
   public getQuestionsCurrentCategory(endpoint: string): void {
-    this.apiService.getQuestionsCurrentCategory(endpoint).subscribe((res) => {
-      this.questions = res;
-      this.currentCategory = endpoint;
-      this.currentCategoryEmitter.emit(endpoint);
-      console.log(this.currentCategory);
-    });
+    this.currentCategoryEmitter.emit(endpoint);
   }
 }

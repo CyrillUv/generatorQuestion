@@ -1,14 +1,15 @@
 <div class="documents">
   <app-document-categories
-    [questions]="questions"
     (currentCategoryEmitter)="setCurrentCategory($event)"
   />
-  <app-category-questions
-    [deletedQuestion]="deletedQuestion"
-    [currentCategory]="currentCategory"
-    (deletedQuestionEmitter)="changeDeletedQuestion($event)"
-    (questionsEmitter)="setQuestions($event)"
-  />
+  @if (currentCategory) {
+    <app-category-questions
+      [currentCategory]="currentCategory"
+      [localStorageAPI]="localStorageAPI"
+    />
+  } @else {
+    Empty category
+  }
 </div>
 <!--<div class="documents">-->
 <!--<div class="categories">-->

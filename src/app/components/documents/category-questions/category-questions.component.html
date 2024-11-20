@@ -2,19 +2,17 @@
   @if (deletedQuestion) {
     <app-modal
       [title]="'Удаление вопроса'"
-      (closeEmitter)="deletingQuestion(this.currentQuestion.title, false)"
+      (closeEmitter)="cancelDelete()"
       [bodyTemplate]="bodyTemplate"
     >
       <ng-template #bodyTemplate>
         <div class="documents__modal">
           <h3>Вы точно хотите удалить этот вопрос?</h3>
           <div class="documents__modal__actions">
-            <button (click)="removeQuestion()">Удалить</button>
-            <button
-              (click)="deletingQuestion(this.currentQuestion.title, false)"
-            >
-              Отмена
+            <button (click)="approveDelete(); deletedQuestion = false">
+              Удалить
             </button>
+            <button (click)="cancelDelete()">Отмена</button>
           </div>
         </div>
       </ng-template>
@@ -39,12 +37,12 @@
           <div>
             <span
               class="documents__question__items--action"
-              (click)="changeQuestion(question.title)"
+              (click)="changeQuestion(question)"
               >✎</span
             >
             <span
               class="documents__question__items--action"
-              (click)="deletingQuestion(question.title, true)"
+              (click)="deleteQuestion(question, true)"
               >✖</span
             >
           </div>
@@ -155,11 +153,11 @@
               name="question"
               class="documents__questions--addition__question"
               [class.documents__questions--addition__error]="
-                !newQuestion.title.length
+                !currentQuestion.title.length
               "
-              [(ngModel)]="newQuestion.title"
+              [(ngModel)]="currentQuestion.title"
             />
-            @if (!newQuestion.title.length) {
+            @if (!currentQuestion.title.length) {
               <div>Обязательное поле ввода</div>
             }
           </div>
@@ -171,12 +169,12 @@
               (input)="autoResize($event)"
               class="documents__questions--addition__response"
               [class.documents__questions--addition__error]="
-                !newQuestion.response.length
+                !currentQuestion.response.length
               "
               name="response"
-              [(ngModel)]="newQuestion.response"
+              [(ngModel)]="currentQuestion.response"
             ></textarea>
-            @if (!newQuestion.response.length) {
+            @if (!currentQuestion.response.length) {
               <div>Обязательное поле ввода</div>
             }
           </div>
@@ -186,10 +184,10 @@
               <span>Junior</span>
               <input
                 type="radio"
-                [defaultValue]="newQuestion.level"
+                [defaultValue]="currentQuestion.level"
                 name="createOption"
                 [value]="'Junior'"
-                [(ngModel)]="newQuestion.level"
+                [(ngModel)]="currentQuestion.level"
               />
             </label>
             <label class="documents__questions--addition__levels__level">
@@ -198,7 +196,7 @@
                 type="radio"
                 name="createOption"
                 [value]="'Middle'"
-                [(ngModel)]="newQuestion.level"
+                [(ngModel)]="currentQuestion.level"
               />
             </label>
             <label class="documents__questions--addition__levels__level">
@@ -207,7 +205,7 @@
                 type="radio"
                 name="createOption"
                 [value]="'Senior'"
-                [(ngModel)]="newQuestion.level"
+                [(ngModel)]="currentQuestion.level"
               />
             </label>
           </div>
@@ -217,9 +215,9 @@
         <button
           (click)="
             addQuestion(
-              newQuestion.title,
-              newQuestion.response,
-              newQuestion.level
+              currentQuestion.title,
+              currentQuestion.response,
+              currentQuestion.level
             )
           "
         >

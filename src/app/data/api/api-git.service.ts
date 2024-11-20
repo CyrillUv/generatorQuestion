@@ -29,6 +29,7 @@ export class ApiGitService {
   public postCategory(category: ICategory): Observable<ICategory> {
     return this.http.post<ICategory>(`${this._categoriesUrl}`, category);
   }
+  //TODO: object body
   public postQuestion(
     endpoint: string,
     title: string,
