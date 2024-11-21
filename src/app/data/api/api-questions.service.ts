@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IQuestion, IQuestionDB } from '../question/type';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,22 +9,41 @@ import { Observable } from 'rxjs';
 export class ApiQuestionsService {
   private _baseUrl = 'http://localhost:3000';
 
-  // private cacheState: Record<string, IQuestionDB[]> = {};
+  public setCache(
+    key: string,
+    mode: 'delete' | 'add',
+    body: string | IQuestionDB,
+  ): void {
+    if (!this.cacheState[key]) return;
+
+    if (mode === 'delete') {
+      this.cacheState[key] = this.cacheState[key].filter(
+        (el) => el.id !== body,
+      );
+    }
+
+    if (mode === 'add') {
+      this.cacheState[key].push(<IQuestionDB>body);
+    }
+  }
+
+  private cacheState: Record<string, IQuestionDB[]> = {};
 
   constructor(private http: HttpClient) {}
 
   public getQuestionsCurrentCategory(
     endpoint: string,
   ): Observable<IQuestionDB[]> {
-    // if (this.cacheState[endpoint]) {
-    //   return of(this.cacheState[endpoint]);
-    // }
-    return this.http.get<IQuestionDB[]>(`${this._baseUrl}${endpoint}`);
-    // .pipe(
-    //   tap((res) => {
-    //     this.cacheState[endpoint] = res;
-    //   }),
-    // );
+    if (this.cacheState[endpoint]) {
+      console.log(this.cacheState[endpoint]);
+      return of(this.cacheState[endpoint]);
+    }
+    return this.http.get<IQuestionDB[]>(`${this._baseUrl}${endpoint}`).pipe(
+      tap((res) => {
+        this.cacheState[endpoint] = res;
+        console.log(this.cacheState[endpoint]);
+      }),
+    );
   }
 
   //TODO: object body

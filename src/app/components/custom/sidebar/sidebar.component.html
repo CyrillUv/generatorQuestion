@@ -7,13 +7,15 @@
     [@sidebar]="triggerSidebar ? 'open' : 'closed'"
     class="sidebar-page__sidebar"
   >
-    <span class="sidebar-page__sidebar__exit-cross" (click)="closingSidebar()"
-      >✖</span
-    >
     <div>
       <ng-container *ngTemplateOutlet="headerTemplate">
         Это header
       </ng-container>
+      <span class="sidebar-page__sidebar__exit-cross" (click)="closingSidebar()"
+        >✖</span
+      >
+    </div>
+    <div>
       <ng-content select="[header]"></ng-content>
     </div>
     <div>

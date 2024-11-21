@@ -60,10 +60,14 @@
       >
         <ng-template #headerTemplate>
           @if (changingQuestion) {
-            <span>Редактирование вопроса</span>
+            <span class="documents__question__header-sidebar"
+              >Редактирование вопроса</span
+            >
           }
           @if (creatingQuestion) {
-            <span>Создание вопроса</span>
+            <span class="documents__question__header-sidebar"
+              >Создание вопроса</span
+            >
           }
         </ng-template>
         <ng-template #bodyTemplate>
@@ -152,8 +156,6 @@
           <button (click)="closeSidebar()">Отмена</button>
         </ng-template></app-custom-sidebar
       >
-    } @empty {
-      <div class="response">Выберите категорию</div>
     }
 
     <button *ngIf="currentCategory" (click)="createQuestion()">

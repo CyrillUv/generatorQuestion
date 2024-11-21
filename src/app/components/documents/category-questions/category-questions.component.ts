@@ -12,7 +12,6 @@ import {
 import { ToastService } from '../../custom/toast/toast.service';
 import { LoaderService } from '../../custom/loader/loader.service';
 import { ApiQuestionsService } from '../../../data/api/api-questions.service';
-import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Component({
   selector: 'app-category-questions',
@@ -109,7 +108,7 @@ export class CategoryQuestionsComponent implements OnInit {
           ),
         )
         .subscribe(
-          () => {
+          (res) => {
             this.closeSidebar();
             this.creatingQuestion = false;
             this.toastService.openToast({
@@ -117,15 +116,21 @@ export class CategoryQuestionsComponent implements OnInit {
               description: 'Добавление вопроса прошло успешно!',
               type: ToastStatus.success,
             });
+            let newQuestion = {
+              id: res.id,
+              title: this.currentQuestion.title,
+              level: this.currentQuestion.level,
+              active: false,
+              response: this.currentQuestion.response,
+            };
             if (this.localStorageAPI) {
-              this.questions.push({
-                id: this.currentQuestion.id,
-                title: this.currentQuestion.title,
-                level: this.currentQuestion.level,
-                active: false,
-                response: this.currentQuestion.response,
-              });
+              this.questions.push(newQuestion);
             } else {
+              this.apiService.setCache(
+                this.currentCategory,
+                'add',
+                newQuestion,
+              );
               this.getQuestionsCurrentCategory(this.currentCategory);
             }
           },
@@ -157,16 +162,13 @@ export class CategoryQuestionsComponent implements OnInit {
       .subscribe(
         () => {
           if (this.localStorageAPI) {
-            const current = this.questions.find(
-              (el) => el.id === this.currentQuestion.id,
-            );
-            if (current || current === this.currentQuestion) {
-              for (let value of Object.values(current)) {
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                value = Object.values(this.currentQuestion);
-              }
-            }
+            this.questions = this.questions.map((el) => {
+              return el.id === this.currentQuestion.id
+                ? { ...el, ...this.currentQuestion }
+                : el;
+            });
           } else {
+            console.log('222');
             this.getQuestionsCurrentCategory(this.currentCategory);
           }
           this.closeSidebar();
@@ -182,25 +184,6 @@ export class CategoryQuestionsComponent implements OnInit {
             description: error.error,
             type: ToastStatus.error,
           });
-          if (error.status === 404) {
-            if (this.localStorageAPI) {
-              const current = this.questions.find(
-                (el) => el.id === this.currentQuestion.id,
-              );
-              if (current || current === this.currentQuestion) {
-                for (let value of Object.values(current)) {
-                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                  value = Object.values(this.currentQuestion);
-                }
-              }
-            }
-            this.closeSidebar();
-            this.toastService.openToast({
-              title: 'Успех',
-              description: 'Изменение прошло успешно!',
-              type: ToastStatus.success,
-            });
-          }
         },
       );
   }
@@ -224,6 +207,11 @@ export class CategoryQuestionsComponent implements OnInit {
               (el) => el.id !== this.currentQuestion.id,
             );
           } else {
+            this.apiService.setCache(
+              this.currentCategory,
+              'delete',
+              <string>this.currentQuestion.id,
+            );
             this.getQuestionsCurrentCategory(this.currentCategory);
           }
         },
@@ -233,18 +221,6 @@ export class CategoryQuestionsComponent implements OnInit {
             description: error.error,
             type: ToastStatus.error,
           });
-          if (error.status === 404) {
-            if (this.localStorageAPI) {
-              this.questions = this.questions.filter(
-                (el) => el.id !== this.currentQuestion.id,
-              );
-            }
-            this.toastService.openToast({
-              title: 'Успех',
-              description: 'Удаление вопроса прошло успешно!',
-              type: ToastStatus.success,
-            });
-          }
         },
       );
   }
