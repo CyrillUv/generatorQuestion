@@ -20,7 +20,6 @@ export class DocumentCategoriesComponent implements OnInit {
   public newCategory = '';
   public adminMode = false;
   public categories!: ICategory[];
-
   constructor(private apiService: ApiCategoriesService) {}
 
   ngOnInit() {

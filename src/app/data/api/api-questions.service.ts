@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IQuestion, IQuestionDB } from '../question/type';
-import { Observable, of, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { Observable, of, tap } from 'rxjs';
 export class ApiQuestionsService {
   private _baseUrl = 'http://localhost:3000';
 
-  private cacheState: Record<string, IQuestionDB[]> = {};
+  // private cacheState: Record<string, IQuestionDB[]> = {};
 
   constructor(private http: HttpClient) {}
 

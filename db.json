@@ -68,13 +68,6 @@
   ],
   "javascript": [
     {
-      "id": "bd1a",
-      "title": "111",
-      "response": "111",
-      "level": "Junior",
-      "active": false
-    },
-    {
       "id": "86a3",
       "title": "222",
       "response": "222",
@@ -82,9 +75,51 @@
       "active": false
     },
     {
-      "id": "9525",
-      "title": "xcv",
-      "response": "sfdsd",
+      "id": "127e",
+      "title": "qwecaxz",
+      "response": "zxcasd",
+      "level": "Junior",
+      "active": false
+    },
+    {
+      "id": "51a9",
+      "title": "cxvdsf",
+      "response": "asdfqw",
+      "level": "Junior",
+      "active": false
+    },
+    {
+      "id": "9ed8",
+      "title": "qwezx",
+      "response": "zxcv",
+      "level": "Junior",
+      "active": false
+    },
+    {
+      "id": "3115",
+      "title": "asd",
+      "response": "zvxzxc",
+      "level": "Junior",
+      "active": false
+    },
+    {
+      "id": "8325",
+      "title": "74",
+      "response": "as",
+      "level": "Junior",
+      "active": false
+    },
+    {
+      "id": "e3b0",
+      "title": "йцуйцу",
+      "response": "ывфаф",
+      "level": "Junior",
+      "active": false
+    },
+    {
+      "id": "cecb",
+      "title": "мя",
+      "response": "ыфвцййу",
       "level": "Junior",
       "active": false
     }
@@ -127,9 +162,9 @@
       "active": false
     },
     {
-      "id": "b32f",
-      "title": "sdfa",
-      "response": "qwe",
+      "id": "dd15",
+      "title": "234",
+      "response": "фыв",
       "level": "Junior",
       "active": false
     }

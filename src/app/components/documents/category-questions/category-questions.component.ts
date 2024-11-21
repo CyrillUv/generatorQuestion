@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IQuestionDB } from '../../../data/question/type';
@@ -38,7 +38,6 @@ export class CategoryQuestionsComponent implements OnInit {
   }
 
   @Input({ required: true }) public localStorageAPI = false;
-  public previousCategory!: string;
   public deletedQuestion = false;
   public questions!: IQuestionDB[];
   public creatingQuestion = false;
@@ -50,18 +49,13 @@ export class CategoryQuestionsComponent implements OnInit {
     level: 'Junior',
     active: false,
   };
-  public newQuestion: IQuestionDB = {
-    title: '',
-    response: '',
-    level: 'Junior',
-    active: false,
-  };
   public heightTextarea = 'auto';
 
   constructor(
     private apiService: ApiQuestionsService,
     private toastService: ToastService,
     private loader: LoaderService,
+    private cdRef: ChangeDetectorRef,
   ) {}
 
   public ngOnInit(): void {
@@ -78,21 +72,12 @@ export class CategoryQuestionsComponent implements OnInit {
   public closeSidebar() {
     if (this.creatingQuestion) this.creatingQuestion = false;
     if (this.changingQuestion) this.changingQuestion = false;
-    this.newQuestion = {
-      title: '',
-      response: '',
-      level: 'Junior',
-      active: false,
-    };
     this.heightTextarea = 'auto';
   }
 
   public getQuestionsCurrentCategory(endpoint: string): void {
     this.loader
-      .loading(
-        this.apiService.getQuestionsCurrentCategory(endpoint),
-        this.currentCategory === this.previousCategory,
-      )
+      .loading(this.apiService.getQuestionsCurrentCategory(endpoint))
       .subscribe((res) => {
         this.questions = res;
         this.currentCategory = endpoint;
@@ -104,12 +89,6 @@ export class CategoryQuestionsComponent implements OnInit {
     response: string,
     level: 'Junior' | 'Middle' | 'Senior',
   ): void {
-    this.currentQuestion = {
-      title: '',
-      response: '',
-      level: 'Junior',
-      active: false,
-    };
     if (this.questions.some((el) => el.title === title)) {
       this.toastService.openToast({
         title: 'Предупреждение',
@@ -136,10 +115,17 @@ export class CategoryQuestionsComponent implements OnInit {
               title: 'Успех',
               description: 'Добавление вопроса прошло успешно!',
             });
-
-            // this.questions.push();
-            this.setDefaultValueCurrentQuestion();
-            this.getQuestionsCurrentCategory(this.currentCategory);
+            if (this.localStorageAPI) {
+              this.questions.push({
+                id: this.currentQuestion.id,
+                title: this.currentQuestion.title,
+                level: this.currentQuestion.level,
+                active: false,
+                response: this.currentQuestion.response,
+              });
+            } else {
+              this.getQuestionsCurrentCategory(this.currentCategory);
+            }
           },
           (error) => {
             console.log(error);
@@ -151,15 +137,6 @@ export class CategoryQuestionsComponent implements OnInit {
           },
         );
     }
-  }
-
-  public setDefaultValueCurrentQuestion(): void {
-    this.currentQuestion = {
-      title: '',
-      response: '',
-      level: 'Junior',
-      active: false,
-    };
   }
 
   public changeQuestion(question: IQuestionDB) {
@@ -177,7 +154,18 @@ export class CategoryQuestionsComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.getQuestionsCurrentCategory(this.currentCategory);
+          if (this.localStorageAPI) {
+            const current = this.questions.find(
+              (el) => el.id === this.currentQuestion.id,
+            );
+            if (current) {
+              for (let value of Object.values(current)) {
+                value = Object.values(this.currentQuestion);
+              }
+            }
+          } else {
+            this.getQuestionsCurrentCategory(this.currentCategory);
+          }
           this.closeSidebar();
           this.toastService.openToast({
             title: 'Успех',
@@ -208,7 +196,13 @@ export class CategoryQuestionsComponent implements OnInit {
               title: 'Успех',
               description: 'Удаление вопроса прошло успешно!',
             });
-            this.getQuestionsCurrentCategory(this.currentCategory);
+            if (this.localStorageAPI) {
+              this.questions = this.questions.filter(
+                (el) => el.id !== this.currentQuestion.id,
+              );
+            } else {
+              this.getQuestionsCurrentCategory(this.currentCategory);
+            }
           },
           (error) => {
             this.toastService.openToast({
@@ -231,12 +225,12 @@ export class CategoryQuestionsComponent implements OnInit {
   }
 
   public createQuestion() {
-    this.creatingQuestion = true;
     this.currentQuestion = {
       title: '',
       response: '',
       level: 'Junior',
       active: false,
     };
+    this.creatingQuestion = true;
   }
 }
