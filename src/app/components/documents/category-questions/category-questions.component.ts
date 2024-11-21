@@ -4,8 +4,6 @@ import { RouterLink } from '@angular/router';
 import { IQuestionDB } from '../../../data/question/type';
 import { SidebarComponent } from '../../custom/sidebar/sidebar.component';
 import { NgIf } from '@angular/common';
-
-import { ApiGitService } from '../../../data/api/api-git.service';
 import { ModalComponent } from '../../custom/modal/modal.component';
 import {
   ToastComponent,
@@ -13,6 +11,7 @@ import {
 } from '../../custom/toast/toast.component';
 import { ToastService } from '../../custom/toast/toast.service';
 import { LoaderService } from '../../custom/loader/loader.service';
+import { ApiQuestionsService } from '../../../data/api/api-questions.service';
 
 @Component({
   selector: 'app-category-questions',
@@ -29,12 +28,22 @@ import { LoaderService } from '../../custom/loader/loader.service';
   templateUrl: './category-questions.component.html',
 })
 export class CategoryQuestionsComponent implements OnInit {
-  @Input({ required: true }) public currentCategory!: string;
+  @Input({ required: true })
+  public set setCurrentCategory(value: string) {
+    if (!value) return;
+    if (this.currentCategory !== value) {
+      this.currentCategory = value;
+      this.getQuestionsCurrentCategory(this.currentCategory);
+    }
+  }
+
   @Input({ required: true }) public localStorageAPI = false;
-  public deletedQuestion: boolean = false;
+  public previousCategory!: string;
+  public deletedQuestion = false;
   public questions!: IQuestionDB[];
   public creatingQuestion = false;
   public changingQuestion = false;
+  public currentCategory!: string;
   public currentQuestion: IQuestionDB = {
     title: '',
     response: '',
@@ -50,7 +59,7 @@ export class CategoryQuestionsComponent implements OnInit {
   public heightTextarea = 'auto';
 
   constructor(
-    private apiService: ApiGitService,
+    private apiService: ApiQuestionsService,
     private toastService: ToastService,
     private loader: LoaderService,
   ) {}
@@ -80,7 +89,10 @@ export class CategoryQuestionsComponent implements OnInit {
 
   public getQuestionsCurrentCategory(endpoint: string): void {
     this.loader
-      .loading(this.apiService.getQuestionsCurrentCategory(endpoint))
+      .loading(
+        this.apiService.getQuestionsCurrentCategory(endpoint),
+        this.currentCategory === this.previousCategory,
+      )
       .subscribe((res) => {
         this.questions = res;
         this.currentCategory = endpoint;
@@ -92,6 +104,12 @@ export class CategoryQuestionsComponent implements OnInit {
     response: string,
     level: 'Junior' | 'Middle' | 'Senior',
   ): void {
+    this.currentQuestion = {
+      title: '',
+      response: '',
+      level: 'Junior',
+      active: false,
+    };
     if (this.questions.some((el) => el.title === title)) {
       this.toastService.openToast({
         title: 'Предупреждение',
@@ -207,8 +225,18 @@ export class CategoryQuestionsComponent implements OnInit {
     this.deletedQuestion = false;
   }
 
-  public deleteQuestion(question: any, state: boolean) {
+  public deleteQuestion(question: IQuestionDB) {
     this.currentQuestion = question;
     this.deletedQuestion = true;
+  }
+
+  public createQuestion() {
+    this.creatingQuestion = true;
+    this.currentQuestion = {
+      title: '',
+      response: '',
+      level: 'Junior',
+      active: false,
+    };
   }
 }

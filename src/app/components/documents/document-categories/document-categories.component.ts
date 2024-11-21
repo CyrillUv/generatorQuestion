@@ -1,9 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ApiGitService, ICategory } from '../../../data/api/api-git.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { tap } from 'rxjs';
-import { IQuestionDB } from '../../../data/question/type';
+import {
+  ApiCategoriesService,
+  ICategory,
+} from '../../../data/api/api-categories.service';
 
 @Component({
   selector: 'app-document-categories',
@@ -18,7 +21,7 @@ export class DocumentCategoriesComponent implements OnInit {
   public adminMode = false;
   public categories!: ICategory[];
 
-  constructor(private apiService: ApiGitService) {}
+  constructor(private apiService: ApiCategoriesService) {}
 
   ngOnInit() {
     this.getAllCategories();
@@ -29,12 +32,14 @@ export class DocumentCategoriesComponent implements OnInit {
       this.categories = res;
     });
   }
+
   public removeCategory(id: string) {
     this.apiService
       .deleteCategory(id)
       .pipe(tap(() => this.getAllCategories()))
       .subscribe();
   }
+
   public changeCategory(id: string, name: string): void {
     if (this.newCategory)
       this.apiService
@@ -42,6 +47,7 @@ export class DocumentCategoriesComponent implements OnInit {
         .pipe(tap(() => this.getAllCategories()))
         .subscribe();
   }
+
   public addCategory() {
     if (
       this.newCategory &&
@@ -61,6 +67,7 @@ export class DocumentCategoriesComponent implements OnInit {
         .subscribe();
     this.newCategory = '';
   }
+
   public getQuestionsCurrentCategory(endpoint: string): void {
     this.currentCategoryEmitter.emit(endpoint);
   }

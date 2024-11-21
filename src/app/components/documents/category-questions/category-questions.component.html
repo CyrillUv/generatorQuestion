@@ -42,7 +42,7 @@
             >
             <span
               class="documents__question__items--action"
-              (click)="deleteQuestion(question, true)"
+              (click)="deleteQuestion(question)"
               >✖</span
             >
           </div>
@@ -227,7 +227,7 @@
       </ng-template>
     </app-custom-sidebar>
 
-    <button *ngIf="currentCategory" (click)="creatingQuestion = true">
+    <button *ngIf="currentCategory" (click)="createQuestion()">
       Создать вопрос
     </button>
   </div>
