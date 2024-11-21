@@ -12,6 +12,7 @@ import {
 import { ToastService } from '../../custom/toast/toast.service';
 import { LoaderService } from '../../custom/loader/loader.service';
 import { ApiQuestionsService } from '../../../data/api/api-questions.service';
+import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Component({
   selector: 'app-category-questions',
@@ -114,6 +115,7 @@ export class CategoryQuestionsComponent implements OnInit {
             this.toastService.openToast({
               title: 'Успех',
               description: 'Добавление вопроса прошло успешно!',
+              type: ToastStatus.success,
             });
             if (this.localStorageAPI) {
               this.questions.push({
@@ -158,8 +160,9 @@ export class CategoryQuestionsComponent implements OnInit {
             const current = this.questions.find(
               (el) => el.id === this.currentQuestion.id,
             );
-            if (current) {
+            if (current || current === this.currentQuestion) {
               for (let value of Object.values(current)) {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 value = Object.values(this.currentQuestion);
               }
             }
@@ -170,6 +173,7 @@ export class CategoryQuestionsComponent implements OnInit {
           this.toastService.openToast({
             title: 'Успех',
             description: 'Изменение прошло успешно!',
+            type: ToastStatus.success,
           });
         },
         (error) => {
@@ -178,41 +182,71 @@ export class CategoryQuestionsComponent implements OnInit {
             description: error.error,
             type: ToastStatus.error,
           });
+          if (error.status === 404) {
+            if (this.localStorageAPI) {
+              const current = this.questions.find(
+                (el) => el.id === this.currentQuestion.id,
+              );
+              if (current || current === this.currentQuestion) {
+                for (let value of Object.values(current)) {
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                  value = Object.values(this.currentQuestion);
+                }
+              }
+            }
+            this.closeSidebar();
+            this.toastService.openToast({
+              title: 'Успех',
+              description: 'Изменение прошло успешно!',
+              type: ToastStatus.success,
+            });
+          }
         },
       );
   }
 
   public approveDelete() {
-    if (this.currentQuestion.id) {
-      this.loader
-        .loading(
-          this.apiService.deleteQuestion(
-            this.currentCategory + '/' + this.currentQuestion.id,
-          ),
-        )
-        .subscribe(
-          () => {
-            this.toastService.openToast({
-              title: 'Успех',
-              description: 'Удаление вопроса прошло успешно!',
-            });
+    this.loader
+      .loading(
+        this.apiService.deleteQuestion(
+          this.currentCategory + '/' + this.currentQuestion.id,
+        ),
+      )
+      .subscribe(
+        () => {
+          this.toastService.openToast({
+            title: 'Успех',
+            description: 'Удаление вопроса прошло успешно!',
+            type: ToastStatus.success,
+          });
+          if (this.localStorageAPI) {
+            this.questions = this.questions.filter(
+              (el) => el.id !== this.currentQuestion.id,
+            );
+          } else {
+            this.getQuestionsCurrentCategory(this.currentCategory);
+          }
+        },
+        (error) => {
+          this.toastService.openToast({
+            title: 'Ошибка',
+            description: error.error,
+            type: ToastStatus.error,
+          });
+          if (error.status === 404) {
             if (this.localStorageAPI) {
               this.questions = this.questions.filter(
                 (el) => el.id !== this.currentQuestion.id,
               );
-            } else {
-              this.getQuestionsCurrentCategory(this.currentCategory);
             }
-          },
-          (error) => {
             this.toastService.openToast({
-              title: 'Ошибка',
-              description: error.error,
-              type: ToastStatus.error,
+              title: 'Успех',
+              description: 'Удаление вопроса прошло успешно!',
+              type: ToastStatus.success,
             });
-          },
-        );
-    }
+          }
+        },
+      );
   }
 
   public cancelDelete() {
