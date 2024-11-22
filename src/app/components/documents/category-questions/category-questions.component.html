@@ -55,17 +55,19 @@
         [bodyTemplate]="bodyTemplate"
         [footerTemplate]="footerTemplate"
         [headerTemplate]="headerTemplate"
-        [triggerSidebar]="changingQuestion || creatingQuestion"
+        [triggerSidebar]="
+          changingQuestion ? changingQuestion : creatingQuestion
+        "
         (closingSidebarEmitter)="closeSidebar()"
       >
         <ng-template #headerTemplate>
           @if (changingQuestion) {
-            <span class="documents__question__header-sidebar"
+            <span class="documents__questions__header-sidebar"
               >Редактирование вопроса</span
             >
           }
           @if (creatingQuestion) {
-            <span class="documents__question__header-sidebar"
+            <span class="documents__questions__header-sidebar"
               >Создание вопроса</span
             >
           }
@@ -82,16 +84,19 @@
                 "
                 [(ngModel)]="currentQuestion.title"
               />
-              @if (!currentQuestion.title.length) {
+              @if (!currentQuestion.title.trim().length) {
                 <div>Обязательное поле ввода</div>
               }
             </div>
             <div>
               <p>Ответ</p>
               <textarea
-                [style.height]="heightTextarea"
+                id="myTextarea"
+                #textarea
                 rows="1"
-                (input)="autoResize($event)"
+                (input)="onInput(textarea)"
+                (mousemove)="onInput(textarea)"
+                style=""
                 class="documents__questions--addition__response"
                 [class.documents__questions--addition__error]="
                   !currentQuestion.response.length
@@ -99,7 +104,7 @@
                 name="response"
                 [(ngModel)]="currentQuestion.response"
               ></textarea>
-              @if (!currentQuestion.response.length) {
+              @if (!currentQuestion.response.trim().length) {
                 <div>Обязательное поле ввода</div>
               }
             </div>

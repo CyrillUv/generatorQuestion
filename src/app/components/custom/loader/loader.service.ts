@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, delay, Observable, tap, timer } from 'rxjs';
+import { BehaviorSubject, delay, finalize, Observable, tap, timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,14 +7,20 @@ import { BehaviorSubject, delay, Observable, tap, timer } from 'rxjs';
 export class LoaderService {
   public isLoading$ = new BehaviorSubject<boolean>(false);
 
-  public loading(req: Observable<any>): Observable<any> {
-    this.isLoading$.next(true);
-    return req.pipe(
-      delay(1000),
-      tap(() => {
-        this.isLoading$.next(false);
-      }),
-    );
+  public loading(req$: Observable<any>, load = true): Observable<any> {
+    if (load) {
+      return req$.pipe(
+        tap(() => {
+          this.isLoading$.next(true);
+        }),
+        delay(1000),
+        finalize(() => {
+          this.isLoading$.next(false);
+        }),
+      );
+    } else {
+      return req$;
+    }
   }
 
   public initLoading(): void {

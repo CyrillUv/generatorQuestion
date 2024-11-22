@@ -9,6 +9,10 @@ import { Observable, of, tap } from 'rxjs';
 export class ApiQuestionsService {
   private _baseUrl = 'http://localhost:3000';
 
+  private cacheState: Record<string, IQuestionDB[]> = {};
+
+  constructor(private http: HttpClient) {}
+
   public setCache(
     key: string,
     mode: 'delete' | 'add',
@@ -26,22 +30,18 @@ export class ApiQuestionsService {
       this.cacheState[key].push(<IQuestionDB>body);
     }
   }
-
-  private cacheState: Record<string, IQuestionDB[]> = {};
-
-  constructor(private http: HttpClient) {}
-
+  public existKeyInCache(key: string): boolean {
+    return Object.prototype.hasOwnProperty.call(this.cacheState, key);
+  }
   public getQuestionsCurrentCategory(
     endpoint: string,
   ): Observable<IQuestionDB[]> {
     if (this.cacheState[endpoint]) {
-      console.log(this.cacheState[endpoint]);
       return of(this.cacheState[endpoint]);
     }
     return this.http.get<IQuestionDB[]>(`${this._baseUrl}${endpoint}`).pipe(
       tap((res) => {
         this.cacheState[endpoint] = res;
-        console.log(this.cacheState[endpoint]);
       }),
     );
   }

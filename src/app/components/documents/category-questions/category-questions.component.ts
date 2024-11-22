@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IQuestionDB } from '../../../data/question/type';
@@ -28,6 +28,8 @@ import { ApiQuestionsService } from '../../../data/api/api-questions.service';
   templateUrl: './category-questions.component.html',
 })
 export class CategoryQuestionsComponent implements OnInit {
+  @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
+
   @Input({ required: true })
   public set setCurrentCategory(value: string) {
     if (!value) return;
@@ -49,35 +51,31 @@ export class CategoryQuestionsComponent implements OnInit {
     level: 'Junior',
     active: false,
   };
-  public heightTextarea = 'auto';
 
   constructor(
     private apiService: ApiQuestionsService,
     private toastService: ToastService,
     private loader: LoaderService,
-    private cdRef: ChangeDetectorRef,
   ) {}
 
-  public ngOnInit(): void {
+  ngOnInit() {
     this.getQuestionsCurrentCategory(this.currentCategory);
   }
 
-  public autoResize(event: Event) {
-    const textarea = event.target as HTMLTextAreaElement;
-    if (textarea.scrollHeight > textarea.clientHeight) {
-      this.heightTextarea = textarea.scrollHeight + 'px';
-    }
+  public onInput(textarea: HTMLTextAreaElement) {
+    textarea.style.height = 'auto'; // Сбрасываем высоту
+    textarea.style.height = textarea.scrollHeight + 'px'; // Устанавливаем высоту под текст
   }
 
   public closeSidebar() {
     if (this.creatingQuestion) this.creatingQuestion = false;
     if (this.changingQuestion) this.changingQuestion = false;
-    this.heightTextarea = 'auto';
   }
 
   public getQuestionsCurrentCategory(endpoint: string): void {
+    const existKey = this.apiService.existKeyInCache(endpoint);
     this.loader
-      .loading(this.apiService.getQuestionsCurrentCategory(endpoint))
+      .loading(this.apiService.getQuestionsCurrentCategory(endpoint), !existKey)
       .subscribe((res) => {
         this.questions = res;
         this.currentCategory = endpoint;
@@ -97,7 +95,11 @@ export class CategoryQuestionsComponent implements OnInit {
       });
     }
     //Нужно обработать валидатором этот кэйс
-    if (title && response && !this.questions.some((el) => el.title === title)) {
+    if (
+      title.trim() &&
+      response.trim() &&
+      !this.questions.some((el) => el.title === title)
+    ) {
       this.loader
         .loading(
           this.apiService.postQuestion(
@@ -116,7 +118,7 @@ export class CategoryQuestionsComponent implements OnInit {
               description: 'Добавление вопроса прошло успешно!',
               type: ToastStatus.success,
             });
-            let newQuestion = {
+            const newQuestion = {
               id: res.id,
               title: this.currentQuestion.title,
               level: this.currentQuestion.level,
@@ -143,6 +145,12 @@ export class CategoryQuestionsComponent implements OnInit {
             });
           },
         );
+    } else {
+      this.toastService.openToast({
+        title: 'Напоминание',
+        description: 'Поля должны быть заполнены!',
+        type: ToastStatus.info,
+      });
     }
   }
 
@@ -152,40 +160,51 @@ export class CategoryQuestionsComponent implements OnInit {
   }
 
   public editQuestion(): void {
-    this.loader
-      .loading(
-        this.apiService.patchQuestion(
-          this.currentCategory + '/' + this.currentQuestion.id,
-          this.currentQuestion,
-        ),
-      )
-      .subscribe(
-        () => {
-          if (this.localStorageAPI) {
-            this.questions = this.questions.map((el) => {
-              return el.id === this.currentQuestion.id
-                ? { ...el, ...this.currentQuestion }
-                : el;
+    if (
+      this.currentQuestion.title.trim().length &&
+      this.currentQuestion.response.trim().length
+    ) {
+      this.loader
+        .loading(
+          this.apiService.patchQuestion(
+            this.currentCategory + '/' + this.currentQuestion.id,
+            this.currentQuestion,
+          ),
+        )
+        .subscribe(
+          () => {
+            if (this.localStorageAPI) {
+              this.questions = this.questions.map((el) => {
+                return el.id === this.currentQuestion.id
+                  ? { ...el, ...this.currentQuestion }
+                  : el;
+              });
+            } else {
+              console.log('222');
+              this.getQuestionsCurrentCategory(this.currentCategory);
+            }
+            this.closeSidebar();
+            this.toastService.openToast({
+              title: 'Успех',
+              description: 'Изменение прошло успешно!',
+              type: ToastStatus.success,
             });
-          } else {
-            console.log('222');
-            this.getQuestionsCurrentCategory(this.currentCategory);
-          }
-          this.closeSidebar();
-          this.toastService.openToast({
-            title: 'Успех',
-            description: 'Изменение прошло успешно!',
-            type: ToastStatus.success,
-          });
-        },
-        (error) => {
-          this.toastService.openToast({
-            title: 'Ошибка',
-            description: error.error,
-            type: ToastStatus.error,
-          });
-        },
-      );
+          },
+          (error) => {
+            this.toastService.openToast({
+              title: 'Ошибка',
+              description: error.error,
+              type: ToastStatus.error,
+            });
+          },
+        );
+    } else {
+      this.toastService.openToast({
+        title: 'Напоминание',
+        description: 'Поля должны быть заполнены!',
+        type: ToastStatus.info,
+      });
+    }
   }
 
   public approveDelete() {
