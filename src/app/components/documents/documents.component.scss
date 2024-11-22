@@ -26,7 +26,7 @@
   &__questions {
     width:70vh ;
     &__header-sidebar{
-      padding-right: 10px;
+      margin: 10px;
     }
     &--addition {
 
@@ -48,7 +48,7 @@
         min-height: 50px;
         max-height: 300px;
         height:fit-content;
-        resize: none;
+        resize: none;overflow: hidden
       }
       &__levels {
         display: flex;
