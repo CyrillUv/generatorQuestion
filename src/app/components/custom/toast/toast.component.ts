@@ -17,8 +17,9 @@ export enum ToastStatus {
   styleUrl: './toast.component.scss',
 })
 export class ToastComponent implements OnInit {
+  // появление тоста
   public activeToast = false;
-
+  // обьект настроек для тоста
   public settings = {
     title: 'Success',
     type: ToastStatus.success,
@@ -30,7 +31,9 @@ export class ToastComponent implements OnInit {
 
   ngOnInit(): void {
     this.toastService.activeToast$.subscribe((v) => {
+      //активация тоста
       this.activeToast = v;
+      //если тост активирован, он покажется и убирется через заданное время
       if (this.activeToast) {
         this.closeToastOfTime();
       }
@@ -42,11 +45,11 @@ export class ToastComponent implements OnInit {
       }
     });
   }
-
+  //закрытие тоста
   public closeToast(): void {
     this.toastService.activeToast$.next(false);
   }
-
+  //задает время через которое тоста закроется
   private closeToastOfTime() {
     timer(this.settings.timer)
       .pipe(tap(() => this.closeToast()))

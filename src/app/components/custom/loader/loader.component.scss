@@ -1,3 +1,4 @@
+//Альтернативный дизайн загрузки компонентов
 //.loading{
 //  position: absolute;
 //  background: none;
@@ -49,7 +50,7 @@
   border-width: 2px 2px 50px 2px;
   border-radius: 100%;
   position: relative;
-  animation: 3s yinYang linear infinite;
+  animation: 3s yinYang linear infinite; //анимация инь-янь
   &:before {
     content: "";
     position: absolute;

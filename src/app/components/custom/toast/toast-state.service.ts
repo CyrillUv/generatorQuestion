@@ -12,6 +12,8 @@ export interface IConfig {
   providedIn: 'root',
 })
 export class ToastStateService {
+  //активация тоста
   public activeToast$ = new BehaviorSubject<boolean>(false);
+  //изменение настроек тоста
   public changeConfig$ = new Subject<IConfig>();
 }

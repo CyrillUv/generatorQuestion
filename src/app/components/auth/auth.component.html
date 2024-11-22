@@ -1,0 +1,18 @@
+<div
+  class="auth"
+  [class.auth--default]="registration"
+  [class.auth--transform]="!registration"
+>
+  <div class="auth__transition-bar">
+    @if (registration) {
+      <button (click)="registration = false">Регистрация</button>
+    } @else {
+      <button (click)="registration = true">Логин</button>
+    }
+  </div>
+  @if (registration) {
+    <div class="auth__registration"></div>
+  } @else {
+    <div class="auth__login"></div>
+  }
+</div>

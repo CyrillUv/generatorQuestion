@@ -5,9 +5,11 @@ import { BehaviorSubject, delay, finalize, Observable, tap, timer } from 'rxjs';
   providedIn: 'root',
 })
 export class LoaderService {
+  //стрим отвечающий за загрузку
   public isLoading$ = new BehaviorSubject<boolean>(false);
 
   public loading(req$: Observable<any>, load = true): Observable<any> {
+    //если флаг загрузки валиден,происходит задержка и начинается загрузка,иначе просто получаем ответ
     if (load) {
       return req$.pipe(
         tap(() => {
@@ -22,7 +24,7 @@ export class LoaderService {
       return req$;
     }
   }
-
+  //Загрузка при входе на страницу,сейчас отсутсует,т.к. присутствует загрузочная планка
   public initLoading(): void {
     this.isLoading$.next(true);
     timer(3000).subscribe(() => {

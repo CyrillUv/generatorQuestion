@@ -24,12 +24,13 @@ import { ModalComponent } from '../custom/modal/modal.component';
   templateUrl: './documents.component.html',
 })
 export class DocumentsComponent {
+  //текущая категория
   public currentCategory!: string;
-
+  //Запросы с фронт вмешательством
   public localStorageAPI!: boolean;
 
   constructor(private cdRef: ChangeDetectorRef) {}
-
+  //разделение запросов на серверное и временное локальное хранилище
   public serverCategories = [
     '/git',
     '/algorithms',
@@ -38,9 +39,10 @@ export class DocumentsComponent {
     '/css',
     '/net-protocols',
   ];
-
+  //изменение текущей категории вопросов
   public setCurrentCategory(category: string): void {
     this.currentCategory = category;
+    //если категория не входит в массив категорий серверной стороны,то к ним приготовлен измененный функционал
     this.localStorageAPI = !this.serverCategories.includes(
       this.currentCategory,
     );

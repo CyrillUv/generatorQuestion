@@ -25,6 +25,7 @@ import { IOptions } from '../../../data/menu/data-menu';
   standalone: true,
 })
 export class SettingTestingComponent {
+  //номер активного блока тестов
   public activeBlockTests = '1';
   @ViewChild('optionRef') option!: TemplateRef<unknown>;
   public ms = inject(MenuService);

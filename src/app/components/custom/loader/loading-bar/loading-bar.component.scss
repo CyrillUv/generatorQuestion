@@ -4,12 +4,12 @@
   left: 0;
   width: 0;
   height: 4px;
-  background-color: #007bff;
+  background-color: #007bff;  //первоначальный цвет планки,когда все в порядке
   z-index: 1000;
   &__end{
-    animation: loading 2s forwards,ending 2s 2s forwards,ending2 4s 4s forwards;
+    animation: loading 2s forwards,ending 2s 2s forwards,ending2 4s 4s forwards;//анимация  с остановкой и исчезанием
 
-    @keyframes loading {
+    @keyframes loading { //анимация начальной загрузки
       0% {
         width: 0;
       }
@@ -17,7 +17,7 @@
         width: 75%;
       }
     }
-    @keyframes ending {
+    @keyframes ending { //анимация остановки
       0%{
         width: 75%;
         opacity: 1;
@@ -26,7 +26,7 @@
         width: 100%;
       }
     }
-    @keyframes ending2 {
+    @keyframes ending2 { //анимация исчезания
       0%{
         width: 100%;
         opacity: 1;
@@ -39,17 +39,17 @@
 
   }
   &__failed{
-    animation: loading-failed 6s forwards;
+    animation: loading-failed 6s forwards; //анимация при провальном результате
   }
   @keyframes loading-failed {
-    0% {
+    0% {// начальная стадия анимации
       width: 0;
       background-color: #007bff;
     }
-    75%{
+    75%{//плавный переход цветов ближе к середине экрана
       background-color:#bd1111;
     }
-    100% {
+    100% {//конечная стадия анимации
       width: 75%;
       background-color:#bd1111;
     }

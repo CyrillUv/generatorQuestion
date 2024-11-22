@@ -1,0 +1,28 @@
+.auth{
+  width: 70vw;
+  height: 75vh;
+  display: flex;
+  flex-direction: row;
+  background-color: #4e99c9;
+  transition: flex-direction 2s ease-in-out;
+  animation: forwards ;
+  &--default{
+    flex-direction: row;
+    transition: flex-direction 2s ease-in-out;
+
+  }
+  &--transform{
+    flex-direction: row-reverse;
+    transition: flex-direction 2s ease-in-out;
+
+  }
+  &__transition-bar{
+    width: 30%;
+    height: 100%;
+    background-color: #410877;
+  }
+  &__registration{
+
+  }
+  &__login{}
+}

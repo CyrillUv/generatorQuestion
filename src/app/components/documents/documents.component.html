@@ -13,29 +13,3 @@
     </div>
   }
 </div>
-<!--<div class="documents">-->
-<!--<div class="categories">-->
-<!--  <div routerLink="/menu">← Меню</div>-->
-<!--  @for (category of categories; track category) {-->
-<!--    <div class="documents__category" (click)="getQuestions(category)">-->
-<!--      {{ category }}-->
-<!--    </div>-->
-<!--  }-->
-<!--  <div [routerLink]="'/screen'">Скрины</div>-->
-<!--</div>-->
-<!--  <hr />-->
-<!--  <div class="documents__questions">-->
-<!--    @for (question of questions; track question.question; let i = $index) {-->
-<!--      <div (click)="question.active = !question.active">-->
-<!--        <span class="documents__question">{{-->
-<!--          i + 1 + ". " + question.question-->
-<!--        }}</span>-->
-<!--        <div class="documents__response" *ngIf="question.active">-->
-<!--          {{ question.response }}-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    } @empty {-->
-<!--      <div class="response">Выберите категорию</div>-->
-<!--    }-->
-<!--  </div>-->
-<!--</div>-->

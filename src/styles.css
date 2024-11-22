@@ -42,7 +42,7 @@ body button{
   border-radius: 10px;
 }
 
-.test:not(.loading) {
+.component-opacity:not(.loading) {
     opacity: 0.6;
 }
 

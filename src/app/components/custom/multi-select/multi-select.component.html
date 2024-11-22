@@ -8,7 +8,7 @@
     [class.multi-select__field__inactive]="!showPanel"
     [class.multi-select__field__error]="invalidField"
     tabindex="0"
-    (click)="changeSelect()"
+    (click)="openCloseSelect()"
   >
     <main>
       <span *ngFor="let option of selectedOptions; let i = index">

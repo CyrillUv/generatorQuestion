@@ -11,5 +11,6 @@ import { EventType } from '@angular/router';
   styleUrl: './loading-bar.component.scss',
 })
 export class LoadingBarComponent {
+  //Энум от которого зависит какая загрузочная планка будет изображена вверху при загрузке страницы
   @Input() public isLoading: EventType = EventType.NavigationStart;
 }

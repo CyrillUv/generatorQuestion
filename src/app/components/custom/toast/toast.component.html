@@ -3,16 +3,21 @@
   [class.toast--active]="activeToast"
   [class.toast--inactive]="!activeToast"
 >
+  <!--анимации тостов-->
   @if (settings.type === "success") {
+    <!--    успех-->
     <div class="toast__icon">✔</div>
   }
   @if (settings.type === "info") {
+    <!--    информация-->
     <div class="toast__icon">ⓘ</div>
   }
   @if (settings.type === "error") {
+    <!--    ошибка-->
     <div class="toast__icon">⊗</div>
   }
   @if (settings.type === "warning") {
+    <!--    предупреждение-->
     <div class="toast__icon">⚠︎</div>
   }
 

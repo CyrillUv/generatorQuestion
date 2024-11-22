@@ -16,11 +16,13 @@ export class LoaderComponent implements OnInit {
   ngOnInit(): void {
     this.loaderService.isLoading$.subscribe((res) => {
       if (res) {
+        //стили для отключения событий других компонентов
         document.body.classList.add('event-none');
-        document.body.classList.add('test');
+        document.body.classList.add('component-opacity');
       } else {
+        //удаление отключения событий
         document.body.classList.remove('event-none');
-        document.body.classList.remove('test');
+        document.body.classList.remove('component-opacity');
       }
     });
   }

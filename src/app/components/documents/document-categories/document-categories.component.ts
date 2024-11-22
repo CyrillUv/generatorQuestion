@@ -15,30 +15,35 @@ import {
   templateUrl: './document-categories.component.html',
 })
 export class DocumentCategoriesComponent implements OnInit {
-  @Output() loadingEmitter = new EventEmitter<boolean>();
+  //эмит текущей категории
   @Output() currentCategoryEmitter = new EventEmitter<string>();
+  //новая категория
   public newCategory = '';
+  //режим бога
   public adminMode = false;
+  //категории документации
   public categories!: ICategory[];
   constructor(private apiService: ApiCategoriesService) {}
 
   ngOnInit() {
+    //получение всех категорий
     this.getAllCategories();
   }
 
   public getAllCategories(): void {
+    //запрос на все категории
     this.apiService.getAllCategories().subscribe((res) => {
       this.categories = res;
     });
   }
-
+  //удаление категории
   public removeCategory(id: string) {
     this.apiService
       .deleteCategory(id)
       .pipe(tap(() => this.getAllCategories()))
       .subscribe();
   }
-
+  //изменение категории
   public changeCategory(id: string, name: string): void {
     if (this.newCategory)
       this.apiService
@@ -46,7 +51,7 @@ export class DocumentCategoriesComponent implements OnInit {
         .pipe(tap(() => this.getAllCategories()))
         .subscribe();
   }
-
+  //добавление категории
   public addCategory() {
     if (
       this.newCategory &&
@@ -66,7 +71,7 @@ export class DocumentCategoriesComponent implements OnInit {
         .subscribe();
     this.newCategory = '';
   }
-
+  //эмит на получение вопросов по выбранной категории
   public getQuestionsCurrentCategory(endpoint: string): void {
     this.currentCategoryEmitter.emit(endpoint);
   }
