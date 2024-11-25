@@ -3,7 +3,9 @@ import {
   EventEmitter,
   inject,
   Input,
+  OnChanges,
   Output,
+  SimpleChanges,
   TemplateRef,
 } from '@angular/core';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
@@ -18,7 +20,7 @@ import { sidebar } from './sidebar.animations';
   imports: [NgTemplateOutlet, NgIf],
   animations: sidebar,
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnChanges {
   //Верхняя часть шаблона
   @Input() public headerTemplate!: TemplateRef<unknown>;
   //Тело шаблона
@@ -29,7 +31,9 @@ export class SidebarComponent {
   @Input() public triggerSidebar!: boolean | null;
   //Закрытие сайдбара
   @Output() public closingSidebarEmitter = new EventEmitter<boolean>();
-
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('trig', this.triggerSidebar);
+  }
   public ms = inject(MenuService);
   //Закрытие сайдбара
   public closingSidebar(): void {

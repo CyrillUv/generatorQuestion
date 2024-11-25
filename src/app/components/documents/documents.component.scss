@@ -2,6 +2,7 @@
   opacity: 0.001%;
 }
 .documents {
+
   display: flex;
   padding: 10px;
   height: 100%;
@@ -25,6 +26,9 @@
 
   &__questions {
     width:70vh ;
+    scroll-behavior: auto;
+    overflow-y: visible;
+    overflow-x: visible;
     &__header-sidebar{
       margin: 10px;
     }

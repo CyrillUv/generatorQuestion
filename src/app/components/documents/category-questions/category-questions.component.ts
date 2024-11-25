@@ -89,7 +89,6 @@ export class CategoryQuestionsComponent implements OnInit {
       .loading(this.apiService.getQuestionsCurrentCategory(endpoint), !existKey)
       .subscribe((res) => {
         this.questions = res;
-        this.currentCategory = endpoint;
       });
   }
   //добавление вопроса

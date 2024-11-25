@@ -51,117 +51,116 @@
           {{ question.response }}
         </div>
       </div>
-      <app-custom-sidebar
-        [bodyTemplate]="bodyTemplate"
-        [footerTemplate]="footerTemplate"
-        [headerTemplate]="headerTemplate"
-        [triggerSidebar]="
-          changingQuestion ? changingQuestion : creatingQuestion
-        "
-        (closingSidebarEmitter)="closeSidebar()"
-      >
-        <ng-template #headerTemplate>
-          @if (changingQuestion) {
-            <span class="documents__questions__header-sidebar"
-              >Редактирование вопроса</span
-            >
-          }
-          @if (creatingQuestion) {
-            <span class="documents__questions__header-sidebar"
-              >Создание вопроса</span
-            >
-          }
-        </ng-template>
-        <ng-template #bodyTemplate>
-          <main>
-            <div>
-              <p>Вопрос</p>
-              <input
-                name="question"
-                class="documents__questions--addition__question"
-                [class.documents__questions--addition__error]="
-                  !currentQuestion.title.length
-                "
-                [(ngModel)]="currentQuestion.title"
-              />
-              @if (!currentQuestion.title.trim().length) {
-                <div>Обязательное поле ввода</div>
-              }
-            </div>
-            <div>
-              <p>Ответ</p>
-              <textarea
-                id="myTextarea"
-                #textarea
-                rows="1"
-                (input)="onInput(textarea)"
-                (mousemove)="onInput(textarea)"
-                style=""
-                class="documents__questions--addition__response"
-                [class.documents__questions--addition__error]="
-                  !currentQuestion.response.length
-                "
-                name="response"
-                [(ngModel)]="currentQuestion.response"
-              ></textarea>
-              @if (!currentQuestion.response.trim().length) {
-                <div>Обязательное поле ввода</div>
-              }
-            </div>
-            <div class="documents__questions--addition__levels">
-              <p>Уровень сложности</p>
-              <label class="documents__questions--addition__levels__level">
-                <span>Junior</span>
-                <input
-                  type="radio"
-                  [defaultValue]="currentQuestion.level"
-                  name="editOption"
-                  [value]="'Junior'"
-                  [(ngModel)]="currentQuestion.level"
-                />
-              </label>
-              <label class="documents__questions--addition__levels__level">
-                <span>Middle</span>
-                <input
-                  type="radio"
-                  name="editOption"
-                  [value]="'Middle'"
-                  [(ngModel)]="currentQuestion.level"
-                />
-              </label>
-              <label class="documents__questions--addition__levels__level">
-                <span>Senior</span>
-                <input
-                  type="radio"
-                  name="editOption"
-                  [value]="'Senior'"
-                  [(ngModel)]="currentQuestion.level"
-                />
-              </label>
-            </div>
-          </main>
-        </ng-template>
-        <ng-template #footerTemplate>
-          @if (changingQuestion) {
-            <button (click)="editQuestion()">Изменить вопрос</button>
-          }
-          @if (creatingQuestion) {
-            <button
-              (click)="
-                addQuestion(
-                  currentQuestion.title,
-                  currentQuestion.response,
-                  currentQuestion.level
-                )
-              "
-            >
-              Добавить вопрос
-            </button>
-          }
-          <button (click)="closeSidebar()">Отмена</button>
-        </ng-template></app-custom-sidebar
-      >
     }
+
+    <app-custom-sidebar
+      [bodyTemplate]="bodyTemplate"
+      [footerTemplate]="footerTemplate"
+      [headerTemplate]="headerTemplate"
+      [triggerSidebar]="changingQuestion || creatingQuestion"
+      (closingSidebarEmitter)="closeSidebar()"
+    >
+      <ng-template #headerTemplate>
+        @if (changingQuestion) {
+          <span class="documents__questions__header-sidebar"
+            >Редактирование вопроса</span
+          >
+        }
+        @if (creatingQuestion) {
+          <span class="documents__questions__header-sidebar"
+            >Создание вопроса</span
+          >
+        }
+      </ng-template>
+      <ng-template #bodyTemplate>
+        <main>
+          <div>
+            <p>Вопрос</p>
+            <input
+              name="question"
+              class="documents__questions--addition__question"
+              [class.documents__questions--addition__error]="
+                !currentQuestion.title.length
+              "
+              [(ngModel)]="currentQuestion.title"
+            />
+            @if (!currentQuestion.title.trim().length) {
+              <div>Обязательное поле ввода</div>
+            }
+          </div>
+          <div>
+            <p>Ответ</p>
+            <textarea
+              id="myTextarea"
+              #textarea
+              rows="1"
+              (input)="onInput(textarea)"
+              (mousemove)="onInput(textarea)"
+              style=""
+              class="documents__questions--addition__response"
+              [class.documents__questions--addition__error]="
+                !currentQuestion.response.length
+              "
+              name="response"
+              [(ngModel)]="currentQuestion.response"
+            ></textarea>
+            @if (!currentQuestion.response.trim().length) {
+              <div>Обязательное поле ввода</div>
+            }
+          </div>
+          <div class="documents__questions--addition__levels">
+            <p>Уровень сложности</p>
+            <label class="documents__questions--addition__levels__level">
+              <span>Junior</span>
+              <input
+                type="radio"
+                [defaultValue]="currentQuestion.level"
+                name="editOption"
+                [value]="'Junior'"
+                [(ngModel)]="currentQuestion.level"
+              />
+            </label>
+            <label class="documents__questions--addition__levels__level">
+              <span>Middle</span>
+              <input
+                type="radio"
+                name="editOption"
+                [value]="'Middle'"
+                [(ngModel)]="currentQuestion.level"
+              />
+            </label>
+            <label class="documents__questions--addition__levels__level">
+              <span>Senior</span>
+              <input
+                type="radio"
+                name="editOption"
+                [value]="'Senior'"
+                [(ngModel)]="currentQuestion.level"
+              />
+            </label>
+          </div>
+        </main>
+      </ng-template>
+      <ng-template #footerTemplate>
+        @if (changingQuestion) {
+          <button (click)="editQuestion()">Изменить вопрос</button>
+        }
+        @if (creatingQuestion) {
+          <button
+            (click)="
+              addQuestion(
+                currentQuestion.title,
+                currentQuestion.response,
+                currentQuestion.level
+              )
+            "
+          >
+            Добавить вопрос
+          </button>
+        }
+        <button (click)="closeSidebar()">Отмена</button>
+      </ng-template></app-custom-sidebar
+    >
 
     <button *ngIf="currentCategory" (click)="createQuestion()">
       Создать вопрос
