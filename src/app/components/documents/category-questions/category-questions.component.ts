@@ -98,7 +98,7 @@ export class CategoryQuestionsComponent implements OnInit {
     level: 'Junior' | 'Middle' | 'Senior',
   ): void {
     //если такое название вопроса есть, выскакивает предупреждение
-    if (this.questions.some((el) => el.title === title)) {
+    if (this.questions.some((el) => el.title.trim().toLowerCase() === title.trim().toLowerCase())) {
       this.toastService.openToast({
         title: 'Предупреждение',
         description: 'Этот вопрос уже существует',
