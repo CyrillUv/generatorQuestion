@@ -1,5 +1,9 @@
-<!--<app-toast />-->
-<!--<app-loading-bar [isLoading]="navigationType" />-->
-<!--<app-loader />-->
-<!--<router-outlet></router-outlet>-->
-<app-auth />
+@if(router.url!=='/auth'){
+  <div style="display:flex;justify-content: end" routerLink="/auth">
+    <button (click)="ms.setAuthorized(false)">Выйти</button>
+  </div>
+}
+<app-toast />
+<app-loading-bar [isLoading]="navigationType" />
+<app-loader />
+<router-outlet></router-outlet>

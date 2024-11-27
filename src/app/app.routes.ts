@@ -3,26 +3,29 @@ import { MenuComponent } from './components/menu/menu.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 
 import { ActivateStatistics } from './guards/activate-statistics.guard';
+import {AuthComponent} from "./components/auth/auth.component";
+import {AuthGuard} from "./guards/auth.guard";
 
 export const routes: Routes = [
-  { path: '', component: MenuComponent },
-  { path: 'menu', component: MenuComponent },
+  { path: '', component: AuthComponent},
+  { path: 'auth', component: AuthComponent },
+  { path: 'menu', component: MenuComponent ,canActivate: [AuthGuard]},
   {
-    path: 'documents',
+    path: 'documents',canActivate: [AuthGuard],
     loadComponent: () =>
       import('./components/documents/documents.component').then(
         (c) => c.DocumentsComponent,
       ),
   },
   {
-    path: 'screen',
+    path: 'screen',canActivate: [AuthGuard],
     loadComponent: () =>
       import('./components/screen/screen.component').then(
         (c) => c.ScreenComponent,
       ),
   },
   {
-    path: 'testing',
+    path: 'testing',canActivate: [AuthGuard],
     loadComponent: () =>
       import('./components/testing/testing.component').then(
         (t) => t.TestingComponent,
@@ -31,10 +34,10 @@ export const routes: Routes = [
   {
     path: 'statistics',
     component: StatisticsComponent,
-    canActivate: [ActivateStatistics],
+    canActivate: [ActivateStatistics,AuthGuard],
   },
   {
-    path: 'questions',
+    path: 'questions',canActivate: [AuthGuard],
     loadComponent: () =>
       import('./components/questions/questions.component').then(
         (c) => c.QuestionsComponent,

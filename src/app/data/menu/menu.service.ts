@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { IQuestion } from '../question/type';
 import { dataMenu, IOptions } from './data-menu';
-import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Injectable({
   providedIn: 'root',
@@ -22,10 +21,15 @@ export class MenuService {
   private _passedQuestions: IQuestion[] = [];
   //состояние тогла
   private _valueToggle: boolean | null = null;
+  //флаг авторизации
+  private _isAuthorized = false;
   public getData() {
     console.log(dataMenu);
     return dataMenu;
   }
+  public getAuthorized():boolean{
+    return this._isAuthorized
+}
   public getSettingMode(): boolean | null {
     return this._settingMode;
   }
@@ -51,6 +55,9 @@ export class MenuService {
   //обнуление прошедших вопросов
   public nullingPassedQuestions(): void {
     this._passedQuestions = [];
+  }
+  public setAuthorized(auth:boolean):void{
+    this._isAuthorized = auth
   }
   public setPassedQuestions(passedQuestions: IQuestion): void {
     this._passedQuestions.push(passedQuestions);

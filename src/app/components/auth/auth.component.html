@@ -1,18 +1,81 @@
 <div
   class="auth"
-  [class.auth--default]="registration"
-  [class.auth--transform]="!registration"
+  [class.auth--default]="toggle"
+  [class.auth--transform]="!toggle"
 >
   <div class="auth__transition-bar">
-    @if (registration) {
-      <button (click)="registration = false">Регистрация</button>
+    @if (!toggle) {
+      <button (click)="toggle = true" class="auth__transition-bar__login">Регистрация</button>
     } @else {
-      <button (click)="registration = true">Логин</button>
+      <button  (click)="toggle = false">
+        Логин
+      </button>
     }
   </div>
-  @if (registration) {
-    <div class="auth__registration"></div>
+  @if (!toggle) {
+    <div class="auth__login">
+      <h1>Вход</h1>
+      <div class="auth__fields">
+        <label for="login-reg" class="auth__fields__item__label">Логин</label>
+        <input
+          id="login-reg"
+          class="auth__fields__item"
+          [class.auth__fields__item--error]="!login.login.trim().length"
+          [(ngModel)]="login.login"
+        />
+        <label *ngIf="!login.login.trim().length" class="auth__fields__item__label"
+          >*Обязательное поле</label
+        >
+        <label for="password-reg" class="auth__fields__item__label"
+          >Пароль</label
+        >
+        <input
+          id="password-reg"
+          class="auth__fields__item"
+          [class.auth__fields__item--error]="!login.login.trim().length"
+          [(ngModel)]="login.password"
+          type="password"
+        />
+        <label *ngIf="!login.password.trim().length" class="auth__fields__item__label"
+          >*Обязательное поле</label
+        >
+        <button (click)="onLogin()">Войти</button>
+      </div>
+    </div>
   } @else {
-    <div class="auth__login"></div>
+    <div class="auth__registration">
+      <h1>Регистрация</h1>
+      <div class="auth__fields">
+        <label for="login" class="auth__fields__item__label">Логин</label>
+        <input
+          id="login"
+          placeholder="*Логин не менее 4 символов"
+          class="auth__fields__item"
+          [class.auth__fields__item--error]="!registration.login.trim().length"
+          [(ngModel)]="registration.login"
+        />
+        <label
+          *ngIf="!registration.login.trim().length"
+          class="auth__fields__item__label"
+          >*Обязательное поле</label
+        >
+        <label for="password" class="auth__fields__item__label">Пароль</label>
+        <input
+          id="password"
+          class="auth__fields__item"
+          placeholder="*Пароль не менее 4 символов"
+          [class.auth__fields__item--error]="!registration.login.trim().length"
+          [(ngModel)]="registration.password"
+          type="password"
+        />
+        <label
+          *ngIf="!registration.password.trim().length"
+          class="auth__fields__item__label"
+          >*Обязательное поле</label
+        >
+        <button (click)="onRegistration()">Зарегистрироваться</button>
+
+      </div>
+    </div>
   }
 </div>

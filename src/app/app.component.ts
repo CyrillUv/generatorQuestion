@@ -5,6 +5,7 @@ import {
   NavigationError,
   NavigationStart,
   Router,
+  RouterLink,
   RouterOutlet,
 } from '@angular/router';
 import {
@@ -16,6 +17,7 @@ import { LoadingBarComponent } from './components/custom/loader/loading-bar/load
 import { ToastService } from './components/custom/toast/toast.service';
 import { timer } from 'rxjs';
 import { AuthComponent } from './components/auth/auth.component';
+import { MenuService } from './data/menu/menu.service';
 
 interface Backend {
   title: string;
@@ -64,6 +66,7 @@ type CurrentEventType = 0 | 1 | 2 | 3;
     LoaderComponent,
     LoadingBarComponent,
     AuthComponent,
+    RouterLink,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -72,31 +75,33 @@ export class AppComponent {
   public navigationType: CurrentEventType = 0;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private toastService: ToastService,
+    public ms: MenuService,
   ) {
+    console.log(this.ms.getAuthorized())
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) this.navigationType = 0;
       if (event instanceof NavigationEnd) this.navigationType = 1;
       if (event instanceof NavigationCancel) {
         this.navigationType = 2;
         this.toastService.openToast({
-          title: 'Страница не найдена!',
+          title: 'Перенаправление ',
           type: ToastStatus.warning,
-          description: 'Вы будете перенаправлены на главную страницу',
+          description: 'Вы будете перенаправлены на страницу авторизации',
           timer: 1000,
         });
-        timer(5000).subscribe(() => this.router.navigate(['/menu']));
+        timer(5000).subscribe(() => this.router.navigate(['/auth']));
       }
       if (event instanceof NavigationError) {
         this.navigationType = 3;
         this.toastService.openToast({
           title: 'Страница не найдена!',
           type: ToastStatus.warning,
-          description: 'Вы будете перенаправлены на главную страницу',
+          description: 'Вы будете перенаправлены на страницу авторизации',
           timer: 1000,
         });
-        timer(5000).subscribe(() => this.router.navigate(['/menu']));
+        timer(5000).subscribe(() => this.router.navigate(['/auth']));
       }
     });
   }
