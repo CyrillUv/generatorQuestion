@@ -7,7 +7,7 @@ import {AuthComponent} from "./components/auth/auth.component";
 import {AuthGuard} from "./guards/auth.guard";
 
 export const routes: Routes = [
-  { path: '', component: AuthComponent},
+  { path: '', component: MenuComponent,canActivate: [AuthGuard]},
   { path: 'auth', component: AuthComponent },
   { path: 'menu', component: MenuComponent ,canActivate: [AuthGuard]},
   {
@@ -43,5 +43,5 @@ export const routes: Routes = [
         (c) => c.QuestionsComponent,
       ),
   },
-  // { path: '**', component: MenuComponent },
+  { path: '**', component: MenuComponent,canActivate:[AuthGuard] },
 ];

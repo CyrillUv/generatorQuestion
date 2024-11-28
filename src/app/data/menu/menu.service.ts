@@ -22,14 +22,14 @@ export class MenuService {
   //состояние тогла
   private _valueToggle: boolean | null = null;
   //флаг авторизации
-  private _isAuthorized = false;
+  // private _isAuthorized = false;
   public getData() {
     console.log(dataMenu);
     return dataMenu;
   }
-  public getAuthorized():boolean{
-    return this._isAuthorized
-}
+//   public getAuthorized():boolean{
+//     return this._isAuthorized || localStorage.getItem('isAuthorized') === 'true';
+// }
   public getSettingMode(): boolean | null {
     return this._settingMode;
   }
@@ -56,9 +56,14 @@ export class MenuService {
   public nullingPassedQuestions(): void {
     this._passedQuestions = [];
   }
-  public setAuthorized(auth:boolean):void{
-    this._isAuthorized = auth
-  }
+  // public setAuthorized(auth:boolean):void{
+  //   this._isAuthorized = auth;
+  //   if (auth) {
+  //     localStorage.setItem('isAuthorized', 'true');
+  //   } else {
+  //     localStorage.removeItem('isAuthorized');
+  //   }
+  // }
   public setPassedQuestions(passedQuestions: IQuestion): void {
     this._passedQuestions.push(passedQuestions);
   }

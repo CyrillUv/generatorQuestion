@@ -1,18 +1,12 @@
 <div
   class="auth"
-  [class.auth--default]="toggle"
-  [class.auth--transform]="!toggle"
+  [class.auth--default]="isRegistration"
+  [class.auth--transform]="!isRegistration"
 >
-  <div class="auth__transition-bar">
-    @if (!toggle) {
-      <button (click)="toggle = true" class="auth__transition-bar__login">Регистрация</button>
-    } @else {
-      <button  (click)="toggle = false">
-        Логин
-      </button>
-    }
-  </div>
-  @if (!toggle) {
+  @if (!isRegistration) {
+    <div class="auth__transition-bar">
+      <button (click)="isRegistration = true" class="auth__transition-bar__login">Регистрация</button>
+    </div>
     <div class="auth__login">
       <h1>Вход</h1>
       <div class="auth__fields">
@@ -20,62 +14,74 @@
         <input
           id="login-reg"
           class="auth__fields__item"
-          [class.auth__fields__item--error]="!login.login.trim().length"
-          [(ngModel)]="login.login"
+          [class.auth__fields__item--error]="!credForLogin.login.trim().length"
+          [(ngModel)]="credForLogin.login"
         />
-        <label *ngIf="!login.login.trim().length" class="auth__fields__item__label"
+        <label *ngIf="!credForLogin.login.trim().length" class="auth__fields__item__label__error"
           >*Обязательное поле</label
         >
+        <div>
+          <h4>Забыли логин?</h4>
+        </div>
         <label for="password-reg" class="auth__fields__item__label"
           >Пароль</label
         >
-        <input
+        <div style="display: flex;"><input
           id="password-reg"
           class="auth__fields__item"
-          [class.auth__fields__item--error]="!login.login.trim().length"
-          [(ngModel)]="login.password"
+          [class.auth__fields__item--error]="!credForLogin.password.trim().length"
+          [(ngModel)]="credForLogin.password"
           type="password"
-        />
-        <label *ngIf="!login.password.trim().length" class="auth__fields__item__label"
+        />👁</div>
+
+        <label *ngIf="!credForLogin.password.trim().length" class="auth__fields__item__label__error"
           >*Обязательное поле</label
         >
         <button (click)="onLogin()">Войти</button>
       </div>
     </div>
   } @else {
+    <div class="auth__transition-bar">
+      <button  (click)="isRegistration = false" >
+        Логин
+      </button>
+    </div>
     <div class="auth__registration">
       <h1>Регистрация</h1>
       <div class="auth__fields">
         <label for="login" class="auth__fields__item__label">Логин</label>
         <input
           id="login"
-          placeholder="*Логин не менее 4 символов"
+          placeholder="*Логин не менее {{minLengthChar}} символов"
           class="auth__fields__item"
-          [class.auth__fields__item--error]="!registration.login.trim().length"
-          [(ngModel)]="registration.login"
+          [class.auth__fields__item--error]="!credForRegistration.login.trim().length"
+          [(ngModel)]="credForRegistration.login"
         />
         <label
-          *ngIf="!registration.login.trim().length"
-          class="auth__fields__item__label"
+          *ngIf="!credForRegistration.login.trim().length"
+          class="auth__fields__item__label__error"
           >*Обязательное поле</label
         >
         <label for="password" class="auth__fields__item__label">Пароль</label>
         <input
           id="password"
           class="auth__fields__item"
-          placeholder="*Пароль не менее 4 символов"
-          [class.auth__fields__item--error]="!registration.login.trim().length"
-          [(ngModel)]="registration.password"
+          placeholder="*Пароль не менее {{minLengthChar}} символов"
+          [class.auth__fields__item--error]="!credForRegistration.password.trim().length"
+          [(ngModel)]="credForRegistration.password"
           type="password"
         />
         <label
-          *ngIf="!registration.password.trim().length"
-          class="auth__fields__item__label"
+          *ngIf="!credForRegistration.password.trim().length"
+          class="auth__fields__item__label__error"
           >*Обязательное поле</label
         >
         <button (click)="onRegistration()">Зарегистрироваться</button>
 
       </div>
+    </div>
+    <div>
+      <h4>Забыли пароль?</h4>
     </div>
   }
 </div>

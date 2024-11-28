@@ -79,7 +79,8 @@ export class AppComponent {
     private toastService: ToastService,
     public ms: MenuService,
   ) {
-    console.log(this.ms.getAuthorized())
+    // console.log(this.ms.getAuthorized())
+    console.log('app init')
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) this.navigationType = 0;
       if (event instanceof NavigationEnd) this.navigationType = 1;
@@ -89,7 +90,7 @@ export class AppComponent {
           title: 'Перенаправление ',
           type: ToastStatus.warning,
           description: 'Вы будете перенаправлены на страницу авторизации',
-          timer: 1000,
+          timer: 5000,
         });
         timer(5000).subscribe(() => this.router.navigate(['/auth']));
       }
@@ -105,4 +106,6 @@ export class AppComponent {
       }
     });
   }
+
+  protected readonly localStorage = localStorage;
 }

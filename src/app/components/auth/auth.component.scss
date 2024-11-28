@@ -11,22 +11,28 @@
   &__fields{
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 40%;
     color: #4e99c9;
     &__item{
-      margin: 10px;
+      margin: 5px 20px;
       padding: 5px;
       font-size: 20px;
       scrollbar-width: thin;
       background: #2b2b2b;
       color: #4e99c9;
       border: 2px solid #4b4747;
-
+      &:hover,&:focus-visible{
+        outline: 2px solid #4e99c9;
+      }
       &--error{
-        border:1px solid red;
+        outline:2px solid red;
       }
       &__label{
-        margin: 10px;
+        margin: 2px 20px 0 20px;
+        &__error{
+          font-size: 15px;
+          margin: 2px 20px 0 20px;
+        }
       }
     }
   }
@@ -44,9 +50,11 @@
 
   &__transition-bar {
     border-radius: 20px 0 0 20px;
-    width: 30%;
-    height: 100%;
-    background-color: #410877;
+    position: absolute;
+    z-index: 2;
+    //width: 30%;
+    //height: 100%;
+    //background-color: #4584af;
     &__login{
       transform:scaleX(-1);
 
