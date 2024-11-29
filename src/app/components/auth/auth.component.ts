@@ -7,6 +7,7 @@ import { ToastStatus } from '../custom/toast/toast.component';
 import {MenuService} from "../../data/menu/menu.service";
 import {BehaviorSubject, timer} from "rxjs";
 import {AUTHORIZATION_TOKEN} from "../../data/tokens/tokens";
+import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Component({
   selector: 'app-auth',
@@ -17,9 +18,11 @@ import {AUTHORIZATION_TOKEN} from "../../data/tokens/tokens";
 })
 export class AuthComponent implements OnInit {
   public isRegistration = false;
-  public credForLogin = { login: '', password: '' };
-  public credForRegistration = { login: '', password: '' };
+  public isOblivion = {isPassword:false,isLogin:false,isChangePassword:false}
+  public credForLogin = { login: '', password: ''};
+  public credForRegistration = { login: '', password: '',secretWord:'' };
   public readonly minLengthChar = 4;
+  public showPassword = false;
   constructor(
     private router: Router,
     private toastService: ToastService,
@@ -32,10 +35,13 @@ export class AuthComponent implements OnInit {
     this.authToken$.next(false);
   }
 
+  public showHiddenPassword():void{
+    this.showPassword=!this.showPassword;
+  }
   public onRegistration(): void {
     if (
       this.credForRegistration.login.trim().length >= this.minLengthChar &&
-      this.credForRegistration.password.trim().length >= this.minLengthChar
+      this.credForRegistration.password.trim().length >= this.minLengthChar&&this.credForRegistration.secretWord.trim().length
     ) {
       if (localStorage.getItem(this.credForRegistration.login)) {
         this.toastService.openToast({
@@ -47,16 +53,21 @@ export class AuthComponent implements OnInit {
         //todo нужно закидыввать весь обьект в джесон стрингиафай
         localStorage.setItem(
           this.credForRegistration.login,
-          this.credForRegistration.password,
+          JSON.stringify(this.credForRegistration),
         );
         this.toastService.openToast({
           title: 'Успех!',
           type: ToastStatus.success,
           description: 'Регистрация прошла успешно!',
         });
-        this.credForRegistration = { login: '', password: '' };
         this.isRegistration = false;
       }
+    }else{
+      this.toastService.openToast({
+        title: 'Информация',
+        type: ToastStatus.info,
+        description: 'Ваших данных нехватает для создания аккаунта',
+      });
     }
   }
   public successLogin(): void {
@@ -95,14 +106,54 @@ export class AuthComponent implements OnInit {
       this.authToken$.next(false);
     });
   }
+  public onForgotLogin(): void {
+
+  }
+  public reductionPassword():void{
+    if(this.credForLogin.password===this.credForRegistration.password){
+    localStorage.setItem(this.credForLogin.login,JSON.stringify({...this.credForLogin}));
+
+    this.isToggle(false)}
+    else{
+      this.toastService.openToast({
+        title: 'Ошибка!',
+        type: ToastStatus.warning,
+        description: 'Пароли не совпадают',
+      });
+    }
+  }
+  public onForgotPassword(): void {
+    console.log(JSON.parse(localStorage.getItem(this.credForLogin.login) as string).secretWord !== this.credForRegistration.secretWord)
+
+    console.log(JSON.parse(localStorage.getItem(this.credForLogin.login) as string).secretWord !== this.credForRegistration.secretWord)
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    JSON.parse(localStorage.getItem(this.credForLogin.login) as string).secretWord === this.credForRegistration.secretWord&&
+    JSON.parse(localStorage.getItem(this.credForLogin.login) as string).login === this.credForLogin.login
+      ?
+      (this.isToggle(false),this.isOblivion.isChangePassword = true)
+      : this.toastService.openToast({
+        title: 'Ошибка!',
+        type: ToastStatus.warning,
+        description: 'Неправильный ввод данных!',
+      });
+  }
   public onLogin(): void {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    localStorage.getItem(this.credForLogin.login) === this.credForLogin.password
+    JSON.parse(localStorage.getItem(this.credForLogin.login) as string).login === this.credForLogin.login&&
+    JSON.parse(localStorage.getItem(this.credForLogin.login) as string).password===this.credForLogin.password
       ? this.successLogin()
       : this.toastService.openToast({
           title: 'Ошибка!',
           type: ToastStatus.warning,
           description: 'Неправильный логин или пароль!',
         });
+  }
+
+  public isToggle(registration: boolean): void {
+    this.credForRegistration={login: '',password: '',secretWord: ''};
+    this.credForLogin={login: '',password: ''};
+    this.isRegistration = registration;
+    this.isOblivion.isPassword=false;
+    this.isOblivion.isLogin=false
   }
 }
