@@ -16,7 +16,7 @@
   @if(isOblivion.isLogin){
   <h1>Восстановление логина</h1>
   }
-  @if(isOblivion.isPassword&&isOblivion.isChangePassword){
+  @if(isOblivion.isPassword&&!isOblivion.isChangePassword){
     <h1>Восстановление пароля</h1>
   }
       @if(isOblivion.isChangePassword){
@@ -31,7 +31,7 @@
           placeholder="*Логин не менее {{minLengthChar}} символов"
           class="auth__fields__item"
           [class.auth__fields__item--error]="!credForRegistration.login.trim().length"
-          [(ngModel)]="credForRegistration.login"
+          [(ngModel)]="credForRegistration.password"
         />
       </div>
       <label for="login-reg" class="auth__fields__item__label">Подтвердите пароль</label>
@@ -41,13 +41,13 @@
           placeholder="*Логин не менее {{minLengthChar}} символов"
           class="auth__fields__item"
           [class.auth__fields__item--error]="!credForLogin.login.trim().length"
-          [(ngModel)]="credForLogin.login"
+          [(ngModel)]="credForLogin.password"
         />
         <button (click)="reductionPassword()">Восстановить пароль</button>
       </div>
 
     }
-    @if (isOblivion.isPassword){
+    @if (isOblivion.isPassword&&!isOblivion.isChangePassword){
       <label for="login-reg" class="auth__fields__item__label">Логин</label>
       <div class="auth__fields__item__block">
         <input
@@ -61,7 +61,7 @@
       >*Обязательное поле</label
       >
     }
-   @if(isOblivion.isLogin||isOblivion.isPassword){
+   @if(isOblivion.isLogin||isOblivion.isPassword&&!isOblivion.isChangePassword){
 
      <label for="login-reg" class="auth__fields__item__label">Секретное слово</label>
      <div class="auth__fields__item__block">
@@ -71,7 +71,7 @@
          [(ngModel)]="credForRegistration.secretWord"
        />
      </div>
-     <label *ngIf="!credForLogin.login.trim().length" class="auth__fields__item__label__error"
+     <label *ngIf="!credForRegistration.secretWord.trim().length" class="auth__fields__item__label__error"
      >*Обязательное поле</label
      >
    }
@@ -94,7 +94,7 @@
     @if(isOblivion.isLogin){
       <button>Восстановить логин</button>
     }
-    @if(isOblivion.isPassword){
+    @if(isOblivion.isPassword&&!isOblivion.isChangePassword){
       <button (click)="onForgotPassword()">Восстановить пароль</button>
     }
   </div>
