@@ -8,47 +8,83 @@
 
   transition: transform 2s ease-in-out;
 
-  &__fields{
+  &__fields {
     display: flex;
     flex-direction: column;
     color: #4e99c9;
-    &__item{
+
+    &__item {
       margin: 5px 20px;
-      padding: 5px;
+      padding: 7px;
       font-size: 17px;
       scrollbar-width: thin;
       background: #2b2b2b;
       color: #4e99c9;
       border: 2px solid #4b4747;
-      &__oblivion{
+
+      &__oblivion {
         font-size: 15px;
-        margin:0 0 8px 20px;
+        margin: 0 0 8px 20px;
         cursor: pointer;
       }
-      &--hidden{
+
+      &--hidden {
         transform: translate(-43px, 10px);
         height: 0;
         cursor: pointer;
         width: 0;
       }
-      &__block{
-        display: flex;justify-content: space-between
+
+      &__block {
+        display: flex;
+        justify-content: space-between
       }
-      &:hover,&:focus-visible{
+
+      &:hover, &:focus-visible {
         outline: 2px solid #4e99c9;
       }
-      &--error{
-        outline:2px solid red;
+
+      &--error {
+        outline: 2px solid red;
       }
-      &__label{
+
+      &--password-complexity {
+        width: 10px;
+        background-color: rgba(255, 0, 0, 0.1);
+        pointer-events: none;
+        position: absolute;
+        border-radius: 5px;
+        margin: 7px 0 0 20px;
+        height: 24px;
+        transition: width 2s ease-in-out;
+      }
+
+      &--weak {
+        width: 70px;
+        background: #ff00009c;
+      }
+
+      &--medium {
+        background: rgba(0, 0, 255, 0.67);
+        width: 150px;
+      }
+
+      &--strong {
+        background: rgba(0, 128, 0, 0.7);
+        width: 215px;
+      }
+
+      &__label {
         margin: 2px 20px 0 25px;
-        &__error{
+
+        &__error {
           font-size: 15px;
-          margin: -10px 0px 12px 20px;
+          margin: -10px 0px 12px 28px;
         }
       }
     }
   }
+
   &--default {
     flex-direction: row;
 
@@ -58,7 +94,7 @@
   &--transform {
 
     transition: transform 2s ease-in-out;
-    transform:scaleX(-1);
+    transform: scaleX(-1);
   }
 
   &__transition-bar {
@@ -68,23 +104,25 @@
     //width: 30%;
     //height: 100%;
     //background-color: #4584af;
-    &__login{
-      transform:scaleX(-1);
+    &__login {
+      transform: scaleX(-1);
 
     }
   }
-  &__login,&__registration{
+
+  &__login, &__registration {
     justify-content: center;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+
   &__registration {
     width: 100%;
     padding: 10px;
   }
 
-  &__reverse-block{
+  &__reverse-block {
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -92,6 +130,6 @@
     text-align: left;
     width: 100%;
     padding: 10px;
-    transform:scaleX(-1);
+    transform: scaleX(-1);
   }
 }
