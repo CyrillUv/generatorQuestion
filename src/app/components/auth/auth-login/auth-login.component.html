@@ -1,0 +1,47 @@
+<div
+  class="auth">
+<div class="auth__transition-bar">
+  <button (click)="inRegistration()" class="auth__transition-bar__login">Регистрация</button>
+</div>
+<div class="auth__reverse-block
+">
+  <h1>Вход</h1>
+  <div class="auth__fields">
+    <label for="login-reg" class="auth__fields__item__label">Логин</label>
+    <div class="auth__fields__item__block">
+      <input
+        id="login-reg"
+        class="auth__fields__item"
+        [class.auth__fields__item--error]="!credForLogin.login.trim().length"
+        [(ngModel)]="credForLogin.login"
+      />
+    </div>
+    <label *ngIf="!credForLogin.login.trim().length" class="auth__fields__item__label__error"
+    >*Обязательное поле</label
+    >
+    <label for="password-reg" class="auth__fields__item__label"
+    >Пароль</label
+    >
+    <div class="auth__fields__item__block">
+      <input
+        id="password-reg"
+        class="auth__fields__item"
+        [class.auth__fields__item--error]="!credForLogin.password.trim().length"
+        [(ngModel)]="credForLogin.password"
+        [type]="showPassword?'text':'password'"
+
+      /><main *ngIf="!showPassword" class="auth__fields__item--hidden" (click)="showHiddenPassword()">👁</main></div>
+    <main *ngIf="showPassword" class="auth__fields__item--hidden" (click)="showHiddenPassword()">⬭</main>
+
+    <label *ngIf="!credForLogin.password.trim().length" class="auth__fields__item__label__error"
+    >*Обязательное поле</label
+    >
+    <div (click)="inputCredentialEmitter.emit(true)" class="auth__fields__item__oblivion">
+      <span>Забыли пароль?</span>
+    </div>
+    <div class="button-block"><button class="button-block__item" (click)="onLogin()">Войти</button></div>
+
+
+  </div>
+</div>
+</div>

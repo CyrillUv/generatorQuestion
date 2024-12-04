@@ -1,0 +1,82 @@
+<div class="auth">
+<div class="auth__transition-bar">
+  <button  (click)="inLogin()">
+    Логин
+  </button>
+</div>
+<div class="auth__registration">
+  <h1>Регистрация</h1>
+  <div class="auth__fields">
+    <label for="login" class="auth__fields__item__label">Логин</label>
+    <div>
+      <input
+        id="login"
+        placeholder="*Не менее {{minLengthChar}} символов"
+        class="auth__fields__item"
+        [class.auth__fields__item--error]="!credForRegistration.login.trim().length"
+        [(ngModel)]="credForRegistration.login"
+      />
+    </div>
+    <label
+      *ngIf="!credForRegistration.login.trim().length"
+      class="auth__fields__item__label__error"
+    >*Обязательное поле</label
+    >
+    <label for="password" class="auth__fields__item__label">Пароль</label>
+    <div class="auth__fields__item__block">
+      <input
+        id="password"
+        class="auth__fields__item"
+        placeholder="*Не менее {{minLengthChar}} символов"
+        [(ngModel)]="credForRegistration.password"
+        (keyup)="determinantPasswordComplexity()"
+        [type]="showPassword?'text':'password'"
+      />
+      <div
+        class="auth__fields__item--password-complexity"
+        [ngClass]="{
+            'auth__fields__item--strong': passwordComplexity === 'strong',
+          'auth__fields__item--medium':passwordComplexity === 'medium',
+          'auth__fields__item--weak': passwordComplexity === 'weak'&&credForRegistration.password}">
+
+      </div>
+      <main *ngIf="!showPassword"class="auth__fields__item--hidden" (click)="showHiddenPassword()">👁</main>
+      <main *ngIf="showPassword" class="auth__fields__item--hidden" (click)="showHiddenPassword()">⬭</main>
+
+    </div>
+    <label class="auth__fields__item__label__error"
+           *ngIf="credForRegistration.password.trim().length"
+            [class.auth__fields__item--strong__text]="passwordComplexity==='strong'"
+            [class.auth__fields__item--medium__text]="passwordComplexity==='medium'"
+            [class.auth__fields__item--weak__text]="passwordComplexity==='weak'"
+    >
+      Сложность пароля:{{passwordComplexity==='strong'?'Тяжелый':passwordComplexity==='medium'?'Средний':'Легкий'}}
+    </label>
+    <label
+      *ngIf="!credForRegistration.password.trim().length"
+      class="auth__fields__item__label__error"
+    >*Обязательное поле</label
+    >
+    <label for="password" class="auth__fields__item__label">Секретное слово</label>
+
+    <div class="auth__fields__item__block"><input
+      id="secretWord"
+      class="auth__fields__item"
+      [class.auth__fields__item--error]="!credForRegistration.secretWord.trim().length"
+      [(ngModel)]="credForRegistration.secretWord"
+      [type]="showPassword?'text':'password'"
+    />
+      <main *ngIf="!showPassword"class="auth__fields__item--hidden" (click)="showHiddenPassword()">👁</main>
+      <main *ngIf="showPassword" class="auth__fields__item--hidden" (click)="showHiddenPassword()">⬭</main>
+
+    </div> <label
+    *ngIf="!credForRegistration.secretWord.trim().length"
+    class="auth__fields__item__label__error"
+  >*Обязательное поле</label
+  >
+    <div class="button-block"><button class="button-block__item" (click)="onRegistration()">Зарегистрироваться</button></div>
+
+
+  </div>
+</div>
+</div>

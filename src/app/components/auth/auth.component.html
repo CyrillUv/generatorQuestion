@@ -1,206 +1,70 @@
-
 <div
   class="auth"
   [class.auth--default]="isRegistration"
   [class.auth--transform]="!isRegistration"
 >
-<!--  восстановление и изменение  пароля-->
-  @if(isOblivion.isPassword){
+  <!--  восстановление и изменение  пароля-->
+  @if (restorePassword.inputCredential) {
     <div class="auth__transition-bar">
-      <button class="auth__transition-bar__login"  (click)="resetForm(false)">
+      <button class="auth__transition-bar__login"
+              (click)="isRegistration=false;
+              restorePassword.inputCredential=false;
+              restorePassword.changePassword=false">
         Логин
       </button>
     </div>
     <div class="auth__reverse-block">
-      @if (isOblivion.isPassword&&!isOblivion.isChangePassword){
+      @if (restorePassword.inputCredential && !restorePassword.changePassword) {
         <h1>Восстановление пароля</h1>
       }
-      @if(isOblivion.isChangePassword){
-        <h1>Новый пароль</h1>}
-  <div class="auth__fields">
-    <!--    при восстановлении пароля-->
-    @if (isOblivion.isPassword&&!isOblivion.isChangePassword){
-      <label for="login-reg" class="auth__fields__item__label">Логин</label>
-      <div class="auth__fields__item__block">
-        <input
-
-          class="auth__fields__item"
-          [class.auth__fields__item--error]="!credForLogin.login.trim().length"
-          [(ngModel)]="credForLogin.login"
-        />
-      </div>
-      <label *ngIf="!credForLogin.login.trim().length" class="auth__fields__item__label__error"
-      >*Обязательное поле</label
-      >
-      <label for="login-reg" class="auth__fields__item__label">Секретное слово</label>
-      <div class="auth__fields__item__block">
-        <input
-          class="auth__fields__item"
-          [class.auth__fields__item--error]="!credForRegistration.secretWord.trim().length"
-          [(ngModel)]="credForRegistration.secretWord"
-        />
-      </div>
-      <label *ngIf="!credForRegistration.secretWord.trim().length" class="auth__fields__item__label__error"
-      >*Обязательное поле</label
-      >
-      <button (click)="isForgotPassword()">Восстановить пароль</button>
-    }
-<!--    при изменении пароля-->
-    @if(isOblivion.isChangePassword){
-      <label for="login-reg" class="auth__fields__item__label">Новый пароль</label>
-      <div class="auth__fields__item__block">
-        <input
-          class="auth__fields__item"
-          placeholder="*Пароль не менее {{minLengthChar}} символов"
-          [(ngModel)]="credForRegistration.password"
-          (keyup)="determinantPasswordComplexity()"
-          [type]="showPassword?'text':'password'"
-        />
-        <div
-          class="auth__fields__item--password-complexity"
-          [ngClass]="{
-            'auth__fields__item--strong': passwordComplexity === 'strong',
-          'auth__fields__item--medium':passwordComplexity === 'medium',
-          'auth__fields__item--weak': passwordComplexity === 'weak'&&credForRegistration.password}">
-
-        </div>
-        <main class="auth__fields__item--hidden" (click)="showHiddenPassword()">👁</main>
-      </div>
-      <label class="auth__fields__item__label__error" *ngIf="credForRegistration.password.trim().length">
-        Сложность пароля:{{passwordComplexity==='strong'?'Тяжелый':passwordComplexity==='medium'?'Средний':'Легкий'}}
-      </label>
-      <label for="login-reg" class="auth__fields__item__label">Подтвердите пароль</label>
-      <div class="auth__fields__item__block">
-        <input
-          [type]="showPassword?'text':'password'"
-          class="auth__fields__item"
-          [class.auth__fields__item--error]="!credForLogin.login.trim().length"
-          [(ngModel)]="credForLogin.password"
-        />
-        <main class="auth__fields__item--hidden" (click)="showHiddenPassword()">👁</main>
-      </div>
-      <button (click)="reductionPassword()">Восстановить пароль</button>
-    }
-
-  </div>
-
-</div>
-  }
-<!--  логинизация-->
-  @if (!isRegistration&&!isOblivion.isPassword) {
-    <div class="auth__transition-bar">
-      <button (click)="resetForm(true)" class="auth__transition-bar__login">Регистрация</button>
-    </div>
-    <div class="auth__reverse-block
-">
-      <h1>Вход</h1>
-      <div class="auth__fields">
-        <label for="login-reg" class="auth__fields__item__label">Логин</label>
-        <div class="auth__fields__item__block">
-          <input
-            id="login-reg"
-            class="auth__fields__item"
-            [class.auth__fields__item--error]="!credForLogin.login.trim().length"
-            [(ngModel)]="credForLogin.login"
+      @if (restorePassword.changePassword) {
+        <h1>Новый пароль</h1>
+      }
+      <div>
+        <!--    при восстановлении пароля-->
+        @if (
+          restorePassword.inputCredential && !restorePassword.changePassword
+        ) {
+          <app-auth-restore-password
+            (currentUserLoginEmitter)="currentUserLogin = $event"
+            (changePasswordEmitter)="restorePassword.changePassword=$event;"
           />
-        </div>
-        <label *ngIf="!credForLogin.login.trim().length" class="auth__fields__item__label__error"
-          >*Обязательное поле</label
-        >
-        <label for="password-reg" class="auth__fields__item__label"
-          >Пароль</label
-        >
-        <div class="auth__fields__item__block">
-          <input
-          id="password-reg"
-          class="auth__fields__item"
-          [class.auth__fields__item--error]="!credForLogin.password.trim().length"
-          [(ngModel)]="credForLogin.password"
-          [type]="showPassword?'text':'password'"
-
-        /><main class="auth__fields__item--hidden" (click)="showHiddenPassword()">👁</main></div>
-
-        <label *ngIf="!credForLogin.password.trim().length" class="auth__fields__item__label__error"
-          >*Обязательное поле</label
-        >
-        <div  (click)="isOblivion.isPassword=true" class="auth__fields__item__oblivion">
-          <span>Забыли пароль?</span>
-        </div>
-        <button (click)="onLogin()">Войти</button>
+        }
+        <!--    при изменении пароля-->
+        @if (restorePassword.changePassword) {
+          <app-auth-change-password
+            (openChangePassword)="restorePassword.changePassword=$event;restorePassword.inputCredential=$event"
+            [passwordComplexity]="passwordComplexity"
+            [minLengthChar]="minLengthChar"
+            (determinantPasswordComplexityEmitter)="
+              determinantPasswordComplexity($event)
+            "
+            [currentUserLogin]="currentUserLogin"
+          />
+        }
       </div>
     </div>
   }
-<!--  регистрация-->
-  @if(isRegistration&&!isOblivion.isPassword) {
-    <div class="auth__transition-bar">
-      <button  (click)="resetForm(false)">
-        Логин
-      </button>
-    </div>
-    <div class="auth__registration">
-      <h1>Регистрация</h1>
-      <div class="auth__fields">
-        <label for="login" class="auth__fields__item__label">Логин</label>
-       <div>
-         <input
-           id="login"
-           placeholder="*Логин не менее {{minLengthChar}} символов"
-           class="auth__fields__item"
-           [class.auth__fields__item--error]="!credForRegistration.login.trim().length"
-           [(ngModel)]="credForRegistration.login"
-         />
-       </div>
-        <label
-          *ngIf="!credForRegistration.login.trim().length"
-          class="auth__fields__item__label__error"
-          >*Обязательное поле</label
-        >
-        <label for="password" class="auth__fields__item__label">Пароль</label>
-        <div class="auth__fields__item__block">
-          <input
-            id="password"
-            class="auth__fields__item"
-            placeholder="*Пароль не менее {{minLengthChar}} символов"
-            [(ngModel)]="credForRegistration.password"
-            (keyup)="determinantPasswordComplexity()"
-            [type]="showPassword?'text':'password'"
-          />
-          <div
-            class="auth__fields__item--password-complexity"
-            [ngClass]="{
-            'auth__fields__item--strong': passwordComplexity === 'strong',
-          'auth__fields__item--medium':passwordComplexity === 'medium',
-          'auth__fields__item--weak': passwordComplexity === 'weak'&&credForRegistration.password}">
-
-          </div>
-          <main class="auth__fields__item--hidden" (click)="showHiddenPassword()">👁</main>
-        </div>
-        <label class="auth__fields__item__label__error" *ngIf="credForRegistration.password.trim().length">
-          Сложность пароля:{{passwordComplexity==='strong'?'Тяжелый':passwordComplexity==='medium'?'Средний':'Легкий'}}
-        </label>
-        <label
-          *ngIf="!credForRegistration.password.trim().length"
-          class="auth__fields__item__label__error"
-          >*Обязательное поле</label
-        >
-        <label for="password" class="auth__fields__item__label">Секретное слово</label>
-
-        <div class="auth__fields__item__block"><input
-          id="secretWord"
-          class="auth__fields__item"
-          [class.auth__fields__item--error]="!credForRegistration.secretWord.trim().length"
-          [(ngModel)]="credForRegistration.secretWord"
-          [type]="showPassword?'text':'password'"
-        />
-         <main class="auth__fields__item--hidden" (click)="showHiddenPassword()">👁</main>
-        </div> <label
-        *ngIf="!credForRegistration.secretWord.trim().length"
-        class="auth__fields__item__label__error"
-      >*Обязательное поле</label
-      >
-        <button (click)="onRegistration()">Зарегистрироваться</button>
-      </div>
-    </div>
-
+  <!--  логинизация-->
+  @if (!isRegistration && !restorePassword.inputCredential) {
+    <app-auth-login (inputCredentialEmitter)="restorePassword.inputCredential=$event"
+      [showPassword]="showPassword"
+      (showHiddenPasswordEmitter)="showHiddenPassword()"
+      (isRegistrationEmitter)="isRegistration = true"
+      [inputCredential]="restorePassword.inputCredential"
+    />
+  }
+  <!--  регистрация-->
+  @if (isRegistration && !restorePassword.inputCredential) {
+    <app-auth-registration
+      (determinantPasswordComplexityEmitter)="
+        determinantPasswordComplexity($event)
+      "
+      (isRegistrationEmitter)="isRegistration = false"
+      (showHiddenPasswordEmitter)="showHiddenPassword()"
+      [minLengthChar]="minLengthChar"
+      [passwordComplexity]="passwordComplexity"
+      [showPassword]="showPassword"
+    />
   }
 </div>
