@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { NgIf } from '@angular/common';
-import { QuestionsTimerPipe } from './questions-timer.pipe';
+
 import { TakeUntilDestroy } from '../../shared/take-until-destroy';
 import { interval } from 'rxjs';
 import { IQuestion, NameDataType } from '../../data/question/type';
 import { QuestionService } from '../../data/question/question.service';
 import { MenuService } from '../../data/menu/menu.service';
+import {QuestionsTimerPipe} from "../../shared/questions-timer.pipe";
 
 @Component({
   selector: 'app-questions',

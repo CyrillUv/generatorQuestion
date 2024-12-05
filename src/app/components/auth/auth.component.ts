@@ -36,10 +36,10 @@ export class AuthComponent implements OnInit {
   };
 
   //минимальная длина вводных данных в форме регистрации
+  //todo service
   public readonly minLengthChar = 4;
-  //показ пароля
-  public showPassword = false;
   //сложность пароля
+  //todo service
   public passwordComplexity!: 'strong' | 'medium' | 'weak' | null;
   //логин для изменения пароля
   public currentUserLogin!: string;
@@ -54,6 +54,7 @@ export class AuthComponent implements OnInit {
     this.authToken$.next(false);
   }
 
+  //todo перенести в сервис
   //определитель сложности пароля
   public determinantPasswordComplexity(password:string): void {
     //переменная определяющая пароль сложным
@@ -71,22 +72,5 @@ export class AuthComponent implements OnInit {
       this.passwordComplexity = 'weak';
     }
   }
-  //показ-скрытие пароля
-  public showHiddenPassword(): void {
-    this.showPassword = !this.showPassword;
-  }
 
-  //перезагрузка формы
-
-  public resetForm(registration: boolean): void {
-    //todo занулять конкретный обьект формы через ифак,не забыть про новый обьект пароля
-
-    // if( cred instanceof credForRegistrationType)
-    // this.credForRegistration = { login: '', password: '', secretWord: '' };
-    // this.credForLogin = { login: '', password: '' };
-    this.isRegistration = registration;
-    this.restorePassword.inputCredential = false;
-    this.restorePassword.changePassword = false;
-    this.passwordComplexity = null;
-  }
 }

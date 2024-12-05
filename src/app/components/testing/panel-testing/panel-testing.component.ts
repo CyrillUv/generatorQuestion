@@ -12,10 +12,11 @@ import { IAnswer, IDataTest } from '../../../data/testing/type';
 import { CorrectDirective } from '../../../directive/correct.directive';
 import { interval, Observable, of, take } from 'rxjs';
 import { TakeUntilDestroy } from '../../../shared/take-until-destroy';
-import { QuestionsTimerPipe } from '../../questions/questions-timer.pipe';
+
 import { MenuService } from '../../../data/menu/menu.service';
 import { PaginatorComponent } from '../../custom/paginator/paginator.component';
 import { TimerComponent } from '../../../shared/timer.component';
+import {QuestionsTimerPipe} from "../../../shared/questions-timer.pipe";
 
 @Component({
   selector: 'app-panel-testing',

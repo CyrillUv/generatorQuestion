@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
-import { QuestionsTimerPipe } from '../questions/questions-timer.pipe';
 import { QuestionService } from '../../data/question/question.service';
 import { IQuestion } from '../../data/question/type';
 import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { IWrongTest, TestingService } from '../../data/testing/testing.service';
+import {QuestionsTimerPipe} from "../../shared/questions-timer.pipe";
 
 @Component({
   selector: 'app-statistics',

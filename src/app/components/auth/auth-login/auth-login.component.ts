@@ -6,34 +6,40 @@ import {Router} from "@angular/router";
 import {ToastService} from "../../custom/toast/toast.service";
 import {AUTHORIZATION_TOKEN} from "../../../data/tokens/tokens";
 import {BehaviorSubject, timer} from "rxjs";
+import {BanLanguageDirective} from "../../../shared/ban-language.directive";
+import {CharsLengthPipe} from "../../../shared/chars-length-sampling.pipe";
 
 @Component({
   selector: 'app-auth-login',
   standalone: true,
-  imports: [NgIf, FormsModule],
+  imports: [NgIf, FormsModule, BanLanguageDirective, CharsLengthPipe],
   templateUrl: './auth-login.component.html',
   styleUrl: '../auth.component.scss',
 })
 export class AuthLoginComponent {
-  //флаг восстановления пароля
-  @Input({ required:true }) public showPassword!: boolean;
-  @Input({required:true})public inputCredential!: boolean;
-  @Output() public showHiddenPasswordEmitter: EventEmitter<void> = new EventEmitter<void>();
-  @Output() public isRegistrationEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() public inputCredentialEmitter:EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Input({ required: true }) public inputCredential!: boolean;
+
+  @Output() public isRegistrationEmitter: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
+  @Output() public inputCredentialEmitter: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
 
   //обьект формы логинизации
+  //показ пароля
+  public showPassword = false;
   public credForLogin = { login: '', password: '' };
-  constructor(private router:Router,
-              private toastService: ToastService,
-              @Inject(AUTHORIZATION_TOKEN) private authToken$: BehaviorSubject<boolean>,) {
-  }
+  constructor(
+    private router: Router,
+    private toastService: ToastService,
+    @Inject(AUTHORIZATION_TOKEN) private authToken$: BehaviorSubject<boolean>,
+  ) {}
   //получение данных из хранилища
   public getStorage(key: string): string {
     return localStorage.getItem(key) as string;
   }
   public showHiddenPassword(): void {
-    this.showHiddenPasswordEmitter.emit();
+    this.showPassword = !this.showPassword;
   }
   public inRegistration(): void {
     this.isRegistrationEmitter.emit();
@@ -102,11 +108,11 @@ export class AuthLoginComponent {
     }
     //если все верно
     if (
-      localStorage.getItem(this.credForLogin.login) as string &&
+      (localStorage.getItem(this.credForLogin.login) as string) &&
       JSON.parse(this.getStorage(this.credForLogin.login)).login ===
-      this.credForLogin.login &&
+        this.credForLogin.login &&
       JSON.parse(this.getStorage(this.credForLogin.login)).password ===
-      this.credForLogin.password
+        this.credForLogin.password
     ) {
       //успешная логинка
       this.successLogin();

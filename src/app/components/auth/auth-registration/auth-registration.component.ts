@@ -3,32 +3,51 @@ import {NgClass, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ToastStatus} from "../../custom/toast/toast.component";
 import {ToastService} from "../../custom/toast/toast.service";
+import {BanLanguageDirective} from "../../../shared/ban-language.directive";
+import {CharsLengthPipe} from "../../../shared/chars-length-sampling.pipe";
 
 @Component({
   selector: 'app-auth-registration',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule, FormsModule, NgClass],
+  imports: [
+    NgIf,
+    ReactiveFormsModule,
+    FormsModule,
+    NgClass,
+    BanLanguageDirective,
+    CharsLengthPipe,
+  ],
   templateUrl: './auth-registration.component.html',
   styleUrl: '../auth.component.scss',
 })
 export class AuthRegistrationComponent {
-  @Input({ required:true }) public minLengthChar!: number;
-  @Input({ required:true }) public showPassword!: boolean;
-  @Input({ required:true }) public passwordComplexity!: 'strong' | 'medium' | 'weak' | null;
-  @Output() public showHiddenPasswordEmitter: EventEmitter<void> = new EventEmitter<void>();
-  @Output() public determinantPasswordComplexityEmitter: EventEmitter<string> = new EventEmitter<string>();
-  @Output() public isRegistrationEmitter: EventEmitter<boolean>  = new EventEmitter<boolean> ();
+  @Input({ required: true }) public minLengthChar!: number;
+
+  @Input({ required: true }) public passwordComplexity!:
+    | 'strong'
+    | 'medium'
+    | 'weak'
+    | null;
+
+  @Output() public determinantPasswordComplexityEmitter: EventEmitter<string> =
+    new EventEmitter<string>();
+  @Output() public isRegistrationEmitter: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
   //обьект формы регистрации
   public credForRegistration = { login: '', password: '', secretWord: '' };
-  constructor(private toastService:ToastService) {
-  }
+  //показ пароля
+  public showPassword = false;
+  constructor(private toastService: ToastService) {}
 
+  //показ-скрытие пароля
   public showHiddenPassword(): void {
-    this.showHiddenPasswordEmitter.emit();
+    this.showPassword = !this.showPassword;
   }
 
   public determinantPasswordComplexity(): void {
-    this.determinantPasswordComplexityEmitter.emit(this.credForRegistration.password);
+    this.determinantPasswordComplexityEmitter.emit(
+      this.credForRegistration.password,
+    );
   }
 
   public inLogin(): void {
@@ -62,7 +81,7 @@ export class AuthRegistrationComponent {
         });
         //переход к логинизации
         this.credForRegistration = { login: '', password: '', secretWord: '' };
-        this.inLogin()
+        this.inLogin();
       }
     } else {
       this.toastService.openToast({
@@ -71,5 +90,17 @@ export class AuthRegistrationComponent {
         description: 'Данных не хватает для создания пользователя',
       });
     }
+  }
+//todo service
+  public getPasswordComplexityStrong() {
+   return  this.passwordComplexity === 'strong'
+  }
+//todo service
+  public getPasswordComplexityMedium() {
+   return  this.passwordComplexity === 'medium'
+  }
+//todo service
+  public getPasswordComplexityWeak() {
+  return this.passwordComplexity === 'weak'&&this.credForRegistration.password
   }
 }

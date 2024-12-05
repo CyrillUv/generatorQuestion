@@ -3,11 +3,12 @@ import {FormsModule} from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
 import {ToastService} from "../../custom/toast/toast.service";
 import {ToastStatus} from "../../custom/toast/toast.component";
-
+import {BanLanguageDirective} from "../../../shared/ban-language.directive";
+import {CharsLengthPipe} from "../../../shared/chars-length-sampling.pipe"
 @Component({
   selector: 'app-auth-change-password',
   standalone: true,
-  imports: [FormsModule, NgClass, NgIf],
+  imports: [FormsModule, NgClass, NgIf, BanLanguageDirective,CharsLengthPipe],
   templateUrl: './auth-change-password.component.html',
   styleUrl: '../auth.component.scss',
 })
@@ -19,9 +20,10 @@ export class AuthChangePasswordComponent {
     | 'medium'
     | 'weak'
     | null;
-  @Output() public openChangePassword:EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public openChangePassword: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
   @Output() public determinantPasswordComplexityEmitter: EventEmitter<string> =
-    new EventEmitter();
+    new EventEmitter<string>();
   public credForChangePassword = { newPassword: '', confirmPassword: '' };
 
   public showPassword = false;
@@ -51,7 +53,7 @@ export class AuthChangePasswordComponent {
         type: ToastStatus.success,
         description: 'Пароль успешно изменён!',
       });
-      this.openChangePassword.emit(false)
+      this.openChangePassword.emit(false);
       this.credForChangePassword = { newPassword: '', confirmPassword: '' };
     } else {
       this.toastService.openToast({
@@ -62,11 +64,23 @@ export class AuthChangePasswordComponent {
     }
   }
   public showHiddenPassword(): void {
-    this.showPassword=!this.showPassword;
+    this.showPassword = !this.showPassword;
   }
   public determinantPasswordComplexity() {
     this.determinantPasswordComplexityEmitter.emit(
       this.credForChangePassword.newPassword,
     );
+  }
+  //todo service
+  public getPasswordComplexityStrong() {
+    return  this.passwordComplexity === 'strong'
+  }
+//todo service
+  public getPasswordComplexityMedium() {
+    return  this.passwordComplexity === 'medium'
+  }
+//todo service
+  public getPasswordComplexityWeak() {
+    return this.passwordComplexity === 'weak'&&this.credForChangePassword.newPassword
   }
 }

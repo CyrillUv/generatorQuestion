@@ -4,9 +4,10 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { QuestionsTimerPipe } from '../components/questions/questions-timer.pipe';
+
 import { interval } from 'rxjs';
 import { TakeUntilDestroy } from './take-until-destroy';
+import {QuestionsTimerPipe} from "./questions-timer.pipe";
 @Component({
   selector: 'app-timer',
   standalone: true,

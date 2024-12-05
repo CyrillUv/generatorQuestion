@@ -1,6 +1,6 @@
 <div
   class="auth">
-<div class="auth__transition-bar">
+<div class="auth__transition-bar auth__transition-bar__special">
   <button (click)="inRegistration()" class="auth__transition-bar__login">Регистрация</button>
 </div>
 <div class="auth__reverse-block
@@ -12,26 +12,29 @@
       <input
         id="login-reg"
         class="auth__fields__item"
-        [class.auth__fields__item--error]="!credForLogin.login.trim().length"
+        appBanLanguageInputText
+        [class.auth__fields__item--error]="!(credForLogin.login|charsLengthSampling)"
         [(ngModel)]="credForLogin.login"
       />
     </div>
     <label *ngIf="!credForLogin.login.trim().length" class="auth__fields__item__label__error"
     >*Обязательное поле</label
     >
-    <label for="password-reg" class="auth__fields__item__label"
+    <label for="password-reg" class="auth__fields__item__label pt-5"
     >Пароль</label
     >
     <div class="auth__fields__item__block">
       <input
         id="password-reg"
         class="auth__fields__item"
-        [class.auth__fields__item--error]="!credForLogin.password.trim().length"
+        [class.auth__fields__item--error]="!(credForLogin.password|charsLengthSampling)"
         [(ngModel)]="credForLogin.password"
+        appBanLanguageInputText
         [type]="showPassword?'text':'password'"
 
-      /><main *ngIf="!showPassword" class="auth__fields__item--hidden" (click)="showHiddenPassword()">👁</main></div>
-    <main *ngIf="showPassword" class="auth__fields__item--hidden" (click)="showHiddenPassword()">⬭</main>
+      /><main *ngIf="!showPassword" class="auth__fields__item--hidden" (click)="showHiddenPassword()">👁</main>
+      <main *ngIf="showPassword" class="auth__fields__item--hidden" (click)="showHiddenPassword()">⬭</main></div>
+
 
     <label *ngIf="!credForLogin.password.trim().length" class="auth__fields__item__label__error"
     >*Обязательное поле</label

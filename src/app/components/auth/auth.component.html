@@ -5,7 +5,7 @@
 >
   <!--  восстановление и изменение  пароля-->
   @if (restorePassword.inputCredential) {
-    <div class="auth__transition-bar">
+    <div class="auth__transition-bar  auth__transition-bar__default">
       <button class="auth__transition-bar__login"
               (click)="isRegistration=false;
               restorePassword.inputCredential=false;
@@ -48,8 +48,6 @@
   <!--  логинизация-->
   @if (!isRegistration && !restorePassword.inputCredential) {
     <app-auth-login (inputCredentialEmitter)="restorePassword.inputCredential=$event"
-      [showPassword]="showPassword"
-      (showHiddenPasswordEmitter)="showHiddenPassword()"
       (isRegistrationEmitter)="isRegistration = true"
       [inputCredential]="restorePassword.inputCredential"
     />
@@ -61,10 +59,9 @@
         determinantPasswordComplexity($event)
       "
       (isRegistrationEmitter)="isRegistration = false"
-      (showHiddenPasswordEmitter)="showHiddenPassword()"
       [minLengthChar]="minLengthChar"
       [passwordComplexity]="passwordComplexity"
-      [showPassword]="showPassword"
+
     />
   }
 </div>
