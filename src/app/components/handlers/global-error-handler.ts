@@ -1,6 +1,6 @@
 // import { ErrorHandler, Injectable } from '@angular/core';
 // import { ToastStatus } from '../custom/toast/toast.component';
-// import { ToastService } from '../custom/toast/toast.service';
+// import { ToastService } from '../custom/toast/toast.services';
 // import { timer } from 'rxjs';
 // import { Router } from '@angular/router';
 //

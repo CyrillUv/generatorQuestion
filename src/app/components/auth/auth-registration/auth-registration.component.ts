@@ -1,10 +1,12 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ToastStatus} from "../../custom/toast/toast.component";
 import {ToastService} from "../../custom/toast/toast.service";
 import {BanLanguageDirective} from "../../../shared/ban-language.directive";
 import {CharsLengthPipe} from "../../../shared/chars-length-sampling.pipe";
+import {AuthStateService} from "../services/auth-state.service";
+
 
 @Component({
   selector: 'app-auth-registration',
@@ -21,14 +23,6 @@ import {CharsLengthPipe} from "../../../shared/chars-length-sampling.pipe";
   styleUrl: '../auth.component.scss',
 })
 export class AuthRegistrationComponent {
-  @Input({ required: true }) public minLengthChar!: number;
-
-  @Input({ required: true }) public passwordComplexity!:
-    | 'strong'
-    | 'medium'
-    | 'weak'
-    | null;
-
   @Output() public determinantPasswordComplexityEmitter: EventEmitter<string> =
     new EventEmitter<string>();
   @Output() public isRegistrationEmitter: EventEmitter<boolean> =
@@ -37,7 +31,7 @@ export class AuthRegistrationComponent {
   public credForRegistration = { login: '', password: '', secretWord: '' };
   //показ пароля
   public showPassword = false;
-  constructor(private toastService: ToastService) {}
+  constructor(private toastService: ToastService,public authService: AuthStateService) {}
 
   //показ-скрытие пароля
   public showHiddenPassword(): void {
@@ -57,8 +51,8 @@ export class AuthRegistrationComponent {
   public onRegistration(): void {
     //если поля формы заполнены и их кол-во символом отвечает требованиям,проходим в следующее условие
     if (
-      this.credForRegistration.login.trim().length >= this.minLengthChar &&
-      this.credForRegistration.password.trim().length >= this.minLengthChar &&
+      this.credForRegistration.login.trim().length >= this.authService.minLengthChar &&
+      this.credForRegistration.password.trim().length >= this.authService.minLengthChar &&
       this.credForRegistration.secretWord.trim().length
     ) {
       //если такой логин найден
@@ -91,16 +85,5 @@ export class AuthRegistrationComponent {
       });
     }
   }
-//todo service
-  public getPasswordComplexityStrong() {
-   return  this.passwordComplexity === 'strong'
-  }
-//todo service
-  public getPasswordComplexityMedium() {
-   return  this.passwordComplexity === 'medium'
-  }
-//todo service
-  public getPasswordComplexityWeak() {
-  return this.passwordComplexity === 'weak'&&this.credForRegistration.password
-  }
+
 }

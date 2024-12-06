@@ -5,6 +5,7 @@ import {ToastService} from "../../custom/toast/toast.service";
 import {ToastStatus} from "../../custom/toast/toast.component";
 import {BanLanguageDirective} from "../../../shared/ban-language.directive";
 import {CharsLengthPipe} from "../../../shared/chars-length-sampling.pipe"
+import {AuthStateService} from "../services/auth-state.service";
 @Component({
   selector: 'app-auth-change-password',
   standalone: true,
@@ -13,21 +14,14 @@ import {CharsLengthPipe} from "../../../shared/chars-length-sampling.pipe"
   styleUrl: '../auth.component.scss',
 })
 export class AuthChangePasswordComponent {
-  @Input({ required: true }) public minLengthChar!: number;
   @Input({ required: true }) public currentUserLogin!: string;
-  @Input({ required: true }) public passwordComplexity!:
-    | 'strong'
-    | 'medium'
-    | 'weak'
-    | null;
   @Output() public openChangePassword: EventEmitter<boolean> =
     new EventEmitter<boolean>();
   @Output() public determinantPasswordComplexityEmitter: EventEmitter<string> =
     new EventEmitter<string>();
   public credForChangePassword = { newPassword: '', confirmPassword: '' };
-
   public showPassword = false;
-  constructor(private toastService: ToastService) {}
+  constructor(private toastService: ToastService,public authService: AuthStateService) {}
   // замена нового пароля вместо старого
   public reductionPassword(): void {
     //если данные в форме заполнены и совпадают
@@ -71,16 +65,5 @@ export class AuthChangePasswordComponent {
       this.credForChangePassword.newPassword,
     );
   }
-  //todo service
-  public getPasswordComplexityStrong() {
-    return  this.passwordComplexity === 'strong'
-  }
-//todo service
-  public getPasswordComplexityMedium() {
-    return  this.passwordComplexity === 'medium'
-  }
-//todo service
-  public getPasswordComplexityWeak() {
-    return this.passwordComplexity === 'weak'&&this.credForChangePassword.newPassword
-  }
+
 }

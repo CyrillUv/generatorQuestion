@@ -12,4 +12,5 @@ export class CharsLengthPipe implements PipeTransform {
   public static transform(value: string): number {
     return value.trim().length
   }
+
 }

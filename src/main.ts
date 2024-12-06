@@ -3,7 +3,7 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 // import { GlobalErrorHandler } from './app/components/handlers/global-error-handler';
 // import { Injector } from '@angular/core';
-// import { ToastService } from './app/components/custom/toast/toast.service';
+// import { ToastService } from './app/components/custom/toast/toast.services';
 bootstrapApplication(AppComponent, appConfig).then((r) => r);
 //   .catch((err) => {
 //   const injector = Injector.create({

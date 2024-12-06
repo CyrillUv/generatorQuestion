@@ -34,8 +34,6 @@
         @if (restorePassword.changePassword) {
           <app-auth-change-password
             (openChangePassword)="restorePassword.changePassword=$event;restorePassword.inputCredential=$event"
-            [passwordComplexity]="passwordComplexity"
-            [minLengthChar]="minLengthChar"
             (determinantPasswordComplexityEmitter)="
               determinantPasswordComplexity($event)
             "
@@ -59,8 +57,6 @@
         determinantPasswordComplexity($event)
       "
       (isRegistrationEmitter)="isRegistration = false"
-      [minLengthChar]="minLengthChar"
-      [passwordComplexity]="passwordComplexity"
 
     />
   }
