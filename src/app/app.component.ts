@@ -18,6 +18,8 @@ import { ToastService } from './components/custom/toast/toast.service';
 import { timer } from 'rxjs';
 import { AuthComponent } from './components/auth/auth.component';
 import { MenuService } from './data/menu/menu.service';
+import {MyButtonComponent} from "uga-uga-uga-32";
+import {AuthStateService} from "./components/auth/services/auth-state.service";
 
 interface Backend {
   title: string;
@@ -67,6 +69,7 @@ type CurrentEventType = 0 | 1 | 2 | 3;
     LoadingBarComponent,
     AuthComponent,
     RouterLink,
+    MyButtonComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -77,10 +80,9 @@ export class AppComponent {
   constructor(
     public router: Router,
     private toastService: ToastService,
-    public ms: MenuService,
+    public ms: MenuService,public authService:AuthStateService
   ) {
-    // console.log(this.ms.getAuthorized())
-    console.log('app init')
+    console.log('app init');
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) this.navigationType = 0;
       if (event instanceof NavigationEnd) this.navigationType = 1;

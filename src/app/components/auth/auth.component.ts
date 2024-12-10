@@ -36,9 +36,6 @@ export class AuthComponent implements OnInit {
     changePassword: false,
   };
 
-
-  //логин для изменения пароля
-  public currentUserLogin!: string;
   constructor(public authService:AuthStateService,
     @Inject(AUTHORIZATION_TOKEN) private authToken$: BehaviorSubject<boolean>,
   ) {}
@@ -46,6 +43,9 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
     //чек авторизации
     localStorage.setItem('isLogin', 'false');
+    if(this.authService.currentUserLogin==='ValuevLoh007'){
+      this.authService.enableDisableAdministratorMode(false)
+    }
     this.authToken$.next(false);
   }
 

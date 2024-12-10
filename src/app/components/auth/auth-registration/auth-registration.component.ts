@@ -6,6 +6,7 @@ import {ToastService} from "../../custom/toast/toast.service";
 import {BanLanguageDirective} from "../../../shared/ban-language.directive";
 import {CharsLengthPipe} from "../../../shared/chars-length-sampling.pipe";
 import {AuthStateService} from "../services/auth-state.service";
+import {ApiAuthService} from "../services/api-auth.service";
 
 
 @Component({
@@ -31,7 +32,7 @@ export class AuthRegistrationComponent {
   public credForRegistration = { login: '', password: '', secretWord: '' };
   //показ пароля
   public showPassword = false;
-  constructor(private toastService: ToastService,public authService: AuthStateService) {}
+  constructor(private toastService: ToastService,public authService: AuthStateService,public apiAuthService:ApiAuthService) {}
 
   //показ-скрытие пароля
   public showHiddenPassword(): void {
@@ -68,6 +69,11 @@ export class AuthRegistrationComponent {
           this.credForRegistration.login,
           JSON.stringify(this.credForRegistration),
         );
+        this.apiAuthService.postUser({login:this.credForRegistration.login.trim(),
+          password:this.credForRegistration.password.trim(),
+          secretWord:this.credForRegistration.secretWord.trim()}).subscribe();
+
+
         this.toastService.openToast({
           title: 'Успех!',
           type: ToastStatus.success,

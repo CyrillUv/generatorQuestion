@@ -26,7 +26,7 @@
           restorePassword.inputCredential && !restorePassword.changePassword
         ) {
           <app-auth-restore-password
-            (currentUserLoginEmitter)="currentUserLogin = $event"
+            (currentUserLoginEmitter)="authService.setCurrentUserLogin($event) "
             (changePasswordEmitter)="restorePassword.changePassword=$event;"
           />
         }
@@ -37,7 +37,6 @@
             (determinantPasswordComplexityEmitter)="
               determinantPasswordComplexity($event)
             "
-            [currentUserLogin]="currentUserLogin"
           />
         }
       </div>

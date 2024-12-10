@@ -1,9 +1,10 @@
 @if(router.url!=='/auth'){
   <div style="display:flex;justify-content: end" routerLink="/auth">
-    <button>Выйти</button>
+    <button (click)="authService.enableDisableAdministratorMode(false)">Выйти</button>
   </div>
 }
 <app-toast />
 <app-loading-bar [isLoading]="navigationType" />
 <app-loader />
+<!--<lib-my-button></lib-my-button>-->
 <router-outlet></router-outlet>

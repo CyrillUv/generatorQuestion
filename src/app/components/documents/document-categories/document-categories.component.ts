@@ -7,6 +7,7 @@ import {
   ApiCategoriesService,
   ICategory,
 } from '../../../data/api/api-categories.service';
+import {AuthStateService} from "../../auth/services/auth-state.service";
 
 @Component({
   selector: 'app-document-categories',
@@ -19,11 +20,10 @@ export class DocumentCategoriesComponent implements OnInit {
   @Output() currentCategoryEmitter = new EventEmitter<string>();
   //новая категория
   public newCategory = '';
-  //режим бога
-  public adminMode = false;
+
   //категории документации
   public categories!: ICategory[];
-  constructor(private apiService: ApiCategoriesService) {}
+  constructor(private apiService: ApiCategoriesService,public authService:AuthStateService) {}
 
   ngOnInit() {
     //получение всех категорий
@@ -61,7 +61,7 @@ export class DocumentCategoriesComponent implements OnInit {
         .postCategory({
           id: String(this.categories.length),
           name: this.newCategory,
-          endpoint: this.newCategory,
+          endpoint: '/'+this.newCategory,
         })
         .pipe(
           tap(() => {

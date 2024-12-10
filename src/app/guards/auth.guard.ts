@@ -1,29 +1,30 @@
 import { Inject, Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AUTHORIZATION_TOKEN } from '../data/tokens/tokens';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject, map, Observable} from 'rxjs';
+import {ApiAuthService} from "../components/auth/services/api-auth.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
   constructor(
-    @Inject(AUTHORIZATION_TOKEN) private authToken$: BehaviorSubject<boolean>,
+    @Inject(AUTHORIZATION_TOKEN) private authToken$: BehaviorSubject<boolean>,private apiAuthService:ApiAuthService,
     private _router: Router,
   ) {}
 
-  public canActivate(): boolean {
-    const auth = this.authToken$.value;
-
-    //Если массив времени проходения вопросов не пуст или
-    console.log(auth)
-    if (auth) {
-      // console.log('blyaaaaaaaaaa', this.authToken$.value)
-      return true;
-    }
-    console.log('redirect');
-    //иначе посылает нахуй в меню
-    this._router.navigate(['/auth']).then((r) => r);
-    return false;
+  public canActivate(): Observable<boolean> {
+    return this.apiAuthService.getCurrentUser().pipe(map(res => {
+      // Проверяем, получили ли мы текущего пользователя
+      console.log(res)
+      if (res && res.length > 0) {
+        this.authToken$.next(true); // Устанавливаем статус аутентификации в true
+        return true
+      } else {
+        this._router.navigate(['/auth']).then((r) => r);
+        this.authToken$.next(false); // Устанавливаем статус аутентификации в false
+        return false
+      }
+    }));
   }
 }

@@ -1,4 +1,11 @@
-import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {ToastStatus} from "../../custom/toast/toast.component";
@@ -8,6 +15,8 @@ import {AUTHORIZATION_TOKEN} from "../../../data/tokens/tokens";
 import {BehaviorSubject, timer} from "rxjs";
 import {BanLanguageDirective} from "../../../shared/ban-language.directive";
 import {CharsLengthPipe} from "../../../shared/chars-length-sampling.pipe";
+import {AuthStateService} from "../services/auth-state.service";
+import {ApiAuthService, IUser} from "../services/api-auth.service";
 
 @Component({
   selector: 'app-auth-login',
@@ -16,7 +25,7 @@ import {CharsLengthPipe} from "../../../shared/chars-length-sampling.pipe";
   templateUrl: './auth-login.component.html',
   styleUrl: '../auth.component.scss',
 })
-export class AuthLoginComponent {
+export class AuthLoginComponent implements OnInit{
 
   @Input({ required: true }) public inputCredential!: boolean;
 
@@ -25,15 +34,24 @@ export class AuthLoginComponent {
   @Output() public inputCredentialEmitter: EventEmitter<boolean> =
     new EventEmitter<boolean>();
 
-  //обьект формы логинизации
   //показ пароля
   public showPassword = false;
+  //обьект формы логинизации
   public credForLogin = { login: '', password: '' };
+  public allUsers:IUser[] = []
   constructor(
-    private router: Router,
+    private router: Router,private authService:AuthStateService,
     private toastService: ToastService,
+    private apiAuthService: ApiAuthService,
     @Inject(AUTHORIZATION_TOKEN) private authToken$: BehaviorSubject<boolean>,
   ) {}
+  ngOnInit(){
+    this.apiAuthService.getAllUsers().subscribe(res => {
+      this.allUsers = res
+      console.log(this.allUsers)
+    })
+  }
+
   //получение данных из хранилища
   public getStorage(key: string): string {
     return localStorage.getItem(key) as string;
@@ -46,6 +64,7 @@ export class AuthLoginComponent {
   }
   //успешно пройденная логинизация
   public successLogin(): void {
+
     //время для показа в тосте
     const time =
       new Date().getHours() +
@@ -60,7 +79,9 @@ export class AuthLoginComponent {
       type: ToastStatus.success,
       description: 'Вход прошел успешно! ' + time + ' ' + 'Время сессии:1 час',
     });
-    localStorage.setItem('isLogin', 'true');
+    // this.authService.setCurrentUserLogin(this.credForLogin.login);
+    // this.authService.enableDisableAdministratorMode(true);
+    this.apiAuthService.postCurrentUser(this.credForLogin).subscribe();
 
     //пользователь авторизован,через 45 минут вылетет предупреждение
     this.authToken$.next(true);
@@ -107,14 +128,18 @@ export class AuthLoginComponent {
       });
     }
     //если все верно
-    if (
-      (localStorage.getItem(this.credForLogin.login) as string) &&
-      JSON.parse(this.getStorage(this.credForLogin.login)).login ===
-        this.credForLogin.login &&
-      JSON.parse(this.getStorage(this.credForLogin.login)).password ===
-        this.credForLogin.password
-    ) {
-      //успешная логинка
+    // if (
+    //   (localStorage.getItem(this.credForLogin.login) as string) &&
+    //   JSON.parse(this.getStorage(this.credForLogin.login)).login ===
+    //     this.credForLogin.login &&
+    //   JSON.parse(this.getStorage(this.credForLogin.login)).password ===
+    //     this.credForLogin.password
+    // ) {
+    //   //успешная логинка
+    //   this.successLogin();
+    // }
+    if(this.allUsers.some(user=>user.login === this.credForLogin.login
+      &&user.password===this.credForLogin.password)){
       this.successLogin();
     }
   }
