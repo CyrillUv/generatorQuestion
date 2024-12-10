@@ -36,8 +36,7 @@ export class AuthChangePasswordComponent {
       this.credForChangePassword.newPassword ===
         this.credForChangePassword.confirmPassword
     ) {
-      let currentUserId!: string; // Убедитесь, что вы понимаете, что это 'не может быть пустым', но это не гарантирует, что 'currentUserId' будет инициализирован до его использования.
-
+      let currentUserId!: string;
       this.authService.getCurrentUserId().subscribe((res) => {
         if (res) {
           currentUserId = res;

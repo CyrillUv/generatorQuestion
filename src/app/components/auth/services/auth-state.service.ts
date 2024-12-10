@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {PasswordComplexity} from "../../../utils/password-complexity";
-import {ApiAuthService, IUser} from "./api-auth.service";
+import {ApiAuthService} from "./api-auth.service";
 import {map, Observable} from "rxjs";
 interface IRestorePassword{
   inputCredential: boolean,

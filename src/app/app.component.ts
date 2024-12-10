@@ -20,6 +20,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { MenuService } from './data/menu/menu.service';
 import {MyButtonComponent} from "uga-uga-uga-32";
 import {AuthStateService} from "./components/auth/services/auth-state.service";
+import {ApiAuthService} from "./components/auth/services/api-auth.service";
 
 interface Backend {
   title: string;
@@ -80,9 +81,11 @@ export class AppComponent {
   constructor(
     public router: Router,
     private toastService: ToastService,
-    public ms: MenuService,public authService:AuthStateService
+    public ms: MenuService,public authService:AuthStateService,
+    public apiAuthService:ApiAuthService
   ) {
-    console.log('app init');
+
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) this.navigationType = 0;
       if (event instanceof NavigationEnd) this.navigationType = 1;
@@ -107,7 +110,17 @@ export class AppComponent {
         timer(5000).subscribe(() => this.router.navigate(['/auth']));
       }
     });
-  }
 
-  protected readonly localStorage = localStorage;
+  }
+  public logoutOfAccount(){
+    this.authService.getCurrentUserId().subscribe(res=>
+    {
+      console.log(res)
+      if(res)
+        this.apiAuthService.deleteCurrentUser(res).subscribe()
+
+
+    })
+
+  }
 }
