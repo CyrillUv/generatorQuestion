@@ -2,7 +2,7 @@ import {AUTHORIZATION_TOKEN} from "./data/tokens/tokens";
 import {BehaviorSubject} from "rxjs";
 import {APP_INITIALIZER, Provider} from "@angular/core";
 import {Router} from "@angular/router";
-import {ApiAuthService, IUser} from "./components/auth/services/api-auth.service";
+import {ApiAuthService} from "./components/auth/services/api-auth.service";
 
 export const authProvider: Provider =  {
   provide:AUTHORIZATION_TOKEN,

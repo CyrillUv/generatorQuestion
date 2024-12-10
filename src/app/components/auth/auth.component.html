@@ -1,62 +1,47 @@
 <div
   class="auth"
-  [class.auth--default]="isRegistration"
-  [class.auth--transform]="!isRegistration"
+  [class.auth--default]="authService.isRegistration"
+  [class.auth--transform]="!authService.isRegistration"
 >
   <!--  восстановление и изменение  пароля-->
-  @if (restorePassword.inputCredential) {
+  @if (authService.restorePassword.inputCredential) {
     <div class="auth__transition-bar  auth__transition-bar__default">
       <button class="auth__transition-bar__login"
-              (click)="isRegistration=false;
-              restorePassword.inputCredential=false;
-              restorePassword.changePassword=false">
+              (click)="authService.setRegistration(false);
+              authService.setInputCredential(false);
+              authService.setChangePassword(false)">
         Логин
       </button>
     </div>
     <div class="auth__reverse-block">
-      @if (restorePassword.inputCredential && !restorePassword.changePassword) {
+      @if (authService.restorePassword.inputCredential && !authService.restorePassword.changePassword) {
         <h1>Восстановление пароля</h1>
       }
-      @if (restorePassword.changePassword) {
+      @if (authService.restorePassword.changePassword) {
         <h1>Новый пароль</h1>
       }
       <div>
         <!--    при восстановлении пароля-->
         @if (
-          restorePassword.inputCredential && !restorePassword.changePassword
+          authService.restorePassword.inputCredential && !authService.restorePassword.changePassword
         ) {
-          <app-auth-restore-password
-            (currentUserLoginEmitter)="authService.setCurrentUserLogin($event) "
-            (changePasswordEmitter)="restorePassword.changePassword=$event;"
-          />
+          <app-auth-restore-password/>
         }
         <!--    при изменении пароля-->
-        @if (restorePassword.changePassword) {
-          <app-auth-change-password
-            (openChangePassword)="restorePassword.changePassword=$event;restorePassword.inputCredential=$event"
-            (determinantPasswordComplexityEmitter)="
-              determinantPasswordComplexity($event)
-            "
-          />
+        @if (authService.restorePassword.changePassword) {
+          <app-auth-change-password/>
         }
       </div>
     </div>
   }
   <!--  логинизация-->
-  @if (!isRegistration && !restorePassword.inputCredential) {
-    <app-auth-login (inputCredentialEmitter)="restorePassword.inputCredential=$event"
-      (isRegistrationEmitter)="isRegistration = true"
-      [inputCredential]="restorePassword.inputCredential"
+  @if (!authService.isRegistration && !authService.restorePassword.inputCredential) {
+    <app-auth-login
     />
   }
   <!--  регистрация-->
-  @if (isRegistration && !restorePassword.inputCredential) {
+  @if (authService.isRegistration && !authService.restorePassword.inputCredential) {
     <app-auth-registration
-      (determinantPasswordComplexityEmitter)="
-        determinantPasswordComplexity($event)
-      "
-      (isRegistrationEmitter)="isRegistration = false"
-
     />
   }
 </div>

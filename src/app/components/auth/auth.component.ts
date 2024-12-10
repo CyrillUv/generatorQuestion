@@ -9,7 +9,6 @@ import {AuthChangePasswordComponent} from "./auth-change-password/auth-change-pa
 import {AuthLoginComponent} from "./auth-login/auth-login.component";
 import {AuthRegistrationComponent} from "./auth-registration/auth-registration.component";
 import {AuthStateService} from "./services/auth-state.service";
-import {PasswordComplexity} from "../../utils/password-complexity";
 
 @Component({
   selector: 'app-auth',
@@ -28,13 +27,7 @@ import {PasswordComplexity} from "../../utils/password-complexity";
   styleUrl: './auth.component.scss',
 })
 export class AuthComponent implements OnInit {
-  //переменная отвечает авторизацию,если false страница логинизации,иначе регистрация
-  public isRegistration = false;
-  //обьект отвечающий за забытие пароля isPassword-отвечает за нахождение аккаунта, isChangePassword - за изменение пароля
-  public restorePassword = {
-    inputCredential: false,
-    changePassword: false,
-  };
+
 
   constructor(public authService:AuthStateService,
     @Inject(AUTHORIZATION_TOKEN) private authToken$: BehaviorSubject<boolean>,
@@ -42,18 +35,13 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     //чек авторизации
-    localStorage.setItem('isLogin', 'false');
-    if(this.authService.currentUserLogin==='ValuevLoh007'){
-      this.authService.enableDisableAdministratorMode(false)
-    }
+    // if(this.authService.currentUserLogin==='ValuevLoh007'){
+    //   this.authService.enableDisableAdministratorMode(false)
+    // }
     this.authToken$.next(false);
   }
 
   //todo перенести в сервис
-  //определитель сложности пароля
-  public determinantPasswordComplexity(password:string): void {
-    if(!password) return;
-    this.authService.setPasswordComplexity(PasswordComplexity.determinantPasswordComplexity(password))
-  }
+
 
 }

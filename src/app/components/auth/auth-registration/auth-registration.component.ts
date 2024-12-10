@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ToastStatus} from "../../custom/toast/toast.component";
@@ -6,7 +6,7 @@ import {ToastService} from "../../custom/toast/toast.service";
 import {BanLanguageDirective} from "../../../shared/ban-language.directive";
 import {CharsLengthPipe} from "../../../shared/chars-length-sampling.pipe";
 import {AuthStateService} from "../services/auth-state.service";
-import {ApiAuthService} from "../services/api-auth.service";
+import {ApiAuthService, IUser} from "../services/api-auth.service";
 
 
 @Component({
@@ -24,29 +24,24 @@ import {ApiAuthService} from "../services/api-auth.service";
   styleUrl: '../auth.component.scss',
 })
 export class AuthRegistrationComponent {
-  @Output() public determinantPasswordComplexityEmitter: EventEmitter<string> =
-    new EventEmitter<string>();
-  @Output() public isRegistrationEmitter: EventEmitter<boolean> =
-    new EventEmitter<boolean>();
   //обьект формы регистрации
   public credForRegistration = { login: '', password: '', secretWord: '' };
   //показ пароля
   public showPassword = false;
-  constructor(private toastService: ToastService,public authService: AuthStateService,public apiAuthService:ApiAuthService) {}
-
+  // массив юзеров
+  public allUsers!:IUser[]
+  constructor(private toastService: ToastService,public authService: AuthStateService,public apiAuthService:ApiAuthService) {
+    this.apiAuthService.getAllUsers().subscribe(res=>{
+      this.allUsers = res
+    })
+  }
   //показ-скрытие пароля
   public showHiddenPassword(): void {
     this.showPassword = !this.showPassword;
   }
-
-  public determinantPasswordComplexity(): void {
-    this.determinantPasswordComplexityEmitter.emit(
-      this.credForRegistration.password,
-    );
-  }
-
+  //переход на страницу login
   public inLogin(): void {
-    this.isRegistrationEmitter.emit();
+    this.authService.setRegistration(false)
   }
   //регистрация пользователя
   public onRegistration(): void {
@@ -57,18 +52,14 @@ export class AuthRegistrationComponent {
       this.credForRegistration.secretWord.trim().length
     ) {
       //если такой логин найден
-      if (localStorage.getItem(this.credForRegistration.login) as string) {
+      if (this.allUsers.some(user=>user.login===this.credForRegistration.login)) {
         this.toastService.openToast({
           title: 'Ошибка',
           type: ToastStatus.error,
           description: 'Такой пользователь уже существует',
         });
       } else {
-        //ключ:логин значение:обьект формы регистрации
-        localStorage.setItem(
-          this.credForRegistration.login,
-          JSON.stringify(this.credForRegistration),
-        );
+        //иначе регистрируем пользователя
         this.apiAuthService.postUser({login:this.credForRegistration.login.trim(),
           password:this.credForRegistration.password.trim(),
           secretWord:this.credForRegistration.secretWord.trim()}).subscribe();

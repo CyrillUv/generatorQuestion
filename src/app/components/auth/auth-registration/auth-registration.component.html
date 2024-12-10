@@ -31,7 +31,7 @@
         placeholder="*Не менее {{authService.minLengthChar}} символов"
         appBanLanguageInputText
         [(ngModel)]="credForRegistration.password"
-        (keyup)="determinantPasswordComplexity()"
+        (keyup)="authService.determinantPasswordComplexity(this.credForRegistration.password)"
         [type]="showPassword?'text':'password'"
       />
       <div

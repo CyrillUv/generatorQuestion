@@ -1,7 +1,7 @@
 <div
   class="auth">
 <div class="auth__transition-bar auth__transition-bar__special">
-  <button (click)="inRegistration()" class="auth__transition-bar__login">Регистрация</button>
+  <button (click)="authService.setRegistration(true)" class="auth__transition-bar__login">Регистрация</button>
 </div>
 <div class="auth__reverse-block
 ">
@@ -39,7 +39,7 @@
     <label *ngIf="!credForLogin.password.trim().length" class="auth__fields__item__label__error"
     >*Обязательное поле</label
     >
-    <div (click)="inputCredentialEmitter.emit(true)" class="auth__fields__item__oblivion">
+    <div (click)="authService.setInputCredential(true)" class="auth__fields__item__oblivion">
       <span>Забыли пароль?</span>
     </div>
     <div class="button-block"><button class="button-block__item" (click)="onLogin()">Войти</button></div>
