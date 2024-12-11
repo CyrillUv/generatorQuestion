@@ -7,8 +7,7 @@
         (click)="getQuestionsCurrentCategory(category.endpoint)"
       >
         {{ category.name }}
-        @if (authService.adminMode) {
-          <main>
+          <main *appPermissions="true">
             <span
               class="documents__category--action"
               (click)="changeCategory(category.id, newCategory)"
@@ -20,15 +19,15 @@
               >✖</span
             >
           </main>
-        }
+
       </div>
     }
     <div [routerLink]="'/screen'">Скрины</div>
-    @if (authService.adminMode) {
-      <div>
+
+      <div *appPermissions="true">
         <input [(ngModel)]="newCategory" (keydown.enter)="addCategory()" />
         <button (click)="addCategory()">Добавить категорию</button>
       </div>
-    }
+
   </div>
 </div>

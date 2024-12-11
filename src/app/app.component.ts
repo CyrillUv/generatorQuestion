@@ -115,11 +115,8 @@ export class AppComponent {
   public logoutOfAccount(){
     this.authService.getCurrentUserId().subscribe(res=>
     {
-      console.log(res)
       if(res)
         this.apiAuthService.deleteCurrentUser(res).subscribe()
-
-
     })
 
   }

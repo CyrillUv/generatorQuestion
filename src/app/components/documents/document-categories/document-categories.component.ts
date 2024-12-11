@@ -8,11 +8,12 @@ import {
   ICategory,
 } from '../../../data/api/api-categories.service';
 import {AuthStateService} from "../../auth/services/auth-state.service";
+import {PermissionsDirective} from "../../../shared/permissions.directive";
 
 @Component({
   selector: 'app-document-categories',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, FormsModule],
+  imports: [ReactiveFormsModule, RouterLink, FormsModule, PermissionsDirective],
   templateUrl: './document-categories.component.html',
 })
 export class DocumentCategoriesComponent implements OnInit {
@@ -23,7 +24,10 @@ export class DocumentCategoriesComponent implements OnInit {
 
   //категории документации
   public categories!: ICategory[];
-  constructor(private apiService: ApiCategoriesService,public authService:AuthStateService) {}
+  constructor(
+    private apiService: ApiCategoriesService,
+    public authService: AuthStateService,
+  ) {}
 
   ngOnInit() {
     //получение всех категорий
@@ -61,7 +65,7 @@ export class DocumentCategoriesComponent implements OnInit {
         .postCategory({
           id: String(this.categories.length),
           name: this.newCategory,
-          endpoint: '/'+this.newCategory,
+          endpoint: '/' + this.newCategory,
         })
         .pipe(
           tap(() => {

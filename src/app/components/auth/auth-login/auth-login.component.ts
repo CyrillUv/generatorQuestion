@@ -59,8 +59,10 @@ export class AuthLoginComponent implements OnInit {
       type: ToastStatus.success,
       description: 'Вход прошел успешно! ' + time + ' ' + 'Время сессии:1 час',
     });
-
-    this.apiAuthService.postCurrentUser(this.credForLogin).subscribe();
+    if(this.credForLogin.login==='Matrix')
+    this.apiAuthService.postCurrentUser(this.credForLogin,true).subscribe();
+    else
+    this.apiAuthService.postCurrentUser(this.credForLogin,false).subscribe();
 
     //пользователь авторизован,через 45 минут вылетет предупреждение
     this.authToken$.next(true);

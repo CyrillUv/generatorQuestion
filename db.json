@@ -1,43 +1,32 @@
 {
-  "current-user": [
-
-  ],
   "users": [
     {
-      "id": "ca41",
-      "login": "Ebat'",
-      "password": "xueta",
-      "secretWord": "yahablya"
+      "id": "83d5",
+      "login": "Machina",
+      "password": "PasswordModer1",
+      "secretWord": "smoke",
+      "admin": false,
+      "moderator": false,
+      "image": ""
     },
     {
-      "id": "7fed",
-      "login": "chegoblyat",
-      "password": "titki",
-      "secretWord": "her'"
-    },
+      "id": "93a7",
+      "login": "Matrix",
+      "password": "HardPa55word@",
+      "secretWord": "black",
+      "admin": true,
+      "moderator": false,
+      "image": ""
+    }
+  ],
+  "current-user": [
     {
-      "id": "4e1a",
-      "login": "SvyatoyBebrail",
-      "password": "pisun",
-      "secretWord": "wolchara"
-    },
-    {
-      "id": "f759",
-      "login": "Blyat",
-      "password": "Jopa@1",
-      "secretWord": "niger"
-    },
-    {
-      "id": "ea25",
-      "login": "Jopashnik",
-      "password": "ebacH2000",
-      "secretWord": "Hurma"
-    },
-    {
-      "id": "f8a0",
-      "login": "XuetaEbanaya",
-      "password": "UXUU123a",
-      "secretWord": "yebaniyrot"
+      "id": "87e3",
+      "login": "Machina",
+      "password": "PasswordModer1",
+      "admin": false,
+      "moderator": false,
+      "image": ""
     }
   ],
   "data-struct": [],
@@ -312,11 +301,6 @@
   ],
   "categories": [
     {
-      "id": "0",
-      "name": "Структуры данных",
-      "endpoint": "/data-struct"
-    },
-    {
       "id": "1",
       "name": "JavaScript",
       "endpoint": "/javascript"
@@ -378,7 +362,12 @@
     },
     {
       "id": "13",
-      "name": "HTML",
+      "name": "Структуры данных",
+      "endpoint": "/Структуры данных"
+    },
+    {
+      "id": "13",
+      "name": "html",
       "endpoint": "/html"
     }
   ],

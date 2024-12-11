@@ -7,8 +7,8 @@ export interface IUser {
   login: string;
   password?: string;
   secretWord?: string;
-  systemAdmin?:boolean;
-  systemUser?:boolean;
+  admin?:boolean;
+  moderator?:boolean;
   image?:string
 }
 
@@ -33,12 +33,12 @@ export class ApiAuthService {
     return this.http.get<IUser[]>(`${this._currentUserUrl}`);
   }
   //добавление текущего пользователя
-  public postCurrentUser(user:IUser):Observable<IUser>{
-    return this.http.post<IUser>(`${this._currentUserUrl}`,{...user,systemAdmin:false,systemUser:false,image:''});
+  public postCurrentUser(user:IUser,permission:boolean):Observable<IUser>{
+    return this.http.post<IUser>(`${this._currentUserUrl}`,{...user,admin:permission,moderator:false,image:''});
   }
   //добавление пользователя
   public postUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${this._usersUrl}`, user);
+    return this.http.post<IUser>(`${this._usersUrl}`, {...user,admin:false,moderator:false,image:''});
   }
   //изменение пароля
   public patchUser(id: string,password:string): Observable<IUser> {

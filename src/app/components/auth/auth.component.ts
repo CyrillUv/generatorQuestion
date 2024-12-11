@@ -40,8 +40,4 @@ export class AuthComponent implements OnInit {
     // }
     this.authToken$.next(false);
   }
-
-  //todo перенести в сервис
-
-
 }

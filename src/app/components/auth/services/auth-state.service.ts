@@ -23,9 +23,18 @@ export class AuthStateService {
   };
 
   constructor(private apiAuthService: ApiAuthService) {
+    this.apiAuthService.getCurrentUser().subscribe(
+      res => {
+        console.log(res)
+        if (res[0].admin ) {
+          this.adminMode = res[0].admin
+        } else {
+          this.adminMode = false;
+        }
+        this.apiAuthService.getAllUsers().subscribe()
+      }
 
-    this.adminMode=JSON.parse(localStorage.getItem('adminMode') as string)
-  }
+      )}
   public getCurrentUserId(): Observable<string|null> {
     return this.apiAuthService.getCurrentUser().pipe(
       map(res => {

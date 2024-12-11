@@ -21,7 +21,9 @@ export class AuthRestorePasswordComponent implements OnInit{
   public credForRestorePassword = { login: '', secretWord: '' };
   //все пользователи
   public allUsers!:IUser[]
-  constructor(public toastService: ToastService,private apiAuthService: ApiAuthService,private authService:AuthStateService ) {}
+  constructor(public toastService: ToastService,
+              private apiAuthService: ApiAuthService,
+              private authService:AuthStateService ) {}
   ngOnInit(){
     this.apiAuthService.getAllUsers().subscribe(res=>{
       this.allUsers = res;
@@ -47,7 +49,7 @@ export class AuthRestorePasswordComponent implements OnInit{
     {
       const user = this.allUsers.find(user=>user.login === this.credForRestorePassword.login
         &&user.secretWord===this.credForRestorePassword.secretWord)
-      this.apiAuthService.postCurrentUser(user as IUser).subscribe()
+      this.apiAuthService.postCurrentUser(user as IUser,false).subscribe()
       //переходим к изменению пароля
       this.authService.setChangePassword(true);
       return;
