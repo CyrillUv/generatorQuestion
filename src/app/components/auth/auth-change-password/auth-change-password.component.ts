@@ -11,7 +11,14 @@ import { ApiAuthService } from '../services/api-auth.service';
 @Component({
   selector: 'app-auth-change-password',
   standalone: true,
-  imports: [FormsModule, NgClass, NgIf, BanLanguageDirective, CharsLengthPipe],
+  imports: [
+    FormsModule,
+    NgClass,
+    NgIf,
+    BanLanguageDirective,
+    CharsLengthPipe,
+
+  ],
   templateUrl: './auth-change-password.component.html',
   styleUrl: '../auth.component.scss',
 })
@@ -37,59 +44,64 @@ export class AuthChangePasswordComponent {
         this.credForChangePassword.confirmPassword
     ) {
       let currentUserId!: string;
-      this.authService.getCurrentUserId().subscribe((res) => {
-        if (res) {
-          currentUserId = res;
+      this.authService.getCurrentUserId().subscribe(
+        (res) => {
+          if (res) {
+            currentUserId = res;
 
-          // Изменение пароля
-          this.apiAuthService.patchUser(currentUserId, this.credForChangePassword.newPassword).subscribe(
-            () => {
-              // Если изменение пароля прошло успешно, вы можете выполнить дальнейшие действия здесь
-              this.toastService.openToast({
-                title: 'Успех!',
-                type: ToastStatus.success,
-                description: 'Пароль успешно изменён!',
-              });
-            },
-            (error) => {
-              console.error('Ошибка при изменении пароля:', error);
-              this.toastService.openToast({
-                title: 'Ошибка!',
-                type: ToastStatus.error,
-                description: 'Не удалось изменить пароль.',
-              });
-            }
-          );
+            // Изменение пароля
+            this.apiAuthService
+              .patchUser(currentUserId, this.credForChangePassword.newPassword)
+              .subscribe(
+                () => {
+                  // Если изменение пароля прошло успешно, вы можете выполнить дальнейшие действия здесь
+                  this.toastService.openToast({
+                    title: 'Успех!',
+                    type: ToastStatus.success,
+                    description: 'Пароль успешно изменён!',
+                  });
+                },
+                (error) => {
+                  console.error('Ошибка при изменении пароля:', error);
+                  this.toastService.openToast({
+                    title: 'Ошибка!',
+                    type: ToastStatus.error,
+                    description: 'Не удалось изменить пароль.',
+                  });
+                },
+              );
 
-          // Удаление текущего юзера
-          this.apiAuthService.deleteCurrentUser(currentUserId).subscribe(
-            (deleteResponse) => {
-              // Обработка успешного удаления пользователя
-              console.log('Пользователь успешно удалён:', deleteResponse);
-            },
-            (error) => {
-              console.error('Ошибка при удалении пользователя:', error);
-              this.toastService.openToast({
-                title: 'Ошибка!',
-                type: ToastStatus.error,
-                description: 'Не удалось удалить пользователя.',
-              });
-            }
-          );
-        } else {
+            // Удаление текущего юзера
+            this.apiAuthService.deleteCurrentUser(currentUserId).subscribe(
+              (deleteResponse) => {
+                // Обработка успешного удаления пользователя
+                console.log('Пользователь успешно удалён:', deleteResponse);
+              },
+              (error) => {
+                console.error('Ошибка при удалении пользователя:', error);
+                this.toastService.openToast({
+                  title: 'Ошибка!',
+                  type: ToastStatus.error,
+                  description: 'Не удалось удалить пользователя.',
+                });
+              },
+            );
+          } else {
+            this.toastService.openToast({
+              title: 'Ошибка!',
+              type: ToastStatus.error,
+              description: 'ID пользователя не найден.',
+            });
+          }
+        },
+        () => {
           this.toastService.openToast({
             title: 'Ошибка!',
             type: ToastStatus.error,
-            description: 'ID пользователя не найден.',
+            description: 'Не удалось получить ID пользователя.',
           });
-        }
-      }, () => {
-        this.toastService.openToast({
-          title: 'Ошибка!',
-          type: ToastStatus.error,
-          description: 'Не удалось получить ID пользователя.',
-        });
-      });
+        },
+      );
       this.authService.setChangePassword(false);
       this.credForChangePassword = { newPassword: '', confirmPassword: '' };
     } else {

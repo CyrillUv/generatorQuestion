@@ -13,7 +13,7 @@
         id="login"
         placeholder="*Не менее {{authService.minLengthChar}} символов"
         class="auth__fields__item"
-        appBanLanguageInputText
+        appBanLanguageInputText="rus"
         [class.auth__fields__item--error]="!(credForRegistration.login|charsLengthSampling)"
         [(ngModel)]="credForRegistration.login"
       />
@@ -26,10 +26,11 @@
     <label for="password" class="auth__fields__item__label pt-5">Пароль</label>
     <div class="auth__fields__item__block">
       <input
+
         id="password"
         class="auth__fields__item"
         placeholder="*Не менее {{authService.minLengthChar}} символов"
-        appBanLanguageInputText
+        appBanLanguageInputText="rus"
         [(ngModel)]="credForRegistration.password"
         (keyup)="authService.determinantPasswordComplexity(this.credForRegistration.password)"
         [type]="showPassword?'text':'password'"
@@ -61,7 +62,8 @@
       >*Обязательное поле</label
     >
     <label for="password" class="auth__fields__item__label pt-5">Секретное слово</label>
-    <div class="auth__fields__item__block"><input
+    <div class="auth__fields__item__block">
+      <input appBanLanguageInputText="rus" [delay]="2000"
       id="secretWord"
       class="auth__fields__item"
       [class.auth__fields__item--error]="!(credForRegistration.secretWord|charsLengthSampling)"

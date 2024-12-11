@@ -14,7 +14,13 @@ import { ApiAuthService, IUser } from '../services/api-auth.service';
 @Component({
   selector: 'app-auth-login',
   standalone: true,
-  imports: [NgIf, FormsModule, BanLanguageDirective, CharsLengthPipe],
+  imports: [
+    NgIf,
+    FormsModule,
+    BanLanguageDirective,
+    CharsLengthPipe,
+
+  ],
   templateUrl: './auth-login.component.html',
   styleUrl: '../auth.component.scss',
 })
@@ -59,10 +65,10 @@ export class AuthLoginComponent implements OnInit {
       type: ToastStatus.success,
       description: 'Вход прошел успешно! ' + time + ' ' + 'Время сессии:1 час',
     });
-    if(this.credForLogin.login==='Matrix')
-    this.apiAuthService.postCurrentUser(this.credForLogin,true).subscribe();
+    if (this.credForLogin.login === 'Matrix')
+      this.apiAuthService.postCurrentUser(this.credForLogin, true).subscribe();
     else
-    this.apiAuthService.postCurrentUser(this.credForLogin,false).subscribe();
+      this.apiAuthService.postCurrentUser(this.credForLogin, false).subscribe();
 
     //пользователь авторизован,через 45 минут вылетет предупреждение
     this.authToken$.next(true);
@@ -81,14 +87,10 @@ export class AuthLoginComponent implements OnInit {
         description: 'Время сессии закончилось!',
       });
       this.authToken$.next(false);
-      this.authService.getCurrentUserId().subscribe(res=>
-      {
-        if(res)
-        this.apiAuthService.deleteCurrentUser(res)
-      })
-
+      this.authService.getCurrentUserId().subscribe((res) => {
+        if (res) this.apiAuthService.deleteCurrentUser(res);
+      });
     });
-
   }
 
   //логинизация пользователя
