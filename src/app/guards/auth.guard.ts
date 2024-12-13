@@ -1,36 +1,52 @@
 import { Inject, Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AUTHORIZATION_TOKEN } from '../data/tokens/tokens';
-import {BehaviorSubject, map, Observable} from 'rxjs';
-import {ApiAuthService} from "../components/auth/services/api-auth.service";
-import {AuthStateService} from "../components/auth/services/auth-state.service";
+import {AUTHORIZATION_TOKEN$, CURRENT_USER_TOKEN$} from '../data';
+import {BehaviorSubject, from, Observable, of, pipe, switchMap, tap} from 'rxjs';
+import {ApiAuthService, AuthStateService, IUser} from '../components';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
   constructor(
-    @Inject(AUTHORIZATION_TOKEN) private authToken$: BehaviorSubject<boolean>,private apiAuthService:ApiAuthService,
-    private _router: Router,private authService:AuthStateService
+    @Inject(AUTHORIZATION_TOKEN$) private authToken$: BehaviorSubject<boolean>,
+    private _router: Router,
   ) {}
 
   public canActivate(): Observable<boolean> {
-    return this.apiAuthService.getCurrentUser().pipe(map(res => {
-      // Проверяем, получили ли мы текущего пользователя
-      if (res && res.length > 0) {
-        this.authToken$.next(true); // Устанавливаем статус аутентификации в true
-        return true
-      } else {
-        this.authService.getCurrentUserId().subscribe(res=>
-        {
-          console.log(res)
-          if(res)
-            this.apiAuthService.deleteCurrentUser(res).subscribe()
-        })
-        this._router.navigate(['/auth']).then((r) => r);
-        this.authToken$.next(false); // Устанавливаем статус аутентификации в false
-        return false
-      }
-    }));
+    if (this.authToken$.value) {
+      return of(true);
+    } else {
+      return from(this._router.navigate(['/auth']).then((r) => r));
+    }
+  }
+}
+
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AntiAuthGuard implements CanActivate {
+  constructor(
+    @Inject(AUTHORIZATION_TOKEN$) private authToken$: BehaviorSubject<boolean>,
+    @Inject(CURRENT_USER_TOKEN$) private currentUser$: BehaviorSubject<IUser | null>,
+    private apiAuthService: ApiAuthService,
+  ) {}
+
+  public canActivate(): Observable<boolean> {
+    if(this.authToken$.value && this.currentUser$.value) {
+      console.log('zaxod')
+      return this.apiAuthService.deleteCurrentUser(((this.currentUser$.value as IUser).id as string)).
+        pipe(
+          tap(() => {
+            this.currentUser$.next(null);
+            this.authToken$.next(false);
+          }),
+        switchMap(() => of(true))
+      )
+    } else {
+      return of(true)
+    }
+
   }
 }

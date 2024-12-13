@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import {Component, Inject, ViewContainerRef} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
@@ -13,6 +13,9 @@ import { MultiSelectComponent } from '../custom/multi-select/multi-select.compon
 import { MyFormComponent } from '../custom/my-form/my-form.component';
 import { ToastComponent } from '../custom/toast/toast.component';
 import { LoaderComponent } from '../custom/loader/loader.component';
+import {CURRENT_USER_TOKEN$} from "../../data";
+import {BehaviorSubject} from "rxjs";
+import {IUser} from "../auth";
 
 @Component({
   selector: 'app-menu',
@@ -51,9 +54,13 @@ export class MenuComponent {
     public ms: MenuService,
     private _qs: QuestionService,
     private _vcr: ViewContainerRef,
+    @Inject(CURRENT_USER_TOKEN$) public userToken$:BehaviorSubject<IUser>,
   ) {
     //Задание значения отображению модалки
     this.activeModal = this.ms.getActiveModal();
+    this.userToken$.subscribe(res=>{
+      console.log(res)
+    })
   }
 
   //Изменяет путь

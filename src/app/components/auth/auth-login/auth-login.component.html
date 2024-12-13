@@ -30,6 +30,7 @@
         [class.auth__fields__item--error]="!(credForLogin.password|charsLengthSampling)"
         [(ngModel)]="credForLogin.password"
         appBanLanguageInputText="rus"
+        [appInputDelay]="5000"
         [type]="showPassword?'text':'password'"
 
       /><main *ngIf="!showPassword" class="auth__fields__item--hidden" (click)="showHiddenPassword()">👁</main>

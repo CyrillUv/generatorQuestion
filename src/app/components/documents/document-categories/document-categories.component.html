@@ -7,7 +7,7 @@
         (click)="getQuestionsCurrentCategory(category.endpoint)"
       >
         {{ category.name }}
-          <main *appPermissions="true">
+          <main *appPermissions>
             <span
               class="documents__category--action"
               (click)="changeCategory(category.id, newCategory)"
@@ -24,10 +24,9 @@
     }
     <div [routerLink]="'/screen'">Скрины</div>
 
-      <div *appPermissions="true">
+      <div *appPermissions>
         <input [(ngModel)]="newCategory" (keydown.enter)="addCategory()" />
         <button (click)="addCategory()">Добавить категорию</button>
       </div>
-
   </div>
 </div>

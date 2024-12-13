@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { ToastStatus } from '../../custom/toast/toast.component';
 import { Router } from '@angular/router';
 import { ToastService } from '../../custom/toast/toast.service';
-import { AUTHORIZATION_TOKEN } from '../../../data/tokens/tokens';
+import { AUTHORIZATION_TOKEN$, CURRENT_USER_TOKEN$ } from '../../../data';
 import { BehaviorSubject, timer } from 'rxjs';
 import { BanLanguageDirective } from '../../../shared/ban-language.directive';
 import { CharsLengthPipe } from '../../../shared/chars-length-sampling.pipe';
-import { AuthStateService } from '../services/auth-state.service';
-import { ApiAuthService, IUser } from '../services/api-auth.service';
+import { ApiAuthService, AuthStateService, IUser } from '../services';
+import { InputDelayDirective } from '../../../shared/inputDelay.directive';
 
 @Component({
   selector: 'app-auth-login',
@@ -19,7 +19,7 @@ import { ApiAuthService, IUser } from '../services/api-auth.service';
     FormsModule,
     BanLanguageDirective,
     CharsLengthPipe,
-
+    InputDelayDirective,
   ],
   templateUrl: './auth-login.component.html',
   styleUrl: '../auth.component.scss',
@@ -30,12 +30,15 @@ export class AuthLoginComponent implements OnInit {
   //обьект формы логинизации
   public credForLogin = { login: '', password: '' };
   public allUsers: IUser[] = [];
+
   constructor(
     private router: Router,
     public authService: AuthStateService,
     private toastService: ToastService,
     private apiAuthService: ApiAuthService,
-    @Inject(AUTHORIZATION_TOKEN) private authToken$: BehaviorSubject<boolean>,
+    @Inject(AUTHORIZATION_TOKEN$) private authToken$: BehaviorSubject<boolean>,
+    @Inject(CURRENT_USER_TOKEN$)
+    private currentUser$: BehaviorSubject<IUser | null>,
   ) {}
 
   ngOnInit() {
@@ -59,19 +62,26 @@ export class AuthLoginComponent implements OnInit {
       ':' +
       new Date().getSeconds();
     //навигация в меню
-    this.router.navigate(['/menu']).then((r) => r);
-    this.toastService.openToast({
-      title: 'Успех!',
-      type: ToastStatus.success,
-      description: 'Вход прошел успешно! ' + time + ' ' + 'Время сессии:1 час',
-    });
-    if (this.credForLogin.login === 'Matrix')
-      this.apiAuthService.postCurrentUser(this.credForLogin, true).subscribe();
-    else
-      this.apiAuthService.postCurrentUser(this.credForLogin, false).subscribe();
+
+
+
+    this.apiAuthService
+      .postCurrentUser(this.credForLogin, this.credForLogin.login === 'Matrix')
+      .subscribe((res) => {
+        this.currentUser$.next(res);
+        this.authToken$.next(true);
+
+        this.router.navigate(['/menu']).then((r) => r);
+        this.toastService.openToast({
+          title: 'Успех!',
+          type: ToastStatus.success,
+          description: 'Вход прошел успешно! ' + time + ' ' + 'Время сессии:1 час',
+        });
+      });
 
     //пользователь авторизован,через 45 минут вылетет предупреждение
-    this.authToken$.next(true);
+
+  //Todo service
     timer(2700000).subscribe(() => {
       this.toastService.openToast({
         title: 'Информация!',
@@ -86,10 +96,14 @@ export class AuthLoginComponent implements OnInit {
         type: ToastStatus.warning,
         description: 'Время сессии закончилось!',
       });
-      this.authToken$.next(false);
-      this.authService.getCurrentUserId().subscribe((res) => {
-        if (res) this.apiAuthService.deleteCurrentUser(res);
-      });
+
+      this.apiAuthService
+        .deleteCurrentUser((this.currentUser$.value as IUser).id as string)
+        .subscribe(() => {
+          this.authToken$.next(false);
+          this.currentUser$.next(null);
+          // this._router.navigate(['/auth']).then((r) => r);
+        });
     });
   }
 
@@ -115,6 +129,7 @@ export class AuthLoginComponent implements OnInit {
           user.password === this.credForLogin.password,
       )
     ) {
+      console.log('success')
       this.successLogin();
     }
     //если данные не прошли проверку

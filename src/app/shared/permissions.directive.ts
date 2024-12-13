@@ -1,32 +1,31 @@
-import {Directive, Input, TemplateRef, ViewContainerRef} from "@angular/core";
-import {ApiAuthService, IUser} from "../components/auth/services/api-auth.service";
-
+import {
+  Directive,
+  Inject,
+  OnInit,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
+import { IUser } from '../components';
+import { CURRENT_USER_TOKEN$ } from '../data';
+import { BehaviorSubject } from 'rxjs';
 
 @Directive({
   selector: '[appPermissions]',
   standalone: true,
 })
-export class PermissionsDirective {
-  // Условие для использования директивы
-  @Input() set appPermissions(condition:boolean) {
-    // Получите текущего пользователя и проверьте права доступа
-    this.apiAuthService.getCurrentUser().subscribe(res=>{
-      const currentUser:IUser = res[0]
-    // Управляем отображением элемента в зависимости от прав доступа
-      if (currentUser && currentUser.admin) {
-        this.viewContainer.createEmbeddedView(this.templateRef);
-      } else {
-        this.viewContainer.clear();
-      }
-    });
-
-
-
-  }
-
+export class PermissionsDirective implements OnInit {
   constructor(
-    private templateRef: TemplateRef<any>,
+    private templateRef: TemplateRef<unknown>,
     private viewContainer: ViewContainerRef,
-    private apiAuthService: ApiAuthService
+    @Inject(CURRENT_USER_TOKEN$) private currentUser$: BehaviorSubject<IUser>,
   ) {}
+
+  ngOnInit(): void {
+    // Управляем отображением элемента в зависимости от прав доступа
+    if (this.currentUser$.value.admin) {
+      this.viewContainer.createEmbeddedView(this.templateRef);
+    } else {
+      this.viewContainer.clear();
+    }
+  }
 }

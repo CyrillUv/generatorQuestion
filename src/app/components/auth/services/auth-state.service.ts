@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {PasswordComplexity} from "../../../utils/password-complexity";
 import {ApiAuthService} from "./api-auth.service";
 import {map, Observable} from "rxjs";
-interface IRestorePassword{
+export interface IRestorePassword{
   inputCredential: boolean,
   changePassword: boolean
 }
@@ -10,8 +10,7 @@ interface IRestorePassword{
 export class AuthStateService {
   //минимальная длина вводных данных в форме регистрации
   public readonly minLengthChar = 4;
-  //режим бога
-  public adminMode= false;
+
   //сложность пароля
   public passwordComplexity!: 'strong' | 'medium' | 'weak' | null;
   //флаг режима авторизации
@@ -22,19 +21,7 @@ export class AuthStateService {
     changePassword: false,
   };
 
-  constructor(private apiAuthService: ApiAuthService) {
-    this.apiAuthService.getCurrentUser().subscribe(
-      res => {
-        console.log(res)
-        if (res[0].admin ) {
-          this.adminMode = res[0].admin
-        } else {
-          this.adminMode = false;
-        }
-        this.apiAuthService.getAllUsers().subscribe()
-      }
-
-      )}
+  constructor(private apiAuthService: ApiAuthService) {}
   public getCurrentUserId(): Observable<string|null> {
     return this.apiAuthService.getCurrentUser().pipe(
       map(res => {

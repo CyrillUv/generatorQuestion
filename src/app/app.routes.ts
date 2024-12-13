@@ -4,11 +4,11 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 
 import { ActivateStatistics } from './guards/activate-statistics.guard';
 import {AuthComponent} from "./components/auth/auth.component";
-import {AuthGuard} from "./guards/auth.guard";
+import {AntiAuthGuard, AuthGuard} from "./guards/auth.guard";
 
 export const routes: Routes = [
   { path: '', component: MenuComponent,canActivate: [AuthGuard]},
-  { path: 'auth', component: AuthComponent },
+  { path: 'auth', component: AuthComponent, canActivate: [AntiAuthGuard] },
   { path: 'menu', component: MenuComponent ,canActivate: [AuthGuard]},
   {
     path: 'documents',canActivate: [AuthGuard],

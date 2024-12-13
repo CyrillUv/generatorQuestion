@@ -90,34 +90,29 @@ export class AppComponent {
       if (event instanceof NavigationStart) this.navigationType = 0;
       if (event instanceof NavigationEnd) this.navigationType = 1;
       if (event instanceof NavigationCancel) {
-        this.navigationType = 2;
-        this.toastService.openToast({
-          title: 'Перенаправление ',
-          type: ToastStatus.warning,
-          description: 'Вы будете перенаправлены на страницу авторизации',
-          timer: 5000,
-        });
-        timer(5000).subscribe(() => this.router.navigate(['/auth']));
+        // console.log('cancel')
+        // this.navigationType = 2;
+        // this.toastService.openToast({
+        //   title: 'Перенаправление ',
+        //   type: ToastStatus.warning,
+        //   description: 'Вы будете перенаправлены на страницу авторизации',
+        //   timer: 5000,
+        // });
+        // timer(5000).subscribe(() => this.router.navigate(['/auth']));
       }
       if (event instanceof NavigationError) {
-        this.navigationType = 3;
-        this.toastService.openToast({
-          title: 'Страница не найдена!',
-          type: ToastStatus.warning,
-          description: 'Вы будете перенаправлены на страницу авторизации',
-          timer: 1000,
-        });
-        timer(5000).subscribe(() => this.router.navigate(['/auth']));
+        // console.log('error')
+        // this.navigationType = 3;
+        // this.toastService.openToast({
+        //   title: 'Страница не найдена!',
+        //   type: ToastStatus.warning,
+        //   description: 'Вы будете перенаправлены на страницу авторизации',
+        //   timer: 1000,
+        // });
+        // timer(5000).subscribe(() => this.router.navigate(['/auth']));
       }
     });
 
   }
-  public logoutOfAccount(){
-    this.authService.getCurrentUserId().subscribe(res=>
-    {
-      if(res)
-        this.apiAuthService.deleteCurrentUser(res).subscribe()
-    })
 
-  }
 }

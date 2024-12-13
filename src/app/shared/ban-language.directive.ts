@@ -1,6 +1,7 @@
 import { Directive,ElementRef, Input, OnInit } from '@angular/core';
 import { debounceTime, fromEvent } from 'rxjs';
 import { Subscription } from 'rxjs/internal/Subscription';
+import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Directive({
   selector: '[appBanLanguageInputText]',
@@ -8,32 +9,27 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class BanLanguageDirective implements OnInit {
   @Input('appBanLanguageInputText') language: 'rus' | 'eng' | 'default' = 'rus';
-  @Input() delay!:number|''; // Задержка по умолчанию
+  @Input() delay = 500; // Задержка по умолчанию
 
-  private isBlocked = false;
   private subscription!: Subscription;
 
   constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
-    if(!this.delay)
-      this.delay = 500;
+    console.log(this.delay)
     this.subscription = fromEvent<KeyboardEvent>(this.el.nativeElement, 'input')
       .pipe(debounceTime(this.delay as number))
       .subscribe((event: Event) => {
         this.onInput(event);
       });
-
   }
 
   private onInput(event: Event): void {
-    if (!this.isBlocked) {
       const input = this.el.nativeElement as HTMLInputElement;
       const value = input.value;
 
       let filteredValue: string;
 
-      console.log(event)
       if (this.language === 'eng') {
         // Удаляем английские символы
         filteredValue = value.replace(/[a-zA-Z]/g, '');
@@ -50,6 +46,5 @@ export class BanLanguageDirective implements OnInit {
         // Триггерим событие input, чтобы другие обработчики могли узнать о изменении
         input.dispatchEvent(new Event('input'));
       }
-    }
   }
 }
