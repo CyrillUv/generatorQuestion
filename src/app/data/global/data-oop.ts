@@ -1,4 +1,4 @@
-import { IDataQuestion } from '../question/type';
+import { IDataQuestion } from '../question';
 
 export const dataOOP: IDataQuestion = {
   name: 'Обьектно-ориентированное программирование',

@@ -1,4 +1,4 @@
-import { IDataQuestion } from '../question/type';
+import { IDataQuestion } from '../question';
 
 export const dataLinux: IDataQuestion = {
   name: 'Linux',

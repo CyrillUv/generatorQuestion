@@ -1,4 +1,4 @@
-import { IDataQuestion } from '../question/type';
+import { IDataQuestion } from '../question';
 
 export const dataAngular: IDataQuestion = {
   name: 'Angular',

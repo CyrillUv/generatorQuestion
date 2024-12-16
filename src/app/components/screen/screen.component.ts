@@ -2,9 +2,8 @@ import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 
 import { NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ScreenService } from '../../data/screen/screen.service';
-import { IScreen } from '../../data/screen/data-screen';
-import { LoaderService } from '../custom/loader/loader.service';
+import { IScreen, ScreenService } from '../../data';
+import { LoaderService } from '../custom';
 
 @Component({
   selector: 'app-screen',

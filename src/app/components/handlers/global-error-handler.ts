@@ -1,18 +1,13 @@
-import {ErrorHandler, Injectable, NgZone} from '@angular/core';
-import { timer } from 'rxjs';
-import { Router } from '@angular/router';
-import {ToastService} from "../custom/toast/toast.service";
-import {ToastStatus} from "../custom/toast/toast.component";
-import {HttpErrorResponse} from "@angular/common/http";
+import { ErrorHandler, Injectable } from '@angular/core';
+import { ToastService, ToastStatus } from '../custom';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
-  constructor(
-    private toastService: ToastService,
-  ) {}
+  constructor(private toastService: ToastService) {}
 
   public handleError(error: any): void {
-    console.log(error)
+    console.log(error);
     if (!(error instanceof HttpErrorResponse)) {
       error = error.rejection; // get the error object
     }

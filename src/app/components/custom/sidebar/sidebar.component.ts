@@ -5,11 +5,10 @@ import {
   Input,
   OnChanges,
   Output,
-  SimpleChanges,
   TemplateRef,
 } from '@angular/core';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { MenuService } from '../../../data/menu/menu.service';
+import { MenuService } from '../../../data';
 import { sidebar } from './sidebar.animations';
 
 @Component({
@@ -31,10 +30,13 @@ export class SidebarComponent implements OnChanges {
   @Input() public triggerSidebar!: boolean | null;
   //Закрытие сайдбара
   @Output() public closingSidebarEmitter = new EventEmitter<boolean>();
-  ngOnChanges(changes: SimpleChanges): void {
+
+  ngOnChanges(): void {
     console.log('trig', this.triggerSidebar);
   }
+
   public ms = inject(MenuService);
+
   //Закрытие сайдбара
   public closingSidebar(): void {
     //Отключение режима настроек

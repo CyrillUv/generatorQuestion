@@ -3,8 +3,6 @@ import {BehaviorSubject, catchError, of} from 'rxjs';
 import { APP_INITIALIZER, Provider } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiAuthService, IUser } from './components';
-import { ToastService } from './components/custom/toast/toast.service';
-import { ToastStatus } from './components/custom/toast/toast.component';
 
 export const currentUserProvider: Provider = {
   provide: CURRENT_USER_TOKEN$,

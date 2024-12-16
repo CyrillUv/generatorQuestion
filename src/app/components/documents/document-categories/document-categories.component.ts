@@ -6,9 +6,9 @@ import { tap } from 'rxjs';
 import {
   ApiCategoriesService,
   ICategory,
-} from '../../../data/api/api-categories.service';
-import {AuthStateService} from "../../auth/services/auth-state.service";
-import {PermissionsDirective} from "../../../shared/permissions.directive";
+} from '../../../data';
+import {AuthStateService} from "../../auth";
+import {PermissionsDirective} from "../../../shared";
 
 @Component({
   selector: 'app-document-categories',

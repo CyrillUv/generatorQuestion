@@ -1,21 +1,22 @@
-import {Component, Inject, ViewContainerRef} from '@angular/core';
+import { Component, Inject, ViewContainerRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
-
-import { MenuService } from '../../data/menu/menu.service';
+import { CURRENT_USER_TOKEN$, MenuService, QuestionService } from '../../data';
 import { SidebarModule } from '../settings/sidebar.module';
-import { SettingsQuestionsComponent } from '../settings/questions/setting-questions.component';
-import { SettingTestingComponent } from '../settings/testing/setting-testing.component';
-import { ModalComponent } from '../custom/modal/modal.component';
-import { QuestionService } from '../../data/question/question.service';
-import { MultiSelectComponent } from '../custom/multi-select/multi-select.component';
-import { MyFormComponent } from '../custom/my-form/my-form.component';
-import { ToastComponent } from '../custom/toast/toast.component';
-import { LoaderComponent } from '../custom/loader/loader.component';
-import {CURRENT_USER_TOKEN$} from "../../data";
-import {BehaviorSubject} from "rxjs";
-import {IUser} from "../auth";
+import {
+  SettingsQuestionsComponent,
+  SettingTestingComponent,
+} from '../settings';
+import {
+  LoaderComponent,
+  ModalComponent,
+  MultiSelectComponent,
+  MyFormComponent,
+  ToastComponent,
+} from '../custom';
+import { BehaviorSubject } from 'rxjs';
+import { IUser } from '../auth';
 
 @Component({
   selector: 'app-menu',
@@ -54,13 +55,13 @@ export class MenuComponent {
     public ms: MenuService,
     private _qs: QuestionService,
     private _vcr: ViewContainerRef,
-    @Inject(CURRENT_USER_TOKEN$) public userToken$:BehaviorSubject<IUser>,
+    @Inject(CURRENT_USER_TOKEN$) public userToken$: BehaviorSubject<IUser>,
   ) {
     //Задание значения отображению модалки
     this.activeModal = this.ms.getActiveModal();
-    this.userToken$.subscribe(res=>{
-      console.log(res)
-    })
+    this.userToken$.subscribe((res) => {
+      console.log(res);
+    });
   }
 
   //Изменяет путь

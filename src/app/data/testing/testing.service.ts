@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IAnswer, IDataTest } from './type';
 import { dataTests } from './data-testing';
-import { of } from 'rxjs';
 
 export interface IWrongTest {
   title: string;

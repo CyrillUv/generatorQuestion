@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { MenuComponent } from './components/menu/menu.component';
-import { StatisticsComponent } from './components/statistics/statistics.component';
+import { MenuComponent } from './components';
+import { StatisticsComponent } from './components';
 
-import { ActivateStatistics } from './guards/activate-statistics.guard';
+import { ActivateStatistics } from './guards';
 import {AuthComponent} from "./components/auth/auth.component";
-import {AntiAuthGuard, AuthGuard} from "./guards/auth.guard";
+import {AntiAuthGuard, AuthGuard} from "./guards";
 
 export const routes: Routes = [
   { path: '', component: MenuComponent,canActivate: [AuthGuard]},

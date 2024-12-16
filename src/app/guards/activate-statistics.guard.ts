@@ -1,7 +1,6 @@
 import { CanActivate, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { QuestionService } from '../data/question/question.service';
-import { TestingService } from '../data/testing/testing.service';
+import { QuestionService, TestingService } from '../data';
 
 @Injectable({
   providedIn: 'root',

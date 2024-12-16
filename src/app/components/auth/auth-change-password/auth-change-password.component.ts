@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgClass, NgIf } from '@angular/common';
-import { ToastService } from '../../custom/toast/toast.service';
-import { ToastStatus } from '../../custom/toast/toast.component';
-import { BanLanguageDirective } from '../../../shared/ban-language.directive';
-import { CharsLengthPipe } from '../../../shared/chars-length-sampling.pipe';
-import { AuthStateService } from '../services/auth-state.service';
-import { ApiAuthService } from '../services/api-auth.service';
+import {BanLanguageDirective, CharsLengthPipe} from "../../../shared";
+import {ToastService, ToastStatus} from "../../custom";
+import {ApiAuthService, AuthStateService} from "../services";
+
 
 @Component({
   selector: 'app-auth-change-password',

@@ -1,4 +1,4 @@
-import { IDataQuestion } from '../question/type';
+import { IDataQuestion } from '../question';
 
 export const dataCss: IDataQuestion = {
   name: 'CSS',

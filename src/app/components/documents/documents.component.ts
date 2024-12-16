@@ -2,10 +2,9 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgForOf, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SidebarComponent } from '../custom/sidebar/sidebar.component';
-import { CategoryQuestionsComponent } from './category-questions/category-questions.component';
-import { DocumentCategoriesComponent } from './document-categories/document-categories.component';
-import { ModalComponent } from '../custom/modal/modal.component';
+import { ModalComponent, SidebarComponent } from '../custom';
+import { CategoryQuestionsComponent } from './category-questions';
+import { DocumentCategoriesComponent } from './document-categories';
 
 @Component({
   selector: 'app-documents',

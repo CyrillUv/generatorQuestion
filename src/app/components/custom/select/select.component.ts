@@ -15,7 +15,7 @@ import {
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
-import { IOptions } from '../../../data/menu/data-menu';
+import { IOptions } from '../../../data';
 
 @Component({
   selector: 'app-select',

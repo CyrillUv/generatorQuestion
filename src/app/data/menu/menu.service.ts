@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IQuestion } from '../question/type';
+import { IQuestion } from '../question';
 import { dataMenu, IOptions } from './data-menu';
 
 @Injectable({

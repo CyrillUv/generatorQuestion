@@ -15,7 +15,7 @@ import {
   FormsModule,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
-import { IOptions } from '../../../data/menu/data-menu';
+import { IOptions } from '../../../data';
 //В данном компоненте используется  NG_VALUE_ACCESSOR для изменения состояний в формах(FormGroup&ngModel)
 @Component({
   selector: 'app-multi-select',

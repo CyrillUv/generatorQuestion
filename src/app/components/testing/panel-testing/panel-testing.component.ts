@@ -7,16 +7,15 @@ import {
   NgStyle,
   NgTemplateOutlet,
 } from '@angular/common';
-import { TestingService } from '../../../data/testing/testing.service';
-import { IAnswer, IDataTest } from '../../../data/testing/type';
-import { CorrectDirective } from '../../../directive/correct.directive';
+import { IAnswer, IDataTest, MenuService, TestingService } from '../../../data';
+import { CorrectDirective } from '../../../directive';
 import { interval, Observable, of, take } from 'rxjs';
-import { TakeUntilDestroy } from '../../../shared/take-until-destroy';
-
-import { MenuService } from '../../../data/menu/menu.service';
-import { PaginatorComponent } from '../../custom/paginator/paginator.component';
-import { TimerComponent } from '../../../shared/timer.component';
-import {QuestionsTimerPipe} from "../../../shared/questions-timer.pipe";
+import {
+  QuestionsTimerPipe,
+  TakeUntilDestroy,
+  TimerComponent,
+} from '../../../shared';
+import { PaginatorComponent } from '../../custom';
 
 @Component({
   selector: 'app-panel-testing',

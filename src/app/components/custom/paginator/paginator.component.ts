@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
-import { IAnswer, IDataTest } from '../../../data/testing/type';
+import { IAnswer, IDataTest } from '../../../data';
 
 //Компонент
 @Component({

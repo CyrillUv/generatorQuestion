@@ -3,12 +3,14 @@ import { RouterLink } from '@angular/router';
 
 import { NgIf } from '@angular/common';
 
-import { TakeUntilDestroy } from '../../shared/take-until-destroy';
+import { QuestionsTimerPipe, TakeUntilDestroy } from '../../shared';
 import { interval } from 'rxjs';
-import { IQuestion, NameDataType } from '../../data/question/type';
-import { QuestionService } from '../../data/question/question.service';
-import { MenuService } from '../../data/menu/menu.service';
-import {QuestionsTimerPipe} from "../../shared/questions-timer.pipe";
+import {
+  IQuestion,
+  MenuService,
+  NameDataType,
+  QuestionService,
+} from '../../data';
 
 @Component({
   selector: 'app-questions',

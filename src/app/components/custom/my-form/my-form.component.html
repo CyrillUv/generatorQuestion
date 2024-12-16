@@ -1,0 +1,39 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name<span style="color: red">*</span>:</label>
+    <input
+      id="name"
+      [class]="
+        myForm.get('firstName')?.invalid && myForm.get('firstName')?.touched
+          ? 'form__error'
+          : ''
+      "
+      formControlName="firstName"
+    />
+    <div
+      *ngIf="
+        myForm.get('firstName')?.invalid && myForm.get('firstName')?.touched
+      "
+    >
+      Name is required.
+    </div>
+  </div>
+  <div>
+    <label for="email">Email<span style="color: red">*</span>:</label>
+    <input
+      id="email"
+      [class]="
+        myForm.get('email')?.invalid && myForm.get('email')?.touched
+          ? 'form__error'
+          : ''
+      "
+      formControlName="email"
+    />
+    <div *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched">
+      Valid email is required.
+    </div>
+  </div>
+  <button type="submit" [disabled]="myForm.invalid">Submit</button>
+  <button type="button" (click)="onFill()">Filling</button>
+  <button (click)="onReset()">Reset</button>
+</form>

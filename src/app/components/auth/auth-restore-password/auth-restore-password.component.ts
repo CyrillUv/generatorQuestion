@@ -1,24 +1,14 @@
-import {Component,  OnInit, } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-
-import { ToastStatus } from '../../custom/toast/toast.component';
-import { ToastService } from '../../custom/toast/toast.service';
-import { BanLanguageDirective } from '../../../shared/ban-language.directive';
-import { CharsLengthPipe } from '../../../shared/chars-length-sampling.pipe';
-import {ApiAuthService, IUser} from "../services/api-auth.service";
-import {AuthStateService} from "../services/auth-state.service";
-
+import { ToastService, ToastStatus } from '../../custom';
+import { BanLanguageDirective, CharsLengthPipe } from '../../../shared';
+import { ApiAuthService, AuthStateService, IUser } from '../services';
 
 @Component({
   selector: 'app-auth-restore-password',
   standalone: true,
-  imports: [
-    FormsModule,
-    NgIf,
-    BanLanguageDirective,
-    CharsLengthPipe,
-  ],
+  imports: [FormsModule, NgIf, BanLanguageDirective, CharsLengthPipe],
   templateUrl: './auth-restore-password.component.html',
   styleUrl: '../auth.component.scss',
 })

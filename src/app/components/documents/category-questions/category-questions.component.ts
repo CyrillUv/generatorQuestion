@@ -1,17 +1,10 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { IQuestionDB } from '../../../data/question/type';
-import { SidebarComponent } from '../../custom/sidebar/sidebar.component';
-import { NgIf } from '@angular/common';
-import { ModalComponent } from '../../custom/modal/modal.component';
-import {
-  ToastComponent,
-  ToastStatus,
-} from '../../custom/toast/toast.component';
-import { ToastService } from '../../custom/toast/toast.service';
-import { LoaderService } from '../../custom/loader/loader.service';
-import { ApiQuestionsService } from '../../../data/api/api-questions.service';
+import {ApiQuestionsService, IQuestionDB} from '../../../data';
+import {LoaderService, ModalComponent, SidebarComponent, ToastComponent, ToastService, ToastStatus} from "../../custom";
+import {NgIf} from "@angular/common";
+
 
 @Component({
   selector: 'app-category-questions',
@@ -259,7 +252,7 @@ export class CategoryQuestionsComponent implements OnInit {
             this.apiService.setCache(
               this.currentCategory,
               'delete',
-              <string>this.currentQuestion.id,
+              this.currentQuestion.id as string,
             );
             this.getQuestionsCurrentCategory(this.currentCategory);
           }

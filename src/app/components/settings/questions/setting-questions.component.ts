@@ -1,16 +1,19 @@
 import { Router, RouterLink } from '@angular/router';
-
 import { Component, inject, OnInit } from '@angular/core';
-
 import { NgForOf, NgIf } from '@angular/common';
-import { ToggleComponent } from '../../custom/toggle/toggle.component';
-import { SidebarComponent } from '../../custom/sidebar/sidebar.component';
-import { ModalComponent } from '../../custom/modal/modal.component';
-import { MenuService } from '../../../data/menu/menu.service';
-import { QuestionService } from '../../../data/question/question.service';
-import { IDataMenu, IOptions } from '../../../data/menu/data-menu';
-import { MultiSelectComponent } from '../../custom/multi-select/multi-select.component';
-import { SelectComponent } from '../../custom/select/select.component';
+import {
+  ModalComponent,
+  MultiSelectComponent,
+  SelectComponent,
+  SidebarComponent,
+  ToggleComponent,
+} from '../../custom';
+import {
+  IDataMenu,
+  IOptions,
+  MenuService,
+  QuestionService,
+} from '../../../data';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { timer } from 'rxjs';
 

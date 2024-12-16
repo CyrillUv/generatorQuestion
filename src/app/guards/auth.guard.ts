@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import {AUTHORIZATION_TOKEN$, CURRENT_USER_TOKEN$} from '../data';
-import {BehaviorSubject, from, Observable, of, pipe, switchMap, tap} from 'rxjs';
-import {ApiAuthService, AuthStateService, IUser} from '../components';
+import {BehaviorSubject, from, Observable, of, switchMap, tap} from 'rxjs';
+import {ApiAuthService, IUser} from '../components';
 
 @Injectable({
   providedIn: 'root',

@@ -1,5 +1,5 @@
-import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
-import {debounceTime, fromEvent, of} from "rxjs";
+import {Directive, ElementRef, Input, OnInit} from '@angular/core';
+import {debounceTime, fromEvent} from "rxjs";
 
 @Directive({
   selector: '[appInputDelay]',

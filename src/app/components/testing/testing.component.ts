@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PanelTestingComponent } from './panel-testing/panel-testing.component';
+import { PanelTestingComponent } from './panel-testing';
 
 @Component({
   selector: 'app-testing',

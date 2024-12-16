@@ -1,15 +1,16 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ToastStatus } from '../../custom/toast/toast.component';
+import { ToastService, ToastStatus } from '../../custom';
 import { Router } from '@angular/router';
-import { ToastService } from '../../custom/toast/toast.service';
 import { AUTHORIZATION_TOKEN$, CURRENT_USER_TOKEN$ } from '../../../data';
 import { BehaviorSubject, timer } from 'rxjs';
-import { BanLanguageDirective } from '../../../shared/ban-language.directive';
-import { CharsLengthPipe } from '../../../shared/chars-length-sampling.pipe';
+import {
+  BanLanguageDirective,
+  CharsLengthPipe,
+  InputDelayDirective,
+} from '../../../shared';
 import { ApiAuthService, AuthStateService, IUser } from '../services';
-import { InputDelayDirective } from '../../../shared/inputDelay.directive';
 
 @Component({
   selector: 'app-auth-login',
@@ -63,8 +64,6 @@ export class AuthLoginComponent implements OnInit {
       new Date().getSeconds();
     //навигация в меню
 
-
-
     this.apiAuthService
       .postCurrentUser(this.credForLogin, this.credForLogin.login === 'Matrix')
       .subscribe((res) => {
@@ -75,13 +74,14 @@ export class AuthLoginComponent implements OnInit {
         this.toastService.openToast({
           title: 'Успех!',
           type: ToastStatus.success,
-          description: 'Вход прошел успешно! ' + time + ' ' + 'Время сессии:1 час',
+          description:
+            'Вход прошел успешно! ' + time + ' ' + 'Время сессии:1 час',
         });
       });
 
     //пользователь авторизован,через 45 минут вылетет предупреждение
 
-  //Todo service
+    //Todo service
     timer(2700000).subscribe(() => {
       this.toastService.openToast({
         title: 'Информация!',
@@ -129,7 +129,7 @@ export class AuthLoginComponent implements OnInit {
           user.password === this.credForLogin.password,
       )
     ) {
-      console.log('success')
+      console.log('success');
       this.successLogin();
     }
     //если данные не прошли проверку

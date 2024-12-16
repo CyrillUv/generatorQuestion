@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {PasswordComplexity} from "../../../utils/password-complexity";
+import {PasswordComplexity} from "../../../utils";
 import {ApiAuthService} from "./api-auth.service";
 import {map, Observable} from "rxjs";
 export interface IRestorePassword{

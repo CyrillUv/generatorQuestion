@@ -9,18 +9,16 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import {
+  ApiAuthService,
+  AuthStateService,
+  LoaderComponent,
   ToastComponent,
-  ToastStatus,
-} from './components/custom/toast/toast.component';
-import { LoaderComponent } from './components/custom/loader/loader.component';
-import { LoadingBarComponent } from './components/custom/loader/loading-bar/loading-bar.component';
-import { ToastService } from './components/custom/toast/toast.service';
-import { timer } from 'rxjs';
+  ToastService,
+} from './components';
+import { LoadingBarComponent } from './components/custom/loader/loading-bar';
 import { AuthComponent } from './components/auth/auth.component';
-import { MenuService } from './data/menu/menu.service';
-import {MyButtonComponent} from "uga-uga-uga-32";
-import {AuthStateService} from "./components/auth/services/auth-state.service";
-import {ApiAuthService} from "./components/auth/services/api-auth.service";
+import { MenuService } from './data';
+import { MyButtonComponent } from 'uga-uga-uga-32';
 
 interface Backend {
   title: string;
@@ -81,11 +79,10 @@ export class AppComponent {
   constructor(
     public router: Router,
     private toastService: ToastService,
-    public ms: MenuService,public authService:AuthStateService,
-    public apiAuthService:ApiAuthService
+    public ms: MenuService,
+    public authService: AuthStateService,
+    public apiAuthService: ApiAuthService,
   ) {
-
-
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) this.navigationType = 0;
       if (event instanceof NavigationEnd) this.navigationType = 1;
@@ -112,7 +109,5 @@ export class AppComponent {
         // timer(5000).subscribe(() => this.router.navigate(['/auth']));
       }
     });
-
   }
-
 }

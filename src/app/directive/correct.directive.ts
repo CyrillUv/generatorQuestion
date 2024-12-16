@@ -6,7 +6,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { IAnswer } from '../data/testing/type';
+import { IAnswer } from '../data';
 
 @Directive({
   selector: '[appCorrectAnswer]',

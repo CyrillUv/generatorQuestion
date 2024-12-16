@@ -1,14 +1,9 @@
-import {Component} from '@angular/core';
-import {NgClass, NgIf} from "@angular/common";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ToastStatus} from "../../custom/toast/toast.component";
-import {ToastService} from "../../custom/toast/toast.service";
-import {BanLanguageDirective} from "../../../shared/ban-language.directive";
-import {CharsLengthPipe} from "../../../shared/chars-length-sampling.pipe";
-import {AuthStateService} from "../services/auth-state.service";
-import {ApiAuthService, IUser} from "../services/api-auth.service";
-
-
+import { Component } from '@angular/core';
+import { NgClass, NgIf } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastService, ToastStatus } from '../../custom';
+import { BanLanguageDirective, CharsLengthPipe } from '../../../shared';
+import { ApiAuthService, AuthStateService, IUser } from '../services';
 
 @Component({
   selector: 'app-auth-registration',
@@ -20,7 +15,6 @@ import {ApiAuthService, IUser} from "../services/api-auth.service";
     NgClass,
     BanLanguageDirective,
     CharsLengthPipe,
-
   ],
   templateUrl: './auth-registration.component.html',
   styleUrl: '../auth.component.scss',
@@ -32,6 +26,7 @@ export class AuthRegistrationComponent {
   public showPassword = false;
   // массив юзеров
   public allUsers!: IUser[];
+
   constructor(
     private toastService: ToastService,
     public authService: AuthStateService,
@@ -41,14 +36,17 @@ export class AuthRegistrationComponent {
       this.allUsers = res;
     });
   }
+
   //показ-скрытие пароля
   public showHiddenPassword(): void {
     this.showPassword = !this.showPassword;
   }
+
   //переход на страницу login
   public inLogin(): void {
     this.authService.setRegistration(false);
   }
+
   //регистрация пользователя
   public onRegistration(): void {
     //если поля формы заполнены и их кол-во символом отвечает требованиям,проходим в следующее условие
