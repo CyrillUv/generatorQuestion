@@ -1,9 +1,7 @@
 @if(router.url!=='/auth'){
-  <div style="display:flex;justify-content: end" routerLink="/auth">
-<!--    <button -->
-<!--      (click)="authService.enableDisableAdministratorMode(false)"-->
-<!--    >Выйти</button>-->
-    <button >Выйти</button>
+  <div class="app-panel" >
+    <img ngSrc="lifeCycle.png" routerLink="/profile" class="app-panel__avatar" priority alt="" width="50" height="50">
+    <button class="app-panel__exit" routerLink="/auth" >Выйти</button>
   </div>
 }
 <app-toast />

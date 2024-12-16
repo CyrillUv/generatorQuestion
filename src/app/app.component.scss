@@ -1,0 +1,10 @@
+.app-panel {
+  display: flex;
+  justify-content: end;
+  &__avatar{
+  border-radius: 30px;
+  }
+  &__exit,&__avatar{
+    cursor:pointer;
+  }
+}

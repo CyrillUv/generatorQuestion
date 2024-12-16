@@ -19,6 +19,7 @@ import { LoadingBarComponent } from './components/custom/loader/loading-bar';
 import { AuthComponent } from './components/auth/auth.component';
 import { MenuService } from './data';
 import { MyButtonComponent } from 'uga-uga-uga-32';
+import {NgOptimizedImage} from "@angular/common";
 
 interface Backend {
   title: string;
@@ -69,9 +70,10 @@ type CurrentEventType = 0 | 1 | 2 | 3;
     AuthComponent,
     RouterLink,
     MyButtonComponent,
+    NgOptimizedImage,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   public navigationType: CurrentEventType = 0;

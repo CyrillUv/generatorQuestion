@@ -1,0 +1,30 @@
+<div class="profile">
+  <h4 routerLink="/menu" class="profile__in-menu">← Вернуться в меню</h4>
+  <main class="profile__info">
+    <div>
+      <img >
+<!--      <input type="file"  accept="image/*" id="AddImage">-->
+      <div (click)="fileInput.click()" class="profile__info__block-avatar" >
+      <img id="blah"  ngSrc="{{imageSrc}}" (change)="onFileChange($event)" class="profile__info__avatar"
+           width="100" height="100" alt="">
+        <img src="avatar.png" width="100" height="100" alt="Edit" class="edit-icon">
+      </div>
+
+      <input type="file" accept="image/*" #fileInput (change)="onFileChange($event)" style="display: none;">
+<!--      <input type="hidden" [(ngModel)]="koef" id="koef">-->
+    </div>
+    <div class="profile__info__block">
+      <p>Никнейм: asdasdasd</p>
+      <p>Дата регистрации:qwerqwr asdsdzc</p>
+    </div>
+    <div class="profile__info__block">
+      <p>Последний визит:asdasdwqadqw</p>
+      <p>Роль:zxczxczxc</p>
+    </div>
+  </main>
+  <main>
+    <div>
+      <p>Статистика:</p>
+    </div>
+  </main>
+</div>

@@ -42,6 +42,12 @@ export const routes: Routes = [
       import('./components/questions/questions.component').then(
         (c) => c.QuestionsComponent,
       ),
+  },{
+    path: 'profile',canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./components/profile/profile.component').then(
+        (c) => c.ProfileComponent,
+      ),
   },
   { path: '**', component: MenuComponent,canActivate:[AuthGuard] },
 ];
