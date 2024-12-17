@@ -1,7 +1,11 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {RouterLink} from "@angular/router";
-import {NgIf, NgOptimizedImage} from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { NgIf, NgOptimizedImage } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ApiProfileService } from './services/api-profile.service';
+import { CURRENT_USER_TOKEN$ } from '../../data';
+import { BehaviorSubject } from 'rxjs';
+import { IProfile, IUser } from '../auth';
 
 @Component({
   selector: 'app-profile',
@@ -13,9 +17,13 @@ import {FormsModule} from "@angular/forms";
 export class ProfileComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
 
-
   public imageSrc: string | ArrayBuffer | null = null;
   public koef = 0;
+
+  constructor(
+    private apiProfileService: ApiProfileService,
+    @Inject(CURRENT_USER_TOKEN$) private currentUser$: BehaviorSubject<IUser>,
+  ) {}
 
   onFileChange(event: any) {
     const file = event.target.files[0];
@@ -27,6 +35,17 @@ export class ProfileComponent {
         const img = new Image();
         if (typeof this.imageSrc === 'string') {
           img.src = this.imageSrc;
+          console.log(img.src);
+          const { id, login, moderator, admin } = this.currentUser$.value;
+
+          const profile: IProfile = {
+            userId: id as string,
+            name: login,
+            role: admin ? 'admin' : moderator ? 'moderator' : 'user',image:img.src
+          };
+          this.apiProfileService.setProfileInCurrentUser(profile).subscribe(res=>{
+            console.log(res)
+          })
         }
 
         img.onload = () => {

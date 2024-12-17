@@ -9,6 +9,12 @@ export interface IUser {
   secretWord?: string;
   admin?:boolean;
   moderator?:boolean;
+}
+export interface IProfile{
+  id?:string;
+  userId:string
+  name: string;
+  role:'admin'|'moderator'|'user'
   image?:string
 }
 

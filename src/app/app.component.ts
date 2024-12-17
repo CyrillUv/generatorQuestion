@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {
   NavigationCancel,
   NavigationEnd,
@@ -20,6 +20,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { MenuService } from './data';
 import { MyButtonComponent } from 'uga-uga-uga-32';
 import {NgOptimizedImage} from "@angular/common";
+import {ApiProfileService} from "./components/profile/services/api-profile.service";
 
 interface Backend {
   title: string;
@@ -75,15 +76,16 @@ type CurrentEventType = 0 | 1 | 2 | 3;
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public navigationType: CurrentEventType = 0;
+  public currentUserImage = '';
 
   constructor(
     public router: Router,
     private toastService: ToastService,
     public ms: MenuService,
     public authService: AuthStateService,
-    public apiAuthService: ApiAuthService,
+    public apiProfileService: ApiProfileService,
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) this.navigationType = 0;
@@ -111,5 +113,11 @@ export class AppComponent {
         // timer(5000).subscribe(() => this.router.navigate(['/auth']));
       }
     });
+  }
+  public ngOnInit() {
+    this.apiProfileService.getProfile().subscribe((res) => {
+      if(res)
+        this.currentUserImage = res[0].image as string
+    })
   }
 }

@@ -1,6 +1,6 @@
 @if(router.url!=='/auth'){
   <div class="app-panel" >
-    <img ngSrc="lifeCycle.png" routerLink="/profile" class="app-panel__avatar" priority alt="" width="50" height="50">
+    <img src="{{currentUserImage}}" routerLink="/profile" class="app-panel__avatar" alt="" width="50" height="50">
     <button class="app-panel__exit" routerLink="/auth" >Выйти</button>
   </div>
 }
