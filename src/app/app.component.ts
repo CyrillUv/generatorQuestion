@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit} from '@angular/core';
 import {
   NavigationCancel,
   NavigationEnd,
@@ -9,18 +9,21 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import {
-  ApiAuthService,
   AuthStateService,
+  IProfile,
+  IUser,
   LoaderComponent,
   ToastComponent,
   ToastService,
 } from './components';
 import { LoadingBarComponent } from './components/custom/loader/loading-bar';
 import { AuthComponent } from './components/auth/auth.component';
-import { MenuService } from './data';
+import { AUTHORIZATION_TOKEN$, CURRENT_USER_TOKEN$, MenuService } from './data';
 import { MyButtonComponent } from 'uga-uga-uga-32';
-import {NgOptimizedImage} from "@angular/common";
-import {ApiProfileService} from "./components/profile/services/api-profile.service";
+import {AsyncPipe, NgOptimizedImage} from '@angular/common';
+import { ApiProfileService } from './components/profile/services/api-profile.service';
+import { ProfileStateService } from './components/profile/services/profile-state.service';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 interface Backend {
   title: string;
@@ -72,20 +75,27 @@ type CurrentEventType = 0 | 1 | 2 | 3;
     RouterLink,
     MyButtonComponent,
     NgOptimizedImage,
+    AsyncPipe,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   public navigationType: CurrentEventType = 0;
-  public currentUserImage = '';
+
+  public get currentProfile$(): Observable<IProfile | null> {
+    return this._profileStateService.profile$;
+  };
 
   constructor(
     public router: Router,
-    private toastService: ToastService,
     public ms: MenuService,
     public authService: AuthStateService,
     public apiProfileService: ApiProfileService,
+    private _toastService: ToastService,
+    private _profileStateService: ProfileStateService,
+    @Inject(AUTHORIZATION_TOKEN$) private _auth$: BehaviorSubject<boolean>,
+    @Inject(CURRENT_USER_TOKEN$) private _currentUser$: BehaviorSubject<IUser>,
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) this.navigationType = 0;
@@ -93,7 +103,7 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationCancel) {
         // console.log('cancel')
         // this.navigationType = 2;
-        // this.toastService.openToast({
+        // this._toastService.openToast({
         //   title: 'Перенаправление ',
         //   type: ToastStatus.warning,
         //   description: 'Вы будете перенаправлены на страницу авторизации',
@@ -104,7 +114,7 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationError) {
         // console.log('error')
         // this.navigationType = 3;
-        // this.toastService.openToast({
+        // this._toastService.openToast({
         //   title: 'Страница не найдена!',
         //   type: ToastStatus.warning,
         //   description: 'Вы будете перенаправлены на страницу авторизации',
@@ -114,10 +124,25 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
   public ngOnInit() {
-    this.apiProfileService.getProfile().subscribe((res) => {
-      if(res)
-        this.currentUserImage = res[0].image as string
-    })
+    if (this._auth$.value) {
+      this.apiProfileService.getProfile().subscribe((res) => {
+        if (res && res.length) {
+          const currentProfile: IProfile | undefined = res.find(
+            (el) => el.userId === this._currentUser$.value.id,
+          );
+          console.log(this._currentUser$.value)
+          console.log(res)
+          if (currentProfile) {
+            this._profileStateService.profile$.next(currentProfile);
+          }
+        }
+      });
+    }
+  }
+
+  public ngAfterViewInit() {
+    this._toastService.openToast();
   }
 }

@@ -7,6 +7,26 @@
       color:white;
     }
   }
+  &__icons{
+    display: flex;
+    flex-direction: column;
+    &__block-icon{
+      margin: 5px;
+      padding: 5px;
+      &:hover,&--active{
+        background: #4e99c9;
+      }
+    }
+    &__store{
+      display: flex;
+
+      flex-direction: row;
+      flex-wrap: wrap;
+      background: #4b4747;
+      justify-content: space-between;
+
+    }
+  }
   &__info{
     display: flex;
     justify-content: space-around;
@@ -23,7 +43,6 @@
     border-radius: 60px;
     border:3px #4e99c9 solid;
     }
-
     &__block-avatar:hover .edit-icon {
       display: block; /* Показываем иконку при наведении на контейнер */
       cursor: pointer;

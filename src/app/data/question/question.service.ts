@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { dataQuestion } from './data-question';
-import { IDataQuestion, IQuestion, NameDataType } from './type';
-import { IOptions } from '../menu';
+import {Injectable} from '@angular/core';
+import {dataQuestion} from './data-question';
+import {IDataQuestion, IQuestion, NameDataType} from './type';
+import {IOptions} from '../menu';
 
 @Injectable({
   providedIn: 'root',
@@ -87,10 +87,12 @@ export class QuestionService {
     //присваивание значения сервисной переменной
     this.allQuestions = newArray;
   }
+
   public getDocuments(category: NameDataType) {
     return (this._data.find((obj) => obj.name === category) as IDataQuestion)
       .questions;
   }
+
   //Получение вопросов по категориям и уровням
   public getQuestions(): IDataQuestion[] {
     // Если хоть одна категория выбрана

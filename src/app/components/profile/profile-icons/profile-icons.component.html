@@ -1,0 +1,11 @@
+<div class="profile">
+  <main class="profile__icons">
+    <h3>Выберите иконку профиля</h3>
+    <main  class="profile__icons__store" >
+      @for( icon of icons;track icon.id){
+        <app-profile-icon [class.profile__icons__block-icon--active]="selectedIcon===icon" [src]="icon.src"  />
+      }
+      <button>Сохранить</button>
+    </main>
+  </main>
+</div>

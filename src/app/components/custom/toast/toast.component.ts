@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {combineLatest, tap, timer} from 'rxjs';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {combineLatest, distinctUntilKeyChanged, startWith, tap, timer} from 'rxjs';
 import { ToastStateService } from './toast-state.service';
 
 export enum ToastStatus {
@@ -24,14 +24,18 @@ export class ToastComponent implements OnInit {
     title: 'Success',
     type: ToastStatus.success,
     description: 'Message Content',
-    timer: 0,
+    timer: 3000,
   };
 
-  constructor(private toastService: ToastStateService) {}
+  constructor(private toastService: ToastStateService,
+              private cdRef: ChangeDetectorRef
+              ) {}
 
   ngOnInit(): void {
-    combineLatest([this.toastService.activeToast$,
-      this.toastService.changeConfig$]).subscribe(([v, conf]) => {
+    combineLatest([
+      this.toastService.activeToast$,
+      this.toastService.changeConfig$.pipe(startWith(this.settings))
+    ]).subscribe(([v, conf]) => {
       //активация тоста
       this.activeToast = v;
       //если тост активирован, он покажется и убирется через заданное время
@@ -41,6 +45,7 @@ export class ToastComponent implements OnInit {
       if (conf) {
         this.settings = { ...this.settings, ...conf };
       }
+      this.cdRef.detectChanges();
     })
   }
   //закрытие тоста

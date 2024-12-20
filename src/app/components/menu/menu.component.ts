@@ -68,7 +68,6 @@ export class MenuComponent {
   public changeRoute(route: '/questions' | '/testing') {
     //изменяет путь в сервисе
     this.ms.setRoute(route);
-
     //активирует режим настроек
     this.ms.setSettingMode(true);
     //предотвращение накладывания сайдбаров

@@ -11,11 +11,13 @@ export class ToastService {
       //изменение настроек тоста
       this.toastStateService.changeConfig$.next(config);
     }
+    console.log(1)
     //активация тоста
     this._activeToast();
   }
   //активация тоста
   private _activeToast(): void {
+    console.log(2)
     this.toastStateService.activeToast$.next(true);
   }
 }

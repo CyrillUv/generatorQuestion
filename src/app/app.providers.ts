@@ -1,8 +1,12 @@
-import { AUTHORIZATION_TOKEN$, CURRENT_USER_TOKEN$ } from './data';
-import {BehaviorSubject, catchError, of} from 'rxjs';
+import {
+  AUTHORIZATION_TOKEN$,
+  CURRENT_USER_TOKEN$,
+} from './data';
+import { BehaviorSubject, catchError, of } from 'rxjs';
 import { APP_INITIALIZER, Provider } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiAuthService, IUser } from './components';
+import { ApiProfileService } from './components/profile/services/api-profile.service';
 
 export const currentUserProvider: Provider = {
   provide: CURRENT_USER_TOKEN$,
@@ -13,6 +17,8 @@ export const authProvider: Provider = {
   provide: AUTHORIZATION_TOKEN$,
   useValue: new BehaviorSubject(false),
 };
+
+
 export const initializerProvider: Provider = {
   provide: APP_INITIALIZER,
   useFactory: (
@@ -36,7 +42,6 @@ export const initializerProvider: Provider = {
               currentUser.next(users[0]);
               autorized.next(true);
               resolve();
-              console.log('if', users);
             } else {
               // Если пользователь не найден, перенаправляем его на /auth
               _router.navigate(['/auth']).then(() => resolve());
@@ -50,6 +55,7 @@ export const initializerProvider: Provider = {
     AUTHORIZATION_TOKEN$,
     Router,
     ApiAuthService,
+    ApiProfileService,
   ],
   multi: true,
 };
@@ -57,5 +63,6 @@ export const initializerProvider: Provider = {
 export const appProvider: Provider[] = [
   currentUserProvider,
   authProvider,
+
   initializerProvider,
 ];

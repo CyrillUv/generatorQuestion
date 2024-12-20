@@ -14,7 +14,13 @@ export class ApiProfileService {
   public getProfile(): Observable<IProfile[]>{
     return this.http.get<IProfile[]>(`${this.profileUrl}`)
   }
-  public setProfileInCurrentUser(body: IProfile): Observable<IProfile> {
+  public getProfileInCurrentUser(id:string): Observable<IProfile>{
+    return this.http.get<IProfile>(`${this.profileUrl}/${id}`)
+  }
+  public postProfileInCurrentUser(body: IProfile): Observable<IProfile> {
     return this.http.post<IProfile>(`${this.profileUrl}`, body);
+  }
+  public patchProfileInCurrentUser(id: string, image: string): Observable<IProfile> {
+    return this.http.patch<IProfile>(`${this.profileUrl}/${id}`, { image });
   }
 }
