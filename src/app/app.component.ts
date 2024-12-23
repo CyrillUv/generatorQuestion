@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Inject, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnChanges, OnInit} from '@angular/core';
 import {
   NavigationCancel,
   NavigationEnd,
@@ -14,7 +14,7 @@ import {
   IUser,
   LoaderComponent,
   ToastComponent,
-  ToastService,
+  ToastService, ToastStatus,
 } from './components';
 import { LoadingBarComponent } from './components/custom/loader/loading-bar';
 import { AuthComponent } from './components/auth/auth.component';
@@ -23,7 +23,7 @@ import { MyButtonComponent } from 'uga-uga-uga-32';
 import {AsyncPipe, NgOptimizedImage} from '@angular/common';
 import { ApiProfileService } from './components/profile/services/api-profile.service';
 import { ProfileStateService } from './components/profile/services/profile-state.service';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, timer} from 'rxjs';
 
 interface Backend {
   title: string;
@@ -101,40 +101,44 @@ export class AppComponent implements OnInit, AfterViewInit {
       if (event instanceof NavigationStart) this.navigationType = 0;
       if (event instanceof NavigationEnd) this.navigationType = 1;
       if (event instanceof NavigationCancel) {
-        // console.log('cancel')
-        // this.navigationType = 2;
-        // this._toastService.openToast({
-        //   title: 'Перенаправление ',
-        //   type: ToastStatus.warning,
-        //   description: 'Вы будете перенаправлены на страницу авторизации',
-        //   timer: 5000,
-        // });
-        // timer(5000).subscribe(() => this.router.navigate(['/auth']));
+        this.navigationType = 2;
+        this._toastService.openToast({
+          title: 'Перенаправление ',
+          type: ToastStatus.warning,
+          description: 'Вы будете перенаправлены на страницу авторизации',
+          timer: 5000,
+        });
+        timer(5000).subscribe(() => this.router.navigate(['/auth']));
       }
       if (event instanceof NavigationError) {
-        // console.log('error')
-        // this.navigationType = 3;
-        // this._toastService.openToast({
-        //   title: 'Страница не найдена!',
-        //   type: ToastStatus.warning,
-        //   description: 'Вы будете перенаправлены на страницу авторизации',
-        //   timer: 1000,
-        // });
-        // timer(5000).subscribe(() => this.router.navigate(['/auth']));
+        this.navigationType = 3;
+        this._toastService.openToast({
+          title: 'Страница не найдена!',
+          type: ToastStatus.warning,
+          description: 'Вы будете перенаправлены на страницу авторизации',
+          timer: 1000,
+        });
+        timer(5000).subscribe(() => this.router.navigate(['/auth']));
       }
     });
   }
 
-  public ngOnInit() {
+   ngOnInit() {
+
     if (this._auth$.value) {
+
       this.apiProfileService.getProfile().subscribe((res) => {
         if (res && res.length) {
+          console.log(res.map(e=>e.userId))
+          console.log( this._currentUser$.value.id)
           const currentProfile: IProfile | undefined = res.find(
-            (el) => el.userId === this._currentUser$.value.id,
+            (el) =>
+              el.userId === this._currentUser$.value.id,
           );
-          console.log(this._currentUser$.value)
-          console.log(res)
+
           if (currentProfile) {
+            console.log(currentProfile)
+
             this._profileStateService.profile$.next(currentProfile);
           }
         }

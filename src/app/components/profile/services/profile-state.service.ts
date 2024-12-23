@@ -28,6 +28,7 @@ export class ProfileStateService {
   }
 
   public setProfileIcon(value: IIcon): void {
+    console.log(value)
     this.profileIcon = value;
   }
 }

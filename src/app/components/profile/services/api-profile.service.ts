@@ -20,7 +20,7 @@ export class ApiProfileService {
   public postProfileInCurrentUser(body: IProfile): Observable<IProfile> {
     return this.http.post<IProfile>(`${this.profileUrl}`, body);
   }
-  public patchProfileInCurrentUser(id: string, image: string): Observable<IProfile> {
-    return this.http.patch<IProfile>(`${this.profileUrl}/${id}`, { image });
+  public patchProfileInCurrentUser(userId: string, image: string): Observable<IProfile> {
+    return this.http.patch<IProfile>(`${this.profileUrl}/${userId}`, { image });
   }
 }

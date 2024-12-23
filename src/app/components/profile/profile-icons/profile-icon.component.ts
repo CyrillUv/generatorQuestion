@@ -1,17 +1,15 @@
-import {Component, Input} from "@angular/core";
-import {ProfileStateService} from "../services/profile-state.service";
+import {Component, Input, OnInit} from "@angular/core";
+import {IIcon, ProfileStateService} from "../services/profile-state.service";
+import {AsyncPipe} from "@angular/common";
 
 @Component({
-  selector: "app-profile-icon",
-  standalone:true,
-  templateUrl:'profile-icon.component.html',
-  styleUrl: "../profile.component.scss"
+  selector: 'app-profile-icon',
+  standalone: true,
+  templateUrl: 'profile-icon.component.html',
+  imports: [AsyncPipe],
+  styleUrl: '../profile.component.scss',
 })
-
 export class ProfileIconComponent {
-  @Input() public src!:string;
-  @Input() public activeIcon!:boolean;
-  constructor(public profileService:ProfileStateService) {
-
-  }
+  @Input() public icon!: IIcon;
+  constructor(public profileService: ProfileStateService) {}
 }

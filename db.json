@@ -2,10 +2,10 @@
   "profile": [
     {
       "id": "921s",
-      "userId": "2f2b",
+      "userId": "0eed",
       "name": "Matrix",
       "role": "admin",
-      "image": "setter.png"
+      "image": "avatar.png"
     }
   ],
   "users": [
@@ -24,11 +24,20 @@
       "secretWord": "black",
       "admin": true,
       "moderator": false
+    },
+    {
+      "id": "488b",
+      "login": "Jopashnik",
+      "password": "alaBama1",
+      "secretWord": "hui",
+      "admin": false,
+      "moderator": false,
+      "image": ""
     }
   ],
   "current-user": [
     {
-      "id": "2f2b",
+      "id": "0eed",
       "login": "Matrix",
       "password": "",
       "admin": true,

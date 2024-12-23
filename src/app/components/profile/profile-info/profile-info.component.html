@@ -3,8 +3,8 @@
   <div>
     <img >
     <div class="profile__info__block-avatar" (click)="profileService.setIconSelection(true)"  >
-      @if (imageSrc){
-        <img id="blah"  ngSrc="{{imageSrc}}"  class="profile__info__avatar"
+      @if (profileService.profile$){
+        <img id="blah" src="{{(profileService.profile$|async)?.image}}" class="profile__info__avatar"
              width="100" height="100" alt="">
         <img src="avatar.png" width="100" height="100" alt="Edit" class="edit-icon">
       }

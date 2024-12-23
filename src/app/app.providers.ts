@@ -29,6 +29,7 @@ export const initializerProvider: Provider = {
   ) => {
     return () => {
       return new Promise<void>((resolve) => {
+
         apiAuthService
           .getCurrentUser()
           .pipe(
