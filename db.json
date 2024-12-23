@@ -1,11 +1,123 @@
 {
   "profile": [
     {
-      "id": "921s",
-      "userId": "0eed",
+      "id": "623a",
+      "image": "screen.png",
       "name": "Matrix",
-      "role": "admin",
-      "image": "avatar.png"
+      "role": "user",
+      "userId": "5373"
+    },
+    {
+      "id": "1e10",
+      "image": "screen.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "bf50"
+    },
+    {
+      "id": "8d4b",
+      "image": "screen.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "5b89"
+    },
+    {
+      "id": "ec38",
+      "image": "screen.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "c229"
+    },
+    {
+      "id": "1bc2",
+      "image": "screen.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "c229"
+    },
+    {
+      "id": "27d1",
+      "image": "pipe.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "c229"
+    },
+    {
+      "id": "a5e9",
+      "image": "pipe.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "c229"
+    },
+    {
+      "id": "8412",
+      "image": "screen.png",
+      "name": "Machina",
+      "role": "user",
+      "userId": "9898"
+    },
+    {
+      "id": "1b38",
+      "image": "setter.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "d301"
+    },
+    {
+      "id": "3aef",
+      "image": "setter.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "f5fa"
+    },
+    {
+      "id": "24e9",
+      "image": "screen.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "02db"
+    },
+    {
+      "id": "7da5",
+      "image": "screen.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "02db"
+    },
+    {
+      "id": "db74",
+      "image": "screen.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "02db"
+    },
+    {
+      "id": "48eb",
+      "image": "screen.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "02db"
+    },
+    {
+      "id": "a783",
+      "image": "pipe.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "02db"
+    },
+    {
+      "id": "8064",
+      "image": "lifeCycle2.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "b00f"
+    },
+    {
+      "id": "bba0",
+      "image": "canActivate.png",
+      "name": "Matrix",
+      "role": "user",
+      "userId": "1fa6"
     }
   ],
   "users": [
@@ -35,16 +147,7 @@
       "image": ""
     }
   ],
-  "current-user": [
-    {
-      "id": "0eed",
-      "login": "Matrix",
-      "password": "",
-      "admin": true,
-      "moderator": false,
-      "image": ""
-    }
-  ],
+  "current-user": [],
   "data-struct": [],
   "oop": [],
   "testing": [

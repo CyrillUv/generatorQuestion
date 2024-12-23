@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {IIcon, ProfileStateService} from "../services/profile-state.service";
-import {AsyncPipe} from "@angular/common";
+import { Component, Input } from '@angular/core';
+import { IIcon, ProfileStateService } from '../services/profile-state.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile-icon',
@@ -11,5 +11,6 @@ import {AsyncPipe} from "@angular/common";
 })
 export class ProfileIconComponent {
   @Input() public icon!: IIcon;
+
   constructor(public profileService: ProfileStateService) {}
 }

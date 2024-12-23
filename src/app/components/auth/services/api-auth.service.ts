@@ -42,7 +42,10 @@ export class ApiAuthService {
     return this.http.get<IUser[]>(`${this._currentUserUrl}`);
   }
   //добавление текущего пользователя
-  public postCurrentUser(user:IUser,permission:boolean):Observable<ICurrentUser>{
+  public postCurrentUser(user:IUser,permission:boolean,userId?:string):Observable<ICurrentUser>{
+    if(userId){
+      return this.http.post<ICurrentUser>(`${this._currentUserUrl}`,{...user,userId:userId,admin:permission,moderator:false,image:''});
+    }
     return this.http.post<ICurrentUser>(`${this._currentUserUrl}`,{...user,admin:permission,moderator:false,image:''});
   }
   //добавление пользователя

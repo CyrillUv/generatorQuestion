@@ -54,6 +54,7 @@ export class AuthRestorePasswordComponent implements OnInit {
           user.login === this.credForRestorePassword.login &&
           user.secretWord === this.credForRestorePassword.secretWord,
       );
+      if(user)
       this.apiAuthService.postCurrentUser(user as IUser, false).subscribe();
       //переходим к изменению пароля
       this.authService.setChangePassword(true);

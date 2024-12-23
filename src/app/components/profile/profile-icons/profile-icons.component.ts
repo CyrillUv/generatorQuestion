@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ProfileIconComponent } from './profile-icon.component';
 import { NgForOf } from '@angular/common';
 import { IIcon, ProfileStateService } from '../services/profile-state.service';
-import {ApiProfileService} from "../services/api-profile.service";
+import { ApiProfileService } from '../services/api-profile.service';
+import { CURRENT_USER_TOKEN$ } from '../../../data';
+import { BehaviorSubject } from 'rxjs';
+import { ICurrentUser } from '../../auth';
 
 @Component({
   selector: 'app-profile-icons',
@@ -26,19 +29,44 @@ export class ProfileIconsComponent {
     { id: 10, src: 'avatar.png' },
   ];
 
-  constructor(public profileService:ProfileStateService,private apiProfileService:ApiProfileService) {
-  }
-
+  constructor(
+    public profileService: ProfileStateService,
+    private apiProfileService: ApiProfileService,
+    @Inject(CURRENT_USER_TOKEN$)
+    private currentUser$: BehaviorSubject<ICurrentUser>,
+  ) {}
 
   public setProfileIcon(icon: IIcon) {
-    console.log(this.profileService.profile$.value);
-    this.apiProfileService.patchProfileInCurrentUser(this.profileService.profile$.value?.id as string, icon.src).subscribe(response => {
-      // Обновите локальное состояние профиля
-      if(this.profileService.profile$.value)
-      this.profileService.profile$.next({
-        ...this.profileService.profile$.value,
-        image: icon.src
-      });
-    });
+    if (this.profileService.profile$.value?.id) {
+      this.apiProfileService
+        .patchProfileInCurrentUser(
+          this.profileService.profile$.value?.id as string,
+          icon.src,
+        )
+        .subscribe(() => {
+          // Обновите локальное состояние профиля
+          if (this.profileService.profile$.value)
+            this.profileService.profile$.next({
+              ...this.profileService.profile$.value,
+              image: icon.src,
+            });
+        });
+    } else {
+      this.apiProfileService
+        .postProfileInCurrentUser({
+          image: icon.src,
+          name: this.currentUser$.value.login,
+          role: 'user',
+          userId: this.currentUser$.value.id as string
+        })
+        .subscribe((res) => {
+            if (!this.profileService.profile$.value) {
+              this.profileService.profile$.next(
+                res
+                // Обновите другие поля, если это необходимо
+              );
+            }
+          });
+    }
   }
 }
