@@ -4,13 +4,21 @@ import { FormsModule } from '@angular/forms';
 import { ToastService, ToastStatus } from '../../custom';
 import { Router } from '@angular/router';
 import { AUTHORIZATION_TOKEN$, CURRENT_USER_TOKEN$ } from '../../../data';
-import { BehaviorSubject, timer } from 'rxjs';
+import { BehaviorSubject, switchMap, tap, timer } from 'rxjs';
 import {
   BanLanguageDirective,
   CharsLengthPipe,
   InputDelayDirective,
 } from '../../../shared';
-import { ApiAuthService, AuthStateService, IUser } from '../services';
+import {
+  ApiAuthService,
+  AuthStateService,
+  ICurrentUser,
+  IProfile,
+  IUser,
+} from '../services';
+import { ApiProfileService } from '../../profile/services/api-profile.service';
+import { ProfileStateService } from '../../profile/services/profile-state.service';
 
 @Component({
   selector: 'app-auth-login',
@@ -36,15 +44,17 @@ export class AuthLoginComponent implements OnInit {
     private router: Router,
     public authService: AuthStateService,
     private toastService: ToastService,
-    private apiAuthService: ApiAuthService,
+    private _apiAuthService: ApiAuthService,
     @Inject(AUTHORIZATION_TOKEN$) private authToken$: BehaviorSubject<boolean>,
     @Inject(CURRENT_USER_TOKEN$)
-    private currentUser$: BehaviorSubject<IUser | null>,
+    private _currentUser$: BehaviorSubject<ICurrentUser | null>,
+    private _apiProfileService: ApiProfileService,
+    private _profileStateService: ProfileStateService,
   ) {}
 
-  ngOnInit() {
+  ngOnInit()   {
     //получение юзеров
-    this.apiAuthService.getAllUsers().subscribe((res) => {
+    this._apiAuthService.getAllUsers().subscribe((res) => {
       this.allUsers = res;
     });
   }
@@ -54,28 +64,41 @@ export class AuthLoginComponent implements OnInit {
   }
 
   //успешно пройденная логинизация
-  public successLogin(): void {
-    //время для показа в тосте
-    const time =
-      new Date().getHours() +
-      ':' +
-      new Date().getMinutes() +
-      ':' +
-      new Date().getSeconds();
-    //навигация в меню
+  public successLogin(userId: string): void {
+    this._apiAuthService
+      .postCurrentUser(
+        this.credForLogin,
+        this.credForLogin.login === 'Matrix',
+        userId,
+      )
+      .pipe(
+        tap((currentUser) => {
+          this._currentUser$.next(currentUser);
+          this.authToken$.next(true);
+        }),
+        switchMap(() => this._apiProfileService.getProfile()),
+      )
+      .subscribe((profiles) => {
+        if (profiles && profiles.length) {
+          const currentProfile: IProfile | undefined = profiles.find(
+            (el) =>
+              el.userId === (this._currentUser$.value as ICurrentUser).userId,
+          );
 
-    this.apiAuthService
-      .postCurrentUser(this.credForLogin, this.credForLogin.login === 'Matrix')
-      .subscribe((res) => {
-        this.currentUser$.next(res);
-        this.authToken$.next(true);
+          if (currentProfile) {
+            this._profileStateService.profile$.next(currentProfile);
+          }
+        }
 
         this.router.navigate(['/menu']).then((r) => r);
         this.toastService.openToast({
           title: 'Успех!',
           type: ToastStatus.success,
           description:
-            'Вход прошел успешно! ' + time + ' ' + 'Время сессии:1 час',
+            'Вход прошел успешно! ' +
+            this.getTime() +
+            ' ' +
+            'Время сессии:1 час',
         });
       });
 
@@ -97,14 +120,25 @@ export class AuthLoginComponent implements OnInit {
         description: 'Время сессии закончилось!',
       });
 
-      this.apiAuthService
-        .deleteCurrentUser((this.currentUser$.value as IUser).id as string)
+      this._apiAuthService
+        .deleteCurrentUser((this._currentUser$.value as IUser).id as string)
         .subscribe(() => {
           this.authToken$.next(false);
-          this.currentUser$.next(null);
+          this._currentUser$.next(null);
           // this._router.navigate(['/auth']).then((r) => r);
         });
     });
+  }
+
+  private getTime(): string {
+    //время для показа в тосте
+    return (
+      new Date().getHours() +
+      ':' +
+      new Date().getMinutes() +
+      ':' +
+      new Date().getSeconds()
+    );
   }
 
   //логинизация пользователя
@@ -129,8 +163,10 @@ export class AuthLoginComponent implements OnInit {
           user.password === this.credForLogin.password,
       )
     ) {
-      console.log('success');
-      this.successLogin();
+      const currentUser = this.allUsers.find(
+        (el) => el.login === this.credForLogin.login,
+      ) as IUser;
+      this.successLogin(currentUser.id as string);
     }
     //если данные не прошли проверку
     else {

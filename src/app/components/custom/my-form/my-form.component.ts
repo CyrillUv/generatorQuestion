@@ -41,7 +41,6 @@ export class MyFormComponent implements OnInit {
   }
   public onSubmit(): void {
     if (this.myForm.valid) {
-      console.log(this.myForm.value);
     }
   }
 }

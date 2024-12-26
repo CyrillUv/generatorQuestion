@@ -60,7 +60,6 @@ export class MenuComponent {
     //Задание значения отображению модалки
     this.activeModal = this.ms.getActiveModal();
     this.userToken$.subscribe((res) => {
-      console.log(res);
     });
   }
 

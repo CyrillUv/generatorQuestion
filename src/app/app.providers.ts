@@ -5,8 +5,7 @@ import {
 import { BehaviorSubject, catchError, of } from 'rxjs';
 import { APP_INITIALIZER, Provider } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiAuthService, IUser } from './components';
-import { ApiProfileService } from './components/profile/services/api-profile.service';
+import { ApiAuthService, IProfile, IUser } from './components';
 
 export const currentUserProvider: Provider = {
   provide: CURRENT_USER_TOKEN$,
@@ -18,18 +17,16 @@ export const authProvider: Provider = {
   useValue: new BehaviorSubject(false),
 };
 
-
 export const initializerProvider: Provider = {
   provide: APP_INITIALIZER,
   useFactory: (
     currentUser: BehaviorSubject<IUser>,
-    autorized: BehaviorSubject<boolean>,
+    authorized: BehaviorSubject<boolean>,
     _router: Router,
     apiAuthService: ApiAuthService,
   ) => {
     return () => {
       return new Promise<void>((resolve) => {
-
         apiAuthService
           .getCurrentUser()
           .pipe(
@@ -37,11 +34,14 @@ export const initializerProvider: Provider = {
               return of([]);
             }),
           )
-          .subscribe((users) => {
-            if (users && users.length > 0) {
+          .subscribe((currentUsers) => {
+            if (currentUsers && currentUsers.length > 0) {
+              const currUser = currentUsers[0];
+
               // Если текущий пользователь найден, просто разрешаем Promise.
-              currentUser.next(users[0]);
-              autorized.next(true);
+              currentUser.next(currUser);
+              authorized.next(true);
+
               resolve();
             } else {
               // Если пользователь не найден, перенаправляем его на /auth
@@ -51,19 +51,12 @@ export const initializerProvider: Provider = {
       });
     };
   },
-  deps: [
-    CURRENT_USER_TOKEN$,
-    AUTHORIZATION_TOKEN$,
-    Router,
-    ApiAuthService,
-    ApiProfileService,
-  ],
+  deps: [CURRENT_USER_TOKEN$, AUTHORIZATION_TOKEN$, Router, ApiAuthService],
   multi: true,
 };
 
 export const appProvider: Provider[] = [
   currentUserProvider,
   authProvider,
-
   initializerProvider,
 ];

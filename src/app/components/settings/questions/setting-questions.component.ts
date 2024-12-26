@@ -172,7 +172,6 @@ export class SettingsQuestionsComponent implements OnInit {
   }
 
   public modelsChange() {
-    console.log(this.models);
   }
 
   public fillingModels() {

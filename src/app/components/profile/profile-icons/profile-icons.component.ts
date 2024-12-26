@@ -38,35 +38,35 @@ export class ProfileIconsComponent {
 
   public setProfileIcon(icon: IIcon) {
     if (this.profileService.profile$.value?.id) {
-      this.apiProfileService
-        .patchProfileInCurrentUser(
-          this.profileService.profile$.value?.id as string,
-          icon.src,
-        )
-        .subscribe(() => {
-          // Обновите локальное состояние профиля
-          if (this.profileService.profile$.value)
-            this.profileService.profile$.next({
-              ...this.profileService.profile$.value,
-              image: icon.src,
-            });
-        });
-    } else {
-      this.apiProfileService
-        .postProfileInCurrentUser({
-          image: icon.src,
-          name: this.currentUser$.value.login,
-          role: 'user',
-          userId: this.currentUser$.value.id as string
-        })
-        .subscribe((res) => {
-            if (!this.profileService.profile$.value) {
-              this.profileService.profile$.next(
-                res
-                // Обновите другие поля, если это необходимо
-              );
-            }
+      // Профиль существует, обновляем его
+      this.apiProfileService.patchProfileInCurrentUser(
+        this.profileService.profile$.value.id as string,
+        icon.src
+      ).subscribe(() => {
+        const currentProfile = this.profileService.profile$.value;
+        if (currentProfile) {
+          this.profileService.profile$.next({
+            ...currentProfile,
+            userId: this.currentUser$.value.userId as string,
+            image: icon.src,
           });
+        }
+      });
+    } else{
+      // Если профиль не существует, создаем новый профиль
+      this.apiProfileService.postProfileInCurrentUser({
+        image: icon.src,
+        name: this.currentUser$.value.login,
+        role: 'user',
+        userId: this.currentUser$.value.userId as string
+      }).subscribe((res) => {
+        // if (!this.profileService.profile$.value) {
+        //   console.log('Текущий профиль:', this.profileService.profile$.value);
+          this.profileService.profile$.next(res);
+        console.log(this.profileService.profile$.value)
+         // console.log('Текущий профиль:', this.profileService.profile$.value);
+        // }
+      });
     }
   }
 }

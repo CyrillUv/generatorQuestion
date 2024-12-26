@@ -10,7 +10,7 @@ export interface IUser {
   admin?:boolean;
   moderator?:boolean;
 }
-export interface ICurrentUser extends IUser{
+export interface ICurrentUser extends IUser {
   userId:string;
 }
 export interface IProfile{
@@ -38,16 +38,14 @@ export class ApiAuthService {
   public getUser(id:string):Observable<IUser>{
     return this.http.get<IUser>(`${this._usersUrl}/${id}`);
   }
-  public getCurrentUser():Observable<IUser[]>{
-    return this.http.get<IUser[]>(`${this._currentUserUrl}`);
+  public getCurrentUser():Observable<ICurrentUser[]>{
+    return this.http.get<ICurrentUser[]>(`${this._currentUserUrl}`);
   }
   //добавление текущего пользователя
-  public postCurrentUser(user:IUser,permission:boolean,userId?:string):Observable<ICurrentUser>{
-    if(userId){
-      return this.http.post<ICurrentUser>(`${this._currentUserUrl}`,{...user,userId:userId,admin:permission,moderator:false,image:''});
+  public postCurrentUser(user:IUser,permission:boolean,userId:string):Observable<ICurrentUser>{
+      return this.http.post<ICurrentUser>(`${this._currentUserUrl}`,
+        {...user,userId,admin:permission,moderator:false,image:''});
     }
-    return this.http.post<ICurrentUser>(`${this._currentUserUrl}`,{...user,admin:permission,moderator:false,image:''});
-  }
   //добавление пользователя
   public postUser(user: IUser): Observable<IUser> {
     return this.http.post<IUser>(`${this._usersUrl}`, {...user,admin:false,moderator:false,image:''});

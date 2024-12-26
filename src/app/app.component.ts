@@ -9,7 +9,7 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import {
-  AuthStateService,
+  AuthStateService, ICurrentUser,
   IProfile,
   IUser,
   LoaderComponent,
@@ -95,7 +95,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private _toastService: ToastService,
     private _profileStateService: ProfileStateService,
     @Inject(AUTHORIZATION_TOKEN$) private _auth$: BehaviorSubject<boolean>,
-    @Inject(CURRENT_USER_TOKEN$) private _currentUser$: BehaviorSubject<IUser>,
+    @Inject(CURRENT_USER_TOKEN$) private _currentUser$: BehaviorSubject<ICurrentUser>,
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) this.navigationType = 0;
@@ -124,21 +124,15 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
    ngOnInit() {
-
     if (this._auth$.value) {
-
       this.apiProfileService.getProfile().subscribe((res) => {
         if (res && res.length) {
-          console.log(res.map(e=>e.userId))
-          console.log( this._currentUser$.value.id)
           const currentProfile: IProfile | undefined = res.find(
             (el) =>
-              el.userId === this._currentUser$.value.id,
+              el.userId === this._currentUser$.value.userId,
           );
 
           if (currentProfile) {
-            console.log(currentProfile)
-
             this._profileStateService.profile$.next(currentProfile);
           }
         }

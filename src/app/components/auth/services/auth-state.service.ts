@@ -1,7 +1,9 @@
-import {Injectable} from "@angular/core";
+import {Inject, Injectable} from "@angular/core";
 import {PasswordComplexity} from "../../../utils";
-import {ApiAuthService} from "./api-auth.service";
-import {map, Observable} from "rxjs";
+import {ApiAuthService, IUser} from "./api-auth.service";
+import {BehaviorSubject, map, Observable} from "rxjs";
+
+import {CURRENT_USER_TOKEN$} from "../../../data";
 export interface IRestorePassword{
   inputCredential: boolean,
   changePassword: boolean
@@ -21,11 +23,15 @@ export class AuthStateService {
     changePassword: false,
   };
 
-  constructor(private apiAuthService: ApiAuthService) {}
+  constructor(private apiAuthService: ApiAuthService,
+              @Inject(CURRENT_USER_TOKEN$) private currentUser$: BehaviorSubject<IUser>
+  ) {}
   public getCurrentUserId(): Observable<string|null> {
+    const userId = this.currentUser$.value.id as string
     return this.apiAuthService.getCurrentUser().pipe(
       map(res => {
         if (res[0] && res[0].id) {
+          this.currentUser$.next({...this.currentUser$.value,id:userId });
           return res[0].id;
         }
         return null; // Или другое значение по умолчанию, если id отсутствует
@@ -44,13 +50,6 @@ export class AuthStateService {
   public setRegistration(value:boolean):void{
     this.isRegistration = value
   }
-  // public enableDisableAdministratorMode(adminMode:boolean):void{
-  //   if(this.currentUserLogin==='ValuevLoh007'){
-  //     this.adminMode=adminMode;
-  //   }
-  //   localStorage.setItem('adminMode',JSON.stringify(this.adminMode));
-  //
-  // }
   //определитель сложности пароля
   public determinantPasswordComplexity(password:string): void {
     if(!password) return;

@@ -7,7 +7,6 @@ export class GlobalErrorHandler implements ErrorHandler {
   constructor(private toastService: ToastService) {}
 
   public handleError(error: any): void {
-    console.log(error);
     if (!(error instanceof HttpErrorResponse)) {
       error = error.rejection; // get the error object
     }

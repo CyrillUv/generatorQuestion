@@ -15,7 +15,7 @@ export class BanLanguageDirective implements OnInit {
   constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
-    console.log(this.delay)
+
     this.subscription = fromEvent<KeyboardEvent>(this.el.nativeElement, 'input')
       .pipe(debounceTime(this.delay as number))
       .subscribe((event: Event) => {

@@ -62,7 +62,6 @@ export class QuestionsComponent extends TakeUntilDestroy implements OnInit {
     this.qs.setActualQuestions(
       this.questions.filter((el) => !this.ms.getPassedQuestions().includes(el)),
     );
-    console.log(this.qs.getActualQuestions());
   }
 
   //Получение категорий
