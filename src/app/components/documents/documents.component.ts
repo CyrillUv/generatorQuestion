@@ -36,7 +36,7 @@ export class DocumentsComponent {
     '/linux',
     '/rxjs',
     '/css',
-    '/net-protocols',
+    '/net-protocols'
   ];
   //изменение текущей категории вопросов
   public setCurrentCategory(category: string): void {
